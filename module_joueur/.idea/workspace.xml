@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="577cb9dd-84bf-4e06-9886-1c30dd80a383" name="Default" comment="" />
+    <list default="true" id="577cb9dd-84bf-4e06-9886-1c30dd80a383" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ConnexionJoueur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ConnexionJoueur.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,8 +18,12 @@
       <file leaf-file-name="ConnexionJoueur.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ConnexionJoueur.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="54" column="47" selection-start-line="54" selection-start-column="47" selection-end-line="54" selection-end-column="47" />
+            <state relative-caret-position="122">
+              <caret line="58" column="44" lean-forward="true" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+              <folding>
+                <element signature="e#615#616#0" expanded="true" />
+                <element signature="e#643#644#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,15 +173,15 @@
       <option name="presentableId" value="Default" />
       <updated>1527279846881</updated>
       <workItem from="1527279856334" duration="6328000" />
-      <workItem from="1527330613831" duration="2428000" />
+      <workItem from="1527330613831" duration="4361000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8756000" />
+    <option name="totallyTimeSpent" value="10689000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -218,13 +225,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1426">
           <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+          <folding>
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#643#644#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ConnexionJoueur.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="54" column="47" selection-start-line="54" selection-start-column="47" selection-end-line="54" selection-end-column="47" />
+        <state relative-caret-position="122">
+          <caret line="58" column="44" lean-forward="true" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+          <folding>
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#643#644#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

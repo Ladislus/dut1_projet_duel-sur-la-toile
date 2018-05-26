@@ -57,7 +57,7 @@ public class ConnexionJoueur extends Application {
         Label lLogin = new Label("Votre nom d'utilisateur : ");
         Label lPassword = new Label("Votre mot de passe : ");
         TextField tfLogin = new TextField();
-        TextField tfPassword = new TextField();
+        PasswordField tfPassword = new PasswordField();
         Button btConnexion = new Button("Vers l'aventure ! -->>");
         title.setFont(Font.font("Arial", 19));
         vBox.setAlignment(Pos.TOP_CENTER);
