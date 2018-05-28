@@ -41,7 +41,7 @@ public class ConnexionJoueur extends Application {
         VBox vBox = new VBox();
         Image image = new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logo.png");
         ImageView logo = new ImageView();
-        Label slogan = new Label("La plateforme de jeux video innovante !");
+        Label slogan = new Label("La plateforme de jeux videos innovante !");
         slogan.setTextAlignment(TextAlignment.CENTER);
         slogan.setWrapText(true);
         slogan.setFont(Font.font("Arial", 15));
