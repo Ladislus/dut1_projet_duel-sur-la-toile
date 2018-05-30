@@ -1,4 +1,3 @@
-import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,7 +23,7 @@ public class ConnexionJoueur extends Application {
         primaryStage.setTitle("Accueil : Connexion");
         primaryStage.setScene(creerConnexionJoueur());
         primaryStage.setResizable(false);
-        primaryStage.getIcons().add(new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logoWithoutText.png"));
+        //primaryStage.getIcons().add(new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logoWithoutText.png"));
         primaryStage.show();
     }
 
@@ -37,13 +36,13 @@ public class ConnexionJoueur extends Application {
     }
     public VBox creerGauche(){
         VBox vBox = new VBox();
-        Image image = new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logo.png");
+        //Image image = new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logo.png");
         ImageView logo = new ImageView();
         Label slogan = new Label("La plateforme de jeux videos innovante !");
         slogan.setTextAlignment(TextAlignment.CENTER);
         slogan.setWrapText(true);
         slogan.setFont(Font.font("Arial", 15));
-        logo.setImage(image);
+        //logo.setImage(image);
         logo.setFitWidth(100);
         logo.setFitHeight(100);
         vBox.getChildren().addAll(logo, slogan);
@@ -54,6 +53,7 @@ public class ConnexionJoueur extends Application {
         return vBox;
     }
     public VBox creerDroite(){
+        //todo: set fixed font for text
         VBox vBox = new VBox();
         Hyperlink hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
         Label title = new Label("Connexion");
