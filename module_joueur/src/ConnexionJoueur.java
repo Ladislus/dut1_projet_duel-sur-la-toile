@@ -12,6 +12,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class ConnexionJoueur extends Application {
 
     public static void main(String[] args) {
@@ -23,7 +25,8 @@ public class ConnexionJoueur extends Application {
         primaryStage.setTitle("Accueil : Connexion");
         primaryStage.setScene(creerConnexionJoueur());
         primaryStage.setResizable(false);
-        //primaryStage.getIcons().add(new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logoWithoutText.png"));
+        File imageFile = new File("./img/logoWithoutText.png");
+        primaryStage.getIcons().add(new Image(imageFile.toURI().toString()));
         primaryStage.show();
     }
 
@@ -32,17 +35,19 @@ public class ConnexionJoueur extends Application {
         bp.setLeft(creerGauche());
         bp.setRight(creerDroite());
         bp.setBottom(creerBas());
-        return new Scene(bp, 500,250);
+        Scene scene = new Scene(bp, 500,250);
+        return scene;
     }
     public VBox creerGauche(){
         VBox vBox = new VBox();
-        //Image image = new Image("file:///C:\\Users\\bordecraft\\Desktop\\Projet Final 1A\\groupe12A\\module_joueur\\img\\logo.png");
+        File imageFile = new File("./img/logo.png");
+        Image image = new Image(imageFile.toURI().toString());
         ImageView logo = new ImageView();
         Label slogan = new Label("La plateforme de jeux videos innovante !");
         slogan.setTextAlignment(TextAlignment.CENTER);
         slogan.setWrapText(true);
         slogan.setFont(Font.font("Arial", 15));
-        //logo.setImage(image);
+        logo.setImage(image);
         logo.setFitWidth(100);
         logo.setFitHeight(100);
         vBox.getChildren().addAll(logo, slogan);
