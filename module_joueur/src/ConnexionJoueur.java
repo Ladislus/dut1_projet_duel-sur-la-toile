@@ -35,7 +35,7 @@ public class ConnexionJoueur extends Application {
         bp.setLeft(creerGauche());
         bp.setRight(creerDroite());
         bp.setBottom(creerBas());
-        Scene scene = new Scene(bp, 500,250);
+        Scene scene = new Scene(bp, 500,290);
         return scene;
     }
     public VBox creerGauche(){
@@ -61,6 +61,8 @@ public class ConnexionJoueur extends Application {
         //todo: set fixed font for text
         VBox vBox = new VBox();
         Hyperlink hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
+        Hyperlink hlMotDePasseOubliee = new Hyperlink("Mot de passe oubliée ?");
+        hlRegister.setOnAction(new ActionRegister());
         Label title = new Label("Connexion");
         Label lLogin = new Label("Votre nom d'utilisateur : ");
         Label lPassword = new Label("Votre mot de passe : ");
@@ -72,7 +74,7 @@ public class ConnexionJoueur extends Application {
         vBox.setPadding(new Insets(18,15,0,0));
         vBox.setPrefWidth(250);
         vBox.setSpacing(10);
-        vBox.getChildren().addAll(title, lLogin, tfLogin, lPassword, tfPassword, hlRegister, btConnexion);
+        vBox.getChildren().addAll(title, lLogin, tfLogin, lPassword, tfPassword, hlRegister, hlMotDePasseOubliee, btConnexion);
         return vBox;
     }
     public HBox creerBas(){
