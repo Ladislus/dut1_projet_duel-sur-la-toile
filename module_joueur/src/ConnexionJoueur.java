@@ -16,6 +16,8 @@ import java.io.File;
 
 public class ConnexionJoueur extends Application {
 
+    Hyperlink hlRegister;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -60,9 +62,9 @@ public class ConnexionJoueur extends Application {
     public VBox creerDroite(){
         //todo: set fixed font for text
         VBox vBox = new VBox();
-        Hyperlink hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
+        hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
         Hyperlink hlMotDePasseOubliee = new Hyperlink("Mot de passe oubliée ?");
-        hlRegister.setOnAction(new ActionRegister());
+        hlRegister.setOnAction(new ActionRegister(this));
         Label title = new Label("Connexion");
         Label lLogin = new Label("Votre nom d'utilisateur : ");
         Label lPassword = new Label("Votre mot de passe : ");
@@ -84,6 +86,10 @@ public class ConnexionJoueur extends Application {
         lCopyright.setFont(Font.font("Arial", 10));
         hBas.getChildren().add(lCopyright);
         return hBas;
+    }
+
+    public Hyperlink getHlRegister() {
+        return hlRegister;
     }
 
 }
