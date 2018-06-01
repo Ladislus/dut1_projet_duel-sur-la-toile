@@ -1,3 +1,5 @@
+package module_joueur;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
