@@ -1,27 +1,23 @@
-package sample;
+package module_puissance4;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 
@@ -218,8 +214,7 @@ public class Puissance4 extends Application {
             int numJGagne = this.p.getPuissance4(l,c);
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Connect 4 - Victory");
-            alert.setHeaderText("And the winner is...");
-            alert.setContentText(this.p.getJ(numJGagne).getNom());
+            alert.setHeaderText("And the winner is..."+this.p.getJ(numJGagne).getNom()+" !");
             alert.showAndWait();
         }
     }

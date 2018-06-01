@@ -1,4 +1,4 @@
-package sample;
+package module_puissance4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,16 +85,16 @@ public class Plateau { // Modèle du plateau du puissance 4
                 if (this.getPion(l,c-3)==p){n++;}
             }
             else if (card=="no" || card=="se"){
-                if (this.getPion(l-2,c-2)==p){n++;}
-                if (this.getPion(l-3,c-3)==p){n++;}
-                if (this.getPion(l+2,c+2)==p){n++;}
-                if (this.getPion(l+3,c+3)==p){n++;}
-            }
-            else if (card=="ne" || card=="so"){
                 if (this.getPion(l-2,c+2)==p){n++;}
                 if (this.getPion(l-3,c+3)==p){n++;}
                 if (this.getPion(l+2,c-2)==p){n++;}
                 if (this.getPion(l+3,c-3)==p){n++;}
+            }
+            else if (card=="ne" || card=="so"){
+                if (this.getPion(l-2,c-2)==p){n++;}
+                if (this.getPion(l-3,c-3)==p){n++;}
+                if (this.getPion(l+2,c+2)==p){n++;}
+                if (this.getPion(l+3,c+3)==p){n++;}
             }
 
             if (n>=2){return p;}
@@ -118,6 +118,13 @@ public class Plateau { // Modèle du plateau du puissance 4
         if (this.getPion(l,c+1)==p){res.add("e");}
 
         return res;
+    }
+
+    private boolean isFull(){
+        for (Colonne c : tableau){
+            if (c.isNotFull()){return false;}
+        }
+        return true;
     }
 
 }

@@ -1,4 +1,4 @@
-package sample;
+package module_puissance4;
 
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
@@ -22,7 +22,7 @@ public class Joueur extends Label{ // Vue des joueurs
     public void setCour(boolean b){
         this.jCourant = b;
         if (jCourant){
-            this.setFont(Font.font("Verdana",FontWeight.BOLD,15));
+            this.setFont(Font.font("Verdana",FontWeight.BOLD,25));
             this.setTextFill(Paint.valueOf("black"));
         }
         else{

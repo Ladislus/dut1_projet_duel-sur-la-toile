@@ -1,4 +1,4 @@
-package sample;
+package module_puissance4;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
