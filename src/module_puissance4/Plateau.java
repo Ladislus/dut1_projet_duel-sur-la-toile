@@ -120,7 +120,7 @@ public class Plateau { // Modèle du plateau du puissance 4
         return res;
     }
 
-    private boolean isFull(){
+    public boolean isFull(){
         for (Colonne c : tableau){
             if (c.isNotFull()){return false;}
         }

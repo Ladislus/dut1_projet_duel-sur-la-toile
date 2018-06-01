@@ -150,7 +150,8 @@ public class Puissance4 extends Application {
         // LIGNE DE BOUTONS POUR SÉLECTIONNER UNE COLONNE
 
         File file1 = new File(chem+"boutColDesactive.png");
-        File file2 = new File(chem+"boutColActive.png");
+        File file2 = new File(chem+"boutColRed.png");
+        File file3 = new File(chem+"boutColYellow.png");
 
         this.listeBoutons = new ArrayList<>();
         HBox ligneBoutons = new HBox();
@@ -161,13 +162,22 @@ public class Puissance4 extends Application {
             imDesactive.setPreserveRatio(true);
             imDesactive.setFitWidth(25.);
 
-            ImageView imActive = new ImageView(new Image(file2.toURI().toString()));
-            imActive.setPreserveRatio(true);
-            imActive.setFitWidth(25.);
+            ImageView imRed = new ImageView(new Image(file2.toURI().toString()));
+            imRed.setPreserveRatio(true);
+            imRed.setFitWidth(25.);
+
+            ImageView imYel = new ImageView(new Image(file3.toURI().toString()));
+            imYel.setPreserveRatio(true);
+            imYel.setFitWidth(25.);
 
             Button b = new Button("",imDesactive);
             b.setUserData(c);
-            b.setOnMouseEntered(e -> b.setGraphic(imActive));
+            b.setOnMouseEntered(e -> {
+                if (this.p.getJCour()==1)
+                    b.setGraphic(imRed); // si c'est le joueur 1 qui joue, les boutons deviendront rouges au passage de souris
+                else
+                    b.setGraphic(imYel); // sinon, ils deviendront jaunes
+            });
             b.setOnMouseExited(e -> b.setGraphic(imDesactive));
             b.setStyle("-fx-background-color: transparent;");
             b.setOnAction(new ActionJouerCol(this));
@@ -218,6 +228,10 @@ public class Puissance4 extends Application {
             alert.setTitle("Connect 4 - Victory");
             alert.setHeaderText("And the winner is..."+this.p.getJ(numJGagne).getNom()+" !");
             alert.showAndWait();
+        }
+        if (this.p.getPuissance4(l,c)!=0 || this.p.isFull()){
+            for (Button b : listeBoutons)
+                b.setDisable(true);
         }
     }
 
