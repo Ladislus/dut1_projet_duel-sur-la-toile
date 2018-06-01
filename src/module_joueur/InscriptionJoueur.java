@@ -21,7 +21,7 @@ public class InscriptionJoueur extends Application {
         primaryStage.setTitle("Accueil : Inscription");
         primaryStage.setScene(creerInscriptionJoueur());
         primaryStage.setResizable(false);
-        File imageFile = new File("./img/logoWithoutText.png");
+        File imageFile = new File("./img/pub/logoWithoutText.png");
         primaryStage.getIcons().add(new Image(imageFile.toURI().toString()));
         primaryStage.show();
     }
