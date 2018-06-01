@@ -23,6 +23,8 @@ import java.util.List;
 
 public class Puissance4 extends Application {
 
+    public static String chem = "./img/module_puissance4/";
+
     private Plateau p; // Modèle du jeu
 
     private List<List<Circle>> tableau; // Le tableau de pion
@@ -104,7 +106,7 @@ public class Puissance4 extends Application {
         res.setPrefHeight(100.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-        File file = new File("./img/connect4logo.png");
+        File file = new File(chem+"connect4logo.png");
         Image im = new Image(file.toURI().toString());
         ImageView iv = new ImageView(im);
         iv.setPreserveRatio(true);
@@ -147,8 +149,8 @@ public class Puissance4 extends Application {
 
         // LIGNE DE BOUTONS POUR SÉLECTIONNER UNE COLONNE
 
-        File file1 = new File("./img/boutColDesactive.png");
-        File file2 = new File("./img/boutColActive.png");
+        File file1 = new File(chem+"boutColDesactive.png");
+        File file2 = new File(chem+"boutColActive.png");
 
         this.listeBoutons = new ArrayList<>();
         HBox ligneBoutons = new HBox();
