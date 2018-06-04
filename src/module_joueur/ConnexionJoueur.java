@@ -44,7 +44,7 @@ public class ConnexionJoueur extends Application {
     }
     public VBox creerGauche(){
         VBox vBox = new VBox();
-        File imageFile = new File("./img/logo.png");
+        File imageFile = new File("./img/pub/logo.png");
         Image image = new Image(imageFile.toURI().toString());
         ImageView logo = new ImageView();
         Label slogan = new Label("La plateforme de jeux videos innovante !");
@@ -62,7 +62,6 @@ public class ConnexionJoueur extends Application {
         return vBox;
     }
     public VBox creerDroite(){
-        //todo: set fixed font for text
         VBox vBox = new VBox();
         hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
         Hyperlink hlMotDePasseOubliee = new Hyperlink("Mot de passe oubliée ?");
