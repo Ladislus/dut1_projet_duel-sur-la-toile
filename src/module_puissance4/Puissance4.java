@@ -22,6 +22,7 @@ import java.util.List;
 
 
 public class Puissance4 extends Application {
+    // Vue du Puissance 4
 
     public static String chem = "./img/module_puissance4/";
 
