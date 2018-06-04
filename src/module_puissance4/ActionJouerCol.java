@@ -20,5 +20,6 @@ public class ActionJouerCol implements EventHandler<ActionEvent> {
         int col = (int) source.getUserData();
         int lig = jeu.getPlateau().jouerUnCoup(col);
         this.jeu.majAffichage(lig,col);
+        this.jeu.getPlateau().changeJCour();
     }
 }

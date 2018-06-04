@@ -36,7 +36,6 @@ public class Puissance4 extends Application {
 
         p = new Plateau("Bernard","xX-Dark-Xx");
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Duel sur la toile - Connect 4");
         primaryStage.setScene(this.laScene());
@@ -148,12 +147,11 @@ public class Puissance4 extends Application {
     public VBox plateau() {
         VBox res = new VBox();
 
-        // LIGNE DE BOUTONS POUR SÉLECTIONNER UNE COLONNE
-
         File file1 = new File(chem+"boutColDesactive.png");
         File file2 = new File(chem+"boutColRed.png");
         File file3 = new File(chem+"boutColYellow.png");
 
+        // LIGNE DE BOUTONS POUR SÉLECTIONNER UNE COLONNE
         this.listeBoutons = new ArrayList<>();
         HBox ligneBoutons = new HBox();
         ligneBoutons.setSpacing(23.);
@@ -188,7 +186,6 @@ public class Puissance4 extends Application {
         }
 
         // TABLEAU DU PLATEAU
-
         tableau = new ArrayList<>();
         GridPane tab = new GridPane();
         tab.setStyle("-fx-background-color: #4F7EFF;" +
@@ -222,15 +219,15 @@ public class Puissance4 extends Application {
             this.tableau.get(c).get(l).setFill(Color.YELLOW);
         if (this.p.getCol(c).isFull())
             this.listeBoutons.get(c).setDisable(true); // on désactive le bouton si sa colonne est pleine
-        if (this.p.getPuissance4(l,c)!=0){
+        if (this.p.getPuissance4(l,c)){
             // Il y a un puissance 4
-            int numJGagne = this.p.getPuissance4(l,c);
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            int numJGagne = this.p.getJCour();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Connect 4 - Victory");
             alert.setHeaderText("And the winner is..."+this.p.getJ(numJGagne).getNom()+" !");
             alert.showAndWait();
         }
-        if (this.p.getPuissance4(l,c)!=0 || this.p.isFull()){
+        if (this.p.getPuissance4(l,c) || this.p.isFull()){
             for (Button b : listeBoutons)
                 b.setDisable(true);
         }
