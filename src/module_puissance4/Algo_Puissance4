@@ -1,0 +1,20 @@
+Algo de vérification de victoire pour le puissance 4
+(aussi appelé "Algorithme de Mérillon-Mirloup" pour les intimes !)
+
+
+Pré-requis :
+- Les données concernant le plateau
+- Les coordonnées (ligne,colonne) du dernier pion ajouté dans le plateau
+
+Algo décomposable en 3 étapes :
+
+1/ En partant du dernier pion ajouté, on crée la liste des directions dans lesquelles le pion voisin
+    est identique au pion en question.
+
+2/ Ces directions permettre de déduire les lignes/colonnes/diagonales
+    dans lesquelles il y a peut-être un puissance 4.
+
+3/ On applique ainsi l'algorithme du plus long plateau sur la liste des pions dans chacunes de celles-ci.
+    Ici, 2 pions ont la même valeur si leur couleur est identique (ou, plus informatiquement, si le numéro du
+    joueur qui les a déposés est le même).
+    Si un plateau est supérieur ou égal (4 pions de même couleur alignés), c'est gagné pour le joueur courant.
