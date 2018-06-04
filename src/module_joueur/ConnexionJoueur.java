@@ -29,7 +29,7 @@ public class ConnexionJoueur extends Application {
         primaryStage.setTitle("Accueil : Connexion");
         primaryStage.setScene(creerConnexionJoueur());
         primaryStage.setResizable(false);
-        File imageFile = new File("./img/logoWithoutText.png");
+        File imageFile = new File("./img/pub/logoWithoutText.png");
         primaryStage.getIcons().add(new Image(imageFile.toURI().toString()));
         primaryStage.show();
     }

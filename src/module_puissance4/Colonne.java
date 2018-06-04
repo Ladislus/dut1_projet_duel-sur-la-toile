@@ -1,4 +1,4 @@
-package sample;
+package module_puissance4;
 
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package sample;
+package module_puissance4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class Plateau { // Modèle du plateau du puissance 4
         return this.getTableau().get(c);
     }
 
-    public int getPuissance4(int l, int c){
+    /*public int getPuissance4(int l, int c){
         // Renvoie le numéro du joueur gagnant s'il y a un puissance 4, 0 sinon
         List<String> possibilites = this.connect4possibles(l,c);
         int p = this.getPion(l,c);
@@ -85,22 +85,44 @@ public class Plateau { // Modèle du plateau du puissance 4
                 if (this.getPion(l,c-3)==p){n++;}
             }
             else if (card=="no" || card=="se"){
-                if (this.getPion(l-2,c-2)==p){n++;}
-                if (this.getPion(l-3,c-3)==p){n++;}
-                if (this.getPion(l+2,c+2)==p){n++;}
-                if (this.getPion(l+3,c+3)==p){n++;}
-            }
-            else if (card=="ne" || card=="so"){
                 if (this.getPion(l-2,c+2)==p){n++;}
                 if (this.getPion(l-3,c+3)==p){n++;}
                 if (this.getPion(l+2,c-2)==p){n++;}
                 if (this.getPion(l+3,c-3)==p){n++;}
             }
+            else if (card=="ne" || card=="so"){
+                if (this.getPion(l-2,c-2)==p){n++;}
+                if (this.getPion(l-3,c-3)==p){n++;}
+                if (this.getPion(l+2,c+2)==p){n++;}
+                if (this.getPion(l+3,c+3)==p){n++;}
+            }
 
             if (n>=2){return p;}
         }
         return 0;
+    }*/
+
+    public int getPuissance4(int l, int c){
+        if (vertical(c))return joueurCourant;
+        else return 0;
     }
+
+    private boolean vertical(int c){
+        int res = 0;
+        for (int i=0;i<6;i++){
+            System.out.println(res);
+            if (tableau.get(c).get(i)==joueurCourant){
+                if (res==3) return true;
+                res++;
+            }
+            else res = 0;
+        }
+        return false;
+    }
+
+    /*private boolean horizontal(int l, int c){
+
+    }*/
 
     private List<String> connect4possibles(int l, int c) {
         // Renvoie la liste des directions (cardinaux) à tester
@@ -118,6 +140,13 @@ public class Plateau { // Modèle du plateau du puissance 4
         if (this.getPion(l,c+1)==p){res.add("e");}
 
         return res;
+    }
+
+    public boolean isFull(){
+        for (Colonne c : tableau){
+            if (c.isNotFull()){return false;}
+        }
+        return true;
     }
 
 }
