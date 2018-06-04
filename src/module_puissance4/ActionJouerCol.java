@@ -8,9 +8,9 @@ import javafx.scene.control.Button;
 public class ActionJouerCol implements EventHandler<ActionEvent> {
     // Controleur de l'ajout d'un pion dans une colonne
 
-    private Puissance4 jeu;
+    private Partie jeu;
 
-    public ActionJouerCol(Puissance4 puissance4) {
+    public ActionJouerCol(Partie puissance4) {
         this.jeu = puissance4;
     }
 

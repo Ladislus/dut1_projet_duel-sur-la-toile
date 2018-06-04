@@ -109,7 +109,7 @@ public class Plateau { // Modèle du plateau du puissance 4
         return this.getTableau().get(numCol).addPion(joueurCourant);
     }
 
-    public boolean getPuissance4(int l, int c){
+    public boolean aUnPuissance4(int l, int c){
         // Renvoie le numéro du joueur gagnant s'il y a un puissance 4, 0 sinon
         List<String> possibilites = this.directions(l,c);
         int p = this.getPion(l,c);
