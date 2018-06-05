@@ -2,6 +2,7 @@ package module_joueur;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -35,9 +37,10 @@ public class InscriptionJoueur extends Application {
 
     public Scene creerInscriptionJoueur(){
         BorderPane bp = new BorderPane();
+        bp.setTop(creerHaut());
         bp.setLeft(creerGauche());
         bp.setRight(creeDroite());
-        return new Scene(bp, 500,400);
+        return new Scene(bp, 500,520);
     }
     public VBox creeDroite() {
         VBox Droite = new VBox();
@@ -55,11 +58,13 @@ public class InscriptionJoueur extends Application {
         HBox hPseudo = new HBox();
         HBox hMotdePasse = new HBox();
         HBox hCMotDePasse = new HBox();
+        //List for generation
         ArrayList<HBox> generationHbox = new ArrayList<HBox>(){
             {
                 add(hNom);add(hPrenom);add(hSexe);add(hEmail);add(hPseudo);add(hMotdePasse);add(hCMotDePasse);
             }
         };
+        //generation
         for(int i = 0; i<7; i++){
             if(i==2){
                 //case sexe
@@ -70,12 +75,9 @@ public class InscriptionJoueur extends Application {
                 rdHomme.setToggleGroup(toggleGroup);
                 rdFemme.setToggleGroup(toggleGroup);
                 rdAutre.setToggleGroup(toggleGroup);
-                File imageFile = new File("./img/pub/help.png");
-                ImageView imageView = new ImageView();
-                imageView.setImage(new Image(imageFile.toURI().toString()));
-                imageView.setPreserveRatio(true);
-                imageView.setFitWidth(20);
-                generationHbox.get(i).getChildren().addAll(rdHomme, rdFemme, rdAutre, imageView);
+                generationHbox.get(i).getChildren().addAll(rdHomme, rdFemme, rdAutre);
+                generationHbox.get(i).setSpacing(5);
+                generationHbox.get(i).setPadding(new Insets(5,0,5,0));
             }
             else{
                 TextField tf = new TextField();
@@ -92,6 +94,7 @@ public class InscriptionJoueur extends Application {
                 pseudo, generationHbox.get(4), motdepasse, generationHbox.get(5), cmotdepasse, generationHbox.get(6));
         Droite.setPadding(new Insets(15,15,0,0));
         Droite.setSpacing(3);
+        Droite.setAlignment(Pos.CENTER_LEFT);
         return Droite;
     }
 
@@ -107,6 +110,15 @@ public class InscriptionJoueur extends Application {
         Gauche.getChildren().addAll(imageView, btRetour);
         Gauche.setSpacing(50);
         return Gauche;
+    }
+    public HBox creerHaut(){
+        HBox haut = new HBox();
+        Label title = new Label("Inscription");
+        haut.getChildren().addAll(title);
+        haut.setAlignment(Pos.TOP_CENTER);
+        haut.setPadding(new Insets(7,0,0,0));
+        title.setFont(Font.font("Arial", 19));
+        return haut;
     }
     public Button getBtRetour(){
         return this.btRetour;
