@@ -40,7 +40,8 @@ public class InscriptionJoueur extends Application {
         bp.setTop(creerHaut());
         bp.setLeft(creerGauche());
         bp.setRight(creeDroite());
-        return new Scene(bp, 500,520);
+        bp.setBottom(creerBas());
+        return new Scene(bp, 500,430);
     }
     public VBox creeDroite() {
         VBox Droite = new VBox();
@@ -58,6 +59,8 @@ public class InscriptionJoueur extends Application {
         HBox hPseudo = new HBox();
         HBox hMotdePasse = new HBox();
         HBox hCMotDePasse = new HBox();
+        Button btDashBoard = new Button("Accéder a la plateforme !");
+        btDashBoard.setPrefWidth(170);
         //List for generation
         ArrayList<HBox> generationHbox = new ArrayList<HBox>(){
             {
@@ -91,24 +94,45 @@ public class InscriptionJoueur extends Application {
             }
         }
         Droite.getChildren().addAll(nom, generationHbox.get(0),prenom, generationHbox.get(1), sexe, generationHbox.get(2), email, generationHbox.get(3),
-                pseudo, generationHbox.get(4), motdepasse, generationHbox.get(5), cmotdepasse, generationHbox.get(6));
+                pseudo, generationHbox.get(4), motdepasse, generationHbox.get(5), cmotdepasse, generationHbox.get(6), btDashBoard);
         Droite.setPadding(new Insets(15,15,0,0));
         Droite.setSpacing(3);
-        Droite.setAlignment(Pos.CENTER_LEFT);
+        //Droite.setAlignment(Pos.);
         return Droite;
     }
 
     public VBox creerGauche(){
         VBox Gauche = new VBox();
-        File imageFile = new File("./img/pub/logo.png");
-        ImageView imageView = new ImageView();
-        imageView.setImage(new Image(imageFile.toURI().toString()));
-        imageView.setPreserveRatio(true);
-        imageView.setFitWidth(100);
+
+        File imageFileLogo = new File("./img/pub/logo.png");//logo plateforme
+        ImageView imageViewLogo = new ImageView();
+        imageViewLogo.setImage(new Image(imageFileLogo.toURI().toString()));
+        imageViewLogo.setPreserveRatio(true);
+        imageViewLogo.setFitWidth(100);
+
+        Hyperlink hyperlinkAide = new Hyperlink("Besoin d'aide ?");
+        HBox hBoxAide = new HBox();
+
+        File imageFileHelp = new File("./img/pub/help.png");//Image help
+        ImageView imageViewHelp = new ImageView();
+        imageViewHelp.setImage(new Image(imageFileHelp.toURI().toString()));
+        imageViewHelp.setPreserveRatio(true);
+        imageViewHelp.setFitWidth(20);
+
+        hBoxAide.getChildren().add(hyperlinkAide);
+        hBoxAide.getChildren().add(imageViewHelp);
+        hBoxAide.setAlignment(Pos.TOP_CENTER);
+
         btRetour = new Button("<-- Retours connexion");
         btRetour.setOnAction(new ActionBackToLogin(this));
-        Gauche.getChildren().addAll(imageView, btRetour);
+        btRetour.setPrefWidth(200);
+
+        Gauche.getChildren().addAll(imageViewLogo,hBoxAide, btRetour);
         Gauche.setSpacing(50);
+        Gauche.setPrefWidth(315);
+        Gauche.setPadding(new Insets(25,0,0,0));
+        Gauche.setAlignment(Pos.TOP_CENTER);
+
         return Gauche;
     }
     public HBox creerHaut(){
@@ -119,6 +143,14 @@ public class InscriptionJoueur extends Application {
         haut.setPadding(new Insets(7,0,0,0));
         title.setFont(Font.font("Arial", 19));
         return haut;
+    }
+    public HBox creerBas(){
+        HBox hBas = new HBox();
+        Label lCopyright = new Label("© Copyright : Duel sur la toile");
+        lCopyright.setFont(Font.font("Arial", 10));
+        hBas.getChildren().add(lCopyright);
+        hBas.setPadding(new Insets(0,0,5,5));
+        return hBas;
     }
     public Button getBtRetour(){
         return this.btRetour;
