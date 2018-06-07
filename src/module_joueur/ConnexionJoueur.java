@@ -80,6 +80,7 @@ public class ConnexionJoueur extends Application {
         vBox.getChildren().addAll(title, lLogin, tfLogin, lPassword, tfPassword, hlRegister, hlMotDePasseOubliee, btConnexion);
         return vBox;
     }
+
     public HBox creerBas(){
         HBox hBas = new HBox();
         hBas.setPadding(new Insets(0,0,5,5));
