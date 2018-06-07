@@ -30,7 +30,7 @@ public class Mastermind extends Application {
     public Scene laScene() {
         BorderPane res = new BorderPane();
 //
-//        res.setLeft(this.menu());
+        res.setLeft(this.gauche());
         res.setTop(this.titre());
 //        res.setCenter(this.plateau());
 
@@ -40,7 +40,7 @@ public class Mastermind extends Application {
     public VBox  titre(){
         VBox res = new VBox(5);
         Label titre = new Label("Mastermind");
-        res.getChildren().add(titre);
+        res.getChildren().addAll(titre);
         res.setAlignment(Pos.CENTER);
         return res;
     }
@@ -51,7 +51,36 @@ public class Mastermind extends Application {
         Label timer = new Label("Time : 00:00:00");
         Label couleurs = new Label("Couleurs : ");
         GridPane tabCouleurs = new GridPane();
-        Circle jaune = new Circle(5, Paint(new Color(1,1,0,1)))
-    }
 
+        Circle jaune = new Circle(15);
+        jaune.setFill(Color.YELLOW);
+
+        Circle rouge = new Circle(15);
+        rouge.setFill(Color.RED);
+
+        Circle bleu = new Circle(15);
+        bleu.setFill(Color.BLUE);
+
+        Circle marron = new Circle(15);
+        marron.setFill(Color.SADDLEBROWN);
+
+        Circle vert = new Circle(15);
+        vert.setFill(Color.FORESTGREEN);
+
+        Circle cyan = new Circle(15);
+        cyan.setFill(Color.CYAN);
+
+        //gridpane.add(truc, colonne, ligne);
+        tabCouleurs.add(jaune,0,0);
+        tabCouleurs.add(rouge,1,0);
+        tabCouleurs.add(bleu,2,0);
+        tabCouleurs.add(marron,0,1);
+        tabCouleurs.add(vert,1,1);
+        tabCouleurs.add(cyan,2,1);
+
+        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs);
+        
+        return res;
+    }
+//
 }
