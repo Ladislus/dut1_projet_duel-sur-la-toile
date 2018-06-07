@@ -77,9 +77,11 @@ public class Mastermind extends Application {
         tabCouleurs.add(marron,0,1);
         tabCouleurs.add(vert,1,1);
         tabCouleurs.add(cyan,2,1);
+        tabCouleurs.setHgap(5);
+        tabCouleurs.setVgap(5);
 
         res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs);
-        
+
         return res;
     }
 //
