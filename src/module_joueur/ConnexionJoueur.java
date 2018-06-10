@@ -40,6 +40,8 @@ public class ConnexionJoueur extends Application {
         bp.setRight(creerDroite());
         bp.setBottom(creerBas());
         Scene scene = new Scene(bp, 500,290);
+        //todo : Add css to make the font globally
+        //scene.getStylesheets().add(getClass().getResource("PAth to css").toExternalForm());
         return scene;
     }
     public VBox creerGauche(){
