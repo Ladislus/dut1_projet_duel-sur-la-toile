@@ -11,30 +11,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class VoirRapport extends Application {
+public class VoirRapport extends BorderPane {
 
-    Button bRetour;
+    PageAccueil pa;
 
-    public static void main(String[] args) {
-        launch(args);
+    public VoirRapport(PageAccueil pa) {
+        super();
+        this.pa = pa;
+        this.haut();
+        this.corp();
     }
 
-    public Button getbRetour() {
-        return bRetour;
-    }
-
-    public BorderPane haut() {
+    public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Rapport des joueurs");
-        bRetour = new Button("< Retour");
+        Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
 
-        bRetour.setOnAction(new ActionRetour(this));
+        bRetour.setOnAction(new ActionRetour());
 
         haut.setPadding(new Insets(20,25,20,25));
-        return haut;
+        this.setTop(haut);
     }
 
     public BorderPane entete() {
@@ -90,26 +89,11 @@ public class VoirRapport extends Application {
       return v;
     }
 
-    public VBox corp() {
+    public void corp() {
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(0,25,0,25));
         vbox.getChildren().addAll(entete(), listeRapport());
         vbox.setSpacing(15);
-        return vbox;
-    }
-
-    public Scene scene() {
-        BorderPane b = new BorderPane();
-        b.setTop(haut());
-        b.setCenter(corp());
-        return new Scene(b, 650, 450);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Duel sur la toile - Administration");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(this.scene());
-        primaryStage.show();
+        this.setCenter(vbox);
     }
 }

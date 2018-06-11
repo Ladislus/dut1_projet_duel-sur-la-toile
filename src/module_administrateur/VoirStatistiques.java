@@ -12,27 +12,27 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.collections.*;
 
-public class VoirStatistiques extends Application {
+public class VoirStatistiques extends BorderPane {
 
-    Button bRetour;
+    PageAccueil pa;
 
-    public static void main(String[] args) {
-        launch(args);
+    public VoirStatistiques(PageAccueil pa) {
+        super();
+        this.pa = pa;
+        this.haut();
+        this.corp();
     }
 
-    public Button getbRetour() {
-        return bRetour;
-    }
-
-    public BorderPane haut() {
+    public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Statistiques");
-        bRetour = new Button("< Retour");
+        Button bRetour = new Button("< Retour");
+        bRetour.setOnAction(new ActionRetour());
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
-        return haut;
+        this.setTop(haut);
     }
 
     public BorderPane entete() {
@@ -70,24 +70,9 @@ public class VoirStatistiques extends Application {
         return entete;
     }
 
-    public VBox corp() {
+    public void corp() {
         VBox vbox = new VBox();
         vbox.getChildren().add(entete());
-        return vbox;
-    }
-
-    public Scene scene() {
-        BorderPane b = new BorderPane();
-        b.setTop(haut());
-        b.setCenter(corp());
-        return new Scene(b, 650, 450);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Duel sur la toile - Administration");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(this.scene());
-        primaryStage.show();
+        this.setCenter(vbox);
     }
 }

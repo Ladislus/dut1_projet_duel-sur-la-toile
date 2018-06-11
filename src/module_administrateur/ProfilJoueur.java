@@ -16,31 +16,29 @@ import javafx.stage.FileChooser;
 import javafx.collections.*;
 import java.io.File;
 
-public class ProfilJoueur extends Application {
+public class ProfilJoueur extends BorderPane {
 
-    Button bRetour;
-
-    public static void main(String[] args) {
-        launch(args);
+    public ProfilJoueur() {
+        super();
+        this.haut();
+        this.gauche();
+        this.droite();
+        this.bas();
     }
 
-    public Button getbRetour() {
-        return bRetour;
-    }
-
-    public BorderPane haut() {
+    public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Profil de ");
-        bRetour = new Button("< Retour");
+        Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        //bRetour.setOnAction(new ActionRetour(this));
+        bRetour.setOnAction(new ActionRetour());
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(0,25,0,25));
-        return haut;
+        this.setTop(haut);
     }
 
-    public GridPane gauche() {
+    public void gauche() {
         GridPane gauche = new GridPane();
         Label pseudo = new Label("Pseudo : ");
         Label prenom = new Label("Prénom : ");
@@ -69,10 +67,10 @@ public class ProfilJoueur extends Application {
         //gauche.setPadding(new Insets(0,25,0,25));
         gauche.setVgap(1);
 
-        return gauche;
+        this.setLeft(gauche);
     }
 
-    public VBox droite() {
+    public void droite() {
         VBox droite = new VBox(15);
         Label stats = new Label("Statistiques");
         Label jeuplusjoue = new Label("Jeu le plus joué : ");
@@ -82,10 +80,10 @@ public class ProfilJoueur extends Application {
 
         droite.getChildren().addAll(stats, jeuplusjoue, tempsplateforme, nbpartiesjouees, nbamis);
         droite.setPadding(new Insets(0,0,0,25));
-        return droite;
+        this.setRight(droite);
     }
 
-    public VBox bas(){
+    public void bas() {
       VBox bas = new VBox(15);
       /*FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Image de profil");
@@ -102,23 +100,6 @@ public class ProfilJoueur extends Application {
 
       bas.setPadding(new Insets(0,25,0,0));
 
-      return bas;
-    }
-
-    public Scene scene() {
-        BorderPane b = new BorderPane();
-        b.setTop(haut());
-        b.setLeft(gauche());
-        b.setRight(droite());
-        b.setBottom(bas());
-        return new Scene(b, 650, 450);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Duel sur la toile - Administration");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(this.scene());
-        primaryStage.show();
+      this.setBottom(bas);
     }
 }
