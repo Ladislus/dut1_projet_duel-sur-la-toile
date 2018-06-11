@@ -36,7 +36,7 @@ public class InscriptionJoueur extends Application {
         primaryStage.show();
     }
 
-    public Scene creerInscriptionJoueur(){
+    private Scene creerInscriptionJoueur(){
         BorderPane bp = new BorderPane();
         bp.setTop(creerHaut());
         bp.setLeft(creerGauche());
@@ -44,7 +44,7 @@ public class InscriptionJoueur extends Application {
         bp.setBottom(creerBas());
         return new Scene(bp, 540,430);
     }
-    public VBox creeDroite() {
+    private VBox creeDroite() {
         VBox Droite = new VBox();
         Label nom = new Label("Nom : ");
         Label prenom = new Label("Prenom : ");
@@ -103,7 +103,7 @@ public class InscriptionJoueur extends Application {
         return Droite;
     }
 
-    public VBox creerGauche(){
+    private VBox creerGauche(){
         VBox Gauche = new VBox();
 
         File imageFileLogo = new File("./img/pub/logo.png");//logo plateforme
@@ -137,7 +137,7 @@ public class InscriptionJoueur extends Application {
 
         return Gauche;
     }
-    public HBox creerHaut(){
+    private HBox creerHaut(){
         HBox haut = new HBox();
         Label title = new Label("Inscription");
         haut.getChildren().addAll(title);
@@ -146,7 +146,7 @@ public class InscriptionJoueur extends Application {
         title.setFont(Font.font("Arial", 19));
         return haut;
     }
-    public HBox creerBas(){
+    private HBox creerBas(){
         HBox hBas = new HBox();
         Label lCopyright = new Label("© Copyright : Duel sur la toile");
         lCopyright.setFont(Font.font("Arial", 10));
@@ -154,11 +154,11 @@ public class InscriptionJoueur extends Application {
         hBas.setPadding(new Insets(0,0,5,5));
         return hBas;
     }
-    public Button getBtRetour(){
+    Button getBtRetour(){
         return this.btRetour;
     }
 
-    public Button getBtDashboard(){
+    Button getBtDashboard(){
         return btDashboard;
     }
 }

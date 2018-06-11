@@ -38,29 +38,18 @@ public class Dashboard extends Application {
         bp.setCenter(creerCentre());
         bp.setRight(creerDroite());
         return new Scene(bp, 900,450);
+        //return new Scene(bp, 850,650);
     }
 
     public HBox creerHaut(){
         HBox hHaut = new HBox();
         Label lTitre = new Label("Bienvenue XxX_DarkSasuke-69_XxX ");
 
-        File imageFile = new File("./img/pub/contact.png");
-        ImageView imageContact = new ImageView();
-        imageContact.setImage(new Image(imageFile.toURI().toString()));
-        imageContact.setPreserveRatio(true);
-        imageContact.setFitWidth(15);
-
-        MenuItem menuItem1 = new MenuItem("Se deconnecter");
-        //todo : make on action for se deconecter
-        //menuItem1.setOnAction();
-        MenuButton menuButtonProfile = new MenuButton("", imageContact);
-        menuButtonProfile.getItems().addAll(menuItem1);
-
         lTitre.setFont(Font.loadFont("file:./assets/roboto.ttf", 19));
 
         hHaut.setAlignment(Pos.TOP_CENTER);
         hHaut.setPadding(new Insets(20));
-        hHaut.getChildren().addAll(lTitre, menuButtonProfile);
+        hHaut.getChildren().addAll(lTitre);
 
         return hHaut;
     }
@@ -72,15 +61,24 @@ public class Dashboard extends Application {
 
         Button btStat = new Button("Mes statistiques");
         Button btParti = new Button("Mes parties");
-        Button btEditerProfile = new Button("Editer profile");
-        Button btParametre = new Button("Parametre");
+        Button btEditerProfile = new Button("Éditez mon profil");
+        Button btParametre = new Button("Mes paramètres");
+
+        File imageFileLogo = new File("./img/pub/log_out.png");//logo plateforme
+        ImageView imageViewLogo = new ImageView();
+        imageViewLogo.setImage(new Image(imageFileLogo.toURI().toString()));
+        imageViewLogo.setPreserveRatio(true);
+        imageViewLogo.setFitWidth(25);
+        Button btExit = new Button("", imageViewLogo);
 
         btStat.setPrefWidth(150);
         btParti.setPrefWidth(150);
         btEditerProfile.setPrefWidth(150);
         btParametre.setPrefWidth(150);
 
-        vParam.getChildren().add(btParametre);
+        vParam.getChildren().addAll(btParametre, btExit);
+        vParam.setSpacing(10);
+        vParam.setAlignment(Pos.TOP_CENTER);
         vParam.setPadding(new Insets(70,0,0,0));
 
         vGauche.getChildren().addAll(btStat, btParti, btEditerProfile, vParam);
@@ -132,7 +130,7 @@ public class Dashboard extends Application {
         VBox vNouveaute = new VBox();
 
         Label lbJeux = new Label("Jeux : ");
-        Label lbNouveaute = new Label("Nouveautée : ");
+        Label lbNouveaute = new Label("Nouveautés : ");
 
         ScrollPane scrollPaneJeux = new ScrollPane();
         scrollPaneJeux.setPrefHeight(150);
