@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.collections.*;
 
-public class Statistiques extends Application {
+public class VoirStatistiques extends Application {
 
     Button bRetour;
 

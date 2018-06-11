@@ -8,7 +8,6 @@ public class ActionRetour implements EventHandler<ActionEvent> {
 
     GererJoueur gererJoueur;
     VoirRapport voirRapport;
-    Statistiques statistiques;
 
     public ActionRetour(GererJoueur gererJoueur) {
         this.gererJoueur = gererJoueur;
@@ -18,9 +17,6 @@ public class ActionRetour implements EventHandler<ActionEvent> {
         this.voirRapport = voirRapport;
     }
 
-    public ActionRetour(Statistiques statistiques){
-      this.statistiques = statistiques;
-    }
 
     @Override
     public void handle(ActionEvent actionEvent) {
