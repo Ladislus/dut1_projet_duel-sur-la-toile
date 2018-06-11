@@ -4,9 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -46,11 +44,23 @@ public class Dashboard extends Application {
         HBox hHaut = new HBox();
         Label lTitre = new Label("Bienvenue XxX_DarkSasuke-69_XxX ");
 
+        File imageFile = new File("./img/pub/contact.png");
+        ImageView imageContact = new ImageView();
+        imageContact.setImage(new Image(imageFile.toURI().toString()));
+        imageContact.setPreserveRatio(true);
+        imageContact.setFitWidth(15);
+
+        MenuItem menuItem1 = new MenuItem("Se deconnecter");
+        //todo : make on action for se deconecter
+        //menuItem1.setOnAction();
+        MenuButton menuButtonProfile = new MenuButton("", imageContact);
+        menuButtonProfile.getItems().addAll(menuItem1);
+
         lTitre.setFont(Font.loadFont("file:./assets/roboto.ttf", 19));
 
         hHaut.setAlignment(Pos.TOP_CENTER);
         hHaut.setPadding(new Insets(20));
-        hHaut.getChildren().add(lTitre);
+        hHaut.getChildren().addAll(lTitre, menuButtonProfile);
 
         return hHaut;
     }
@@ -58,6 +68,7 @@ public class Dashboard extends Application {
     public VBox creerGauche(){
         //todo : make to correspond to the IHM
         VBox vGauche = new VBox();
+        VBox vParam = new VBox();
 
         Button btStat = new Button("Mes statistiques");
         Button btParti = new Button("Mes parties");
@@ -69,9 +80,12 @@ public class Dashboard extends Application {
         btEditerProfile.setPrefWidth(150);
         btParametre.setPrefWidth(150);
 
-        vGauche.getChildren().addAll(btStat, btParti, btEditerProfile, btParametre);
+        vParam.getChildren().add(btParametre);
+        vParam.setPadding(new Insets(70,0,0,0));
+
+        vGauche.getChildren().addAll(btStat, btParti, btEditerProfile, vParam);
         vGauche.setPadding(new Insets(70,0,0,10));
-        vGauche.setSpacing(40);
+        vGauche.setSpacing(20);
 
         return vGauche;
     }
@@ -113,6 +127,32 @@ public class Dashboard extends Application {
     public VBox creerCentre(){
         //todo: make that
         VBox vCentre = new VBox();
+
+        VBox vJeux = new VBox();
+        VBox vNouveaute = new VBox();
+
+        Label lbJeux = new Label("Jeux : ");
+        Label lbNouveaute = new Label("Nouveautée : ");
+
+        ScrollPane scrollPaneJeux = new ScrollPane();
+        scrollPaneJeux.setPrefHeight(150);
+        scrollPaneJeux.setContent(vJeux);
+
+        ScrollPane scrollPaneNouveaute = new ScrollPane();
+        scrollPaneNouveaute.setContent(vNouveaute);
+        scrollPaneNouveaute.setPrefHeight(150);
+        //todo remove that and place image
+
+        for(int i = 0; i<150; i++){
+            vJeux.getChildren().add(new Label("test"));
+            vNouveaute.getChildren().add(new Label("test"));
+        }
+
+        vCentre.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
+        vCentre.setSpacing(10);
+        vCentre.setPadding(new Insets(0,15,0,15));
+        //vCentre.setStyle("-fx-background-color: #384354;");
+
         return vCentre;
     }
 }

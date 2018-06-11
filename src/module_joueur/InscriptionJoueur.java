@@ -130,7 +130,7 @@ public class InscriptionJoueur extends Application {
         btRetour.setPrefWidth(200);
 
         Gauche.getChildren().addAll(imageViewLogo,hBoxAide, btRetour);
-        Gauche.setSpacing(50);
+        Gauche.setSpacing(35);
         Gauche.setPrefWidth(315);
         Gauche.setPadding(new Insets(25,0,0,0));
         Gauche.setAlignment(Pos.TOP_CENTER);
