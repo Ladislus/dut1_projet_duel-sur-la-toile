@@ -37,7 +37,14 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
+<<<<<<< HEAD
         bJoueur = new Button("Gérer les utilisateurs");
+=======
+      //  ImageView imageView = new ImageView(new Image("//LIEN IMAGE//"));
+    //    bJoueur = new Button("Gérer les utilisateurs", imageView);
+        bJoueur = new Button("Gérer les utilisateurs");
+
+>>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
       //  button.setContentDisplay(ContentDisplay.TOP);
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
@@ -85,7 +92,11 @@ public class PageAccueil extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Duel sur la toile - Administration");
         primaryStage.setResizable(false);
+<<<<<<< HEAD
         primaryStage.setScene(this.scene());
+=======
+        primaryStage.setScene(scene());
+>>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
         primaryStage.show();
     }
 }
