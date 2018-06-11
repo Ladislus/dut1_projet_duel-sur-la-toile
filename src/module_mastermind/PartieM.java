@@ -5,10 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -47,7 +45,7 @@ import javafx.scene.text.FontWeight;
         res.setRight(plateau());
         res.setBottom(bas());
 
-        return new Scene(res, 850, 650);
+        return new Scene(res, 700, 650);
     }
 
     public static VBox haut(){
@@ -60,29 +58,36 @@ import javafx.scene.text.FontWeight;
     }
 
     public static VBox menu(){
-        VBox res = new VBox(5);
+        VBox res = new VBox(25);
+
+        Button quitter = new Button("Quitter");
 
         Label timer = new Label("Time : 00:00:00");
-        Label couleurs = new Label("Couleurs : ");
+        timer.setPadding(new Insets(75,0,0,0));
+
+        Label couleurs = new Label("Couleurs :");
+        couleurs.setPadding(new Insets(50,0,0,0));
+
         GridPane tabCouleurs = new GridPane();
 
-        Circle jaune = new Circle(15);
+        Circle jaune = new Circle(25);
         jaune.setFill(Color.YELLOW);
 
-        Circle rouge = new Circle(15);
+        Circle rouge = new Circle(25);
         rouge.setFill(Color.RED);
 
-        Circle bleu = new Circle(15);
+        Circle bleu = new Circle(25);
         bleu.setFill(Color.BLUE);
 
-        Circle marron = new Circle(15);
+        Circle marron = new Circle(25);
         marron.setFill(Color.SADDLEBROWN);
 
-        Circle vert = new Circle(15);
+        Circle vert = new Circle(25);
         vert.setFill(Color.FORESTGREEN);
 
-        Circle cyan = new Circle(15);
+        Circle cyan = new Circle(25);
         cyan.setFill(Color.CYAN);
+
 
         //gridpane.add(truc, colonne, ligne);
         tabCouleurs.add(jaune,0,0);
@@ -94,7 +99,11 @@ import javafx.scene.text.FontWeight;
         tabCouleurs.setHgap(5);
         tabCouleurs.setVgap(5);
 
-        res.getChildren().addAll(timer,couleurs,tabCouleurs);
+        tabCouleurs.setPadding(new Insets(0,0,0,15));
+
+        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs);
+
+        res.setPadding(new Insets(0,0,0,10));
 
         return res;
     }
@@ -102,7 +111,6 @@ import javafx.scene.text.FontWeight;
     public static VBox plateau(){
         VBox res = new VBox(10);
         res.setAlignment(Pos.CENTER_RIGHT);
-        res.setPadding(new Insets(5,5,30,5));
         res.setSpacing(20.);
         res.setPrefWidth(160.);
 
@@ -142,7 +150,13 @@ import javafx.scene.text.FontWeight;
             res.getChildren().addAll(temp);
         }
 
-//        res.getPadding();
+//        ScrollPane sp = new ScrollPane(res);
+//        sp.setHmin(200.);
+//        sp.setPadding(new Insets(0,0,0,0));
+//        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        res.setPadding(new Insets(20,100,0,0));
 
         return res;
     }
@@ -154,25 +168,26 @@ import javafx.scene.text.FontWeight;
         res.setPadding(new Insets(30,0,30,0));
         res.setPrefHeight(100.);
 
-        Button quitter = new Button("Quitter");
         Button suppr = new Button("Supprimer");
         Button valider = new Button("Valider");
 
         HBox adders = new HBox();
 
-        Circle c1 = new Circle(15);
+        Circle c1 = new Circle(20);
         c1.setFill(Color.DARKGREY);
-        Circle c2 = new Circle(15);
+        Circle c2 = new Circle(20);
         c2.setFill(Color.DARKGREY);
-        Circle c3 = new Circle(15);
+        Circle c3 = new Circle(20);
         c3.setFill(Color.DARKGREY);
-        Circle c4 = new Circle(15);
+        Circle c4 = new Circle(20);
         c4.setFill(Color.DARKGREY);
 
         adders.getChildren().addAll(c1,c2,c3,c4);
 
-        res.getChildren().addAll(quitter,suppr,c1,c2,c3,c4,valider);
+        res.getChildren().addAll(suppr,c1,c2,c3,c4,valider);
 
+        res.setPadding(new Insets(0,0,0,75));
         return res;
-    }// /
+    }
+
 }
