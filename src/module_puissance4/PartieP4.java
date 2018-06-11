@@ -1,10 +1,8 @@
 package module_puissance4;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,7 +12,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,13 +23,13 @@ public class PartieP4 {
 
     public static String chem = "./img/module_puissance4/";
 
-    private Plateau p; // Modèle du jeu
+    private PlateauP4 p; // Modèle du jeu
 
     private List<List<Circle>> tableau; // Le tableau de pion
     private List<Button> listeBoutons; // Liste des boutons pour sélectionner une colonne
 
     public PartieP4(){
-        p = new Plateau("Bernard","xX-Dark-Xx");
+        p = new PlateauP4("Bernard","xX-Dark-Xx");
     }
 
     public Scene getScene() {
@@ -42,7 +39,7 @@ public class PartieP4 {
         res.setBottom(this.bas());
         res.setTop(this.haut());
         res.setRight(this.indic());
-        res.setCenter(this.plateau());
+        res.setCenter(this.PlateauP4());
 
         return new Scene(res, 850, 650);
     }
@@ -137,7 +134,7 @@ public class PartieP4 {
         return res;
     }
 
-    public VBox plateau() {
+    public VBox PlateauP4() {
         VBox res = new VBox();
 
         File file1 = new File(chem+"boutColDesactive.png");
@@ -226,7 +223,7 @@ public class PartieP4 {
         }
     }
 
-    public Plateau getPlateau() {
+    public PlateauP4 getPlateauP4() {
         return p;
     }
 }

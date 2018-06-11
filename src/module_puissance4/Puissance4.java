@@ -8,9 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class Puissance4 extends Application {
 
@@ -22,21 +24,23 @@ public class Puissance4 extends Application {
 
     private Stage primaryStage;
 
+    public static HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
+
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+        this.attribution = new HashMap<>();
+        this.attribution.put("Accueil",this.pageAccueil());
+        this.attribution.put("PartieP4",new PartieP4().getScene());
 
+        this.primaryStage = primaryStage;
         primaryStage.setResizable(false);
         primaryStage.setTitle("Duel sur la toile - Connect 4");
         primaryStage.setScene(this.pageAccueil());
         primaryStage.show();
     }
 
-    public void setScene(int n){
-        if (n==1)
-            primaryStage.setScene(pageAccueil());
-        else if (n==2)
-            primaryStage.setScene(new PartieP4().getScene());
+    public void setScene(String titre){
+        primaryStage.setScene(this.attribution.get(titre));
     }
 
     public HBox boutonsAccueil(String[] boutons){
