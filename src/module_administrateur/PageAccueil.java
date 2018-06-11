@@ -88,7 +88,7 @@ public class PageAccueil extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Duel sur la toile - Administration");
         primaryStage.setResizable(false);
-        primaryStage.setScene(scene());
+        primaryStage.setScene(this.scene());
         primaryStage.show();
     }
 }

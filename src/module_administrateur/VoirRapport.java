@@ -39,9 +39,27 @@ public class VoirRapport extends Application {
         return entete;
     }
 
+    public BorderPane rapportJoueur() {
+      BorderPane b = new BorderPane();
+      Label pseudo = new Label("Joueur1");
+      Label rapport = new Label("J'adore cette plateforme");
+      CheckBox lu = new CheckBox();
+      VBox v = new VBox();
+      v.getChildren().addAll(pseudo, rapport);
+      b.setLeft(v);
+      b.setRight(lu);
+      return b;
+    }
+
+    public VBox listeRapport() {
+      VBox v = new VBox();
+      v.getChildren().add(rapportJoueur());
+      return v;
+    }
+
     public VBox corp() {
         VBox vbox = new VBox();
-        vbox.getChildren().add(entete());
+        vbox.getChildren().addAll(entete(), listeRapport());
         return vbox;
     }
 
