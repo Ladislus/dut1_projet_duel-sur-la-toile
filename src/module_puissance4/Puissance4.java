@@ -36,7 +36,7 @@ public class Puissance4 extends Application {
         if (n==1)
             primaryStage.setScene(pageAccueil());
         else if (n==2)
-            primaryStage.setScene(new Partie().getScene());
+            primaryStage.setScene(new PartieP4().getScene());
     }
 
     public HBox boutonsAccueil(String[] boutons){
@@ -57,6 +57,6 @@ public class Puissance4 extends Application {
         res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
         String[] boutons = {"Duel aléatoire","Duel contre un ami","Reprendre"};
         res.setBottom(boutonsAccueil(boutons));
-        return new Scene(res);
+        return new Scene(res,850,650);
     }
 }

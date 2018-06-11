@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Partie {
+public class PartieP4 {
     // Vue de la plateforme de jeu Puissance 4
 
     public static String chem = "./img/module_puissance4/";
@@ -31,7 +31,7 @@ public class Partie {
     private List<List<Circle>> tableau; // Le tableau de pion
     private List<Button> listeBoutons; // Liste des boutons pour sélectionner une colonne
 
-    public Partie(){
+    public PartieP4(){
         p = new Plateau("Bernard","xX-Dark-Xx");
     }
 
@@ -68,22 +68,22 @@ public class Partie {
         save.setOnMouseExited(e -> save.setStyle(saveNormal));
         save.setPrefWidth(115.);
 
-        Button forfait = new Button("Forfait");
+        Button forfeit = new Button("Forfeit");
 
-        String forfaitNormal = "-fx-background-color: linear-gradient(#FF4d40,#f02020);"+
+        String forfeitNormal = "-fx-background-color: linear-gradient(#FF4d40,#f02020);"+
                 "-fx-background-radius: 5;"+
                 "-fx-font-size: 15;";
-        String forfaitHover = "-fx-background-color: linear-gradient(#ff8d80, #ff8d80);"+
+        String forfeitHover = "-fx-background-color: linear-gradient(#ff8d80, #ff8d80);"+
                 "-fx-background-radius: 5;"+
                 "-fx-font-size: 15;";
 
-        forfait.setStyle(forfaitNormal);
-        forfait.setOnMouseEntered(e -> forfait.setStyle(forfaitHover));
-        forfait.setOnMouseExited(e -> forfait.setStyle(forfaitNormal));
-        forfait.setPrefWidth(115.);
+        forfeit.setStyle(forfeitNormal);
+        forfeit.setOnMouseEntered(e -> forfeit.setStyle(forfeitHover));
+        forfeit.setOnMouseExited(e -> forfeit.setStyle(forfeitNormal));
+        forfeit.setPrefWidth(115.);
 
 
-        res.getChildren().addAll(save,forfait);
+        res.getChildren().addAll(save,forfeit);
         return res;
     }
 
