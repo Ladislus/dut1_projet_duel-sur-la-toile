@@ -41,7 +41,7 @@ public class InscriptionJoueur extends Application {
         bp.setLeft(creerGauche());
         bp.setRight(creeDroite());
         bp.setBottom(creerBas());
-        return new Scene(bp, 500,430);
+        return new Scene(bp, 540,430);
     }
     public VBox creeDroite() {
         VBox Droite = new VBox();
