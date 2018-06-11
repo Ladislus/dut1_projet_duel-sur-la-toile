@@ -20,6 +20,7 @@ import java.util.Arrays;
 public class InscriptionJoueur extends Application {
 
     Button btRetour;
+    Button btDashboard;
 
     public static void main(String[] args) {
         launch(args);
@@ -59,8 +60,8 @@ public class InscriptionJoueur extends Application {
         HBox hPseudo = new HBox();
         HBox hMotdePasse = new HBox();
         HBox hCMotDePasse = new HBox();
-        Button btDashBoard = new Button("Accéder a la plateforme !");
-        btDashBoard.setPrefWidth(170);
+        btDashboard = new Button("Accéder a la plateforme !");
+        btDashboard.setPrefWidth(170);
         //List for generation
         ArrayList<HBox> generationHbox = new ArrayList<HBox>(){
             {
@@ -93,8 +94,9 @@ public class InscriptionJoueur extends Application {
                 generationHbox.get(i).getChildren().add(imageView);
             }
         }
+        btDashboard.setOnAction(new ActionToDashboard(this));
         Droite.getChildren().addAll(nom, generationHbox.get(0),prenom, generationHbox.get(1), sexe, generationHbox.get(2), email, generationHbox.get(3),
-                pseudo, generationHbox.get(4), motdepasse, generationHbox.get(5), cmotdepasse, generationHbox.get(6), btDashBoard);
+                pseudo, generationHbox.get(4), motdepasse, generationHbox.get(5), cmotdepasse, generationHbox.get(6), btDashboard);
         Droite.setPadding(new Insets(15,15,0,0));
         Droite.setSpacing(3);
         //Droite.setAlignment(Pos.);
@@ -154,5 +156,9 @@ public class InscriptionJoueur extends Application {
     }
     public Button getBtRetour(){
         return this.btRetour;
+    }
+
+    public Button getBtDashboard(){
+        return btDashboard;
     }
 }
