@@ -37,11 +37,8 @@ public class GererJoueur extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-<<<<<<< HEAD
+
         Label l = new Label("Nombre de joueurs à activer : ");
-=======
-        Label l = new Label("Nombre de joueurs à activer : 2");
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
         Button activer = new Button("Activer");
         Button supprimer = new Button("Supprimer");
         activer.setStyle("-fx-background-color: #009e0f;");
@@ -58,10 +55,9 @@ public class GererJoueur extends Application {
         VBox listeJoueur = new VBox();
         TextField recherche = new TextField("Rechercher un joueur");
 
-<<<<<<< HEAD
+
         VBox v = new VBox();
-=======
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
+
         //POUR CHAQUE JOUEUR
         BorderPane joueur = new BorderPane();
         Label lj = new Label("Joueur1");
@@ -74,7 +70,6 @@ public class GererJoueur extends Application {
         joueur2.setLeft(lj2);
         joueur2.setRight(cb2);
 
-<<<<<<< HEAD
         v.getChildren().addAll(joueur, joueur2);
         listeJoueur.getChildren().addAll(recherche, v);
         listeJoueur.setStyle("-fx-border-color: black;");
@@ -82,20 +77,13 @@ public class GererJoueur extends Application {
         listeJoueur.setSpacing(5);
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(10);
-=======
-        listeJoueur.getChildren().addAll(recherche, joueur, joueur2);
-        listeJoueur.setSpacing(5);
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
-//        listeJoueur.setStyle("-fx-border-color: black");
+
 
         centre.getChildren().addAll(l, bouton, listeJoueur);
         centre.setSpacing(10);
 
-<<<<<<< HEAD
         centre.setPadding(new Insets(0,25,15,25));
-=======
-        centre.setPadding(new Insets(0,25,0,25));
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
+
         return centre;
     }
 
@@ -106,35 +94,27 @@ public class GererJoueur extends Application {
         TextField recherche = new TextField("Rechercher un joueur");
         VBox listeJoueur = new VBox();
         listeJoueur.setPrefHeight(450);
-<<<<<<< HEAD
         listeJoueur.setStyle("-fx-border-color: black;");
 
 //SI NOMBRE DE JOUEUR EST SUPERIEUR A VALEUR ALORS AFFICHER UNE BARRE DE DEFILEMENT
+
         VBox v = new VBox();
        //POUR CHAQUE JOUEUR
         HBox joueur = new HBox();
         Label lj = new Label("- Joueur1");
-=======
-      //  listeJoueur.setStyle("-fx-padding: 10;" + "-fx-border-style: solid;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-color: black;");
 
-       //POUR CHAQUE JOUEUR
-        HBox joueur = new HBox();
-        Label lj = new Label("Joueur1");
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
         Hyperlink hl = new Hyperlink("Profil");
         joueur.setSpacing(150);
         joueur.getChildren().addAll(lj, hl);
         HBox joueur2 = new HBox();
-<<<<<<< HEAD
+
         Label lj2 = new Label("- Joueur2");
-=======
-        Label lj2 = new Label("Joueur2");
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
+
         Hyperlink hl2 = new Hyperlink("Profil");
         joueur2.setSpacing(150);
         joueur2.getChildren().addAll(lj2, hl2);
         HBox joueur3 = new HBox();
-<<<<<<< HEAD
+
         Label lj3 = new Label("- Joueur3");
         Hyperlink hl3 = new Hyperlink("Profil");
         joueur3.setSpacing(150);
@@ -147,16 +127,6 @@ public class GererJoueur extends Application {
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(5);
         gauche.setPadding(new Insets(0,0,15,25));
-=======
-        Label lj3 = new Label("Joueur3");
-        Hyperlink hl3 = new Hyperlink("Profil");
-        joueur3.setSpacing(150);
-        joueur3.getChildren().addAll(lj3, hl3);
-
-        listeJoueur.getChildren().addAll(recherche, joueur, joueur2, joueur3);
-        gauche.getChildren().addAll(l, listeJoueur);
-        gauche.setPadding(new Insets(0,0,0,25));
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
         return gauche;
     }
 
