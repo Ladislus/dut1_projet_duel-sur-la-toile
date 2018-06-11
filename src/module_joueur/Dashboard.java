@@ -56,17 +56,20 @@ public class Dashboard extends Application {
     }
 
     public VBox creerGauche(){
+        //todo : make to correspond to the IHM
         VBox vGauche = new VBox();
 
         Button btStat = new Button("Mes statistiques");
         Button btParti = new Button("Mes parties");
         Button btEditerProfile = new Button("Editer profile");
+        Button btParametre = new Button("Parametre");
 
         btStat.setPrefWidth(150);
         btParti.setPrefWidth(150);
         btEditerProfile.setPrefWidth(150);
+        btParametre.setPrefWidth(150);
 
-        vGauche.getChildren().addAll(btStat, btParti, btEditerProfile);
+        vGauche.getChildren().addAll(btStat, btParti, btEditerProfile, btParametre);
         vGauche.setPadding(new Insets(70,0,0,10));
         vGauche.setSpacing(40);
 
