@@ -38,7 +38,6 @@ public class PageAccueil extends Application {
     public VBox gauche() {
         VBox gauche = new VBox();
         bJoueur = new Button("Gérer les utilisateurs");
-      //  button.setContentDisplay(ContentDisplay.TOP);
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
         bJoueur.setOnAction(new ActionUtilisateurs(this));
