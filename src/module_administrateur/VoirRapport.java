@@ -19,13 +19,10 @@ public class VoirRapport extends Application {
         launch(args);
     }
 
-<<<<<<< HEAD
     public Button getbRetour() {
         return bRetour;
     }
 
-=======
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
     public BorderPane haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Rapport des joueurs");
@@ -33,10 +30,9 @@ public class VoirRapport extends Application {
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
-<<<<<<< HEAD
+
         bRetour.setOnAction(new ActionRetour(this));
-=======
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
+
         haut.setPadding(new Insets(20,25,20,25));
         return haut;
     }
@@ -45,7 +41,6 @@ public class VoirRapport extends Application {
         BorderPane entete = new BorderPane();
         Label l = new Label("Nombre de rapport non lus : ");
         Button suppr = new Button("Tout supprimer");
-<<<<<<< HEAD
         suppr.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
         suppr.setTextFill(Color.web("white"));
         suppr.setPrefWidth(150);
@@ -100,16 +95,6 @@ public class VoirRapport extends Application {
         vbox.setPadding(new Insets(0,25,0,25));
         vbox.getChildren().addAll(entete(), listeRapport());
         vbox.setSpacing(15);
-=======
-        entete.setLeft(l);
-        entete.setRight(suppr);
-        return entete;
-    }
-
-    public VBox corp() {
-        VBox vbox = new VBox();
-        vbox.getChildren().add(entete());
->>>>>>> 2c9b32abe13c3227a5e0d7f83a7d1be9df7b615c
         return vbox;
     }
 
