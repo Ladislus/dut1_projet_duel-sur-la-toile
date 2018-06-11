@@ -15,8 +15,8 @@
 //
 //    private Plateau p;
 //
-//    public PartieM(String j1, String j2){
-//        this.p = new Plateau("J1","J2");
+//    public PartieM(String j1){
+//        this.p = new Plateau("J1");
 //    }
 //
 //    public Scene getScene(){
