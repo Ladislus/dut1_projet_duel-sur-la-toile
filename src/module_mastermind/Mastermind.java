@@ -1,6 +1,7 @@
 package module_mastermind;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,8 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Mastermind extends Application {
@@ -24,31 +26,33 @@ public class Mastermind extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setResizable(false);
         primaryStage.setTitle("Duel sur la toile - Mastermind");
-        primaryStage.setScene(this.laScene());
+        primaryStage.setScene(this.getScene());
         primaryStage.show();
     }
 
-    public Scene laScene() {
+    public Scene getScene() {
         BorderPane res = new BorderPane();
 //
-        res.setLeft(this.gauche());
-        res.setTop(this.titre());
-        res.setCenter(this.droite());
+        res.setLeft(this.menu());
+        res.setTop(this.haut());
+        res.setRight(this.plateau());
+        res.setBottom(this.bas());
 
-        return new Scene(res, 850, 850);
+        return new Scene(res, 850, 650);
     }
 
-    public VBox  titre(){
+    public VBox haut(){
         VBox res = new VBox(5);
         Label titre = new Label("Mastermind");
+        titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
         res.getChildren().addAll(titre);
         res.setAlignment(Pos.CENTER);
         return res;
     }
 
-    public VBox gauche(){
+    public VBox menu(){
         VBox res = new VBox(5);
-        Button quitter = new Button("Quitter");
+
         Label timer = new Label("Time : 00:00:00");
         Label couleurs = new Label("Couleurs : ");
         GridPane tabCouleurs = new GridPane();
@@ -81,15 +85,19 @@ public class Mastermind extends Application {
         tabCouleurs.setHgap(5);
         tabCouleurs.setVgap(5);
 
-        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs);
+        res.getChildren().addAll(timer,couleurs,tabCouleurs);
 
         return res;
     }
 
-    public VBox droite(){
+    public VBox plateau(){
         VBox res = new VBox(10);
+        res.setAlignment(Pos.CENTER_RIGHT);
+        res.setPadding(new Insets(5,5,30,5));
+        res.setSpacing(20.);
+        res.setPrefWidth(160.);
 
-        for(int i=0; i<12;i++){
+        for(int i=0; i<7;i++){
             HBox temp = new HBox(20);
 
             for(int k=0; k<4;k++){
@@ -124,6 +132,31 @@ public class Mastermind extends Application {
 
             res.getChildren().addAll(temp);
         }
+
+        return res;
+    }
+
+    public HBox bas(){
+        HBox res = new HBox();
+        res.setAlignment(Pos.CENTER);
+        res.setSpacing(20.);
+        res.setPadding(new Insets(30,0,30,0));
+        res.setPrefHeight(100.);
+
+        Button quitter = new Button("Quitter");
+        Button suppr = new Button("Supprimer");
+        Button valider = new Button("Valider");
+
+        Circle c1 = new Circle(15);
+        c1.setFill(Color.DARKGREY);
+        Circle c2 = new Circle(15);
+        c2.setFill(Color.DARKGREY);
+        Circle c3 = new Circle(15);
+        c3.setFill(Color.DARKGREY);
+        Circle c4 = new Circle(15);
+        c4.setFill(Color.DARKGREY);
+
+        res.getChildren().addAll(quitter,suppr,c1,c2,c3,c4,valider);
 
         return res;
     }
