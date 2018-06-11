@@ -106,7 +106,7 @@ public class Mastermind extends Application {
                 temp.getChildren().addAll(cercleBleu);
             }
 
-            GridPane indices = new GridPane();
+            GridPane plateau = new GridPane();
 
             Circle cercleIndice1 = new Circle(10);
             cercleIndice1.setFill(Color.BLACK);
@@ -120,15 +120,15 @@ public class Mastermind extends Application {
             Circle cercleIndice4 = new Circle(10);
             cercleIndice4.setFill(Color.BLACK);
 
-            indices.add(cercleIndice1,0,0);
-            indices.add(cercleIndice2,1,0);
-            indices.add(cercleIndice3,0,1);
-            indices.add(cercleIndice4,1,1);
+            plateau.add(cercleIndice1,1,0);
+            plateau.add(cercleIndice2,2,0);
+            plateau.add(cercleIndice3,1,1);
+            plateau.add(cercleIndice4,2,1);
 
-            indices.setHgap(5);
-            indices.setVgap(5);
+            plateau.setHgap(5);
+            plateau.setVgap(5);
 
-            temp.getChildren().addAll(indices);
+            temp.getChildren().addAll(plateau);
 
             res.getChildren().addAll(temp);
         }
@@ -147,6 +147,8 @@ public class Mastermind extends Application {
         Button suppr = new Button("Supprimer");
         Button valider = new Button("Valider");
 
+        HBox adders = new HBox();
+
         Circle c1 = new Circle(15);
         c1.setFill(Color.DARKGREY);
         Circle c2 = new Circle(15);
@@ -155,6 +157,8 @@ public class Mastermind extends Application {
         c3.setFill(Color.DARKGREY);
         Circle c4 = new Circle(15);
         c4.setFill(Color.DARKGREY);
+
+        adders.getChildren().addAll(c1,c2,c3,c4);
 
         res.getChildren().addAll(quitter,suppr,c1,c2,c3,c4,valider);
 
