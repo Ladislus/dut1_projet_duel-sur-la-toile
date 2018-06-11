@@ -51,7 +51,9 @@ public class Mastermind extends Application {
         Label timer = new Label("Time : 00:00:00");
         Label couleurs = new Label("Couleurs : ");
         GridPane tabCouleurs = new GridPane();
-        Circle jaune = new Circle(5, Paint(new Color(1,1,0,1)))
+        Circle jaune = new Circle(5, Color.YELLOW);
+
+        return res;
     }
 
 }
