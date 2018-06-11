@@ -19,6 +19,10 @@ public class VoirRapport extends Application {
         launch(args);
     }
 
+    public Button getbRetour() {
+        return bRetour;
+    }
+
     public BorderPane haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Rapport des joueurs");
@@ -26,6 +30,7 @@ public class VoirRapport extends Application {
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
+        bRetour.setOnAction(new ActionRetour(this));
         haut.setPadding(new Insets(20,25,20,25));
         return haut;
     }

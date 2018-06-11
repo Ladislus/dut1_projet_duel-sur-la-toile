@@ -37,7 +37,7 @@ public class GererJoueur extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-        Label l = new Label("Nombre de joueurs à activer : 2");
+        Label l = new Label("Nombre de joueurs à activer : ");
         Button activer = new Button("Activer");
         Button supprimer = new Button("Supprimer");
         activer.setStyle("-fx-background-color: #009e0f;");
@@ -54,6 +54,7 @@ public class GererJoueur extends Application {
         VBox listeJoueur = new VBox();
         TextField recherche = new TextField("Rechercher un joueur");
 
+        VBox v = new VBox();
         //POUR CHAQUE JOUEUR
         BorderPane joueur = new BorderPane();
         Label lj = new Label("Joueur1");
@@ -66,14 +67,19 @@ public class GererJoueur extends Application {
         joueur2.setLeft(lj2);
         joueur2.setRight(cb2);
 
-        listeJoueur.getChildren().addAll(recherche, joueur, joueur2);
+        v.getChildren().addAll(joueur, joueur2);
+        listeJoueur.getChildren().addAll(recherche, v);
+        listeJoueur.setStyle("-fx-border-color: black;");
+        listeJoueur.setPrefHeight(300);
         listeJoueur.setSpacing(5);
+        v.setPadding(new Insets(5,0,0,10));
+        v.setSpacing(10);
 //        listeJoueur.setStyle("-fx-border-color: black");
 
         centre.getChildren().addAll(l, bouton, listeJoueur);
         centre.setSpacing(10);
 
-        centre.setPadding(new Insets(0,25,0,25));
+        centre.setPadding(new Insets(0,25,15,25));
         return centre;
     }
 
@@ -84,28 +90,34 @@ public class GererJoueur extends Application {
         TextField recherche = new TextField("Rechercher un joueur");
         VBox listeJoueur = new VBox();
         listeJoueur.setPrefHeight(450);
-      //  listeJoueur.setStyle("-fx-padding: 10;" + "-fx-border-style: solid;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-color: black;");
+        listeJoueur.setStyle("-fx-border-color: black;");
 
+//SI NOMBRE DE JOUEUR EST SUPERIEUR A VALEUR ALORS AFFICHER UNE BARRE DE DEFILEMENT
+        VBox v = new VBox();
        //POUR CHAQUE JOUEUR
         HBox joueur = new HBox();
-        Label lj = new Label("Joueur1");
+        Label lj = new Label("- Joueur1");
         Hyperlink hl = new Hyperlink("Profil");
         joueur.setSpacing(150);
         joueur.getChildren().addAll(lj, hl);
         HBox joueur2 = new HBox();
-        Label lj2 = new Label("Joueur2");
+        Label lj2 = new Label("- Joueur2");
         Hyperlink hl2 = new Hyperlink("Profil");
         joueur2.setSpacing(150);
         joueur2.getChildren().addAll(lj2, hl2);
         HBox joueur3 = new HBox();
-        Label lj3 = new Label("Joueur3");
+        Label lj3 = new Label("- Joueur3");
         Hyperlink hl3 = new Hyperlink("Profil");
         joueur3.setSpacing(150);
         joueur3.getChildren().addAll(lj3, hl3);
+        //
 
-        listeJoueur.getChildren().addAll(recherche, joueur, joueur2, joueur3);
+        v.getChildren().addAll(joueur, joueur2, joueur3);
+        listeJoueur.getChildren().addAll(recherche, v);
         gauche.getChildren().addAll(l, listeJoueur);
-        gauche.setPadding(new Insets(0,0,0,25));
+        v.setPadding(new Insets(5,0,0,10));
+        v.setSpacing(5);
+        gauche.setPadding(new Insets(0,0,15,25));
         return gauche;
     }
 
