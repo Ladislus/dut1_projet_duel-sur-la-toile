@@ -37,10 +37,7 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
-      //  ImageView imageView = new ImageView(new Image("//LIEN IMAGE//"));
-    //    bJoueur = new Button("Gérer les utilisateurs", imageView);
         bJoueur = new Button("Gérer les utilisateurs");
-
       //  button.setContentDisplay(ContentDisplay.TOP);
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
