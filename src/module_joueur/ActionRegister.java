@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class ActionRegister implements EventHandler<ActionEvent> {
 
     ConnexionJoueur connexionJoueur;
