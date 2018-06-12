@@ -6,12 +6,11 @@ import javafx.stage.Stage;
 
 public class ActionRetour implements EventHandler<ActionEvent> {
 
-    VoirRapport vRapport;
-    GererJoueur gJoueur;
-    VoirStatistiques vStat;
-    ProfilJoueur pJoueur;
     PageAccueil pa;
-    String pageActuelle;
+
+    public ActionRetour(PageAccueil pa) {
+        this.pa = pa;
+    }
 
     @Override
     public void handle(ActionEvent actionEvent) {

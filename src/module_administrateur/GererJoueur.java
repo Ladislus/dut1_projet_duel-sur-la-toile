@@ -29,7 +29,7 @@ public class GererJoueur extends BorderPane {
         Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour());
+        bRetour.setOnAction(new ActionRetour(this.pa));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);

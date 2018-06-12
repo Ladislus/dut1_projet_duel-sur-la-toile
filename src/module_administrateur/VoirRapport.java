@@ -30,7 +30,7 @@ public class VoirRapport extends BorderPane {
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
 
-        bRetour.setOnAction(new ActionRetour());
+        bRetour.setOnAction(new ActionRetour(this.pa));
 
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);

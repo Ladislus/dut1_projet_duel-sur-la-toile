@@ -13,35 +13,19 @@ import javafx.stage.Stage;
 
 public class PageAccueil extends Application {
 
-    Button bJoueur;
-    Button bRapport;
-    Button bJeu;
-    Button bStat;
     BorderPane bp;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public Button getbJoueur() {
-        return bJoueur;
-    }
-
-    public Button getbRapport() {
-        return bRapport;
-    }
-
-    public Button getbJeu() {
-        return bJeu;
-    }
-
-    public Button getbStat() {
-        return bStat;
+    public BorderPane getBp() {
+        return this.bp;
     }
 
     public VBox bas() {
         VBox bas = new VBox();
-        bRapport = new Button("Lire les rapports des joueurs");
+        Button bRapport = new Button("Lire les rapports des joueurs");
         bRapport.setOnAction(new ActionRapport(this));
         bRapport.setPrefWidth(600);
         bRapport.setPrefHeight(100);
@@ -53,7 +37,7 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
-        bJoueur = new Button("Gérer les utilisateurs");
+        Button bJoueur = new Button("Gérer les utilisateurs");
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
         bJoueur.setOnAction(new ActionUtilisateurs(this));
@@ -64,9 +48,9 @@ public class PageAccueil extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-        bJeu = new Button("Gérer les jeux");
-      //  bJeu.setOnAction(new ActionJeu(this));
-        bStat = new Button("Voir les statistiques");
+        Button bJeu = new Button("Gérer les jeux");
+        bJeu.setOnAction(new ActionJeu(this));
+        Button bStat = new Button("Voir les statistiques");
         bStat.setOnAction(new ActionStatistiques(this));
         bJeu.setPrefWidth(388);
         bJeu.setPrefHeight(117);
@@ -102,10 +86,6 @@ public class PageAccueil extends Application {
       b.setBottom(bas());
       b.setLeft(gauche());
       return b;
-    }
-
-    public BorderPane getBp() {
-        return this.bp;
     }
 
     @Override

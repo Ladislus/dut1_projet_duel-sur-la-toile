@@ -27,7 +27,7 @@ public class VoirStatistiques extends BorderPane {
         BorderPane haut = new BorderPane();
         Label l = new Label("Statistiques");
         Button bRetour = new Button("< Retour");
-        bRetour.setOnAction(new ActionRetour());
+        bRetour.setOnAction(new ActionRetour(this.pa));
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
