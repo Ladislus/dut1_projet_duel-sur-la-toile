@@ -54,6 +54,7 @@ import java.util.List;
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
+        quitter.setOnAction(new ActionQuitter());
 
         Label timer = new Label("Time : 00:00:00");
         timer.setPadding(new Insets(75,0,0,0));
