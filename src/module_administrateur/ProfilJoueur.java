@@ -1,7 +1,7 @@
 package module_administrateur;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
+import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -15,110 +15,108 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooser;
 import javafx.collections.*;
 import java.io.File;
+import javafx.scene.chart.*;
 
-public class ProfilJoueur extends Application {
+public class ProfilJoueur extends BorderPane {
 
-    Button bRetour;
+    GererJoueur gJoueur;
+    PageAccueil pa;
 
-    public static void main(String[] args) {
-        launch(args);
+    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur) {
+        super();
+        this.gJoueur = gJoueur;
+        this.pa = pa;
+        this.haut();
+        this.gauche();
+        this.centre();
     }
 
-    public Button getbRetour() {
-        return bRetour;
-    }
-
-    public BorderPane haut() {
+    public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Profil de ");
-        bRetour = new Button("< Retour");
+        Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        //bRetour.setOnAction(new ActionRetour(this));
+        bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
         l.setFont(Font.font ("Arial", 25));
-        haut.setPadding(new Insets(0,25,0,25));
-        return haut;
+        haut.setPadding(new Insets(20,25,20,25));
+        this.setTop(haut);
     }
 
-    public GridPane gauche() {
-        GridPane gauche = new GridPane();
-        Label pseudo = new Label("Pseudo : ");
-        Label prenom = new Label("Prénom : ");
-        Label nom = new Label("Nom : ");
-        Label email = new Label("Email : ");
-        Label role = new Label("Rôle : ");
-        TextField tpseudo = new TextField();
-        TextField tprenom = new TextField();
-        TextField tnom = new TextField();
-        TextField temail = new TextField();
-        ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
-        ComboBox cbrole = new ComboBox(optionsRoles);
+    public void gauche() {
+      VBox vbgauche = new VBox(18);
+      GridPane gpgauche = new GridPane();
+      HBox hbsave = new HBox();
+      Label pseudo = new Label("Pseudo : ");
+      Label prenom = new Label("Prénom : ");
+      Label nom = new Label("Nom : ");
+      Label email = new Label("Email : ");
+      Label role = new Label("Rôle : ");
+      TextField tpseudo = new TextField();
+      TextField tprenom = new TextField();
+      TextField tnom = new TextField();
+      TextField temail = new TextField();
+      ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
+      ComboBox cbrole = new ComboBox(optionsRoles);
+      Label active = new Label("Activé");
+      Button bsave = new Button("Sauvegarder");
+      Label limageprofil = new Label("Image de profil");
 
-        gauche.add(pseudo, 1, 40);
-        gauche.add(prenom, 1, 45);
-        gauche.add(nom, 1, 50);
-        gauche.add(email, 1, 55);
-        gauche.add(role, 1, 60);
+      gpgauche.add(pseudo, 1, 40);
+      gpgauche.add(prenom, 1, 45);
+      gpgauche.add(nom, 1, 50);
+      gpgauche.add(email, 1, 55);
+      gpgauche.add(role, 1, 60);
 
-        gauche.add(tpseudo, 2, 40);
-        gauche.add(tprenom, 2, 45);
-        gauche.add(tnom, 2, 50);
-        gauche.add(temail, 2, 55);
-        gauche.add(cbrole, 2, 60);
+      gpgauche.add(tpseudo, 2, 40);
+      gpgauche.add(tprenom, 2, 45);
+      gpgauche.add(tnom, 2, 50);
+      gpgauche.add(temail, 2, 55);
+      gpgauche.add(cbrole, 2, 60);
 
-        //gauche.setPadding(new Insets(0,25,0,25));
-        gauche.setVgap(1);
+      gpgauche.setVgap(1);
 
-        return gauche;
+      hbsave.getChildren().add(bsave);
+      hbsave.setAlignment(Pos.CENTER);
+      vbgauche.getChildren().addAll(gpgauche, limageprofil, active, hbsave);
+
+      vbgauche.setPadding(new Insets(0,0,0,25));
+
+      this.setLeft(vbgauche);
+
+
     }
 
-    public VBox droite() {
-        VBox droite = new VBox(15);
-        Label stats = new Label("Statistiques");
-        Label jeuplusjoue = new Label("Jeu le plus joué : ");
-        Label tempsplateforme = new Label("Temps passé sur la plateforme : ");
-        Label nbpartiesjouees = new Label("Nombre de parties jouées : ");
-        Label nbamis = new Label("Nombre d'amis : ");
+    public void centre() {
+      VBox vbcentre = new VBox(15);
+      VBox vbstats = new VBox(15);
+      Label stats = new Label("Statistiques");
+      stats.setStyle("-fx-font-weight: bold");
+      Label jeuplusjoue = new Label("Jeu le plus joué : ");
+      Label tempsplateforme = new Label("Temps passé sur la plateforme : ");
+      Label nbpartiesjouees = new Label("Nombre de parties jouées : ");
+      Label nbamis = new Label("Nombre d'amis : ");
 
-        droite.getChildren().addAll(stats, jeuplusjoue, tempsplateforme, nbpartiesjouees, nbamis);
-        droite.setPadding(new Insets(0,0,0,25));
-        return droite;
+      ObservableList<PieChart.Data> donneesdiagramme = FXCollections.observableArrayList(
+        new PieChart.Data("Victoires", 60),
+        new PieChart.Data("Défaites", 40));
+
+      PieChart diagramme = new PieChart(donneesdiagramme);
+      diagramme.setTitle("Ratio Victoires/Défaites");
+
+      diagramme.setStartAngle(90);
+
+      vbstats.getChildren().addAll(stats, jeuplusjoue, tempsplateforme, nbpartiesjouees, nbamis);
+
+      vbstats.setPadding(new Insets(5,10,5,10));
+      vbstats.setStyle("-fx-border-color: black;");
+      vbstats.setPrefHeight(200);
+
+      vbcentre.getChildren().addAll(vbstats, diagramme);
+
+      vbcentre.setPadding(new Insets(40,25,20,25));
+
+      this.setCenter(vbcentre);
     }
 
-    public VBox bas(){
-      VBox bas = new VBox(15);
-      /*FileChooser fileChooser = new FileChooser();
-      fileChooser.setTitle("Image de profil");
-      fileChooser.getExtensionFilters().add(new ExtensionFilter(
-        "Image Files", "*.png", "*.jpg", "*.jpeg"));
-      File file = fileChooser.showOpenDialog(primaryStage);
-      bas.getChildren().add(fileChooser);*/
-      Label active = new Label("Active");
-      ToggleButton tb1 = new ToggleButton("ON");
-      ToggleGroup group = new ToggleGroup();
-      tb1.setToggleGroup(group);
-
-      bas.getChildren().add(tb1);
-
-      bas.setPadding(new Insets(0,25,0,0));
-
-      return bas;
-    }
-
-    public Scene scene() {
-        BorderPane b = new BorderPane();
-        b.setTop(haut());
-        b.setLeft(gauche());
-        b.setRight(droite());
-        b.setBottom(bas());
-        return new Scene(b, 650, 450);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Duel sur la toile - Administration");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(this.scene());
-        primaryStage.show();
-    }
 }

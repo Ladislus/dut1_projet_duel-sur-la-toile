@@ -6,32 +6,28 @@ import javafx.stage.Stage;
 
 public class ActionRetour implements EventHandler<ActionEvent> {
 
-    VoirRapport vRapport;
+    PageAccueil pa;
     GererJoueur gJoueur;
-    String pageActuelle;
+    String page;
 
-    public ActionRetour(VoirRapport vRapport) {
-        this.vRapport = vRapport;
-        this.pageActuelle = "VoirRapport";
+    public ActionRetour(PageAccueil pa) {
+        this.pa = pa;
+        this.page = "PageAccueil";
     }
 
-    public ActionRetour(GererJoueur gJoueur) {
+    public ActionRetour(PageAccueil pa, GererJoueur gJoueur) {
         this.gJoueur = gJoueur;
-        this.pageActuelle = "GererJoueur";
+        this.pa = pa;
+        this.page = "GererJoueur";
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Stage stageConnexion;
-        if (this.pageActuelle.equals("VoirRapport")) {
-            stageConnexion = (Stage) this.vRapport.getbRetour().getScene().getWindow();
-
+        if (this.page.equals("GererJoueur")) {
+            this.pa.getBp().setCenter(new GererJoueur(this.pa));
         }
         else {
-            stageConnexion = (Stage) this.gJoueur.getbRetour().getScene().getWindow();
+            this.pa.getBp().setCenter(this.pa.constructB());
         }
-        PageAccueil pa = new PageAccueil();
-        stageConnexion.close();
-        pa.start(new Stage());
     }
 }

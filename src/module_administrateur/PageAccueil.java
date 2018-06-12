@@ -13,23 +13,23 @@ import javafx.stage.Stage;
 
 public class PageAccueil extends Application {
 
-    Button bJoueur;
+    BorderPane bp;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public Button getbJoueur() {
-        return bJoueur;
+    public BorderPane getBp() {
+        return this.bp;
     }
 
     public VBox bas() {
         VBox bas = new VBox();
-        Button rapport = new Button("Lire les rapports des joueurs");
-        rapport.setOnAction(new ActionRapport(this));
-        rapport.setPrefWidth(600);
-        rapport.setPrefHeight(100);
-        bas.getChildren().add(rapport);
+        Button bRapport = new Button("Lire les rapports des joueurs");
+        bRapport.setOnAction(new ActionRapport(this));
+        bRapport.setPrefWidth(600);
+        bRapport.setPrefHeight(100);
+        bas.getChildren().add(bRapport);
         bas.setAlignment(Pos.BOTTOM_CENTER);
         bas.setPadding(new Insets(0,0,15,0));
         return bas;
@@ -37,8 +37,7 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
-        bJoueur = new Button("Gérer les utilisateurs");
-      //  button.setContentDisplay(ContentDisplay.TOP);
+        Button bJoueur = new Button("Gérer les utilisateurs");
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
         bJoueur.setOnAction(new ActionUtilisateurs(this));
@@ -49,13 +48,15 @@ public class PageAccueil extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-        Button jeu = new Button("Gérer les jeux");
-        Button stat = new Button("Voir les statistiques");
-        jeu.setPrefWidth(388);
-        jeu.setPrefHeight(117);
-        stat.setPrefWidth(388);
-        stat.setPrefHeight(117);
-        centre.getChildren().addAll(jeu, stat);
+        Button bJeu = new Button("Gérer les jeux");
+        bJeu.setOnAction(new ActionJeu(this));
+        Button bStat = new Button("Voir les statistiques");
+        bStat.setOnAction(new ActionStatistiques(this));
+        bJeu.setPrefWidth(388);
+        bJeu.setPrefHeight(117);
+        bStat.setPrefWidth(388);
+        bStat.setPrefHeight(117);
+        centre.getChildren().addAll(bJeu, bStat);
         centre.setPadding(new Insets(0,12,0,12));
         centre.setSpacing(16);
         return centre;
@@ -73,12 +74,18 @@ public class PageAccueil extends Application {
     }
 
     public Scene scene() {
-        BorderPane b = new BorderPane();
-        b.setTop(haut());
-        b.setCenter(centre());
-        b.setBottom(bas());
-        b.setLeft(gauche());
-        return new Scene(b, 650, 450);
+        this.bp = new BorderPane();
+        this.bp.setCenter(this.constructB());
+        return new Scene(this.bp, 650, 450);
+    }
+
+    public BorderPane constructB() {
+      BorderPane b = new BorderPane();
+      b.setTop(haut());
+      b.setCenter(centre());
+      b.setBottom(bas());
+      b.setLeft(gauche());
+      return b;
     }
 
     @Override

@@ -14,9 +14,6 @@ public class ActionRapport implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Stage stageConnexion = (Stage) pAccueil.getbJoueur().getScene().getWindow();
-        VoirRapport v = new VoirRapport();
-        stageConnexion.close();
-        v.start(new Stage());
+        this.pAccueil.getBp().setCenter(new VoirRapport(this.pAccueil));
     }
 }

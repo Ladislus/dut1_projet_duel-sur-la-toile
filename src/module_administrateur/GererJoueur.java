@@ -11,31 +11,31 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class GererJoueur extends Application {
+public class GererJoueur extends BorderPane {
 
-    Button bRetour;
+    PageAccueil pa;
 
-    public static void main(String[] args) {
-        launch(args);
+    public GererJoueur(PageAccueil pa) {
+      super();
+      this.pa = pa;
+      this.haut();
+      this.gauche();
+      this.centre();
     }
 
-    public Button getbRetour() {
-        return bRetour;
-    }
-
-    public BorderPane haut() {
+    public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des joueurs");
-        bRetour = new Button("< Retour");
+        Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this));
+        bRetour.setOnAction(new ActionRetour(this.pa));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
-        return haut;
+        this.setTop(haut);
     }
 
-    public VBox centre() {
+    public void centre() {
         VBox centre = new VBox();
 
         Label l = new Label("Nombre de joueurs à activer : ");
@@ -54,7 +54,6 @@ public class GererJoueur extends Application {
         bouton.setSpacing(10);
         VBox listeJoueur = new VBox();
         TextField recherche = new TextField("Rechercher un joueur");
-
 
         VBox v = new VBox();
 
@@ -84,10 +83,10 @@ public class GererJoueur extends Application {
 
         centre.setPadding(new Insets(0,25,15,25));
 
-        return centre;
+        this.setCenter(centre);
     }
 
-    public VBox gauche() {
+    public void gauche() {
         VBox gauche = new VBox();
         Label l = new Label("Liste des joueurs");
         l.setPadding(new Insets(0,0,12,0));
@@ -99,24 +98,26 @@ public class GererJoueur extends Application {
 //SI NOMBRE DE JOUEUR EST SUPERIEUR A VALEUR ALORS AFFICHER UNE BARRE DE DEFILEMENT
 
         VBox v = new VBox();
+
        //POUR CHAQUE JOUEUR
         HBox joueur = new HBox();
         Label lj = new Label("- Joueur1");
-
         Hyperlink hl = new Hyperlink("Profil");
+        hl.setOnAction(new ActionProfilJoueur(this.pa, this));
         joueur.setSpacing(150);
         joueur.getChildren().addAll(lj, hl);
+
         HBox joueur2 = new HBox();
-
         Label lj2 = new Label("- Joueur2");
-
         Hyperlink hl2 = new Hyperlink("Profil");
+        hl2.setOnAction(new ActionProfilJoueur(this.pa, this));
         joueur2.setSpacing(150);
         joueur2.getChildren().addAll(lj2, hl2);
-        HBox joueur3 = new HBox();
 
+        HBox joueur3 = new HBox();
         Label lj3 = new Label("- Joueur3");
         Hyperlink hl3 = new Hyperlink("Profil");
+        hl3.setOnAction(new ActionProfilJoueur(this.pa, this));
         joueur3.setSpacing(150);
         joueur3.getChildren().addAll(lj3, hl3);
         //
@@ -127,22 +128,6 @@ public class GererJoueur extends Application {
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(5);
         gauche.setPadding(new Insets(0,0,15,25));
-        return gauche;
-    }
-
-    public Scene scene() {
-        BorderPane b = new BorderPane();
-        b.setTop(haut());
-        b.setLeft(gauche());
-        b.setCenter(centre());
-        return new Scene(b, 650, 450);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Duel sur la toile - Administration");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(this.scene());
-        primaryStage.show();
+        this.setLeft(gauche);
     }
 }
