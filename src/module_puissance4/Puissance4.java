@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -53,14 +52,17 @@ public class Puissance4 extends Application {
         }
         res.setAlignment(Pos.CENTER);
         res.setSpacing(25);
+
         return res;
     }
 
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
+
         res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
         String[] boutons = {"Duel aléatoire","Duel contre un ami","Reprendre"};
         res.setBottom(boutonsAccueil(boutons));
+
         return new Scene(res,850,650);
     }
 }
