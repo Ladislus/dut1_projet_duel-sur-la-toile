@@ -103,21 +103,21 @@ public class GererJoueur extends BorderPane {
         HBox joueur = new HBox();
         Label lj = new Label("- Joueur1");
         Hyperlink hl = new Hyperlink("Profil");
-        hl.setOnAction(new ActionProfilJoueur(this.pa));
+        hl.setOnAction(new ActionProfilJoueur(this.pa, this));
         joueur.setSpacing(150);
         joueur.getChildren().addAll(lj, hl);
 
         HBox joueur2 = new HBox();
         Label lj2 = new Label("- Joueur2");
         Hyperlink hl2 = new Hyperlink("Profil");
-        hl2.setOnAction(new ActionProfilJoueur(this.pa));
+        hl2.setOnAction(new ActionProfilJoueur(this.pa, this));
         joueur2.setSpacing(150);
         joueur2.getChildren().addAll(lj2, hl2);
 
         HBox joueur3 = new HBox();
         Label lj3 = new Label("- Joueur3");
         Hyperlink hl3 = new Hyperlink("Profil");
-        hl3.setOnAction(new ActionProfilJoueur(this.pa));
+        hl3.setOnAction(new ActionProfilJoueur(this.pa, this));
         joueur3.setSpacing(150);
         joueur3.getChildren().addAll(lj3, hl3);
         //
