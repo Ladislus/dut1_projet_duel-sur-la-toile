@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,18 +51,26 @@ public class Mastermind extends Application {
     public HBox boutonsAccueil() {
         HBox res = new HBox();
         ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
-        int cpt = 0;
+        Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
-        File imageami = new File(chem+"iconeami.png");
+        File imageami = new File(chem+"jouerAmi.png");
         ImageView ami = new ImageView();
         ami.setImage(new Image(imageami.toURI().toString()));
 
         Button b1 = new Button("Duel contre un ami",ami);
+        b1.setFont(bouton);
+        b1.setContentDisplay(ContentDisplay.TOP);
         b1.setPrefSize(390,75.);
         b1.setOnAction(handler);
         res.getChildren().add(b1);
 
-        Button b2 = new Button("Reprendre");
+        File continu = new File(chem+"continuerPartie.png");
+        ImageView continuPartie = new ImageView();
+        continuPartie.setImage(new Image(continu.toURI().toString()));
+
+        Button b2 = new Button("Reprendre", continuPartie);
+        b2.setFont(bouton);
+        b2.setContentDisplay(ContentDisplay.TOP);
         b2.setPrefSize(390,75.);
         b2.setOnAction(handler);
         res.getChildren().add(b2);

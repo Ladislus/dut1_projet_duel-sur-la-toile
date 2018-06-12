@@ -18,6 +18,7 @@ import java.io.File;
 
 public class ConnexionJoueur extends Application {
 
+
     Hyperlink hlRegister;
 
     public static void main(String[] args) {
@@ -34,15 +35,16 @@ public class ConnexionJoueur extends Application {
         primaryStage.show();
     }
 
-    public Scene creerConnexionJoueur(){
+    public Scene creerConnexionJoueur() {
         BorderPane bp = new BorderPane();
         bp.setLeft(creerGauche());
         bp.setRight(creerDroite());
         bp.setBottom(creerBas());
-        Scene scene = new Scene(bp, 500,290);
+        Scene scene = new Scene(bp, 500, 290);
         return scene;
     }
-    public VBox creerGauche(){
+
+    public VBox creerGauche() {
         VBox vBox = new VBox();
         File imageFile = new File("./img/pub/logo.png");
         Image image = new Image(imageFile.toURI().toString());
@@ -57,11 +59,12 @@ public class ConnexionJoueur extends Application {
         vBox.getChildren().addAll(logo, slogan);
         vBox.setPrefWidth(250);
         vBox.setSpacing(20);
-        vBox.setPadding(new Insets(25,0,0,25));
+        vBox.setPadding(new Insets(25, 0, 0, 25));
         vBox.setAlignment(Pos.TOP_CENTER);
         return vBox;
     }
-    public VBox creerDroite(){
+
+    public VBox creerDroite() {
         VBox vBox = new VBox();
         hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
         Hyperlink hlMotDePasseOubliee = new Hyperlink("Mot de passe oubliée ?");
@@ -74,15 +77,16 @@ public class ConnexionJoueur extends Application {
         Button btConnexion = new Button("Vers l'aventure ! -->>");
         title.setFont(Font.font("Arial", 19));
         vBox.setAlignment(Pos.TOP_CENTER);
-        vBox.setPadding(new Insets(18,15,0,0));
+        vBox.setPadding(new Insets(18, 15, 0, 0));
         vBox.setPrefWidth(250);
         vBox.setSpacing(10);
         vBox.getChildren().addAll(title, lLogin, tfLogin, lPassword, tfPassword, hlRegister, hlMotDePasseOubliee, btConnexion);
         return vBox;
     }
-    public HBox creerBas(){
+
+    public HBox creerBas() {
         HBox hBas = new HBox();
-        hBas.setPadding(new Insets(0,0,5,5));
+        hBas.setPadding(new Insets(0, 0, 5, 5));
         Label lCopyright = new Label("© Copyright : Duel sur la toile");
         lCopyright.setFont(Font.font("Arial", 10));
         hBas.getChildren().add(lCopyright);
