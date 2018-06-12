@@ -25,7 +25,7 @@ import java.io.File;
 public class Mastermind extends Application {
 
     private Stage primaryStage;
-    public static String chem = "./img/module_puissance4/";
+    public static String chem = "./img/module_mastermind/";
 
     public static void main(String[] args) {
         launch(args);
@@ -44,7 +44,7 @@ public class Mastermind extends Application {
         if (n==1)
             primaryStage.setScene(pageAccueil());
         else if (n==2)
-            primaryStage.setScene(new PartieM().getScene());
+            primaryStage.setScene(new PartieM("j1").getScene());
     }
 
     public HBox boutonsAccueil(String[] boutons) {
@@ -52,20 +52,21 @@ public class Mastermind extends Application {
         ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
         for (String s:boutons){
             Button temp = new Button(s);
+            temp.setPrefSize(390,75.);
             temp.setOnAction(handler);
             res.getChildren().add(temp);
         }
         res.setAlignment(Pos.CENTER);
         res.setSpacing(25);
+        res.setPadding(new Insets(0,0,40,0));
         return res;
     }
 
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
-        res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
-        String[] boutons = {"Duel aléatoire","Duel contre un ami","Reprendre"};
+        res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
+        String[] boutons = {"Duel contre un ami","Reprendre"};
         res.setBottom(boutonsAccueil(boutons));
-        return new Scene(res);
+        return new Scene(res,850,650);
     }
-
 }
