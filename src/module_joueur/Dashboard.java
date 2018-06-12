@@ -11,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -55,7 +54,7 @@ public class Dashboard extends Application {
     }
 
     public VBox creerGauche(){
-        //todo : make to correspond to the IHM
+        //todo : make to correspond to the IHM --> fini
         VBox vGauche = new VBox();
         VBox vParam = new VBox();
 
@@ -91,13 +90,18 @@ public class Dashboard extends Application {
     public VBox creerDroite(){
         VBox hDroiteCentral = new VBox();
         VBox hDroiteListeDamis = new VBox();
+        ScrollPane sDroiteListeDamis = new ScrollPane();
+        Label lbTotalContact = new Label("Total : 7 contacts");
 
         Label lListeDamis = new Label("Ma liste d'amis");
+        Button btListeDamis = new Button("Mes amis");
+        Button btMessage = new Button("8 messages non lu");
+        btListeDamis.setPrefWidth(150);btMessage.setPrefWidth(150);
         lListeDamis.setFont(new Font("Arial",20));
 
         //todo : Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
 
-        String[] btName = {"Jean Michel", "Jacque", "Tiouan", "Pierre"};
+        String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "fzfze", "Ofzjzelfj"};
         ArrayList<Button> listeButton = new ArrayList<>();
 
         for(String name : btName){
@@ -113,11 +117,17 @@ public class Dashboard extends Application {
         }
 
         hDroiteListeDamis.getChildren().addAll(listeButton);
-        hDroiteListeDamis.setPadding(new Insets(20,5,0,0));
         hDroiteListeDamis.setSpacing(5);
+        hDroiteListeDamis.setPrefHeight(200);
 
-        hDroiteCentral.setPadding(new Insets(40,0,0,0));
-        hDroiteCentral.getChildren().addAll(lListeDamis, hDroiteListeDamis);
+        sDroiteListeDamis.setContent(hDroiteListeDamis);
+        sDroiteListeDamis.setFitToWidth(true);
+
+        hDroiteCentral.setPadding(new Insets(5));
+
+        //hDroiteCentral.setStyle(cssLayout);
+        hDroiteCentral.setSpacing(15);
+        hDroiteCentral.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
 
         return hDroiteCentral;
     }

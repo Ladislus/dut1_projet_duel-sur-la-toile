@@ -16,6 +16,6 @@ public class ActionRegister implements EventHandler<ActionEvent> {
         Stage stageConnexion = (Stage) connexionJoueur.getHlRegister().getScene().getWindow();
         InscriptionJoueur ij = new InscriptionJoueur();
         stageConnexion.close();
-        ij.start(new Stage());
+        //ij.start(new Stage());
     }
 }

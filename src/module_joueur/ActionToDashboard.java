@@ -13,10 +13,10 @@ public class ActionToDashboard implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Stage stageInscription = (Stage) inscriptionJoueur.getBtDashboard().getScene().getWindow();
+/*        Stage stageInscription = (Stage) inscriptionJoueur.getBtDashboard().getScene().getWindow();
         stageInscription.close();
         Dashboard cj = new Dashboard();
-        cj.start(new Stage());
+        cj.start(new Stage());*/
     }
 
 }
