@@ -30,7 +30,7 @@ public class PageAccueil extends Application {
         VBox bas = new VBox();
         Image rapport = new Image(getClass().getResourceAsStream("rapport.png"));
         Button bRapport = new Button("Lire les rapports des joueurs", new ImageView(rapport));
-        bRapport.setContentDisplay(ContentDisplay.RIGHT);
+        bRapport.setContentDisplay(ContentDisplay.TOP);
         bRapport.setOnAction(new ActionRapport(this));
         bRapport.setPrefWidth(600);
         bRapport.setPrefHeight(100);
@@ -44,7 +44,7 @@ public class PageAccueil extends Application {
         VBox gauche = new VBox();
         Image utilisateurs = new Image(getClass().getResourceAsStream("profil.png"));
         Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
-        bJoueur.setContentDisplay(ContentDisplay.BOTTOM);
+        bJoueur.setContentDisplay(ContentDisplay.TOP);
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
         bJoueur.setOnAction(new ActionUtilisateurs(this));
@@ -57,11 +57,11 @@ public class PageAccueil extends Application {
         VBox centre = new VBox();
         Image jeu = new Image(getClass().getResourceAsStream("jeu.png"));
         Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
-        bJeu.setContentDisplay(ContentDisplay.RIGHT);
+        bJeu.setContentDisplay(ContentDisplay.TOP);
         bJeu.setOnAction(new ActionJeu(this));
         Image stat = new Image(getClass().getResourceAsStream("stat.png"));
         Button bStat = new Button("Voir les statistiques", new ImageView(stat));
-        bStat.setContentDisplay(ContentDisplay.RIGHT);
+        bStat.setContentDisplay(ContentDisplay.TOP);
         bStat.setOnAction(new ActionStatistiques(this));
         bJeu.setPrefWidth(388);
         bJeu.setPrefHeight(117);
