@@ -36,8 +36,7 @@ public class Dashboard extends Application {
         bp.setLeft(creerGauche());
         bp.setCenter(creerCentre());
         bp.setRight(creerDroite());
-        return new Scene(bp, 900,450);
-        //return new Scene(bp, 850,650);
+        return new Scene(bp, 850,650);
     }
 
     public HBox creerHaut(){
@@ -78,7 +77,7 @@ public class Dashboard extends Application {
         vParam.getChildren().addAll(btParametre, btExit);
         vParam.setSpacing(10);
         vParam.setAlignment(Pos.TOP_CENTER);
-        vParam.setPadding(new Insets(70,0,0,0));
+        vParam.setPadding(new Insets(250,0,0,0));
 
         vGauche.getChildren().addAll(btStat, btParti, btEditerProfile, vParam);
         vGauche.setPadding(new Insets(70,0,0,10));
@@ -91,17 +90,17 @@ public class Dashboard extends Application {
         VBox hDroiteCentral = new VBox();
         VBox hDroiteListeDamis = new VBox();
         ScrollPane sDroiteListeDamis = new ScrollPane();
-        Label lbTotalContact = new Label("Total : 7 contacts");
+        Label lbTotalContact = new Label("Total : 8 contacts");
 
         Label lListeDamis = new Label("Ma liste d'amis");
         Button btListeDamis = new Button("Mes amis");
-        Button btMessage = new Button("8 messages non lu");
+        Button btMessage = new Button("4 messages non lu");
         btListeDamis.setPrefWidth(150);btMessage.setPrefWidth(150);
         lListeDamis.setFont(new Font("Arial",20));
 
         //todo : Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
 
-        String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "fzfze", "Ofzjzelfj"};
+        String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "Sergine", "Anastasia"};
         ArrayList<Button> listeButton = new ArrayList<>();
 
         for(String name : btName){
@@ -118,14 +117,13 @@ public class Dashboard extends Application {
 
         hDroiteListeDamis.getChildren().addAll(listeButton);
         hDroiteListeDamis.setSpacing(5);
-        hDroiteListeDamis.setPrefHeight(200);
+        hDroiteListeDamis.setPrefHeight(375);
 
         sDroiteListeDamis.setContent(hDroiteListeDamis);
         sDroiteListeDamis.setFitToWidth(true);
 
         hDroiteCentral.setPadding(new Insets(5));
 
-        //hDroiteCentral.setStyle(cssLayout);
         hDroiteCentral.setSpacing(15);
         hDroiteCentral.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
 
@@ -143,12 +141,12 @@ public class Dashboard extends Application {
         Label lbNouveaute = new Label("Nouveautés : ");
 
         ScrollPane scrollPaneJeux = new ScrollPane();
-        scrollPaneJeux.setPrefHeight(150);
+        scrollPaneJeux.setPrefHeight(310);
         scrollPaneJeux.setContent(vJeux);
 
         ScrollPane scrollPaneNouveaute = new ScrollPane();
         scrollPaneNouveaute.setContent(vNouveaute);
-        scrollPaneNouveaute.setPrefHeight(150);
+        scrollPaneNouveaute.setPrefHeight(310);
         //todo remove that and place image
 
         for(int i = 0; i<150; i++){
@@ -158,8 +156,7 @@ public class Dashboard extends Application {
 
         vCentre.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
         vCentre.setSpacing(10);
-        vCentre.setPadding(new Insets(0,15,0,15));
-        //vCentre.setStyle("-fx-background-color: #384354;");
+        vCentre.setPadding(new Insets(0,15,9,15));
 
         return vCentre;
     }
