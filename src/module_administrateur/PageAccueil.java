@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 public class PageAccueil extends Application {
 
     BorderPane bp;
+    Administration a;
 
     public static void main(String[] args) {
         launch(args);
@@ -24,6 +25,10 @@ public class PageAccueil extends Application {
 
     public BorderPane getBp() {
         return this.bp;
+    }
+
+    public Administration getAdmin() {
+        return this.a;
     }
 
     public VBox bas() {
@@ -87,6 +92,7 @@ public class PageAccueil extends Application {
     public Scene scene() {
         this.bp = new BorderPane();
         this.bp.setCenter(this.constructB());
+        this.a = new Administration();
         return new Scene(this.bp, 650, 450);
     }
 

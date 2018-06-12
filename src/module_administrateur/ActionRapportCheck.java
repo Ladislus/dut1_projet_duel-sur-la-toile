@@ -5,11 +5,11 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
 
-public class ActionBoutonRapport implements EventHandler<ActionEvent> {
+public class ActionRapportCheck implements EventHandler<ActionEvent> {
 
     VoirRapport rapp;
 
-    public ActionBoutonRapport(VoirRapport rapp) {
+    public ActionRapportCheck(VoirRapport rapp) {
         this.rapp = rapp;
     }
 

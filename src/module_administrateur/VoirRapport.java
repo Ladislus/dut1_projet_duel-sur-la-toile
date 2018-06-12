@@ -40,6 +40,9 @@ public class VoirRapport extends BorderPane {
         BorderPane entete = new BorderPane();
         Label l = new Label("Nombre de rapport non lus : ");
         Button suppr = new Button("Tout supprimer");
+        //suppr.setOnAction(new EventHandler<ActionEvent>{
+
+      //  });
         suppr.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
         suppr.setTextFill(Color.web("white"));
         suppr.setPrefWidth(150);
@@ -57,7 +60,7 @@ public class VoirRapport extends BorderPane {
       rapport.setPadding(new Insets(0,0,0,10));
       pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
       CheckBox lu = new CheckBox();
-      lu.setOnAction(new ActionBoutonRapport(this));
+      lu.setOnAction(new ActionRapportCheck(this));
       VBox v = new VBox();
       v.getChildren().addAll(pseudo, rapport);
       b.setLeft(v);

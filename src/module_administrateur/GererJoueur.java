@@ -68,11 +68,13 @@ public class GererJoueur extends BorderPane {
         BorderPane joueur = new BorderPane();
         Label lj = new Label("- Joueur1");
         CheckBox cb = new CheckBox();
+        cb.setOnAction(new ActionCheckActiver(this, "Joueur1", this.pa.getAdmin()));
         joueur.setLeft(lj);
         joueur.setRight(cb);
         BorderPane joueur2 = new BorderPane();
         Label lj2 = new Label("- Joueur2");
         CheckBox cb2 = new CheckBox();
+        cb2.setOnAction(new ActionCheckActiver(this, "Joueur2", this.pa.getAdmin()));
         joueur2.setLeft(lj2);
         joueur2.setRight(cb2);
 
