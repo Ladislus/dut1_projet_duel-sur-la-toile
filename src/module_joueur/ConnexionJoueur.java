@@ -4,18 +4,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
 import java.io.File;
 
 class ConnexionJoueur extends BorderPane {
+
+  String title;
 
   Hyperlink hlRegister;
   Hyperlink hlPasswordForgotten;
@@ -30,6 +30,8 @@ class ConnexionJoueur extends BorderPane {
 
     super();
 
+    this.title = "Acceuil : Connexion";
+
     this.setLeft(creerGauche());
     this.setRight(creerDroite());
     this.setBottom(creerBas()); }
@@ -38,15 +40,13 @@ class ConnexionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    Image image = VariablesJoueur.LOGO;
-
     Label slogan = new Label("La plateforme de jeux videos innovante !");
     slogan.setTextAlignment(TextAlignment.CENTER);
     slogan.setWrapText(true);
     slogan.setFont(Font.font("Arial", 15));
 
     ImageView logo = new ImageView();
-    logo.setImage(image);
+    logo.setImage(VariablesJoueur.LOGO_TEXT);
     logo.setFitWidth(100);
     logo.setFitHeight(100);
 
@@ -107,4 +107,6 @@ class ConnexionJoueur extends BorderPane {
 
   public PasswordField getTfPassword() { return this.tfPassword; }
 
-  public Button getbtConnection() { return this.btConnection; }}
+  public Button getbtConnection() { return this.btConnection; }
+
+  public String getTitle() { return this.title; }}
