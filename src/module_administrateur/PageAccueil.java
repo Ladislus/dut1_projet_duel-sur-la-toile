@@ -10,6 +10,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
 
 public class PageAccueil extends Application {
 
@@ -25,7 +28,9 @@ public class PageAccueil extends Application {
 
     public VBox bas() {
         VBox bas = new VBox();
-        Button bRapport = new Button("Lire les rapports des joueurs");
+        Image rapport = new Image(getClass().getResourceAsStream("rapport.png"));
+        Button bRapport = new Button("Lire les rapports des joueurs", new ImageView(rapport));
+        bRapport.setContentDisplay(ContentDisplay.RIGHT);
         bRapport.setOnAction(new ActionRapport(this));
         bRapport.setPrefWidth(600);
         bRapport.setPrefHeight(100);
@@ -37,7 +42,9 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
-        Button bJoueur = new Button("Gérer les utilisateurs");
+        Image utilisateurs = new Image(getClass().getResourceAsStream("profil.png"));
+        Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
+        bJoueur.setContentDisplay(ContentDisplay.BOTTOM);
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
         bJoueur.setOnAction(new ActionUtilisateurs(this));
@@ -48,9 +55,13 @@ public class PageAccueil extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-        Button bJeu = new Button("Gérer les jeux");
+        Image jeu = new Image(getClass().getResourceAsStream("jeu.png"));
+        Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
+        bJeu.setContentDisplay(ContentDisplay.RIGHT);
         bJeu.setOnAction(new ActionJeu(this));
-        Button bStat = new Button("Voir les statistiques");
+        Image stat = new Image(getClass().getResourceAsStream("stat.png"));
+        Button bStat = new Button("Voir les statistiques", new ImageView(stat));
+        bStat.setContentDisplay(ContentDisplay.RIGHT);
         bStat.setOnAction(new ActionStatistiques(this));
         bJeu.setPrefWidth(388);
         bJeu.setPrefHeight(117);

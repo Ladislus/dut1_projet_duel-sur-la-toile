@@ -41,8 +41,8 @@ public class GererJoueur extends BorderPane {
         Label l = new Label("Nombre de joueurs à activer : ");
         Button activer = new Button("Activer");
         Button supprimer = new Button("Supprimer");
-        activer.setStyle("-fx-background-color: #009e0f;");
-        supprimer.setStyle("-fx-background-color: #cf2a27;");
+        activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
+        supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
         activer.setTextFill(Color.web("white"));
         supprimer.setTextFill(Color.web("white"));
         activer.setPrefWidth(200);
@@ -53,7 +53,8 @@ public class GererJoueur extends BorderPane {
         bouton.getChildren().addAll(activer, supprimer);
         bouton.setSpacing(10);
         VBox listeJoueur = new VBox();
-        TextField recherche = new TextField("Rechercher un joueur");
+        TextField recherche = new TextField("");
+        recherche.setPromptText("Rechercher un joueur");
 
         VBox v = new VBox();
 
@@ -90,7 +91,8 @@ public class GererJoueur extends BorderPane {
         VBox gauche = new VBox();
         Label l = new Label("Liste des joueurs");
         l.setPadding(new Insets(0,0,12,0));
-        TextField recherche = new TextField("Rechercher un joueur");
+        TextField recherche = new TextField("");
+        recherche.setPromptText("Rechercher un joueur");
         VBox listeJoueur = new VBox();
         listeJoueur.setPrefHeight(450);
         listeJoueur.setStyle("-fx-border-color: black;");
