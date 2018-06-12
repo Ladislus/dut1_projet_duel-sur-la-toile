@@ -14,13 +14,15 @@ import javafx.scene.text.FontWeight;
 
 import java.util.List;
 
-    public class PartieM {
+public class PartieM {
 //
     public static String chem = "./img/module_puissance4/";
 
     public List<Button> listeCouleurs;
 
     private Plateau p;
+
+    private Mastermind mastermind;
 
     public PartieM(String j1){
         this.p = new Plateau();
@@ -31,9 +33,9 @@ import java.util.List;
     public void majAffichage(int l, int c){}
 //
 
-    public static Scene getScene() {
+    public static Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
-        res.setLeft(menu());
+        res.setLeft(menu(m));
         res.setTop(haut());
         res.setRight(plateau());
         res.setBottom(bas());
@@ -50,11 +52,11 @@ import java.util.List;
         return res;
     }
 
-    public static VBox menu(){
+    public static VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
-        quitter.setOnAction(new ActionQuitter());
+        quitter.setOnAction(new ActionQuitter(m));
 
         Label timer = new Label("Time : 00:00:00");
         timer.setPadding(new Insets(75,0,0,0));

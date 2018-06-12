@@ -1,6 +1,7 @@
 package module_mastermind;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -45,7 +46,11 @@ public class Mastermind extends Application {
         if (n==1)
             primaryStage.setScene(pageAccueil());
         else if (n==2)
-            primaryStage.setScene(new PartieM("j1").getScene());
+            primaryStage.setScene(PartieM.getScene(this));
+    }
+
+    public void exit(){
+        Platform.exit();
     }
 
     public HBox boutonsAccueil() {
