@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 class ActionHyperlink implements EventHandler<ActionEvent> {
 
-  Stage primaryStage;
+  private Stage primaryStage;
 
   public ActionHyperlink(Stage primaryStage) { this.primaryStage = primaryStage; }
 
@@ -21,9 +21,6 @@ class ActionHyperlink implements EventHandler<ActionEvent> {
       InscriptionJoueur inscription = new InscriptionJoueur(this.primaryStage);
 
       primaryStage.setTitle(inscription.getTitle());
-      primaryStage.setScene(new Scene(inscription, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT)); }
+      primaryStage.setScene(new Scene(inscription, VariablesJoueur.DEFAULT_REGISTRATION_WIDTH, VariablesJoueur.DEFAULT_REGISTRATION_HEIGHT)); }
 
-    else if (hl.getText().contains("Mot de passe oubliée ?")) {
-
-
-    }}}
+    else if (hl.getText().contains("Mot de passe oubliee ?")) {}}}

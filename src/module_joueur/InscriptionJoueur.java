@@ -7,29 +7,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 class InscriptionJoueur extends BorderPane {
 
-  Button btBack;
-  Button btDashBoard;
+  private Button btBack;
+  private Button btDashBoard;
 
-  TextField tfName;
-  TextField tfFirstName;
-  TextField tfMail;
-  TextField tfPseudo;
+  private TextField tfName;
+  private TextField tfFirstName;
+  private TextField tfMail;
+  private TextField tfPseudo;
 
-  ToggleGroup tgSex;
+  private ToggleGroup tgSex;
 
-  PasswordField tfPassword;
-  PasswordField tfPasswordConfirm;
+  private PasswordField tfPassword;
+  private PasswordField tfPasswordConfirm;
 
-  Hyperlink hlHelp;
+  private Hyperlink hlHelp;
 
-  String title;
+  private String title;
 
-  Stage primaryStage;
+  private Stage primaryStage;
 
   public InscriptionJoueur(Stage primaryStage) {
 
@@ -82,7 +81,7 @@ class InscriptionJoueur extends BorderPane {
     Label lPasswordConfirm = new Label("Confirmer mot de passe : ");
     tfPasswordConfirm = new PasswordField();
 
-    btDashBoard = new Button("Accéder a la plateforme !");
+    btDashBoard = new Button("Acceder a la plateforme !");
     btDashBoard.setPrefWidth(170);
 
     candidate.getChildren().addAll(lName, tfName, lFirstName, tfFirstName, lSex, hSex, lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, btDashBoard);
@@ -129,7 +128,7 @@ class InscriptionJoueur extends BorderPane {
     HBox candidate = new HBox();
 
     Label title = new Label("Inscription");
-    title.setFont(Font.font("Arial", 19));
+    title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     candidate.getChildren().addAll(title);
     candidate.setAlignment(Pos.TOP_CENTER);
@@ -142,7 +141,7 @@ class InscriptionJoueur extends BorderPane {
     HBox candidate = new HBox();
 
     Label lCopyright = new Label("© Copyright : Duel sur la toile");
-    lCopyright.setFont(Font.font("Arial", 10));
+    lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
     candidate.setPadding(new Insets(0,0,5,5));

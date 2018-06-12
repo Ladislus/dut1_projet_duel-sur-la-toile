@@ -2,10 +2,15 @@ package module_joueur;
 
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 
 import java.io.File;
 
 class VariablesJoueur {
+
+  public final static Font DEFAULT_TITLE_FONT = Font.font("Arial", 19);
+  public final static Font DEFAULT_TEXT_FONT = Font.font("Arial", 10);
+  public final static Font DEFAULT_SLOGAN_FONT = Font.font("Arial", 15);
 
   public final static Color DEFAULT_BACKGROUND_COLOR = Color.LIGHTBLUE;
   public final static Color DEFAULT_TEXT_COLOR = Color.LIGHTCORAL;
@@ -15,6 +20,9 @@ class VariablesJoueur {
 
   public final static double DEFAULT_CONNECTION_WIDTH = 500;
   public final static double DEFAULT_CONNECTION_HEIGHT = 290;
+
+  public final static double DEFAULT_REGISTRATION_WIDTH = 500;
+  public final static double  DEFAULT_REGISTRATION_HEIGHT = 430;
 
   public final static boolean IS_RESIZABLE = false;
 

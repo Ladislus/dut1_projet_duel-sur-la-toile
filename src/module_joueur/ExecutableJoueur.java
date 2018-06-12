@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
-class ExecutableJoueur extends Application {
+public class ExecutableJoueur extends Application {
 
   public static void main(String [] args) { launch(args); }
 

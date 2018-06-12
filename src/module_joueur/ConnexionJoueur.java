@@ -15,18 +15,18 @@ import javafx.event.ActionEvent;
 
 class ConnexionJoueur extends BorderPane {
 
-  String title;
+  private String title;
 
-  Hyperlink hlRegister;
-  Hyperlink hlPasswordForgotten;
+  private Hyperlink hlRegister;
+  private Hyperlink hlPasswordForgotten;
 
-  TextField tfLogin;
+  private TextField tfLogin;
 
-  PasswordField tfPassword;
+  private PasswordField tfPassword;
 
-  Button btConnection;
+  private Button btConnection;
 
-  Stage primaryStage;
+  private Stage primaryStage;
 
   public ConnexionJoueur(Stage primaryStage) {
 
@@ -47,7 +47,7 @@ class ConnexionJoueur extends BorderPane {
     Label slogan = new Label("La plateforme de jeux videos innovante !");
     slogan.setTextAlignment(TextAlignment.CENTER);
     slogan.setWrapText(true);
-    slogan.setFont(Font.font("Arial", 15));
+    slogan.setFont(VariablesJoueur.DEFAULT_SLOGAN_FONT);
 
     ImageView logo = new ImageView();
     logo.setImage(VariablesJoueur.LOGO_TEXT);
@@ -69,11 +69,11 @@ class ConnexionJoueur extends BorderPane {
     hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
     hlRegister.setOnAction(new ActionHyperlink(this.primaryStage));
 
-    hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
-    hlPasswordForgotten.setOnAction(new ActionHyperlink(this.primaryStage));
+    hlPasswordForgotten = new Hyperlink("Mot de passe oubliee ?");
+    //hlPasswordForgotten.setOnAction(new ActionHyperlink(this.primaryStage));
 
     Label title = new Label("Connexion");
-    title.setFont(Font.font("Arial", 19));
+    title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     Label lLogin = new Label("Votre nom d'utilisateur : ");
     tfLogin = new TextField();
@@ -97,7 +97,7 @@ class ConnexionJoueur extends BorderPane {
     HBox candidate = new HBox();
 
     Label lCopyright = new Label("© Copyright : Duel sur la toile");
-    lCopyright.setFont(Font.font("Arial", 10));
+    lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
     candidate.setPadding(new Insets(0,0,5,5));
