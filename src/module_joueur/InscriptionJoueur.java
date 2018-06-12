@@ -81,7 +81,7 @@ class InscriptionJoueur extends BorderPane {
     Label lPasswordConfirm = new Label("Confirmer mot de passe : ");
     tfPasswordConfirm = new PasswordField();
 
-    btDashBoard = new Button("Acceder a la plateforme !");
+    btDashBoard = new Button("Accéder a la plateforme !");
     btDashBoard.setPrefWidth(170);
 
     candidate.getChildren().addAll(lName, tfName, lFirstName, tfFirstName, lSex, hSex, lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, btDashBoard);
@@ -111,9 +111,9 @@ class InscriptionJoueur extends BorderPane {
     hHelp.getChildren().addAll(hlHelp, imageHelp);
     hHelp.setAlignment(Pos.TOP_CENTER);
 
-    btBack = new Button("<-- Retours connexion");
-    btBack.setPrefWidth(200);
-    //btBack.setOnAction(new ActionBackToLogin(this));
+    btBack = new Button("Retour");
+    btBack.setOnAction(new ActionBouton(this.primaryStage));
+    btBack.setPrefWidth(100);
 
     candidate.getChildren().addAll(imageLogo, hHelp, btBack);
     candidate.setSpacing(50);
@@ -140,7 +140,7 @@ class InscriptionJoueur extends BorderPane {
 
     HBox candidate = new HBox();
 
-    Label lCopyright = new Label("© Copyright : Duel sur la toile");
+    Label lCopyright = new Label(VariablesJoueur.COPYRIGHT);
     lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
@@ -170,4 +170,6 @@ class InscriptionJoueur extends BorderPane {
 
   public Hyperlink getHlHelp() { return this.hlHelp; }
 
-  public String getTitle() { return this.title; }}
+  public String getTitle() { return this.title; }
+
+  public Stage getPrimaryStage() { return this.primaryStage; }}

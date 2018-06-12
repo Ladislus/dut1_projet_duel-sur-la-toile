@@ -23,4 +23,4 @@ class ActionHyperlink implements EventHandler<ActionEvent> {
       primaryStage.setTitle(inscription.getTitle());
       primaryStage.setScene(new Scene(inscription, VariablesJoueur.DEFAULT_REGISTRATION_WIDTH, VariablesJoueur.DEFAULT_REGISTRATION_HEIGHT)); }
 
-    else if (hl.getText().contains("Mot de passe oubliee ?")) {}}}
+    else if (hl.getText().contains("Mot de passe oubliée ?")) {}}}

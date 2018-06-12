@@ -44,7 +44,7 @@ class ConnexionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    Label slogan = new Label("La plateforme de jeux videos innovante !");
+    Label slogan = new Label(VariablesJoueur.SLOGAN);
     slogan.setTextAlignment(TextAlignment.CENTER);
     slogan.setWrapText(true);
     slogan.setFont(VariablesJoueur.DEFAULT_SLOGAN_FONT);
@@ -69,7 +69,7 @@ class ConnexionJoueur extends BorderPane {
     hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
     hlRegister.setOnAction(new ActionHyperlink(this.primaryStage));
 
-    hlPasswordForgotten = new Hyperlink("Mot de passe oubliee ?");
+    hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
     //hlPasswordForgotten.setOnAction(new ActionHyperlink(this.primaryStage));
 
     Label title = new Label("Connexion");
@@ -81,8 +81,8 @@ class ConnexionJoueur extends BorderPane {
     Label lPassword = new Label("Votre mot de passe : ");
     tfPassword = new PasswordField();
 
-    btConnection = new Button("Vers l'aventure ! -->>");
-    //btConnection.setOnAction(new ActionBouton());
+    btConnection = new Button("Vers l'aventure !");
+    btConnection.setOnAction(new ActionBouton(this.primaryStage));
 
     candidate.setAlignment(Pos.TOP_CENTER);
     candidate.setPadding(new Insets(18,15,0,0));
@@ -96,7 +96,7 @@ class ConnexionJoueur extends BorderPane {
 
     HBox candidate = new HBox();
 
-    Label lCopyright = new Label("© Copyright : Duel sur la toile");
+    Label lCopyright = new Label(VariablesJoueur.COPYRIGHT);
     lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
