@@ -26,7 +26,7 @@ public class ExecutableJoueur extends Application {
     ConnexionJoueur cj = new ConnexionJoueur();
 
     primaryStage.setTitle(cj.getTitle());
-    primaryStage.setScene(new Scene(cj, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT));
+    primaryStage.setScene(new Scene(cj, 500,290));
     primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
     primaryStage.getIcons().add(VariablesJoueur.LOGO);
     primaryStage.show(); }}
