@@ -13,6 +13,9 @@ class VariablesJoueur {
   public final static double DEFAULT_APPLICATION_WIDTH = 850;
   public final static double DEFAULT_APPLICATION_HEIGHT = 650;
 
+  public final static double DEFAULT_CONNECTION_WIDTH = 500;
+  public final static double DEFAULT_CONNECTION_HEIGHT = 290;
+
   public final static boolean IS_RESIZABLE = false;
 
   public final static Image LOGO = new Image(new File("./img/pub/logoWithoutText.png").toURI().toString());

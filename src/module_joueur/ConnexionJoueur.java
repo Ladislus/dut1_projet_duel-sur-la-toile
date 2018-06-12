@@ -2,7 +2,6 @@ package module_joueur;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -10,8 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-
-import java.io.File;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.event.ActionEvent;
 
 class ConnexionJoueur extends BorderPane {
 
@@ -26,9 +26,13 @@ class ConnexionJoueur extends BorderPane {
 
   Button btConnection;
 
-  public ConnexionJoueur() {
+  Stage primaryStage;
+
+  public ConnexionJoueur(Stage primaryStage) {
 
     super();
+
+    this.primaryStage = primaryStage;
 
     this.title = "Acceuil : Connexion";
 
@@ -63,10 +67,10 @@ class ConnexionJoueur extends BorderPane {
     VBox candidate = new VBox();
 
     hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
-    //hlRegister.setOnAction(new ActionRegister(this));
+    hlRegister.setOnAction(new ActionHyperlink(this.primaryStage));
 
     hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
-    //getHlPasswordForgotten.setOnAction(new ActionPasswordForgotten(this));
+    hlPasswordForgotten.setOnAction(new ActionHyperlink(this.primaryStage));
 
     Label title = new Label("Connexion");
     title.setFont(Font.font("Arial", 19));
@@ -78,6 +82,7 @@ class ConnexionJoueur extends BorderPane {
     tfPassword = new PasswordField();
 
     btConnection = new Button("Vers l'aventure ! -->>");
+    //btConnection.setOnAction(new ActionBouton());
 
     candidate.setAlignment(Pos.TOP_CENTER);
     candidate.setPadding(new Insets(18,15,0,0));

@@ -2,17 +2,13 @@ package module_joueur;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
-import java.io.File;
-
-import java.util.ArrayList;
+import javafx.stage.Stage;
 
 class InscriptionJoueur extends BorderPane {
 
@@ -33,9 +29,13 @@ class InscriptionJoueur extends BorderPane {
 
   String title;
 
-  public InscriptionJoueur() {
+  Stage primaryStage;
+
+  public InscriptionJoueur(Stage primaryStage) {
 
     super();
+
+    this.primaryStage = primaryStage;
 
     this.title = "Acceuil : Inscription";
 
