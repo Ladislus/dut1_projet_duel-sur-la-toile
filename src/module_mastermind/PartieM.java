@@ -12,30 +12,23 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.List;
 
-//
-//import javafx.scene.Scene;
-//import javafx.scene.control.Button;
-//import javafx.scene.layout.HBox;
-//import javafx.scene.layout.VBox;
-//
-//import java.util.List;
-//
     public class PartieM {
 //
-//    public static String chem = "./img/module_puissance4/";
-//
-//    public List<Button> listeCouleurs;
-//
-//    private Plateau p;
-//
-//    public PartieM(String j1){
-//        this.p = new Plateau("J1");
-//    }
+    public static String chem = "./img/module_puissance4/";
 
-//    public Plateau getPlateau(){return this.p;}
-//
-//    public void majAffichage(int l, int c){}
+    public List<Button> listeCouleurs;
+
+    private Plateau p;
+
+    public PartieM(String j1){
+        this.p = new Plateau();
+    }
+
+    public Plateau getPlateau(){return this.p;}
+
+    public void majAffichage(int l, int c){}
 //
 
     public static Scene getScene() {
