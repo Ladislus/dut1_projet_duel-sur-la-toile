@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 public class VoirRapport extends BorderPane {
 
     PageAccueil pa;
+    Label pseudo;
+    Label rapport;
 
     public VoirRapport(PageAccueil pa) {
         super();
@@ -29,9 +31,7 @@ public class VoirRapport extends BorderPane {
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));
-
         bRetour.setOnAction(new ActionRetour(this.pa));
-
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);
     }
@@ -52,46 +52,31 @@ public class VoirRapport extends BorderPane {
 
     public BorderPane rapportJoueur() {
       BorderPane b = new BorderPane();
-      Label pseudo = new Label("Joueur1");
-      Label rapport = new Label("J'adore cette plateforme");
+      this.pseudo = new Label("Joueur1");
+      this.rapport = new Label("J'adore cette plateforme");
       rapport.setPadding(new Insets(0,0,0,10));
       pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
       CheckBox lu = new CheckBox();
-      lu.setSelected(true);
+      lu.setOnAction(new ActionBoutonRapport(this));
       VBox v = new VBox();
       v.getChildren().addAll(pseudo, rapport);
       b.setLeft(v);
       b.setRight(lu);
       v.setSpacing(10);
-      if (lu.isSelected()) {
-        pseudo.setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#999999");
-        rapport.setStyle("-fx-font-style: italic;-fx-font-color:#999999");
-      }
       return b;
     }
 
-    public BorderPane rapportJoueur2() {
-      BorderPane b = new BorderPane();
-      Label pseudo = new Label("Joueur2");
-      Label rapport = new Label("Le mastermind marche pas");
-      rapport.setPadding(new Insets(0,0,0,10));
-      pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
-      CheckBox lu = new CheckBox();
-      VBox v = new VBox();
-      v.getChildren().addAll(pseudo, rapport);
-      b.setLeft(v);
-      b.setRight(lu);
-      v.setSpacing(10);
-      if (lu.isSelected()) {
-        pseudo.setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#999999");
-        rapport.setStyle("-fx-font-style: italic;-fx-font-color:#999999");
-      }
-      return b;
+    public Label getPseudo() {
+        return this.pseudo;
+    }
+
+    public Label getRapport() {
+        return this.rapport;
     }
 
     public VBox listeRapport() {
       VBox v = new VBox();
-      v.getChildren().addAll(rapportJoueur(), rapportJoueur2());
+      v.getChildren().addAll(rapportJoueur());
       v.setStyle("-fx-border-color: black;");
       v.setPrefHeight(450);
       v.setPadding(new Insets(12,12,12,12));
