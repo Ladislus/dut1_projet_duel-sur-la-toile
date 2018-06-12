@@ -47,15 +47,25 @@ public class Mastermind extends Application {
             primaryStage.setScene(new PartieM("j1").getScene());
     }
 
-    public HBox boutonsAccueil(String[] boutons) {
+    public HBox boutonsAccueil() {
         HBox res = new HBox();
         ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
-        for (String s:boutons){
-            Button temp = new Button(s);
-            temp.setPrefSize(390,75.);
-            temp.setOnAction(handler);
-            res.getChildren().add(temp);
-        }
+        int cpt = 0;
+
+        File imageami = new File(chem+"iconeami.png");
+        ImageView ami = new ImageView();
+        ami.setImage(new Image(imageami.toURI().toString()));
+
+        Button b1 = new Button("Duel contre un ami",ami);
+        b1.setPrefSize(390,75.);
+        b1.setOnAction(handler);
+        res.getChildren().add(b1);
+
+        Button b2 = new Button("Reprendre");
+        b2.setPrefSize(390,75.);
+        b2.setOnAction(handler);
+        res.getChildren().add(b2);
+
         res.setAlignment(Pos.CENTER);
         res.setSpacing(25);
         res.setPadding(new Insets(0,0,40,0));
@@ -65,8 +75,9 @@ public class Mastermind extends Application {
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
         res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
-        String[] boutons = {"Duel contre un ami","Reprendre"};
-        res.setBottom(boutonsAccueil(boutons));
+
+        res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
 }
+
