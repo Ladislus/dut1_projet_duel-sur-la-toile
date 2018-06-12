@@ -57,11 +57,16 @@ public class VoirRapport extends BorderPane {
       rapport.setPadding(new Insets(0,0,0,10));
       pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
       CheckBox lu = new CheckBox();
+      lu.setSelected(true);
       VBox v = new VBox();
       v.getChildren().addAll(pseudo, rapport);
       b.setLeft(v);
       b.setRight(lu);
       v.setSpacing(10);
+      if (lu.isSelected()) {
+        pseudo.setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#999999");
+        rapport.setStyle("-fx-font-style: italic;-fx-font-color:#999999");
+      }
       return b;
     }
 
@@ -77,6 +82,10 @@ public class VoirRapport extends BorderPane {
       b.setLeft(v);
       b.setRight(lu);
       v.setSpacing(10);
+      if (lu.isSelected()) {
+        pseudo.setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#999999");
+        rapport.setStyle("-fx-font-style: italic;-fx-font-color:#999999");
+      }
       return b;
     }
 
@@ -84,6 +93,7 @@ public class VoirRapport extends BorderPane {
       VBox v = new VBox();
       v.getChildren().addAll(rapportJoueur(), rapportJoueur2());
       v.setStyle("-fx-border-color: black;");
+      v.setPrefHeight(450);
       v.setPadding(new Insets(12,12,12,12));
       v.setSpacing(10);
       return v;
@@ -91,7 +101,7 @@ public class VoirRapport extends BorderPane {
 
     public void corp() {
         VBox vbox = new VBox();
-        vbox.setPadding(new Insets(0,25,0,25));
+        vbox.setPadding(new Insets(0,25,25,25));
         vbox.getChildren().addAll(entete(), listeRapport());
         vbox.setSpacing(15);
         this.setCenter(vbox);
