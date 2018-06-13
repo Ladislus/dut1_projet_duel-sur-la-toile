@@ -31,7 +31,9 @@ public class PartieM {
         this.p = new Plateau();
     }
 
-    public Plateau getPlateau(){return this.p;}
+    public Plateau getPlateau(){
+        return this.p;
+    }
 
     public void majAffichage(int l, int c){}
 //
