@@ -48,7 +48,7 @@ public class Puissance4 extends Application {
         module_puissance4.ActionBoutonsAccueil handler = new module_puissance4.ActionBoutonsAccueil(this);
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
-        File imageami = new File(chem+"jouerAmi1.png");
+        File imageami = new File(chem+"jouerAmi.png");
         ImageView ami = new ImageView();
         ami.setImage(new Image(imageami.toURI().toString()));
 
