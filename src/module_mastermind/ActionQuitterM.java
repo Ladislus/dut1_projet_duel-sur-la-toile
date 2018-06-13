@@ -7,11 +7,11 @@ import javafx.scene.control.ButtonType;
 
 import java.util.Optional;
 
-public class ActionQuitter implements EventHandler<ActionEvent> {
+public class ActionQuitterM implements EventHandler<ActionEvent> {
 
     private Mastermind mastermind;
 
-    public ActionQuitter(Mastermind mastermind){
+    public ActionQuitterM(Mastermind mastermind){
         this.mastermind=mastermind;
     }
 

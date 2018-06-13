@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -56,7 +55,7 @@ public class PartieM {
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
-        quitter.setOnAction(new ActionQuitter(m));
+        quitter.setOnAction(new ActionQuitterM(m));
 
         Label timer = new Label("Time : 00:00:00");
         timer.setPadding(new Insets(75,0,0,0));
