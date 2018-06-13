@@ -93,6 +93,7 @@ public class PartieM {
         inter.setImage(new Image(intero.toURI().toString()));
 
         Button aide = new Button("",inter);
+        aide.setOnAction(new ActionHelpM());
 
 
         //gridpane.add(truc, colonne, ligne);
