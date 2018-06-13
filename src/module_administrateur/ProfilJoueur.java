@@ -67,6 +67,7 @@ public class ProfilJoueur extends BorderPane {
       Button bsave = new Button("Sauvegarder");
       Label limageprofil = new Label("Image de profil");
       TextField tfilechooser = new TextField();
+      tfilechooser.setPromptText("Choisissez une image");
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);

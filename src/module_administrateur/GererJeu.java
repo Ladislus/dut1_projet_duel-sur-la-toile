@@ -53,14 +53,16 @@ public class GererJeu extends BorderPane {
       Button bactiverjeu = new Button("Activer");
       Button bdesactiverjeu = new Button("Désactiver");
       TextField tetatjeu = new TextField();
-      //tetatjeu.setPromptText("");
+      tetatjeu.setPromptText("Entrez le nom du jeu");
       TextArea treglejeu = new TextArea();
+      treglejeu.setPromptText("Entrez les règles du jeu");
       treglejeu.setPrefWidth(80);
       treglejeu.setWrapText(true);
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
       ComboBox cbmodes = new ComboBox(optionsmode);
       TextField tfilechooser = new TextField();
+      tfilechooser.setPromptText("Choisissez une image");
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);
@@ -101,13 +103,16 @@ public class GererJeu extends BorderPane {
       Label laddjeu = new Label("Ajouter un jeu");
       laddjeu.setFont(Font.font ("Arial", 18));
       TextField tnom = new TextField();
+      tnom.setPromptText("Entrez le nom du jeu");
       TextArea tdescription = new TextArea();
       tdescription.setPrefWidth(80);
       tdescription.setWrapText(true);
+      tdescription.setPromptText("Entrez la description du jeu");
       ObservableList<String> optionstype = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
       ComboBox cbmodes = new ComboBox(optionstype);
       TextField tfilechooser = new TextField();
+      tfilechooser.setPromptText("Choisissez une image");
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);

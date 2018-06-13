@@ -7,7 +7,13 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooser;
 import javafx.scene.control.*;
 import java.io.File;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
+import javafx.embed.swing.SwingFXUtils;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ActionFileChooser implements EventHandler<ActionEvent> {
 
@@ -36,7 +42,6 @@ public class ActionFileChooser implements EventHandler<ActionEvent> {
       if (fichierSelectionne != null){
         if (fichierSelectionne.getName().contains(".png") || fichierSelectionne.getName().contains(".jpg")){
           listview.getItems().add(fichierSelectionne.getName());
-          ImageView imagefilechooser = new ImageView(fichierSelectionne.toURI().toString());
         }
         else{
           Alert reponse = new Alert(Alert.AlertType.INFORMATION);
