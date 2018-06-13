@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.geometry.Orientation;
 import javafx.stage.Stage;
 
 public class GererJoueur extends BorderPane {
@@ -41,8 +42,8 @@ public class GererJoueur extends BorderPane {
         Label l = new Label("Nombre de joueurs à activer : ");
         Button activer = new Button("Activer");
         Button supprimer = new Button("Supprimer");
-        activer.setStyle("-fx-background-color: #009e0f;");
-        supprimer.setStyle("-fx-background-color: #cf2a27;");
+        activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
+        supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
         activer.setTextFill(Color.web("white"));
         supprimer.setTextFill(Color.web("white"));
         activer.setPrefWidth(200);
@@ -53,36 +54,42 @@ public class GererJoueur extends BorderPane {
         bouton.getChildren().addAll(activer, supprimer);
         bouton.setSpacing(10);
         VBox listeJoueur = new VBox();
-        TextField recherche = new TextField("Rechercher un joueur");
+
+        HBox rechercheJ = new HBox();
+        TextField recherche = new TextField("");
+        recherche.setPrefWidth(214);
+        recherche.setPromptText("Rechercher un joueur");
+        Button lancerRecherche = new Button("Rechercher");
+        rechercheJ.getChildren().addAll(recherche, lancerRecherche);
 
         VBox v = new VBox();
 
         //POUR CHAQUE JOUEUR
         BorderPane joueur = new BorderPane();
-        Label lj = new Label("Joueur1");
+        Label lj = new Label("- Joueur1");
         CheckBox cb = new CheckBox();
+        cb.setOnAction(new ActionCheckActiver(this, "Joueur1", this.pa.getAdmin()));
         joueur.setLeft(lj);
         joueur.setRight(cb);
         BorderPane joueur2 = new BorderPane();
-        Label lj2 = new Label("Joueur2");
+        Label lj2 = new Label("- Joueur2");
         CheckBox cb2 = new CheckBox();
+        cb2.setOnAction(new ActionCheckActiver(this, "Joueur2", this.pa.getAdmin()));
         joueur2.setLeft(lj2);
         joueur2.setRight(cb2);
 
         v.getChildren().addAll(joueur, joueur2);
-        listeJoueur.getChildren().addAll(recherche, v);
+        listeJoueur.getChildren().addAll(rechercheJ, v);
+        centre.getChildren().addAll(l, bouton, listeJoueur);
+        centre.setPadding(new Insets(0,0,15,25));
+
         listeJoueur.setStyle("-fx-border-color: black;");
         listeJoueur.setPrefHeight(300);
         listeJoueur.setSpacing(5);
+        v.setSpacing(15);
         v.setPadding(new Insets(5,0,0,10));
-        v.setSpacing(10);
-
-
-        centre.getChildren().addAll(l, bouton, listeJoueur);
         centre.setSpacing(10);
-
         centre.setPadding(new Insets(0,25,15,25));
-
         this.setCenter(centre);
     }
 
@@ -90,12 +97,15 @@ public class GererJoueur extends BorderPane {
         VBox gauche = new VBox();
         Label l = new Label("Liste des joueurs");
         l.setPadding(new Insets(0,0,12,0));
-        TextField recherche = new TextField("Rechercher un joueur");
+        TextField recherche = new TextField("");
+        recherche.setPromptText("Rechercher un joueur");
         VBox listeJoueur = new VBox();
         listeJoueur.setPrefHeight(450);
         listeJoueur.setStyle("-fx-border-color: black;");
 
-//SI NOMBRE DE JOUEUR EST SUPERIEUR A VALEUR ALORS AFFICHER UNE BARRE DE DEFILEMENT
+        HBox rechercheJ = new HBox();
+        Button lancerRecherche = new Button("Rechercher");
+        rechercheJ.getChildren().addAll(recherche, lancerRecherche);
 
         VBox v = new VBox();
 
@@ -122,12 +132,28 @@ public class GererJoueur extends BorderPane {
         joueur3.getChildren().addAll(lj3, hl3);
         //
 
-        v.getChildren().addAll(joueur, joueur2, joueur3);
-        listeJoueur.getChildren().addAll(recherche, v);
-        gauche.getChildren().addAll(l, listeJoueur);
-        v.setPadding(new Insets(5,0,0,10));
-        v.setSpacing(5);
-        gauche.setPadding(new Insets(0,0,15,25));
-        this.setLeft(gauche);
+
+        //if ( < ) {
+            v.getChildren().addAll(joueur, joueur2, joueur3);
+            listeJoueur.getChildren().addAll(rechercheJ, v);
+            gauche.getChildren().addAll(l, listeJoueur);
+            v.setPadding(new Insets(5,0,0,10));
+            v.setSpacing(5);
+            gauche.setPadding(new Insets(0,0,15,25));
+            this.setLeft(gauche);
+      //    }
+        //  else {
+  //          ScrollBar sb = new ScrollBar();
+  //          sb.setOrientation(Orientation.VERTICAL);
+  //          HBox h = new HBox();
+  //          v.getChildren().addAll(joueur, joueur2, joueur3);
+  //          h.getChildren().addAll(v, sb);
+  //          listeJoueur.getChildren().addAll(rechercheJ, h);
+  //          gauche.getChildren().addAll(l, listeJoueur);
+  //          v.setPadding(new Insets(5,0,0,10));
+  //          v.setSpacing(5);
+  //          gauche.setPadding(new Insets(0,0,15,25));
+  //          this.setLeft(gauche);
+        //  }
     }
 }
