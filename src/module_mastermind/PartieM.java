@@ -38,7 +38,7 @@ public class PartieM {
     public void majAffichage(){}
 //
 
-    public static Scene getScene(Mastermind m) {
+    public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
         res.setLeft(menu(m));
         res.setTop(haut());
@@ -57,7 +57,7 @@ public class PartieM {
         return res;
     }
 
-    public static VBox menu(Mastermind m){
+    public VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
@@ -73,21 +73,27 @@ public class PartieM {
 
         Circle jaune = new Circle(25);
         jaune.setFill(Color.YELLOW);
+        jaune.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle rouge = new Circle(25);
         rouge.setFill(Color.RED);
+        rouge.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle bleu = new Circle(25);
         bleu.setFill(Color.BLUE);
+        bleu.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle marron = new Circle(25);
         marron.setFill(Color.SADDLEBROWN);
+        marron.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle vert = new Circle(25);
         vert.setFill(Color.FORESTGREEN);
+        vert.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle cyan = new Circle(25);
         cyan.setFill(Color.CYAN);
+        cyan.setOnMouseClicked(new ActionMettreCouleur(this));
 
 
         File intero = new File(chem+"intero.png");

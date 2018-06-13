@@ -1,12 +1,14 @@
 package module_mastermind;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-public class ActionMettreCouleur implements EventHandler<ActionEvent> {
+public class ActionMettreCouleur implements EventHandler<Event> {
 
     private PartieM mastermind;
 
@@ -15,8 +17,8 @@ public class ActionMettreCouleur implements EventHandler<ActionEvent> {
     }
 
     @Override
-    public void handle(ActionEvent actionEvent){
-        Circle cercle = (Circle)actionEvent.getSource();
+    public void handle(Event event){
+        Circle cercle = (Circle)event.getSource();
         Paint paint = cercle.getFill();
         Integer intCouleur = 0;
         if (paint == Color.YELLOW){

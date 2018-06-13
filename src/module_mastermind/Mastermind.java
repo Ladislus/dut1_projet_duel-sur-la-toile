@@ -47,7 +47,7 @@ public class Mastermind extends Application {
         if (n==1)
             primaryStage.setScene(pageAccueil());
         else if (n==2)
-            primaryStage.setScene(PartieM.getScene(this));
+            primaryStage.setScene(new PartieM("j1").getScene(this));
     }
 
     public void exit(){
