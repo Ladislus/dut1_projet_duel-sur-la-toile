@@ -35,7 +35,7 @@ public class PartieM {
         return this.p;
     }
 
-    public void majAffichage(int l, int c){}
+    public void majAffichage(){}
 //
 
     public static Scene getScene(Mastermind m) {
