@@ -14,6 +14,6 @@ public class ActionBoutonsAccueil implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        puissance4.setScene(2);
+        puissance4.setScene("PartieP4");
     }
 }

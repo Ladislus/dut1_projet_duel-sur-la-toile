@@ -18,8 +18,8 @@ public class ActionJouerCol implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Button source = (Button) actionEvent.getSource();
         int col = (int) source.getUserData();
-        int lig = jeu.getPlateau().jouerUnCoup(col);
+        int lig = jeu.getPlateauP4().jouerUnCoup(col);
         this.jeu.majAffichage(lig,col);
-        this.jeu.getPlateau().changeJCour();
+        this.jeu.getPlateauP4().changeJCour();
     }
 }
