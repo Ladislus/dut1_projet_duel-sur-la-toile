@@ -1,26 +1,30 @@
 package module_puissance4;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import module_mastermind.ActionBoutonsAccueil;
 
 import java.io.File;
 
 public class Puissance4 extends Application {
 
+    public static String chem = "./img/module_puissance4/";
+    private Stage primaryStage;
+
     public static void main(String[] args) {
         launch(args);
     }
-
-    public static String chem = "./img/module_puissance4/";
-
-    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,24 +43,44 @@ public class Puissance4 extends Application {
             primaryStage.setScene(new PartieP4().getScene());
     }
 
-    public HBox boutonsAccueil(String[] boutons){
+    public HBox boutonsAccueil(){
         HBox res = new HBox();
-        ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
-        for (String s:boutons){
-            Button temp = new Button(s);
-            temp.setOnAction(handler);
-            res.getChildren().add(temp);
-        }
+        module_puissance4.ActionBoutonsAccueil handler = new module_puissance4.ActionBoutonsAccueil(this);
+        Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
+
+        File imageami = new File(chem+"jouerAmi1.png");
+        ImageView ami = new ImageView();
+        ami.setImage(new Image(imageami.toURI().toString()));
+
+        Button b1 = new Button("Duel contre un ami",ami);
+        b1.setFont(bouton);
+        b1.setContentDisplay(ContentDisplay.TOP);
+        b1.setPrefSize(390,75.);
+        b1.setOnAction(handler);
+        res.getChildren().add(b1);
+
+        File continu = new File(chem+"continuerPartie.png");
+        ImageView continuPartie = new ImageView();
+        continuPartie.setImage(new Image(continu.toURI().toString()));
+
+        Button b2 = new Button("Reprendre", continuPartie);
+        b2.setFont(bouton);
+        b2.setContentDisplay(ContentDisplay.TOP);
+        b2.setPrefSize(390,75.);
+        b2.setOnAction(handler);
+        res.getChildren().add(b2);
+
         res.setAlignment(Pos.CENTER);
         res.setSpacing(25);
+        res.setPadding(new Insets(0,0,40,0));
         return res;
     }
 
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
+
         res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
-        String[] boutons = {"Duel aléatoire","Duel contre un ami","Reprendre"};
-        res.setBottom(boutonsAccueil(boutons));
+        res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
 }

@@ -36,6 +36,7 @@ public class Mastermind extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+
         primaryStage.setResizable(false);
         primaryStage.setTitle("Duel sur la toile - Mastermind");
         primaryStage.setScene(this.pageAccueil());
@@ -88,8 +89,8 @@ public class Mastermind extends Application {
 
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
-        res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
 
+        res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
