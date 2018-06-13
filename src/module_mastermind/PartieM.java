@@ -164,6 +164,7 @@ public class PartieM {
         res.setPrefHeight(100.);
 
         Button suppr = new Button("Supprimer");
+        suppr.setOnAction(new ActionHelpM());
         Button valider = new Button("Valider");
 
         HBox adders = new HBox();
