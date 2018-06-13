@@ -59,7 +59,7 @@ public class PartieM {
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
-        quitter.setOnAction(new ActionQuitter(m));
+        quitter.setOnAction(new ActionQuitterM(m));
 
         Label timer = new Label("Time : 00:00:00");
         timer.setPadding(new Insets(75,0,0,0));
