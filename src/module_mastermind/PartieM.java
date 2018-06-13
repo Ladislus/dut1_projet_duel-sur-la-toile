@@ -5,17 +5,21 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.io.File;
 import java.util.List;
 
 public class PartieM {
 //
-    public static String chem = "./img/module_puissance4/";
+    public static String chem = "./img/module_mastermind/";
 
     public List<Button> listeCouleurs;
 
@@ -55,7 +59,7 @@ public class PartieM {
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
-        quitter.setOnAction(new ActionQuitterM(m));
+        quitter.setOnAction(new ActionQuitter(m));
 
         Label timer = new Label("Time : 00:00:00");
         timer.setPadding(new Insets(75,0,0,0));
@@ -84,6 +88,13 @@ public class PartieM {
         cyan.setFill(Color.CYAN);
 
 
+        File intero = new File(chem+"intero.png");
+        ImageView inter = new ImageView();
+        inter.setImage(new Image(intero.toURI().toString()));
+
+        Button aide = new Button("",inter);
+
+
         //gridpane.add(truc, colonne, ligne);
         tabCouleurs.add(jaune,0,0);
         tabCouleurs.add(rouge,1,0);
@@ -94,9 +105,9 @@ public class PartieM {
         tabCouleurs.setHgap(5);
         tabCouleurs.setVgap(5);
 
-        tabCouleurs.setPadding(new Insets(0,0,0,15));
+        tabCouleurs.setPadding(new Insets(0,0,90,15));
 
-        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs);
+        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs,aide);
 
         res.setPadding(new Insets(0,0,0,10));
 
