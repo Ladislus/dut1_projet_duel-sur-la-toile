@@ -16,6 +16,8 @@ public class VoirRapport extends BorderPane {
     PageAccueil pa;
     Label pseudo;
     Label rapport;
+    BorderPane b;
+    Button suppr;
 
     public VoirRapport(PageAccueil pa) {
         super();
@@ -36,25 +38,8 @@ public class VoirRapport extends BorderPane {
         this.setTop(haut);
     }
 
-    public BorderPane entete() {
-        BorderPane entete = new BorderPane();
-        Label l = new Label("Nombre de rapport non lus : ");
-        Button suppr = new Button("Tout supprimer");
-        //suppr.setOnAction(new EventHandler<ActionEvent>{
-
-      //  });
-        suppr.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
-        suppr.setTextFill(Color.web("white"));
-        suppr.setPrefWidth(150);
-        suppr.setPrefHeight(50);
-        entete.setLeft(l);
-        entete.setRight(suppr);
-        l.setPadding(new Insets(15,0,0,0));
-        return entete;
-    }
-
     public BorderPane rapportJoueur() {
-      BorderPane b = new BorderPane();
+      this.b = new BorderPane();
       this.pseudo = new Label("Joueur1");
       this.rapport = new Label("J'adore cette plateforme");
       rapport.setPadding(new Insets(0,0,0,10));
@@ -66,7 +51,28 @@ public class VoirRapport extends BorderPane {
       b.setLeft(v);
       b.setRight(lu);
       v.setSpacing(10);
+      this.pa.ajouterRapport(this.joueur+" : "+this.rapport);
       return b;
+    }
+
+    public BorderPane entete() {
+        BorderPane entete = new BorderPane();
+        Label l = new Label("Nombre de rapport non lus : ");
+        this.suppr = new Button("Tout supprimer");
+        this.suppr.setDisable(true);
+        suppr.setOnAction(new ActionSupprRapport(this, this.pa.getAdmin()));
+        suppr.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
+        suppr.setTextFill(Color.web("white"));
+        suppr.setPrefWidth(150);
+        suppr.setPrefHeight(50);
+        entete.setLeft(l);
+        entete.setRight(suppr);
+        l.setPadding(new Insets(15,0,0,0));
+        return entete;
+    }
+
+    public Button getButtonSuppr() {
+        return this.suppr;
     }
 
     public Label getPseudo() {
@@ -79,7 +85,7 @@ public class VoirRapport extends BorderPane {
 
     public VBox listeRapport() {
       VBox v = new VBox();
-      v.getChildren().addAll(rapportJoueur());
+      v.getChildren().addAll(rapportJoueur(), rapportJoueur());
       v.setStyle("-fx-border-color: black;");
       v.setPrefHeight(450);
       v.setPadding(new Insets(12,12,12,12));

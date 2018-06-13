@@ -6,6 +6,7 @@ public class Administration {
 
     private ArrayList<String> joueurAactiver;
 
+    private ArrayList<String> listeRapport;
     private ArrayList<String> listeRapportLu;
 
     public Administration() {
@@ -13,6 +14,7 @@ public class Administration {
         this.listeRapportLu = new ArrayList<>();
     }
 
+    //GERER JOUEUR
     public void ajouterListeActiver(String joueur) {
         this.joueurAactiver.add(joueur);
     }
@@ -25,6 +27,11 @@ public class Administration {
         return this.joueurAactiver;
     }
 
+    //GERER RAPPORT
+    public void ajouterRapport(String res) {
+        this.listeRapport.add(res);
+    }
+
     public void ajouterRapportLu(String res) {
         this.listeRapportLu.add(res);
     }
@@ -35,5 +42,11 @@ public class Administration {
 
     public ArrayList<String> getRapportLu() {
         return this.listeRapportLu;
+    }
+
+    public void supprimerRapport(ArrayList<String> listeRapportLu) {
+        for (String rapp : listeRapportLu) {
+            this.listeRapportLu.remove(rapp);
+        }
     }
 }

@@ -34,6 +34,12 @@ public class ActionRapportCheck implements EventHandler<ActionEvent> {
             this.rapp.getRapport().setStyle("-fx-font-style: normal;-fx-font-color:black");
             this.a.retirerRapportLu(this.res);
         }
+        if (this.a.getRapportLu().size() > 0) {
+            this.rapp.getButtonSuppr().setDisable(false);
+        }
+        else {
+            this.rapp.getButtonSuppr().setDisable(true);
+        }
         System.out.println(this.a.getRapportLu());
     }
 }
