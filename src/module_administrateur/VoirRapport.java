@@ -60,7 +60,7 @@ public class VoirRapport extends BorderPane {
       rapport.setPadding(new Insets(0,0,0,10));
       pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
       CheckBox lu = new CheckBox();
-      lu.setOnAction(new ActionRapportCheck(this));
+      lu.setOnAction(new ActionRapportCheck(this, this.pa.getAdmin(), "Joueur1", "J'adore cette plateforme"));
       VBox v = new VBox();
       v.getChildren().addAll(pseudo, rapport);
       b.setLeft(v);
