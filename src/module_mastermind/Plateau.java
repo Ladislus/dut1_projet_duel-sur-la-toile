@@ -21,7 +21,7 @@ public class Plateau { // Modèle du plateau du Mastermind
         this.listeResultats = new ArrayList<>();
         combiMystere = new Combinaison();
         for (int i=0;i<4;i++){
-            combiMystere.addPion((int) (Math.random()*6)+1);
+            combiMystere.add((int) (Math.random()*6)+1);
         }
         combiCour = new Combinaison();
     }

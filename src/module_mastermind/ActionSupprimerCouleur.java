@@ -19,7 +19,8 @@ public class ActionSupprimerCouleur implements EventHandler<Event> {
         int pos = (int)cercle.getUserData();
         Combinaison combCour = plateau.getCombiCour();
         if (combCour.get(pos) != 0){
-            combCour.remove(pos);
+            combCour.set(pos,0);
+            System.out.println(combCour);
         }
         this.mastermind.majAffichage();
     }

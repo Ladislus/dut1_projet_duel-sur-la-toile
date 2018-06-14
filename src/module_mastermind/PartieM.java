@@ -30,6 +30,8 @@ public class PartieM {
 
     private Mastermind mastermind;
 
+    private Circle c1,c2,c3,c4;
+
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
         this.p = new Plateau(j1,j2);
@@ -39,7 +41,100 @@ public class PartieM {
         return this.p;
     }
 
-    public void majAffichage(){}
+    public void majAffichage(){
+
+        int pos = this.getPlateau().getCombiCour().get(0);
+        if (pos == 0){
+            c1.setFill(Color.DARKGREY);
+        }
+        else if (pos == 1){
+            c1.setFill(Color.YELLOW);
+        }
+        else if (pos == 2){
+            c1.setFill(Color.RED);
+        }
+        else if (pos == 3){
+            c1.setFill(Color.BLUE);
+        }
+        else if (pos == 4){
+            c1.setFill(Color.SADDLEBROWN);
+        }
+        else if (pos == 5){
+            c1.setFill(Color.FORESTGREEN);
+        }
+        else if (pos == 6){
+            c1.setFill(Color.CYAN);
+        }
+
+        pos = this.getPlateau().getCombiCour().get(1);
+        if (pos == 0){
+            c2.setFill(Color.DARKGREY);
+        }
+        else if (pos == 1){
+            c2.setFill(Color.YELLOW);
+        }
+        else if (pos == 2){
+            c2.setFill(Color.RED);
+        }
+        else if (pos == 3){
+            c2.setFill(Color.BLUE);
+        }
+        else if (pos == 4){
+            c2.setFill(Color.SADDLEBROWN);
+        }
+        else if (pos == 5){
+            c2.setFill(Color.FORESTGREEN);
+        }
+        else if (pos == 6){
+            c2.setFill(Color.CYAN);
+        }
+
+        pos = this.getPlateau().getCombiCour().get(2);
+        if (pos == 0){
+            c3.setFill(Color.DARKGREY);
+        }
+        else if (pos == 1){
+            c3.setFill(Color.YELLOW);
+        }
+        else if (pos == 2){
+            c3.setFill(Color.RED);
+        }
+        else if (pos == 3){
+            c3.setFill(Color.BLUE);
+        }
+        else if (pos == 4){
+            c3.setFill(Color.SADDLEBROWN);
+        }
+        else if (pos == 5){
+            c3.setFill(Color.FORESTGREEN);
+        }
+        else if (pos == 6){
+            c3.setFill(Color.CYAN);
+        }
+
+        pos = this.getPlateau().getCombiCour().get(3);
+        if (pos == 0){
+            c4.setFill(Color.DARKGREY);
+        }
+        else if (pos == 1){
+            c4.setFill(Color.YELLOW);
+        }
+        else if (pos == 2){
+            c4.setFill(Color.RED);
+        }
+        else if (pos == 3){
+            c4.setFill(Color.BLUE);
+        }
+        else if (pos == 4){
+            c4.setFill(Color.SADDLEBROWN);
+        }
+        else if (pos == 5){
+            c4.setFill(Color.FORESTGREEN);
+        }
+        else if (pos == 6){
+            c4.setFill(Color.CYAN);
+        }
+    }
 
     public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
@@ -191,24 +286,24 @@ public class PartieM {
 
         HBox adders = new HBox();
 
-        Circle c1 = new Circle(20);
+        c1 = new Circle(20);
         c1.setFill(Color.DARKGREY);
         c1.setUserData(0);
         c1.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
-        Circle c2 = new Circle(20);
+        c2 = new Circle(20);
         c2.setFill(Color.DARKGREY);
-        c2.setUserData(0);
+        c2.setUserData(1);
         c2.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
-        Circle c3 = new Circle(20);
+        c3 = new Circle(20);
         c3.setFill(Color.DARKGREY);
-        c3.setUserData(0);
+        c3.setUserData(2);
         c3.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
-        Circle c4 = new Circle(20);
+        c4 = new Circle(20);
         c4.setFill(Color.DARKGREY);
-        c4.setUserData(0);
+        c4.setUserData(3);
         c4.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
 
