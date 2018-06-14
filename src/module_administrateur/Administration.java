@@ -6,11 +6,12 @@ public class Administration {
 
     private ArrayList<String> joueurAactiver;
 
-    private ArrayList<String> listeRapport;
-    private ArrayList<String> listeRapportLu;
+    private ArrayList<Rapport> listeRapport;
+    private ArrayList<Rapport> listeRapportLu;
 
     public Administration() {
         this.joueurAactiver = new ArrayList<>();
+        this.listeRapport = new ArrayList<>();
         this.listeRapportLu = new ArrayList<>();
     }
 
@@ -28,25 +29,27 @@ public class Administration {
     }
 
     //GERER RAPPORT
-    public void ajouterRapport(String res) {
-        this.listeRapport.add(res);
+    public void ajouterRapport(Rapport r) {
+        this.listeRapport.add(r);
     }
 
-    public void ajouterRapportLu(String res) {
-        this.listeRapportLu.add(res);
+    public ArrayList<Rapport> getRapport() {
+        return this.listeRapport;
     }
 
-    public void retirerRapportLu(String res) {
-        this.listeRapportLu.remove(res);
+    public void ajouterRapportLu(Rapport r) {
+        this.listeRapportLu.add(r);
     }
 
-    public ArrayList<String> getRapportLu() {
+    public void retirerRapportLu(Rapport r) {
+        this.listeRapportLu.remove(r);
+    }
+
+    public ArrayList<Rapport> getRapportLu() {
         return this.listeRapportLu;
     }
 
-    public void supprimerRapport(ArrayList<String> listeRapportLu) {
-        for (String rapp : listeRapportLu) {
-            this.listeRapportLu.remove(rapp);
-        }
+    public void supprimerRapportLu(Rapport r) {
+        this.listeRapport.remove(r);
     }
 }

@@ -16,6 +16,10 @@ public class ActionSupprRapport implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.a.supprimerRapport(this.a.getRapportLu());
+        for (Rapport r : this.a.getRapportLu()) {
+            this.a.supprimerRapportLu(r);
+            this.rapp.getVBoxListeRapport().getChildren().remove(r.getB());
+        }
+        this.rapp.getButtonSuppr().setDisable(true);
     }
 }

@@ -10,20 +10,42 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.util.ArrayList;
 
 public class VoirRapport extends BorderPane {
 
     PageAccueil pa;
-    Label pseudo;
-    Label rapport;
-    BorderPane b;
+
     Button suppr;
+    VBox listeRapport;
+    Label l;
+
+    //EXEMPLE
+    ArrayList<Rapport> liste;
 
     public VoirRapport(PageAccueil pa) {
         super();
         this.pa = pa;
+        this.l = new Label();
+
+        //EXEMPLE
+        this.liste = new ArrayList<>();
+        this.liste.add(new Rapport("Leo", "hjgjerg"));
+        this.liste.add(new Rapport("Nolan", "gzeeeg"));
+        this.liste.add(new Rapport("Valentin", "sgdfdg"));
+        this.liste.add(new Rapport("Ladislas", "gsdgbgf"));
+
         this.haut();
         this.corp();
+        this.l.setText("Nombre de rapport non lus : "+this.pa.getAdmin().getRapport().size());
+    }
+
+    public VBox getVBoxListeRapport() {
+        return this.listeRapport;
+    }
+
+    public Label getLabel() {
+        return this.l;
     }
 
     public void haut() {
@@ -38,34 +60,32 @@ public class VoirRapport extends BorderPane {
         this.setTop(haut);
     }
 
-    public BorderPane rapportJoueur() {
-      this.b = new BorderPane();
-      this.pseudo = new Label("Joueur1");
-      this.rapport = new Label("J'adore cette plateforme");
-      rapport.setPadding(new Insets(0,0,0,10));
-      pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
-      CheckBox lu = new CheckBox();
-      lu.setOnAction(new ActionRapportCheck(this, this.pa.getAdmin(), "Joueur1", "J'adore cette plateforme"));
-      VBox v = new VBox();
-      v.getChildren().addAll(pseudo, rapport);
-      b.setLeft(v);
-      b.setRight(lu);
-      v.setSpacing(10);
-      this.pa.ajouterRapport(this.joueur+" : "+this.rapport);
-      return b;
+    public BorderPane creerRapportJoueur(Rapport r) {
+        Label pseudo = new Label(r.getPseudo());
+        Label contenu = new Label(r.getContenu());
+        contenu.setPadding(new Insets(0,0,0,10));
+        pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
+        CheckBox lu = new CheckBox();
+        lu.setOnAction(new ActionRapportCheck(this, this.pa.getAdmin(), r));
+        VBox v = new VBox();
+        v.getChildren().addAll(pseudo, contenu);
+        r.getB().setLeft(v);
+        r.getB().setRight(lu);
+        v.setSpacing(10);
+        this.pa.getAdmin().ajouterRapport(r);
+        return r.getB();
     }
 
     public BorderPane entete() {
         BorderPane entete = new BorderPane();
-        Label l = new Label("Nombre de rapport non lus : ");
-        this.suppr = new Button("Tout supprimer");
+        this.suppr = new Button("Supprimer les rapports lus");
         this.suppr.setDisable(true);
         suppr.setOnAction(new ActionSupprRapport(this, this.pa.getAdmin()));
         suppr.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
         suppr.setTextFill(Color.web("white"));
-        suppr.setPrefWidth(150);
+        suppr.setPrefWidth(200);
         suppr.setPrefHeight(50);
-        entete.setLeft(l);
+        entete.setLeft(this.l);
         entete.setRight(suppr);
         l.setPadding(new Insets(15,0,0,0));
         return entete;
@@ -75,22 +95,16 @@ public class VoirRapport extends BorderPane {
         return this.suppr;
     }
 
-    public Label getPseudo() {
-        return this.pseudo;
-    }
-
-    public Label getRapport() {
-        return this.rapport;
-    }
-
     public VBox listeRapport() {
-      VBox v = new VBox();
-      v.getChildren().addAll(rapportJoueur(), rapportJoueur());
-      v.setStyle("-fx-border-color: black;");
-      v.setPrefHeight(450);
-      v.setPadding(new Insets(12,12,12,12));
-      v.setSpacing(10);
-      return v;
+      this.listeRapport = new VBox();
+      for (Rapport r : this.liste) {
+          this.listeRapport.getChildren().add(creerRapportJoueur(r));
+      }
+      this.listeRapport.setStyle("-fx-border-color: black;");
+      this.listeRapport.setPrefHeight(450);
+      this.listeRapport.setPadding(new Insets(12,12,12,12));
+      this.listeRapport.setSpacing(10);
+      return this.listeRapport;
     }
 
     public void corp() {

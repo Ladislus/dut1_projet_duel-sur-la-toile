@@ -33,8 +33,10 @@ public class PageAccueil extends Application {
 
     public VBox bas() {
         VBox bas = new VBox();
-        Image rapport = new Image(getClass().getResourceAsStream("rapport.png"));
-        Button bRapport = new Button("Lire les rapports des joueurs", new ImageView(rapport));
+      //  Image rapport = new Image(getClass().getResourceAsStream("../img/module_administrateur/rapport.png"));
+//        Button bRapport = new Button("Lire les rapports des joueurs", new ImageView(rapport));
+          Button bRapport = new Button("Lire les rapports des joueurs");
+
         bRapport.setContentDisplay(ContentDisplay.TOP);
         bRapport.setOnAction(new ActionRapport(this));
         bRapport.setPrefWidth(600);
@@ -47,8 +49,10 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
-        Image utilisateurs = new Image(getClass().getResourceAsStream("profil.png"));
-        Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
+      //  Image utilisateurs = new Image(getClass().getResourceAsStream("../img/module_administrateur/profil.png"));
+//        Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
+        Button bJoueur = new Button("Gérer les utilisateurs");
+
         bJoueur.setContentDisplay(ContentDisplay.TOP);
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
@@ -60,12 +64,16 @@ public class PageAccueil extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-        Image jeu = new Image(getClass().getResourceAsStream("jeu.png"));
-        Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
+      //  Image jeu = new Image(getClass().getResourceAsStream("../img/module_administrateur/jeu.png"));
+        //Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
+        Button bJeu = new Button("Gérer les jeux");
+
         bJeu.setContentDisplay(ContentDisplay.TOP);
         bJeu.setOnAction(new ActionJeu(this));
-        Image stat = new Image(getClass().getResourceAsStream("stat.png"));
-        Button bStat = new Button("Voir les statistiques", new ImageView(stat));
+      //  Image stat = new Image(getClass().getResourceAsStream("../img/module_administrateur/stat.png"));
+        //Button bStat = new Button("Voir les statistiques", new ImageView(stat));
+        Button bStat = new Button("Voir les statistiques");
+
         bStat.setContentDisplay(ContentDisplay.TOP);
         bStat.setOnAction(new ActionStatistiques(this));
         bJeu.setPrefWidth(388);
