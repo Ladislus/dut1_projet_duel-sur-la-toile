@@ -136,7 +136,7 @@ public class ChoixJoueurM {
             b.setContentDisplay(ContentDisplay.LEFT);
             b.setPrefSize(200.,50.);
             b.setFont(Font.font("Verdana",FontWeight.NORMAL,15));
-            b.setOnAction(event -> this.mastermind.newGame(this.mastermind,"Bernard",b.getText()));
+            b.setOnAction(event -> this.mastermind.newGame("Naruto","Sasque"));
             this.contacts.add(b,i%3,i/3);
             i++;
         }
