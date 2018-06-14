@@ -180,7 +180,7 @@ public class PartieM {
         return res;
     }
 
-    public static HBox bas(){
+    public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
         res.setSpacing(20.);
@@ -194,12 +194,24 @@ public class PartieM {
 
         Circle c1 = new Circle(20);
         c1.setFill(Color.DARKGREY);
+        c1.setUserData(0);
+        c1.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
         Circle c2 = new Circle(20);
         c2.setFill(Color.DARKGREY);
+        c2.setUserData(0);
+        c2.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
         Circle c3 = new Circle(20);
         c3.setFill(Color.DARKGREY);
+        c3.setUserData(0);
+        c3.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
         Circle c4 = new Circle(20);
         c4.setFill(Color.DARKGREY);
+        c4.setUserData(0);
+        c4.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
 
         adders.getChildren().addAll(c1,c2,c3,c4);
 
