@@ -1,6 +1,7 @@
 package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
+import com.mysql.jdbc.exceptions.MySQLDataException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,19 +20,23 @@ public class GestionBD {
      * Constructeur qui se connecte a la base de donnée
      *
      */
-    public GestionBD(String url, String nomBase, String username, String password) throws ClassNotFoundException {
+    public GestionBD(String url, String nomBase, String username, String password) throws ClassNotFoundException, MySQLDataException {
         this.url = url;
         this.nomBase = nomBase;
         this.username = username;
         this.password = password;
         connexionMySQL = new ConnexionMySQL();
+        boolean init = init();
+        if (!init){
+            throw new MySQLDataException();
+        }
     }
 
     /*
     Initialise la connexion a la base de donnée
     Retourne vraie si elle c'est connectée, sinon faux
      */
-    public boolean init(){
+    private boolean init(){
         try{
             this.connexionMySQL.connecter(this.url, this.nomBase, this.username, this.password);
         } catch (SQLException e) {
@@ -97,5 +102,4 @@ public class GestionBD {
         }
         return true;
     }
-
 }
