@@ -1,6 +1,12 @@
 package APIMySQL;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 public class Utilisateur {
 
@@ -17,20 +23,28 @@ public class Utilisateur {
         return salt;
     }
 
-    public boolean creerUtilisateur(String nom, String email, String mdp, String nomRole){
-        System.out.println(bytesToHex(getSalt()));
-        return true;
+    private String getHash(byte[] bytes){
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {}
+        byte[] hash = digest.digest(bytes);
+        return Base64.getEncoder().encodeToString(hash);
     }
 
-    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
+    public boolean creerUtilisateur(String nom, String email, String mdp, String nomRole){
+        byte[] mdpBytes = mdp.getBytes(StandardCharsets.UTF_8);
 
-    public static String bytesToHex(byte[] bytes) {
-        char[] hexChars = new char[bytes.length * 2];
-        for ( int j = 0; j < bytes.length; j++ ) {
-            int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        ByteArrayOutputStream mdpSalted = new ByteArrayOutputStream();
+
+        try {
+            mdpSalted.write(mdpBytes);
+            mdpSalted.write(getSalt());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return new String(hexChars);
+
+        System.out.println(getHash(mdpSalted.toByteArray()));
+        return true;
     }
 }
