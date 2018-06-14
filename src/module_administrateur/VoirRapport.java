@@ -32,8 +32,12 @@ public class VoirRapport extends BorderPane {
         this.liste = new ArrayList<>();
         this.liste.add(new Rapport("Leo", "hjgjerg"));
         this.liste.add(new Rapport("Nolan", "gzeeeg"));
-        this.liste.add(new Rapport("Valentin", "sgdfdg"));
-        this.liste.add(new Rapport("Ladislas", "gsdgbgf"));
+        this.liste.add(new Rapport("Valentin", "hg"));
+        this.liste.add(new Rapport("ehhe", "gsrrhdgbgf"));
+        this.liste.add(new Rapport("Ladhrhislas", "hrr"));
+        this.liste.add(new Rapport("ehrh", "gsdgbgf"));
+        this.liste.add(new Rapport("dd", "gsdgbgf"));
+        this.liste.add(new Rapport("575", "g58"));
 
         this.haut();
         this.corp();
@@ -95,16 +99,19 @@ public class VoirRapport extends BorderPane {
         return this.suppr;
     }
 
-    public VBox listeRapport() {
+    public ScrollPane listeRapport() {
       this.listeRapport = new VBox();
+      ScrollPane s = new ScrollPane();
+      s.setPrefSize(500, 1000);
+      this.listeRapport.setPrefWidth(580);
       for (Rapport r : this.liste) {
           this.listeRapport.getChildren().add(creerRapportJoueur(r));
       }
-      this.listeRapport.setStyle("-fx-border-color: black;");
-      this.listeRapport.setPrefHeight(450);
+      s.setStyle("-fx-border-color: black;");
       this.listeRapport.setPadding(new Insets(12,12,12,12));
       this.listeRapport.setSpacing(10);
-      return this.listeRapport;
+      s.setContent(this.listeRapport);
+      return s;
     }
 
     public void corp() {

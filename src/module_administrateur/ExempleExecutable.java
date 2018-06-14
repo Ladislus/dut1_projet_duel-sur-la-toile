@@ -10,7 +10,7 @@ import java.util.List;
 public class ExempleExecutable {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         GestionBD gestionBD = new GestionBD("192.168.1.100", "serveurDeJeux", "dst", "dst");
-        System.out.println(gestionBD.init());
+        gestionBD.init();
         //Exemple pour ajouter des données
         //ArrayList<Object> donnee = new ArrayList<>();
         //donnee.add("ADMIN");
