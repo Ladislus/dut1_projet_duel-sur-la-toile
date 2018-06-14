@@ -23,5 +23,13 @@ public class ExempleExecutable {
 
         Utilisateur utilisateur = new Utilisateur(gestionBD);
         utilisateur.creerUtilisateur("test","test@gmail.com","couscous","admin");
+
+        // TEST : Essai de passer en bibliothèques statiques.
+
+        ConnexionMySQL co = new ConnexionMySQL();
+        co.connecter("192.168.1.100", "serveurDeJeux", "dst", "dst");
+
+        System.out.println(UtilisateurStatic.mdpValide(co,1,"couscous"));
+
     }
 }
