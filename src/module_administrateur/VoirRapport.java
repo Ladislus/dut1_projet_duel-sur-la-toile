@@ -51,7 +51,7 @@ public class VoirRapport extends BorderPane {
       b.setLeft(v);
       b.setRight(lu);
       v.setSpacing(10);
-      this.pa.ajouterRapport(this.joueur+" : "+this.rapport);
+    //  this.pa.ajouterRapport(this.pseudo+" : "+this.rapport);
       return b;
     }
 
