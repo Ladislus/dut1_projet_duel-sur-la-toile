@@ -14,6 +14,7 @@ public class ActionProfilJoueur implements EventHandler<ActionEvent> {
         this.gJoueur = gJoueur;
     }
 
+
     @Override
     public void handle(ActionEvent actionEvent) {
         this.pa.getBp().setCenter(new ProfilJoueur(this.pa, this.gJoueur));
