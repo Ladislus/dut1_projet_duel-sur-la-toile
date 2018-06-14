@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import module_puissance4.Joueur;
 
 import java.io.File;
 import java.util.List;
@@ -24,6 +25,8 @@ public class PartieM {
     public List<Button> listeCouleurs;
 
     private Plateau p;
+
+    private Joueur j1,j2;
 
     private Mastermind mastermind;
 

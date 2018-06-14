@@ -63,7 +63,6 @@ public class Mastermind extends Application {
 
     public HBox boutonsAccueil() {
         HBox res = new HBox();
-        ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
         File imageami = new File(chem+"jouerAmi.png");
@@ -74,7 +73,7 @@ public class Mastermind extends Application {
         b1.setFont(bouton);
         b1.setContentDisplay(ContentDisplay.TOP);
         b1.setPrefSize(390,75.);
-        b1.setOnAction(handler);
+        b1.setOnAction(event -> this.setScene("New Game"));
         res.getChildren().add(b1);
 
         File continu = new File(chem+"continuerPartie.png");
@@ -85,7 +84,7 @@ public class Mastermind extends Application {
         b2.setFont(bouton);
         b2.setContentDisplay(ContentDisplay.TOP);
         b2.setPrefSize(390,75.);
-        b2.setOnAction(handler);
+        b2.setOnAction(event -> this.setScene("Resume Game"));
         res.getChildren().add(b2);
 
         res.setAlignment(Pos.CENTER);
