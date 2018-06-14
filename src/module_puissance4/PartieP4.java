@@ -1,10 +1,8 @@
 package module_puissance4;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,25 +12,27 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Partie {
+public class PartieP4 {
     // Vue de la plateforme de jeu Puissance 4
 
     public static String chem = "./img/module_puissance4/";
 
-    private Plateau p; // Modèle du jeu
+    private PlateauP4 p; // Modèle du jeu
 
     private List<List<Circle>> tableau; // Le tableau de pion
     private List<Button> listeBoutons; // Liste des boutons pour sélectionner une colonne
+    private Button boutActiv; // Bouton de colonne activé
 
-    public Partie(){
-        p = new Plateau("Bernard","xX-Dark-Xx");
+    public PartieP4(){
+        p = new PlateauP4("Bernard","xX-Dark-Xx");
     }
 
     public Scene getScene() {
@@ -42,9 +42,23 @@ public class Partie {
         res.setBottom(this.bas());
         res.setTop(this.haut());
         res.setRight(this.indic());
-        res.setCenter(this.plateau());
+        res.setCenter(this.PlateauP4());
+
+        res.setOnKeyPressed(new ActionBoutonsClavier(this));
 
         return new Scene(res, 850, 650);
+    }
+
+    public List<Button> getListeBoutons() {
+        return listeBoutons;
+    }
+
+    public Button getBoutActiv() {
+        return boutActiv;
+    }
+
+    public void setBoutActiv(Button nouv){
+        this.boutActiv = nouv;
     }
 
     public VBox menu() {
@@ -68,29 +82,38 @@ public class Partie {
         save.setOnMouseExited(e -> save.setStyle(saveNormal));
         save.setPrefWidth(115.);
 
-        Button forfait = new Button("Forfait");
+        Button forfeit = new Button("Forfeit");
 
-        String forfaitNormal = "-fx-background-color: linear-gradient(#FF4d40,#f02020);"+
+        String forfeitNormal = "-fx-background-color: linear-gradient(#FF4d40,#f02020);"+
                 "-fx-background-radius: 5;"+
                 "-fx-font-size: 15;";
-        String forfaitHover = "-fx-background-color: linear-gradient(#ff8d80, #ff8d80);"+
+        String forfeitHover = "-fx-background-color: linear-gradient(#ff8d80, #ff8d80);"+
                 "-fx-background-radius: 5;"+
                 "-fx-font-size: 15;";
 
-        forfait.setStyle(forfaitNormal);
-        forfait.setOnMouseEntered(e -> forfait.setStyle(forfaitHover));
-        forfait.setOnMouseExited(e -> forfait.setStyle(forfaitNormal));
-        forfait.setPrefWidth(115.);
+        forfeit.setStyle(forfeitNormal);
+        forfeit.setOnMouseEntered(e -> forfeit.setStyle(forfeitHover));
+        forfeit.setOnMouseExited(e -> forfeit.setStyle(forfeitNormal));
+        forfeit.setPrefWidth(115.);
 
 
-        res.getChildren().addAll(save,forfait);
+        res.getChildren().addAll(save,forfeit);
         return res;
     }
 
     public VBox indic() {
         VBox res = new VBox();
         res.setPrefWidth(160.);
+        res.setPadding(new Insets(50,5,0,10));
 
+        Text info = new Text("TIPS !\nYou can play with the keyboard !\n\nTo move among the columns, press keys \nQ (left) and D (right).\n\nTo put a token,\n press key M.\n\nGood luck !");
+        info.setWrappingWidth(140.);
+
+        ImageView touches = new ImageView(new Image(new File(chem+"touchesP4.png").toURI().toString()));
+        touches.setPreserveRatio(true);
+        touches.setFitWidth(140.);
+
+        res.getChildren().addAll(info,touches);
         return res;
     }
 
@@ -137,12 +160,9 @@ public class Partie {
         return res;
     }
 
-    public VBox plateau() {
+    public VBox PlateauP4() {
         VBox res = new VBox();
 
-        File file1 = new File(chem+"boutColDesactive.png");
-        File file2 = new File(chem+"boutColRed.png");
-        File file3 = new File(chem+"boutColYellow.png");
 
         // LIGNE DE BOUTONS POUR SÉLECTIONNER UNE COLONNE
         this.listeBoutons = new ArrayList<>();
@@ -150,33 +170,25 @@ public class Partie {
         ligneBoutons.setSpacing(23.);
         ligneBoutons.setAlignment(Pos.CENTER);
         for (int c=0;c<7;c++){
-            ImageView imDesactive = new ImageView(new Image(file1.toURI().toString()));
-            imDesactive.setPreserveRatio(true);
-            imDesactive.setFitWidth(25.);
-
-            ImageView imRed = new ImageView(new Image(file2.toURI().toString()));
-            imRed.setPreserveRatio(true);
-            imRed.setFitWidth(25.);
-
-            ImageView imYel = new ImageView(new Image(file3.toURI().toString()));
-            imYel.setPreserveRatio(true);
-            imYel.setFitWidth(25.);
+            ImageView imDesactive = new ImgBouton("desactive");
+            ImageView imRed = new ImgBouton("1");
+            ImageView imYel = new ImgBouton("2");
 
             Button b = new Button("",imDesactive);
             b.setUserData(c);
             b.setOnMouseEntered(e -> {
-                if (this.p.getJCour()==1)
-                    b.setGraphic(imRed); // si c'est le joueur 1 qui joue, les boutons deviendront rouges au passage de souris
-                else
-                    b.setGraphic(imYel); // sinon, ils deviendront jaunes
-            });
-            b.setOnMouseExited(e -> b.setGraphic(imDesactive));
+                int n = (int) this.boutActiv.getUserData();
+                this.boutActiv = b;
+                this.majBoutons(n);
+            } );
             b.setStyle("-fx-background-color: transparent;");
             b.setOnAction(new ActionJouerCol(this));
 
             this.listeBoutons.add(b);
             ligneBoutons.getChildren().add(b);
         }
+        this.boutActiv = this.listeBoutons.get(3);
+        this.boutActiv.setGraphic(new ImgBouton(String.valueOf(this.getPlateauP4().getJCour())));
 
         // TABLEAU DU PLATEAU
         tableau = new ArrayList<>();
@@ -226,7 +238,12 @@ public class Partie {
         }
     }
 
-    public Plateau getPlateau() {
+    public void majBoutons(int numAncien){
+        this.listeBoutons.get(numAncien).setGraphic(new ImgBouton("desactive"));
+        this.boutActiv.setGraphic(new ImgBouton(String.valueOf(this.getPlateauP4().getJCour())));
+    }
+
+    public PlateauP4 getPlateauP4() {
         return p;
     }
 }

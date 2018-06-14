@@ -7,30 +7,34 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 class InscriptionJoueur extends BorderPane {
 
-  Button btBack;
-  Button btDashBoard;
+  private Button btBack;
+  private Button btDashBoard;
 
-  TextField tfName;
-  TextField tfFirstName;
-  TextField tfMail;
-  TextField tfPseudo;
+  private TextField tfName;
+  private TextField tfFirstName;
+  private TextField tfMail;
+  private TextField tfPseudo;
 
-  ToggleGroup tgSex;
+  private ToggleGroup tgSex;
 
-  PasswordField tfPassword;
-  PasswordField tfPasswordConfirm;
+  private PasswordField tfPassword;
+  private PasswordField tfPasswordConfirm;
 
-  Hyperlink hlHelp;
+  private Hyperlink hlHelp;
 
-  String title;
+  private String title;
 
-  public InscriptionJoueur() {
+  private Stage primaryStage;
+
+  public InscriptionJoueur(Stage primaryStage) {
 
     super();
+
+    this.primaryStage = primaryStage;
 
     this.title = "Acceuil : Inscription";
 
@@ -107,9 +111,9 @@ class InscriptionJoueur extends BorderPane {
     hHelp.getChildren().addAll(hlHelp, imageHelp);
     hHelp.setAlignment(Pos.TOP_CENTER);
 
-    btBack = new Button("<-- Retours connexion");
-    btBack.setPrefWidth(200);
-    //btBack.setOnAction(new ActionBackToLogin(this));
+    btBack = new Button("Retour");
+    btBack.setOnAction(new ActionBouton(this.primaryStage));
+    btBack.setPrefWidth(100);
 
     candidate.getChildren().addAll(imageLogo, hHelp, btBack);
     candidate.setSpacing(50);
@@ -124,7 +128,7 @@ class InscriptionJoueur extends BorderPane {
     HBox candidate = new HBox();
 
     Label title = new Label("Inscription");
-    title.setFont(Font.font("Arial", 19));
+    title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     candidate.getChildren().addAll(title);
     candidate.setAlignment(Pos.TOP_CENTER);
@@ -136,8 +140,8 @@ class InscriptionJoueur extends BorderPane {
 
     HBox candidate = new HBox();
 
-    Label lCopyright = new Label("© Copyright : Duel sur la toile");
-    lCopyright.setFont(Font.font("Arial", 10));
+    Label lCopyright = new Label(VariablesJoueur.COPYRIGHT);
+    lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
     candidate.setPadding(new Insets(0,0,5,5));
@@ -166,4 +170,6 @@ class InscriptionJoueur extends BorderPane {
 
   public Hyperlink getHlHelp() { return this.hlHelp; }
 
-  public String getTitle() { return this.title; }}
+  public String getTitle() { return this.title; }
+
+  public Stage getPrimaryStage() { return this.primaryStage; }}

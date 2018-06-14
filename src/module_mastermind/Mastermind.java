@@ -1,54 +1,62 @@
-package module_puissance4;
+package module_mastermind;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.HashMap;
 
-public class Puissance4 extends Application {
+
+public class Mastermind extends Application {
+
+    private Stage primaryStage;
+    public static String chem = "./img/module_mastermind/";
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public static String chem = "./img/module_puissance4/";
-
-    private Stage primaryStage;
-
-    public static HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
-
     @Override
     public void start(Stage primaryStage) {
-        this.attribution = new HashMap<>();
-        this.attribution.put("Accueil",this.pageAccueil());
-        this.attribution.put("PartieP4",new PartieP4().getScene());
-
         this.primaryStage = primaryStage;
+
         primaryStage.setResizable(false);
-        primaryStage.setTitle("Duel sur la toile - Connect 4");
+        primaryStage.setTitle("Duel sur la toile - Mastermind");
         primaryStage.setScene(this.pageAccueil());
         primaryStage.show();
     }
 
-    public void setScene(String titre){
-        primaryStage.setScene(this.attribution.get(titre));
+    public void setScene(int n){
+        if (n==1)
+            primaryStage.setScene(pageAccueil());
+        else if (n==2)
+            primaryStage.setScene(PartieM.getScene(this));
     }
 
-    public HBox boutonsAccueil(){
+    public void exit(){
+        Platform.exit();
+    }
+
+    public HBox boutonsAccueil() {
         HBox res = new HBox();
-        module_puissance4.ActionBoutonsAccueil handler = new module_puissance4.ActionBoutonsAccueil(this);
+        ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
         File imageami = new File(chem+"jouerAmi.png");
@@ -82,8 +90,9 @@ public class Puissance4 extends Application {
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
 
-        res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
+        res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
 }
+

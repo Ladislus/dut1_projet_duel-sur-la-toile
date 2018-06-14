@@ -2,7 +2,6 @@ package module_joueur;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -10,25 +9,30 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-
-import java.io.File;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.event.ActionEvent;
 
 class ConnexionJoueur extends BorderPane {
 
-  String title;
+  private String title;
 
-  Hyperlink hlRegister;
-  Hyperlink hlPasswordForgotten;
+  private Hyperlink hlRegister;
+  private Hyperlink hlPasswordForgotten;
 
-  TextField tfLogin;
+  private TextField tfLogin;
 
-  PasswordField tfPassword;
+  private PasswordField tfPassword;
 
-  Button btConnection;
+  private Button btConnection;
 
-  public ConnexionJoueur() {
+  private Stage primaryStage;
+
+  public ConnexionJoueur(Stage primaryStage) {
 
     super();
+
+    this.primaryStage = primaryStage;
 
     this.title = "Acceuil : Connexion";
 
@@ -40,10 +44,10 @@ class ConnexionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    Label slogan = new Label("La plateforme de jeux videos innovante !");
+    Label slogan = new Label(VariablesJoueur.SLOGAN);
     slogan.setTextAlignment(TextAlignment.CENTER);
     slogan.setWrapText(true);
-    slogan.setFont(Font.font("Arial", 15));
+    slogan.setFont(VariablesJoueur.DEFAULT_SLOGAN_FONT);
 
     ImageView logo = new ImageView();
     logo.setImage(VariablesJoueur.LOGO_TEXT);
@@ -63,13 +67,13 @@ class ConnexionJoueur extends BorderPane {
     VBox candidate = new VBox();
 
     hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
-    //hlRegister.setOnAction(new ActionRegister(this));
+    hlRegister.setOnAction(new ActionHyperlink(this.primaryStage));
 
     hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
-    //getHlPasswordForgotten.setOnAction(new ActionPasswordForgotten(this));
+    //hlPasswordForgotten.setOnAction(new ActionHyperlink(this.primaryStage));
 
     Label title = new Label("Connexion");
-    title.setFont(Font.font("Arial", 19));
+    title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     Label lLogin = new Label("Votre nom d'utilisateur : ");
     tfLogin = new TextField();
@@ -77,7 +81,8 @@ class ConnexionJoueur extends BorderPane {
     Label lPassword = new Label("Votre mot de passe : ");
     tfPassword = new PasswordField();
 
-    btConnection = new Button("Vers l'aventure ! -->>");
+    btConnection = new Button("Vers l'aventure !");
+    btConnection.setOnAction(new ActionBouton(this.primaryStage));
 
     candidate.setAlignment(Pos.TOP_CENTER);
     candidate.setPadding(new Insets(18,15,0,0));
@@ -91,8 +96,8 @@ class ConnexionJoueur extends BorderPane {
 
     HBox candidate = new HBox();
 
-    Label lCopyright = new Label("© Copyright : Duel sur la toile");
-    lCopyright.setFont(Font.font("Arial", 10));
+    Label lCopyright = new Label(VariablesJoueur.COPYRIGHT);
+    lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
     candidate.setPadding(new Insets(0,0,5,5));

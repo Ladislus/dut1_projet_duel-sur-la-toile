@@ -1,4 +1,4 @@
-package module_puissance4;
+package module_mastermind;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,14 +6,14 @@ import javafx.event.EventHandler;
 public class ActionBoutonsAccueil implements EventHandler<ActionEvent> {
     // Contrôleur des boutons de l'accueil.
 
-    private Puissance4 puissance4;
+    private Mastermind mastermind;
 
-    public ActionBoutonsAccueil(Puissance4 puissance4){
-        this.puissance4 = puissance4;
+    public ActionBoutonsAccueil(Mastermind mastermind) {
+        this.mastermind = mastermind;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        puissance4.setScene("PartieP4");
+        mastermind.setScene(2);
     }
 }

@@ -3,7 +3,7 @@ package module_puissance4;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plateau { // Modèle du plateau du puissance 4
+public class PlateauP4 { // Modèle du plateau du puissance 4
 
     private Joueur joueur1;
 
@@ -13,7 +13,7 @@ public class Plateau { // Modèle du plateau du puissance 4
 
     private List<Colonne> tableau;
 
-    public Plateau(String j1, String j2){
+    public PlateauP4(String j1, String j2){
         this.joueur1 = new Joueur(j1);
         this.joueur2 = new Joueur(j2);
         joueurCourant = 1 + (int)(Math.random() * 2);
