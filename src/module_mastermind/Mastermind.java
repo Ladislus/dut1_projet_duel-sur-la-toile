@@ -51,7 +51,7 @@ public class Mastermind extends Application {
     }
 
 
-    public void newGame(Mastermind m, String j1, String j2){primaryStage.setScene(new PartieM(m,j1,j2).getScene());}
+    public void newGame(String j1, String j2){primaryStage.setScene(new PartieM(this,j1,j2).getScene(this));}
 
     public void setScene(String titre){
         primaryStage.setScene(this.attribution.get(titre));

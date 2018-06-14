@@ -49,8 +49,8 @@ public class PartieM {
         return new Scene(res, 700, 650);
     }
 
-    public static VBox haut(){
-        VBox res = new VBox(5);
+    public static HBox haut(){
+        HBox res = new HBox(5);
         Label titre = new Label("Mastermind");
         titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
         res.getChildren().addAll(titre);
