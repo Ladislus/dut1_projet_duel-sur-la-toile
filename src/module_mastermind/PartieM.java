@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.List;
 
 public class PartieM {
-//
+
     public static String chem = "./img/module_mastermind/";
 
     public List<Button> listeCouleurs;
@@ -40,7 +40,6 @@ public class PartieM {
     }
 
     public void majAffichage(){}
-//
 
     public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
