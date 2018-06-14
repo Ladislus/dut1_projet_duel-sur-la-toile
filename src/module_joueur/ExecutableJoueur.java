@@ -13,10 +13,10 @@ public class ExecutableJoueur extends Application {
   @Override
   public void start(Stage primaryStage) {
 
-    ConnexionJoueur connection = new ConnexionJoueur(primaryStage);
+    EditionProfil editionProfil = new EditionProfil(primaryStage);
 
-    primaryStage.setTitle(connection.getTitle());
-    primaryStage.setScene(new Scene(connection, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
+    primaryStage.setTitle(editionProfil.getTitle());
+    primaryStage.setScene(new Scene(editionProfil, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
 
     primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
     primaryStage.getIcons().add(VariablesJoueur.LOGO);
