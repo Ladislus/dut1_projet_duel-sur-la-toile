@@ -38,6 +38,7 @@ public class ActionRapportCheck implements EventHandler<ActionEvent> {
         else {
             this.rapp.getButtonSuppr().setDisable(true);
         }
+
       //  this.rapp.getLabel().setText("Nombre de rapport non lus : "+(this.a.getRapport().size()-this.a.getRapportLu().size()));
     }
 }
