@@ -7,32 +7,32 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
 
-public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
+public class ActionActiverJoueur implements EventHandler<ActionEvent>{
 
-  ProfilJoueur pJoueur;
+  GererJoueur gJoueur;
 
-  public ActionProfilJoueurSauvegarde(ProfilJoueur pJoueur){
-    this.pJoueur = pJoueur;
+  public ActionActiverJoueur(GererJoueur gJoueur){
+    this.gJoueur = gJoueur;
   }
 
   @Override
   public void handle(ActionEvent actionEvent){
 
     Button b = (Button) actionEvent.getSource();
-    if((b.getText()) == "Sauvegarder"){
+    if((b.getText()) == "Activer"){
       ButtonType btoui = new ButtonType("Oui");
       ButtonType btnon = new ButtonType("Non", ButtonData.CANCEL_CLOSE);
       Alert alert = new Alert(AlertType.CONFIRMATION);
-      alert.setTitle("Confirmation de la sauvegarde");
-      alert.setHeaderText("Confirmation sauvegarde");
-      alert.setContentText("Voulez-vous vraiment sauvegarder les\n informations modifiées ?");
+      alert.setTitle("Confirmation de l'activation");
+      alert.setHeaderText("Confirmation activation");
+      alert.setContentText("Voulez-vous vraiment activer le joueur ?");
       alert.getButtonTypes().setAll(btoui, btnon);
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == btoui){
         alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Validation de la sauvegarde");
+        alert.setTitle("Validation de l'activation");
         alert.setHeaderText(null);
-        alert.setContentText("Les informations modifiées ont bien\n été sauvegardées.");
+        alert.setContentText("Le joueur a bien été activé.");
         alert.showAndWait();
       }
     }

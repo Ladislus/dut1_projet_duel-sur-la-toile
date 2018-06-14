@@ -41,6 +41,8 @@ public class GererJoueur extends BorderPane {
         Label l = new Label("Nombre de joueurs à activer : ");
         Button activer = new Button("Activer");
         Button supprimer = new Button("Supprimer");
+        ActionActiverJoueur acj = new ActionActiverJoueur(this);
+        ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
         activer.setStyle("-fx-background-color: #009e0f;");
         supprimer.setStyle("-fx-background-color: #cf2a27;");
         activer.setTextFill(Color.web("white"));
@@ -49,6 +51,8 @@ public class GererJoueur extends BorderPane {
         activer.setPrefHeight(50);
         supprimer.setPrefWidth(200);
         supprimer.setPrefHeight(50);
+        activer.setOnAction(acj);
+        supprimer.setOnAction(asj);
         HBox bouton = new HBox();
         bouton.getChildren().addAll(activer, supprimer);
         bouton.setSpacing(10);

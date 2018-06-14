@@ -47,6 +47,7 @@ public class GererJeu extends BorderPane {
       HBox hbsave = new HBox();
       HBox hbetatjeu = new HBox(30);
       HBox hbfilechooser = new HBox(5);
+      ActionSauvegardeModifsJeu asmj = new ActionSauvegardeModifsJeu(this);
       ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
       ComboBox cbjeux = new ComboBox(optionsjeu);
       Label etatjeu = new Label("Etat du jeu : ");
@@ -68,6 +69,7 @@ public class GererJeu extends BorderPane {
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);
       Button bsave = new Button("Sauvegarder");
+      bsave.setOnAction(asmj);
 
       hbfilechooser.getChildren().addAll(tfilechooser, bplus);
 
@@ -101,6 +103,7 @@ public class GererJeu extends BorderPane {
       HBox hbajouterjeu = new HBox();
       HBox hbfilechooser = new HBox(5);
       ToggleGroup groupe = new ToggleGroup();
+      ActionAjouterJeu aaj = new ActionAjouterJeu(this);
       Label laddjeu = new Label("Ajouter un jeu");
       laddjeu.setFont(Font.font ("Arial", 18));
       TextField tnom = new TextField();
@@ -122,6 +125,7 @@ public class GererJeu extends BorderPane {
       RadioButton rbactiver = new RadioButton("Oui");
       RadioButton rbpasactiver = new RadioButton("Non");
       Button bajouter = new Button("Ajouter");
+      bajouter.setOnAction(aaj);
       rbactiver.setSelected(true);
       rbactiver.setToggleGroup(groupe);
       rbpasactiver.setToggleGroup(groupe);
