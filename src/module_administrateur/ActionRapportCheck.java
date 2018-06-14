@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
+import java.util.Collections;
 
 public class ActionRapportCheck implements EventHandler<ActionEvent> {
 
@@ -23,14 +24,16 @@ public class ActionRapportCheck implements EventHandler<ActionEvent> {
         System.out.println(this.a.getRapport().size()-this.a.getRapportLu().size());
 
         if (cb.isSelected()) {
-            //this.rapp.getPseudo().setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#cccccc");
-            //this.rapp.getContenu().setStyle("-fx-font-style: italic;-fx-font-color:#cccccc");
+            this.r.getLabPseudo().setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#cccccc");
+            this.r.getLabContenu().setStyle("-fx-font-style: italic;-fx-font-color:#cccccc");
             this.a.ajouterRapportLu(this.r);
+            this.r.setLu(true);
         }
         else {
-          //  this.rapp.getPseudo().setStyle("-fx-font-weight: bold;-fx-underline: true;");
-          //  this.rapp.getContenu().setStyle("-fx-font-style: normal;-fx-font-color:black");
+            this.r.getLabPseudo().setStyle("-fx-font-weight: bold;-fx-underline: true;");
+            this.r.getLabContenu().setStyle("-fx-font-style: normal;-fx-font-color:black");
             this.a.retirerRapportLu(this.r);
+            this.r.setLu(false);
         }
         if (this.a.getRapportLu().size() > 0) {
             this.rapp.getButtonSuppr().setDisable(false);
@@ -38,6 +41,10 @@ public class ActionRapportCheck implements EventHandler<ActionEvent> {
         else {
             this.rapp.getButtonSuppr().setDisable(true);
         }
+
+      //  Collections.sort(this.rapp.getListe(), new CompCheck());
+
+      //  System.out.println(this.rapp.getListe());
 
     //  this.rapp.getLabel().setText("Nombre de rapport non lus : "+(this.a.getRapport().size()-this.a.getRapportLu().size()));
     }

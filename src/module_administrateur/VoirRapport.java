@@ -44,6 +44,10 @@ public class VoirRapport extends BorderPane {
         this.l.setText("Nombre de rapport non lus : "+this.pa.getAdmin().getRapport().size());
     }
 
+    public ArrayList<Rapport> getListe() {
+        return this.liste;
+    }
+
     public VBox getVBoxListeRapport() {
         return this.listeRapport;
     }
@@ -65,14 +69,12 @@ public class VoirRapport extends BorderPane {
     }
 
     public BorderPane creerRapportJoueur(Rapport r) {
-        Label pseudo = new Label(r.getPseudo());
-        Label contenu = new Label(r.getContenu());
-        contenu.setPadding(new Insets(0,0,0,10));
-        pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
+        r.getLabContenu().setPadding(new Insets(0,0,0,10));
+        r.getLabPseudo().setStyle("-fx-font-weight: bold;-fx-underline: true;");
         CheckBox lu = new CheckBox();
         lu.setOnAction(new ActionRapportCheck(this, this.pa.getAdmin(), r));
         VBox v = new VBox();
-        v.getChildren().addAll(pseudo, contenu);
+        v.getChildren().addAll(r.getLabPseudo(), r.getLabContenu());
         r.getB().setLeft(v);
         r.getB().setRight(lu);
         v.setSpacing(10);
@@ -100,18 +102,18 @@ public class VoirRapport extends BorderPane {
     }
 
     public ScrollPane listeRapport() {
-      this.listeRapport = new VBox();
-      ScrollPane s = new ScrollPane();
-      s.setPrefSize(500, 1000);
-      this.listeRapport.setPrefWidth(580);
-      for (Rapport r : this.liste) {
-          this.listeRapport.getChildren().add(creerRapportJoueur(r));
-      }
-      s.setStyle("-fx-border-color: black;");
-      this.listeRapport.setPadding(new Insets(12,12,12,12));
-      this.listeRapport.setSpacing(10);
-      s.setContent(this.listeRapport);
-      return s;
+        this.listeRapport = new VBox();
+        ScrollPane s = new ScrollPane();
+        s.setPrefSize(500, 1000);
+        this.listeRapport.setPrefWidth(580);
+        for (Rapport r : this.liste) {
+            this.listeRapport.getChildren().add(creerRapportJoueur(r));
+        }
+        s.setStyle("-fx-border-color: black;");
+        this.listeRapport.setPadding(new Insets(12,12,12,12));
+        this.listeRapport.setSpacing(10);
+        s.setContent(this.listeRapport);
+        return s;
     }
 
     public void corp() {
