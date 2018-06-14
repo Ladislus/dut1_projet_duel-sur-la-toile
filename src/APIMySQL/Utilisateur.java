@@ -6,7 +6,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 
 public class Utilisateur {
 
@@ -17,10 +21,10 @@ public class Utilisateur {
         this.gestionBD = gestionBD;
     }
 
-    private static byte[] getSalt(){
+    private static String getSalt(){
         byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
-        return salt;
+        return Base64.getEncoder().encodeToString(salt);
     }
 
     private String getHash(byte[] bytes){
@@ -32,19 +36,26 @@ public class Utilisateur {
         return Base64.getEncoder().encodeToString(hash);
     }
 
-    public boolean creerUtilisateur(String nom, String email, String mdp, String nomRole){
-        byte[] mdpBytes = mdp.getBytes(StandardCharsets.UTF_8);
-
-        ByteArrayOutputStream mdpSalted = new ByteArrayOutputStream();
+    public boolean creerUtilisateur(String pseudo, String email, String mdp, String nomRole){
+        String salt = getSalt();
+        ArrayList<Object> donnees = new ArrayList<>();
 
         try {
-            mdpSalted.write(mdpBytes);
-            mdpSalted.write(getSalt());
-        } catch (IOException e) {
+            Collections.addAll(donnees,pseudo,email,"O",nomRole,getHash((mdp + salt).getBytes()),salt);
+            gestionBD.insertRequete("INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println(getHash(mdpSalted.toByteArray()));
+        System.out.println(salt);
         return true;
+    }
+
+    public boolean mdpValide(String idU, String mdp){
+        /*try {
+            String hash = gestionBD.selectRequestWithPreparedStatement("SELECT hash FROM UTILISATEUR WHERE idU="+idU).get(0).get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+        return false;
     }
 }

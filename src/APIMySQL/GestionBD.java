@@ -102,4 +102,15 @@ public class GestionBD {
         }
         return true;
     }
+
+    public boolean statement(String requete){
+        try {
+            Statement s = connexionMySQL.createStatement();
+            s.executeUpdate(requete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    return true;
+    }
 }

@@ -19,6 +19,8 @@ public class ExempleExecutable {
         //retourne {nomRole=[ADMIN, USER]}
         System.out.println(res);
 
+        gestionBD.statement("INSERT INTO ROLE VALUES ('ADMIN')");
+
         Utilisateur utilisateur = new Utilisateur(gestionBD);
         utilisateur.creerUtilisateur("test","test@gmail.com","couscous","admin");
     }
