@@ -22,12 +22,14 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.HashMap;
 
 
 public class Mastermind extends Application {
 
     private Stage primaryStage;
     public static String chem = "./img/module_mastermind/";
+    public static HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
         launch(args);
@@ -35,6 +37,11 @@ public class Mastermind extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        this.attribution = new HashMap<>();
+        this.attribution.put("Home",this.pageAccueil());
+        this.attribution.put("New Game",new ChoixJoueurM(this).getScene("New Game"));
+        this.attribution.put("Resume Game",new ChoixJoueurM(this).getScene("Resume Game"));
+
         this.primaryStage = primaryStage;
 
         primaryStage.setResizable(false);
@@ -43,11 +50,11 @@ public class Mastermind extends Application {
         primaryStage.show();
     }
 
-    public void setScene(int n){
-        if (n==1)
-            primaryStage.setScene(pageAccueil());
-        else if (n==2)
-            primaryStage.setScene(PartieM.getScene(this));
+
+    public void newGame(Mastermind m, String j1, String j2){primaryStage.setScene(new PartieM(m,j1,j2).getScene());}
+
+    public void setScene(String titre){
+        primaryStage.setScene(this.attribution.get(titre));
     }
 
     public void exit(){
