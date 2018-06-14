@@ -63,6 +63,7 @@ public class GererJeu extends BorderPane {
       ComboBox cbmodes = new ComboBox(optionsmode);
       TextField tfilechooser = new TextField();
       tfilechooser.setPromptText("Choisissez une image");
+      tfilechooser.setDisable(true);
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);
@@ -113,6 +114,7 @@ public class GererJeu extends BorderPane {
       ComboBox cbmodes = new ComboBox(optionstype);
       TextField tfilechooser = new TextField();
       tfilechooser.setPromptText("Choisissez une image");
+      tfilechooser.setDisable(true);
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);

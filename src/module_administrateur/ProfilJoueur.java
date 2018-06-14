@@ -17,8 +17,9 @@ import javafx.scene.chart.*;
 
 public class ProfilJoueur extends BorderPane {
 
-    GererJoueur gJoueur;
-    PageAccueil pa;
+    private GererJoueur gJoueur;
+    private PageAccueil pa;
+
 
     public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur) {
         super();
@@ -68,9 +69,12 @@ public class ProfilJoueur extends BorderPane {
       Label limageprofil = new Label("Image de profil");
       TextField tfilechooser = new TextField();
       tfilechooser.setPromptText("Choisissez une image");
+      tfilechooser.setDisable(true);
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);
+      ActionProfilJoueurSauvegarde apjs = new ActionProfilJoueurSauvegarde(this);
+      bsave.setOnAction(apjs);
 
 
       gpgauche.add(pseudo, 1, 40);
@@ -99,8 +103,6 @@ public class ProfilJoueur extends BorderPane {
       vbgauche.setPadding(new Insets(0,0,0,25));
 
       this.setLeft(vbgauche);
-
-
     }
 
     public void centre() {
