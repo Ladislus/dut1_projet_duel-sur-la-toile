@@ -19,8 +19,8 @@ import java.io.File;
 import java.util.List;
 
 public class PartieM {
-//
-    public static String chem = "./img/module_mastermind/";
+
+    private static String chem = "./img/module_mastermind/";
 
     public List<Button> listeCouleurs;
 
@@ -30,7 +30,7 @@ public class PartieM {
 
     private Mastermind mastermind;
 
-    public PartieM(Mastermind m,String j1,String j2){
+    private PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
         this.p = new Plateau(j1,j2);
     }
@@ -42,9 +42,9 @@ public class PartieM {
     public void majAffichage(){}
 //
 
-    public Scene getScene(Mastermind m) {
+    public Scene getScene() {
         BorderPane res = new BorderPane();
-        res.setLeft(menu(m));
+        res.setLeft(menu(this.mastermind));
         res.setTop(haut());
         res.setRight(plateau());
         res.setBottom(bas());
@@ -52,7 +52,7 @@ public class PartieM {
         return new Scene(res, 700, 650);
     }
 
-    public static HBox haut(){
+    private static HBox haut(){
         HBox res = new HBox(5);
         Label titre = new Label("Mastermind");
         titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
@@ -61,7 +61,7 @@ public class PartieM {
         return res;
     }
 
-    public VBox menu(Mastermind m){
+    private VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
@@ -127,7 +127,7 @@ public class PartieM {
         return res;
     }
 
-    public static VBox plateau(){
+    private static VBox plateau(){
         VBox res = new VBox(10);
         res.setAlignment(Pos.CENTER_RIGHT);
         res.setSpacing(20.);
@@ -180,7 +180,7 @@ public class PartieM {
         return res;
     }
 
-    public HBox bas(){
+    private HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
         res.setSpacing(20.);
