@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -7,11 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.event.ActionEvent;
 
 class ConnexionJoueur extends BorderPane {
 
@@ -28,9 +26,13 @@ class ConnexionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  public ConnexionJoueur(Stage primaryStage) {
+  private GestionBD laConnection;
+
+  public ConnexionJoueur(Stage primaryStage, GestionBD laConnection) {
 
     super();
+
+    this.laConnection = laConnection;
 
     this.primaryStage = primaryStage;
 
@@ -67,10 +69,10 @@ class ConnexionJoueur extends BorderPane {
     VBox candidate = new VBox();
 
     hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
-    hlRegister.setOnAction(new ActionHyperlink(this.primaryStage));
+    hlRegister.setOnAction(new ActionToInscription(this.primaryStage, this.laConnection));
 
     hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
-    //hlPasswordForgotten.setOnAction(new ActionHyperlink(this.primaryStage));
+    //hlPasswordForgotten.setOnAction(new ActionToForgottenPassword(this.primaryStage, this.laConnection));
 
     Label title = new Label("Connexion");
     title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -82,7 +84,7 @@ class ConnexionJoueur extends BorderPane {
     tfPassword = new PasswordField();
 
     btConnection = new Button("Vers l'aventure !");
-    btConnection.setOnAction(new ActionBouton(this.primaryStage));
+    btConnection.setOnAction(new ActionConnection(this.primaryStage, this.laConnection));
 
     candidate.setAlignment(Pos.TOP_CENTER);
     candidate.setPadding(new Insets(18,15,0,0));
@@ -104,14 +106,8 @@ class ConnexionJoueur extends BorderPane {
 
     return candidate; }
 
-  public Hyperlink getHlRegister() { return this.hlRegister; }
-
-  public Hyperlink getHlPasswordForgotten() { return this.hlPasswordForgotten; }
-
   public TextField getTfLogin() { return this.tfLogin; }
 
   public PasswordField getTfPassword() { return this.tfPassword; }
-
-  public Button getbtConnection() { return this.btConnection; }
 
   public String getTitle() { return this.title; }}

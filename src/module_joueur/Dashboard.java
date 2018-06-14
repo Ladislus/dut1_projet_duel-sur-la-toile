@@ -1,163 +1,165 @@
 package module_joueur;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import APIMySQL.GestionBD;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class Dashboard extends Application {
+class Dashboard extends BorderPane {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+  private String title;
 
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Dashboard");
-        primaryStage.setScene(creerDashboard());
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
+  private Stage primaryStage;
 
-    public Scene creerDashboard(){
-        BorderPane bp = new BorderPane();
-        bp.setTop(creerHaut());
-        bp.setLeft(creerGauche());
-        bp.setCenter(creerCentre());
-        bp.setRight(creerDroite());
-        return new Scene(bp, 850,650);
-    }
+  private GestionBD laConnection;
 
-    public HBox creerHaut(){
-        HBox hHaut = new HBox();
-        Label lTitre = new Label("Bienvenue XxX_DarkSasuke-69_XxX ");
+  public Dashboard(Stage primaryStage, GestionBD laConnection) {
 
-        lTitre.setFont(Font.loadFont("file:./assets/roboto.ttf", 19));
+    super();
 
-        hHaut.setAlignment(Pos.TOP_CENTER);
-        hHaut.setPadding(new Insets(20));
-        hHaut.getChildren().addAll(lTitre);
+    this.title = "Dashboard";
 
-        return hHaut;
-    }
+    this.primaryStage = primaryStage;
 
-    public VBox creerGauche(){
-        //todo : make to correspond to the IHM --> fini
-        VBox vGauche = new VBox();
-        VBox vParam = new VBox();
+    this.laConnection = laConnection;
 
-        Button btStat = new Button("Mes statistiques");
-        Button btParti = new Button("Mes parties");
-        Button btEditerProfile = new Button("Éditez mon profil");
-        Button btParametre = new Button("Mes paramètres");
+    this.setTop(creerHaut());
+    this.setLeft(creerGauche());
+    this.setCenter(creerCentre());
+    this.setRight(creerDroite()); }
 
-        File imageFileLogo = new File("./img/pub/log_out.png");//logo plateforme
-        ImageView imageViewLogo = new ImageView();
-        imageViewLogo.setImage(new Image(imageFileLogo.toURI().toString()));
-        imageViewLogo.setPreserveRatio(true);
-        imageViewLogo.setFitWidth(25);
-        Button btExit = new Button("", imageViewLogo);
+  public HBox creerHaut() {
 
-        btStat.setPrefWidth(150);
-        btParti.setPrefWidth(150);
-        btEditerProfile.setPrefWidth(150);
-        btParametre.setPrefWidth(150);
+    Label lTitre = new Label("Bienvenue XxX_DarkSasuke-69_XxX ");
+    lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
-        vParam.getChildren().addAll(btParametre, btExit);
-        vParam.setSpacing(10);
-        vParam.setAlignment(Pos.TOP_CENTER);
-        vParam.setPadding(new Insets(250,0,0,0));
+    HBox candidate = new HBox();
+    candidate.setAlignment(Pos.TOP_CENTER);
+    candidate.setPadding(new Insets(20));
+    candidate.getChildren().addAll(lTitre);
 
-        vGauche.getChildren().addAll(btStat, btParti, btEditerProfile, vParam);
-        vGauche.setPadding(new Insets(70,0,0,10));
-        vGauche.setSpacing(20);
+    return candidate; }
 
-        return vGauche;
-    }
+  public VBox creerGauche() {
 
-    public VBox creerDroite(){
-        VBox hDroiteCentral = new VBox();
-        VBox hDroiteListeDamis = new VBox();
-        ScrollPane sDroiteListeDamis = new ScrollPane();
-        Label lbTotalContact = new Label("Total : 8 contacts");
+    //todo : make to correspond to the IHM --> fini
+    VBox candidate = new VBox();
+    VBox param = new VBox();
 
-        Label lListeDamis = new Label("Ma liste d'amis");
-        Button btListeDamis = new Button("Mes amis");
-        Button btMessage = new Button("4 messages non lu");
-        btListeDamis.setPrefWidth(150);btMessage.setPrefWidth(150);
-        lListeDamis.setFont(new Font("Arial",20));
+    ImageView imageViewLogo = new ImageView();
+    imageViewLogo.setImage(VariablesJoueur.LOGOUT);
+    imageViewLogo.setPreserveRatio(true);
+    imageViewLogo.setFitWidth(25);
 
-        //todo : Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
+    Button btStat = new Button("Mes statistiques");
+    btStat.setPrefWidth(150);
 
-        String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "Sergine", "Anastasia"};
-        ArrayList<Button> listeButton = new ArrayList<>();
+    Button btParti = new Button("Mes parties");
+    btParti.setPrefWidth(150);
 
-        for(String name : btName){
-            File imageFile = new File("./img/pub/contact.png");
-            ImageView imageContact = new ImageView();
-            imageContact.setImage(new Image(imageFile.toURI().toString()));
-            imageContact.setPreserveRatio(true);
-            imageContact.setFitWidth(20);
-            Button btContact = new Button(name, imageContact);
-            btContact.setPrefWidth(150);
-            btContact.setAlignment(Pos.CENTER_LEFT);
-            listeButton.add(btContact);
-        }
+    Button btEditerProfile = new Button("Éditez mon profil");
+    btEditerProfile.setPrefWidth(150);
 
-        hDroiteListeDamis.getChildren().addAll(listeButton);
-        hDroiteListeDamis.setSpacing(5);
-        hDroiteListeDamis.setPrefHeight(375);
+    Button btParametre = new Button("Mes paramètres");
+    btParametre.setPrefWidth(150);
 
-        sDroiteListeDamis.setContent(hDroiteListeDamis);
-        sDroiteListeDamis.setFitToWidth(true);
+    Button btExit = new Button("", imageViewLogo);
 
-        hDroiteCentral.setPadding(new Insets(5));
+    param.getChildren().addAll(btParametre, btExit);
+    param.setSpacing(10);
+    param.setAlignment(Pos.TOP_CENTER);
+    param.setPadding(new Insets(250,0,0,0));
 
-        hDroiteCentral.setSpacing(15);
-        hDroiteCentral.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
+    candidate.getChildren().addAll(btStat, btParti, btEditerProfile, param);
+    candidate.setPadding(new Insets(70,0,0,10));
+    candidate.setSpacing(20);
 
-        return hDroiteCentral;
-    }
+    return candidate; }
 
-    public VBox creerCentre(){
-        //todo: make that
-        VBox vCentre = new VBox();
+  public VBox creerDroite() {
 
-        VBox vJeux = new VBox();
-        VBox vNouveaute = new VBox();
+    VBox candidate = new VBox();
+    VBox hDroiteListeDamis = new VBox();
 
-        Label lbJeux = new Label("Jeux : ");
-        Label lbNouveaute = new Label("Nouveautés : ");
+    ScrollPane sDroiteListeDamis = new ScrollPane();
 
-        ScrollPane scrollPaneJeux = new ScrollPane();
-        scrollPaneJeux.setPrefHeight(310);
-        scrollPaneJeux.setContent(vJeux);
+    Label lbTotalContact = new Label("Total : 8 contacts");
+    Label lListeDamis = new Label("Ma liste d'amis");
+    lListeDamis.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
-        ScrollPane scrollPaneNouveaute = new ScrollPane();
-        scrollPaneNouveaute.setContent(vNouveaute);
-        scrollPaneNouveaute.setPrefHeight(310);
-        //todo remove that and place image
+    Button btMessage = new Button("4 messages non lu");
+    btMessage.setPrefWidth(150);
 
-        for(int i = 0; i<150; i++){
-            vJeux.getChildren().add(new Label("test"));
-            vNouveaute.getChildren().add(new Label("test"));
-        }
+    Button btListeDamis = new Button("Mes amis");
+    btListeDamis.setPrefWidth(150);
 
-        vCentre.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
-        vCentre.setSpacing(10);
-        vCentre.setPadding(new Insets(0,15,9,15));
+    //todo : Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
 
-        return vCentre;
-    }
-}
+    String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "Sergine", "Anastasia"};
+
+    ArrayList<Button> listeButton = new ArrayList<>();
+
+    for (String name : btName) {
+
+      ImageView imageContact = new ImageView();
+      imageContact.setImage(VariablesJoueur.CONTACT);
+      imageContact.setPreserveRatio(true);
+      imageContact.setFitWidth(20);
+
+      Button btContact = new Button(name, imageContact);
+      btContact.setPrefWidth(150);
+      btContact.setAlignment(Pos.CENTER_LEFT);
+      listeButton.add(btContact); }
+
+    hDroiteListeDamis.getChildren().addAll(listeButton);
+    hDroiteListeDamis.setSpacing(5);
+    hDroiteListeDamis.setPrefHeight(375);
+
+    sDroiteListeDamis.setContent(hDroiteListeDamis);
+    sDroiteListeDamis.setFitToWidth(true);
+
+    candidate.setPadding(new Insets(5));
+    candidate.setSpacing(15);
+    candidate.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
+
+    return candidate; }
+
+  public VBox creerCentre() {
+
+    //todo: make that
+    VBox candidate = new VBox();
+    VBox vJeux = new VBox();
+    VBox vNouveaute = new VBox();
+
+    Label lbJeux = new Label("Jeux : ");
+    Label lbNouveaute = new Label("Nouveautés : ");
+
+    ScrollPane scrollPaneJeux = new ScrollPane();
+    scrollPaneJeux.setPrefHeight(310);
+    scrollPaneJeux.setContent(vJeux);
+
+    ScrollPane scrollPaneNouveaute = new ScrollPane();
+    scrollPaneNouveaute.setContent(vNouveaute);
+    scrollPaneNouveaute.setPrefHeight(310);
+
+    //todo remove that and place image
+
+    for(int i = 0; i < 150; i++) {
+
+      vJeux.getChildren().add(new Label("test"));
+      vNouveaute.getChildren().add(new Label("test")); }
+
+    candidate.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
+    candidate.setSpacing(10);
+    candidate.setPadding(new Insets(0,15,9,15));
+
+    return candidate; }
+
+  public String getTitle() { return this.title; }}

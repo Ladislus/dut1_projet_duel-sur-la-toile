@@ -22,7 +22,7 @@ class VariablesJoueur {
   public final static double DEFAULT_CONNECTION_HEIGHT = 290;
 
   public final static double DEFAULT_REGISTRATION_WIDTH = 500;
-  public final static double  DEFAULT_REGISTRATION_HEIGHT = 430;
+  public final static double DEFAULT_REGISTRATION_HEIGHT = 430;
 
   public final static boolean IS_RESIZABLE = false;
 
@@ -31,4 +31,6 @@ class VariablesJoueur {
 
   public final static Image LOGO = new Image(new File("./img/pub/logoWithoutText.png").toURI().toString());
   public final static Image LOGO_TEXT = new Image(new File("./img/pub/logo.png").toURI().toString());
-  public final static Image HELP = new Image(new File("./img/pub/help.png").toURI().toString()); }
+  public final static Image HELP = new Image(new File("./img/pub/help.png").toURI().toString());
+  public final static Image CONTACT = new Image(new File("./img/pub/contact.png").toURI().toString());
+  public final static Image LOGOUT = new Image(new File("./img/pub/log_out.png").toURI().toString()); }
