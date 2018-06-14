@@ -7,16 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -28,8 +22,8 @@ import java.util.HashMap;
 public class Mastermind extends Application {
 
     private Stage primaryStage;
-    public static String chem = "./img/module_mastermind/";
-    public static HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
+    private static String chem = "./img/module_mastermind/";
+    private HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
         launch(args);
@@ -61,7 +55,7 @@ public class Mastermind extends Application {
         Platform.exit();
     }
 
-    public HBox boutonsAccueil() {
+    private HBox boutonsAccueil() {
         HBox res = new HBox();
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
@@ -93,7 +87,7 @@ public class Mastermind extends Application {
         return res;
     }
 
-    public Scene pageAccueil(){
+    private Scene pageAccueil(){
         BorderPane res = new BorderPane();
 
         res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
