@@ -27,8 +27,9 @@ public class PartieM {
 
     private Mastermind mastermind;
 
-    public PartieM(String j1){
-        this.p = new Plateau();
+    public PartieM(Mastermind m,String j1,String j2){
+        this.mastermind = m;
+        this.p = new Plateau(j1,j2);
     }
 
     public Plateau getPlateau(){
