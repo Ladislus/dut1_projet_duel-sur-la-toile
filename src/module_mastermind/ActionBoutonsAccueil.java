@@ -14,6 +14,6 @@ public class ActionBoutonsAccueil implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        mastermind.setScene(2);
+        this.mastermind.setScene("");
     }
 }
