@@ -16,6 +16,7 @@ import javafx.scene.text.FontWeight;
 import module_puissance4.Joueur;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PartieM {
@@ -31,6 +32,7 @@ public class PartieM {
     private Mastermind mastermind;
 
     private Circle c1,c2,c3,c4;
+    private List<Circle> lCercle;
 
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
@@ -43,96 +45,35 @@ public class PartieM {
 
     public void majAffichage(){
 
-        int pos = this.getPlateau().getCombiCour().get(0);
-        if (pos == 0){
-            c1.setFill(Color.DARKGREY);
-        }
-        else if (pos == 1){
-            c1.setFill(Color.YELLOW);
-        }
-        else if (pos == 2){
-            c1.setFill(Color.RED);
-        }
-        else if (pos == 3){
-            c1.setFill(Color.BLUE);
-        }
-        else if (pos == 4){
-            c1.setFill(Color.SADDLEBROWN);
-        }
-        else if (pos == 5){
-            c1.setFill(Color.FORESTGREEN);
-        }
-        else if (pos == 6){
-            c1.setFill(Color.CYAN);
-        }
+        lCercle = new ArrayList<>();0
+        lCercle.add(c1);
+        lCercle.add(c2);
+        lCercle.add(c3);
+        lCercle.add(c4);
 
-        pos = this.getPlateau().getCombiCour().get(1);
-        if (pos == 0){
-            c2.setFill(Color.DARKGREY);
-        }
-        else if (pos == 1){
-            c2.setFill(Color.YELLOW);
-        }
-        else if (pos == 2){
-            c2.setFill(Color.RED);
-        }
-        else if (pos == 3){
-            c2.setFill(Color.BLUE);
-        }
-        else if (pos == 4){
-            c2.setFill(Color.SADDLEBROWN);
-        }
-        else if (pos == 5){
-            c2.setFill(Color.FORESTGREEN);
-        }
-        else if (pos == 6){
-            c2.setFill(Color.CYAN);
-        }
-
-        pos = this.getPlateau().getCombiCour().get(2);
-        if (pos == 0){
-            c3.setFill(Color.DARKGREY);
-        }
-        else if (pos == 1){
-            c3.setFill(Color.YELLOW);
-        }
-        else if (pos == 2){
-            c3.setFill(Color.RED);
-        }
-        else if (pos == 3){
-            c3.setFill(Color.BLUE);
-        }
-        else if (pos == 4){
-            c3.setFill(Color.SADDLEBROWN);
-        }
-        else if (pos == 5){
-            c3.setFill(Color.FORESTGREEN);
-        }
-        else if (pos == 6){
-            c3.setFill(Color.CYAN);
-        }
-
-        pos = this.getPlateau().getCombiCour().get(3);
-        if (pos == 0){
-            c4.setFill(Color.DARKGREY);
-        }
-        else if (pos == 1){
-            c4.setFill(Color.YELLOW);
-        }
-        else if (pos == 2){
-            c4.setFill(Color.RED);
-        }
-        else if (pos == 3){
-            c4.setFill(Color.BLUE);
-        }
-        else if (pos == 4){
-            c4.setFill(Color.SADDLEBROWN);
-        }
-        else if (pos == 5){
-            c4.setFill(Color.FORESTGREEN);
-        }
-        else if (pos == 6){
-            c4.setFill(Color.CYAN);
+        for (Circle c : lCercle){
+            int pos = this.getPlateau().getCombiCour().get(lCercle.indexOf(c));
+            if (pos == 0){
+                c.setFill(Color.DARKGREY);
+            }
+            else if (pos == 1){
+                c.setFill(Color.YELLOW);
+            }
+            else if (pos == 2){
+                c.setFill(Color.RED);
+            }
+            else if (pos == 3){
+                c.setFill(Color.BLUE);
+            }
+            else if (pos == 4){
+                c.setFill(Color.SADDLEBROWN);
+            }
+            else if (pos == 5){
+                c.setFill(Color.FORESTGREEN);
+            }
+            else if (pos == 6){
+                c.setFill(Color.CYAN);
+            }
         }
     }
 
