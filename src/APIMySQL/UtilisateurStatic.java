@@ -35,7 +35,7 @@ public class UtilisateurStatic {
 
         try {
             Collections.addAll(donnees,pseudo,email,"O",nomRole,getHash((mdp + salt).getBytes()),salt);
-            GestionBDStatic.insertRequete(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
+            GestionBDStatic.updatePreparedStatement(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
             e.printStackTrace();
         }

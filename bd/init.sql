@@ -8,14 +8,15 @@ CREATE TABLE ROLE (
 
 CREATE TABLE UTILISATEUR (
   idUt SMALLINT NOT NULL AUTO_INCREMENT,
-  pseudoUt varchar(10) UNIQUE NOT NULL,
+  pseudoUt varchar(30) UNIQUE NOT NULL,
   emailUt varchar(100) NOT NULL,
-  activeUt char(1) NOT NULL,
+  activeUt BIT NOT NULL,
   nomRole varchar(10) NOT NULL,
   hash varchar(100) NOT NULL,
   salt varchar(100) NOT NULL,
   PRIMARY KEY (idUt)
 );
+
 
 CREATE TABLE ETREAMI (
   idUt SMALLINT NOT NULL,

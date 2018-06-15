@@ -41,7 +41,7 @@ public class Utilisateur {
         ArrayList<Object> donnees = new ArrayList<>();
 
         try {
-            Collections.addAll(donnees,pseudo,email,"O",nomRole,getHash((mdp + salt).getBytes()),salt);
+            Collections.addAll(donnees,pseudo,email,1,nomRole,getHash((mdp + salt).getBytes()),salt);
             gestionBD.insertRequete("INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
             e.printStackTrace();

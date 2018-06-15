@@ -20,29 +20,12 @@ public class GestionBD {
      * Constructeur qui se connecte a la base de donnée
      *
      */
-    public GestionBD(String url, String nomBase, String username, String password) throws ClassNotFoundException, MySQLDataException {
+    public GestionBD(String url, String nomBase, String username, String password) throws ClassNotFoundException {
         this.url = url;
         this.nomBase = nomBase;
         this.username = username;
         this.password = password;
-        connexionMySQL = new ConnexionMySQL();
-        boolean init = init();
-        if (!init){
-            throw new MySQLDataException();
-        }
-    }
-
-    /*
-    Initialise la connexion a la base de donnée
-    Retourne vraie si elle c'est connectée, sinon faux
-     */
-    private boolean init(){
-        try{
-            this.connexionMySQL.connecter(this.url, this.nomBase, this.username, this.password);
-        } catch (SQLException e) {
-            System.out.println("Est casser -->");
-        }
-        return this.connexionMySQL.isConnecte();
+        connexionMySQL = new ConnexionMySQL(this.url, this.nomBase, this.username, this.password);
     }
 
     public HashMap<String, List<Object>> selectRequestWithPreparedStatement(String requete) throws SQLException {

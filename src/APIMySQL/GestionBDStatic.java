@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GestionBDStatic {
 
-    public static HashMap<String, List<Object>> selectRequestWithPreparedStatement(ConnexionMySQL co, String requete) throws SQLException {
+    public static HashMap<String, List<Object>> selectPreparedStatement(ConnexionMySQL co, String requete) throws SQLException {
         Statement st=co.createStatement();
         ResultSet rs=st.executeQuery(requete);
         ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
@@ -45,7 +45,7 @@ public class GestionBDStatic {
         return res;
     }
 
-    public static boolean insertRequete(ConnexionMySQL co, String requete, List<Object> listeDonnee) throws SQLException {
+    public static boolean updatePreparedStatement(ConnexionMySQL co, String requete, List<Object> listeDonnee) throws SQLException {
         //todo : make an exception
         if(!requete.contains("?")){
             return true;
@@ -68,7 +68,7 @@ public class GestionBDStatic {
         return true;
     }
 
-    public static boolean statement(ConnexionMySQL co, String requete){
+    public static boolean updateStatement(ConnexionMySQL co, String requete){
         try {
             Statement s = co.createStatement();
             s.executeUpdate(requete);
