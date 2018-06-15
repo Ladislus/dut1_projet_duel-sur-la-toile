@@ -27,7 +27,7 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
     try {
 
-      if (Utilisateur.isMdpValide(laConnection, login, password)) {
+      if (!Utilisateur.isMdpValide(laConnection, login, password)) {
 
         page.setTfPassword("");
 
