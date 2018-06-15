@@ -4,9 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-
+/**
+ * Controleur de l'ajout d'un pion dans une colonne
+ */
 public class ActionJouerCol implements EventHandler<ActionEvent> {
-    // Controleur de l'ajout d'un pion dans une colonne
 
     private PartieP4 jeu;
 
@@ -14,6 +15,11 @@ public class ActionJouerCol implements EventHandler<ActionEvent> {
         this.jeu = puissance4;
     }
 
+    /**
+     * Ajoute le pion au bon ednroit en fonction du bouton (et donc de la colonne) qui a été actionné
+     * Met à jour l'affichage
+     * Change de joueur courant
+     */
     @Override
     public void handle(ActionEvent actionEvent) {
         Button source = (Button) actionEvent.getSource();
