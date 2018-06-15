@@ -110,7 +110,7 @@ public class PartieP4 {
         res.setPrefWidth(160.);
         res.setPadding(new Insets(50,5,0,10));
 
-        Text info = new Text("TIPS !\nYou can play with the keyboard !\n\nTo move among the columns, press keys \nQ (left) and D (right).\n\nTo put a token,\n press key M.\n\nGood luck !");
+        Text info = new Text("TIPS !\nYou can play with the mouse or the keyboard !\n\nClick on the arrow on the columns\nOR\nTo move among the columns, press keys \nQ (left) and D (right).\n\nTo put a token,\n press key M.\n\nGood luck !");
         info.setWrappingWidth(140.);
 
         ImageView touches = new ImageView(new Image(new File(chem+"touchesP4.png").toURI().toString()));
@@ -235,7 +235,7 @@ public class PartieP4 {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Connect 4 - Victory");
             alert.setHeaderText("And the winner is..."+this.p.getJ(numJGagne).getNom()+" !");
-            alert.setContentText("Le score du gagnant est de : "+this.p.nbPionsRest*etatJeu.nbPionsAlignes+" points !");
+            alert.setContentText("The winner score is : "+this.p.nbPionsRest*etatJeu.nbPionsAlignes+" points !");
             alert.showAndWait();
         }
         if (etatJeu.contientPuissance || this.p.isFull()){
