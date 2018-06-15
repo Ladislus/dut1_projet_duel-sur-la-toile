@@ -25,6 +25,10 @@ public class Joueur extends Label{
 
     public String getNom() {return nom;}
 
+    /** Changer la valeur du booléen jCourant
+     * Si le joueur devient le joueur courant, le texte devient plus gros et noir
+     * Sinon, le texte devient plus petit est gris
+     */
     public void setCour(boolean b){
         this.jCourant = b;
         if (jCourant){

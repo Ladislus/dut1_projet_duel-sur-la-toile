@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/** Modèle du plateau du puissance 4 */
+/**
+ * Modèle du plateau du puissance 4
+ */
 public class PlateauP4 {
 
     /** les joueurs qui s'opposent */
