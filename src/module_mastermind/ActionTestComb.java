@@ -3,6 +3,7 @@ package module_mastermind;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Region;
 
 public class ActionTestComb implements EventHandler<ActionEvent> {
 
@@ -13,11 +14,19 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
     }
 
     @Override
-    /***
+    /**
      *
      */
     public void handle(ActionEvent actionEvent){
         PlateauM plateauM = this.mastermind.getPlateau();
+        if (!plateauM.getCombiCour().isFull()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Combinaison incomplète");
+            alert.setContentText("Veuillez mettre un pion sur chaque emplacement avant de valider.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+        }
         plateauM.jouerUnCoup();
         if (plateauM.aTrouveCombi()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -27,13 +36,8 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
                     " Votre score est de xxx points ! \n" +
                     "Cliquer sur le bouton \"Rejouer\" pour refaire une partie, et sur \"Quitter\" pour arrêter.\n" +
                     "Bon jeu !");
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("DÉFAITE ...");
-            alert.setHeaderText("Vous avez perdu ...");
-            alert.setContentText("Malheureusement, vous n'avez pas réussi cette fois-ci.\n" +
-                    "Retentez votre chance en cliquant sur \"Rejouer\" ou arrêtez vous ici en cliquant sur \"Quitter\".");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
         }
         this.mastermind.majAffichage();
     }

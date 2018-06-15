@@ -21,7 +21,7 @@ public class PlateauM { // Modèle du plateau du Mastermind
         this.listeResultats = new ArrayList<>();
         combiMystere = new Combinaison();
         for (int i=0;i<4;i++){
-            combiMystere.add((int) (Math.random()*6)+1);
+            combiMystere.set(i,(int) (Math.random()*6)+1);
         }
         combiCour = new Combinaison();
     }
@@ -49,7 +49,7 @@ public class PlateauM { // Modèle du plateau du Mastermind
     }
 
     public boolean aTrouveCombi(){
-        Combinaison dernier = this.listeResultats.get(-1);
+        Combinaison dernier = this.listeResultats.get(this.listeResultats.size()-1);
         for (int p : dernier){
             if (p != 1){return false;}
         }
