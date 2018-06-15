@@ -14,9 +14,19 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
     }
 
     public void addPion(int num){
-        for (int i=0;i<4;i++){
-            if (this.get(i) != 0){this.set(i,num);}
+//        for (int i=0;i<4;i++){
+//            if (this.get(i) == 0){this.set(i,num);}
+//        }
+        boolean done = false;
+        int posActuelle = 0;
+        while (!done && posActuelle <4){
+            if (this.get(posActuelle) == 0){
+                this.set(posActuelle,num);
+                done = !done;
+            }
+            posActuelle += 1;
         }
+
     }
 
     public boolean isFull(){

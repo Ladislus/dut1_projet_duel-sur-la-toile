@@ -1,21 +1,27 @@
 package module_mastermind;
 
 
+import module_puissance4.Joueur;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plateau { // Modèle du plateau du Mastermind
+public class PlateauM { // Modèle du plateau du Mastermind
 
     private List<Combinaison> listeEssais, listeResultats;
 
     private Combinaison combiMystere, combiCour;
 
-    public Plateau(){
+    private Joueur joueur1, joueur2;
+
+    public PlateauM(String j1, String j2){
+        this.joueur1 = new Joueur(j1);
+        this.joueur2 = new Joueur(j2);
         this.listeEssais = new ArrayList<>();
         this.listeResultats = new ArrayList<>();
         combiMystere = new Combinaison();
         for (int i=0;i<4;i++){
-            combiMystere.addPion((int) (Math.random()*6)+1);
+            combiMystere.add((int) (Math.random()*6)+1);
         }
         combiCour = new Combinaison();
     }

@@ -1,4 +1,4 @@
-package module_puissance4;
+package module_mastermind;
 
 
 import javafx.geometry.Insets;
@@ -11,15 +11,16 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+
 import java.io.File;
 import java.util.*;
 
 import static module_puissance4.Puissance4.chem;
 
-public class ChoixJoueurP4 {
+public class ChoixJoueurM {
     // Vue de la fenêtre pour choisir contre qui jouer
 
-    private Puissance4 puissance4;
+    private Mastermind mastermind;
 
     public String mode; // New Game ou Resume Game
 
@@ -30,8 +31,8 @@ public class ChoixJoueurP4 {
     private GridPane contacts; // Grille des contacts à afficher
     private BorderPane scene;
 
-    public ChoixJoueurP4(Puissance4 p){
-        this.puissance4 = p;
+    public ChoixJoueurM(Mastermind m){
+        this.mastermind = m;
         this.listeAmis = new HashSet<>();
 
         // TEST
@@ -62,19 +63,19 @@ public class ChoixJoueurP4 {
         res.setSpacing(50.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-        Image im = new Image(new File(chem+"connect4logo.png").toURI().toString());
+        Image im = new Image(new File(chem+"mastermind_logo1.png").toURI().toString());
         ImageView iv = new ImageView(im);
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
 
         Button retour = new Button("Home");
         retour.setPrefSize(100.,30.);
-        retour.setOnAction(event -> this.puissance4.setScene("Home"));
+        retour.setOnAction(event -> this.mastermind.setScene("Home"));
         Button changeMode;
         if (mode == "New Game"){changeMode = new Button("Resume Game");}
         else {changeMode = new Button("New Game");}
         changeMode.setPrefSize(150.,30.);
-        changeMode.setOnAction(event -> this.puissance4.setScene(changeMode.getText()));
+        changeMode.setOnAction(event -> this.mastermind.setScene(changeMode.getText()));
 
         res.getChildren().addAll(iv,retour,changeMode,new Label("Welcome "+"Bernard"+" !"));
 
@@ -103,7 +104,7 @@ public class ChoixJoueurP4 {
         barre = new TextField();
         barre.setPromptText("Search");
         barre.setMaxWidth(250.);
-        barre.setOnKeyReleased(new module_puissance4.ActionRechercherJoueur(this));
+        barre.setOnKeyReleased(new ActionRechercherJoueurM(this));
 
 
         // LISTE DES CONTACTS
@@ -135,7 +136,7 @@ public class ChoixJoueurP4 {
             b.setContentDisplay(ContentDisplay.LEFT);
             b.setPrefSize(200.,50.);
             b.setFont(Font.font("Verdana",FontWeight.NORMAL,15));
-            b.setOnAction(event -> this.puissance4.newGame(this.puissance4,"Bernard",b.getText()));
+            b.setOnAction(event -> this.mastermind.newGame("Naruto","Sasque"));
             this.contacts.add(b,i%3,i/3);
             i++;
         }

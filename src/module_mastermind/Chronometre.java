@@ -17,7 +17,7 @@ public class Chronometre extends Label {
     private ActionTemps actionTemps; // contrôleur associé au chronomètre
 
     public Chronometre(){
-        super("00 : 00 : 00");
+        super("200");
         this.actionTemps= new ActionTemps(this);
         this.keyFrame= new KeyFrame(new Duration(1), this.actionTemps);
         this.timeline= new Timeline(this.keyFrame);
@@ -25,11 +25,9 @@ public class Chronometre extends Label {
     }
 
     public void setTime(long tempsMillisec){
-        long tpsCen = (tempsMillisec % 1000) / 10;
         long tpsSec = (tempsMillisec / 1000) % 60;
-        long tpsMin = (tempsMillisec / (1000*60)) % 60;
 
-        this.setText(tpsMin +" : "+ tpsSec +" : "+ tpsCen);
+        this.setText(""+(200-tpsSec));
     }
 
     public void start(){

@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -13,30 +12,71 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import module_puissance4.Joueur;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PartieM {
-//
+
     public static String chem = "./img/module_mastermind/";
 
     public List<Button> listeCouleurs;
 
-    private Plateau p;
+    private PlateauM p;
+
+    private Joueur j1,j2;
 
     private Mastermind mastermind;
 
-    public PartieM(String j1){
-        this.p = new Plateau();
+    private Circle c1,c2,c3,c4;
+    private List<Circle> lCercle;
+
+    public PartieM(Mastermind m,String j1,String j2){
+        this.mastermind = m;
+        this.p = new PlateauM(j1,j2);
     }
 
-    public Plateau getPlateau(){return this.p;}
+    public PlateauM getPlateau(){
+        return this.p;
+    }
 
-    public void majAffichage(int l, int c){}
-//
+    public void majAffichage(){
 
-    public static Scene getScene(Mastermind m) {
+        lCercle = new ArrayList<>();
+        lCercle.add(c1);
+        lCercle.add(c2);
+        lCercle.add(c3);
+        lCercle.add(c4);
+
+        for (Circle c : lCercle){
+            int pos = this.getPlateau().getCombiCour().get(lCercle.indexOf(c));
+            if (pos == 0){
+                c.setFill(Color.DARKGREY);
+            }
+            else if (pos == 1){
+                c.setFill(Color.YELLOW);
+            }
+            else if (pos == 2){
+                c.setFill(Color.RED);
+            }
+            else if (pos == 3){
+                c.setFill(Color.BLUE);
+            }
+            else if (pos == 4){
+                c.setFill(Color.SADDLEBROWN);
+            }
+            else if (pos == 5){
+                c.setFill(Color.FORESTGREEN);
+            }
+            else if (pos == 6){
+                c.setFill(Color.CYAN);
+            }
+        }
+    }
+
+    public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
         res.setLeft(menu(m));
         res.setTop(haut());
@@ -46,8 +86,8 @@ public class PartieM {
         return new Scene(res, 700, 650);
     }
 
-    public static VBox haut(){
-        VBox res = new VBox(5);
+    public static HBox haut(){
+        HBox res = new HBox(5);
         Label titre = new Label("Mastermind");
         titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
         res.getChildren().addAll(titre);
@@ -55,13 +95,13 @@ public class PartieM {
         return res;
     }
 
-    public static VBox menu(Mastermind m){
+    public VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
 
-        Label timer = new Label("Time : 00:00:00");
+        Label timer = new Label("Time : 200");
         timer.setPadding(new Insets(75,0,0,0));
 
         Label couleurs = new Label("Couleurs :");
@@ -71,28 +111,33 @@ public class PartieM {
 
         Circle jaune = new Circle(25);
         jaune.setFill(Color.YELLOW);
+        jaune.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle rouge = new Circle(25);
         rouge.setFill(Color.RED);
+        rouge.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle bleu = new Circle(25);
         bleu.setFill(Color.BLUE);
+        bleu.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle marron = new Circle(25);
         marron.setFill(Color.SADDLEBROWN);
+        marron.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle vert = new Circle(25);
         vert.setFill(Color.FORESTGREEN);
+        vert.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle cyan = new Circle(25);
         cyan.setFill(Color.CYAN);
+        cyan.setOnMouseClicked(new ActionMettreCouleur(this));
 
 
-        File intero = new File(chem+"intero.png");
-        ImageView inter = new ImageView();
-        inter.setImage(new Image(intero.toURI().toString()));
-
-        Button aide = new Button("",inter);
+        Button aide = new Button("?");
+        aide.setFont(Font.font("Verdana", FontWeight.BOLD,25));
+        aide.setTextFill(Color.WHITE);
+        aide.setStyle("-fx-background-color: #202020");
         aide.setOnAction(new ActionHelpM());
 
 
@@ -125,9 +170,9 @@ public class PartieM {
             HBox temp = new HBox(20);
 
             for(int k=0; k<4;k++){
-                Circle cercleBleu = new Circle(25);
-                cercleBleu.setFill(Color.DARKGREY);
-                temp.getChildren().addAll(cercleBleu);
+                Circle cercleGris = new Circle(25);
+                cercleGris.setFill(Color.DARKGREY);
+                temp.getChildren().addAll(cercleGris);
             }
 
             GridPane plateau = new GridPane();
@@ -168,7 +213,7 @@ public class PartieM {
         return res;
     }
 
-    public static HBox bas(){
+    public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
         res.setSpacing(20.);
@@ -176,18 +221,32 @@ public class PartieM {
         res.setPrefHeight(100.);
 
         Button suppr = new Button("Supprimer");
+        suppr.setOnAction(new ActionSupprimerTout(this));
+
         Button valider = new Button("Valider");
 
         HBox adders = new HBox();
 
-        Circle c1 = new Circle(20);
+        c1 = new Circle(20);
         c1.setFill(Color.DARKGREY);
-        Circle c2 = new Circle(20);
+        c1.setUserData(0);
+        c1.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
+        c2 = new Circle(20);
         c2.setFill(Color.DARKGREY);
-        Circle c3 = new Circle(20);
+        c2.setUserData(1);
+        c2.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
+        c3 = new Circle(20);
         c3.setFill(Color.DARKGREY);
-        Circle c4 = new Circle(20);
+        c3.setUserData(2);
+        c3.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
+        c4 = new Circle(20);
         c4.setFill(Color.DARKGREY);
+        c4.setUserData(3);
+        c4.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
 
         adders.getChildren().addAll(c1,c2,c3,c4);
 
