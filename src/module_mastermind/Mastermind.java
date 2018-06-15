@@ -38,9 +38,9 @@ public class Mastermind extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.attribution = new HashMap<>();
-        this.attribution.put("Home",this.pageAccueil());
-        this.attribution.put("New Game",new ChoixJoueurM(this).getScene("New Game"));
-        this.attribution.put("Resume Game",new ChoixJoueurM(this).getScene("Resume Game"));
+        this.attribution.put("Accueil",this.pageAccueil());
+        this.attribution.put("Nouvelle Partie",new ChoixJoueurM(this).getScene("Nouvelle Partie"));
+        this.attribution.put("Reprendre Partie",new ChoixJoueurM(this).getScene("Reprendre Partie"));
 
         this.primaryStage = primaryStage;
 
@@ -87,18 +87,18 @@ public class Mastermind extends Application {
         b1.setFont(bouton);
         b1.setContentDisplay(ContentDisplay.TOP);
         b1.setPrefSize(390,75.);
-        b1.setOnAction(event -> this.setScene("New Game"));
+        b1.setOnAction(event -> this.setScene("Nouvelle Partie"));
         res.getChildren().add(b1);
 
         File continu = new File(chem+"continuerPartie.png");
-        ImageView continuPartie = new ImageView();
-        continuPartie.setImage(new Image(continu.toURI().toString()));
+        ImageView continuerPartie = new ImageView();
+        continuerPartie.setImage(new Image(continu.toURI().toString()));
 
-        Button b2 = new Button("Reprendre", continuPartie);
+        Button b2 = new Button("Reprendre partie", continuerPartie);
         b2.setFont(bouton);
         b2.setContentDisplay(ContentDisplay.TOP);
         b2.setPrefSize(390,75.);
-        b2.setOnAction(event -> this.setScene("Resume Game"));
+        b2.setOnAction(event -> this.setScene("Reprendre Partie"));
         res.getChildren().add(b2);
 
         res.setAlignment(Pos.CENTER);

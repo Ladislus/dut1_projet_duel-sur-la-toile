@@ -70,10 +70,10 @@ public class ChoixJoueurM {
 
         Button retour = new Button("Accueil");
         retour.setPrefSize(100.,30.);
-        retour.setOnAction(event -> this.mastermind.setScene("Home"));
+        retour.setOnAction(event -> this.mastermind.setScene("Accueil"));
         Button changeMode;
-        if (mode == "New Game"){changeMode = new Button("Reprendre partie");}
-        else {changeMode = new Button("New Game");}
+        if (mode == "Nouvelle Partie"){changeMode = new Button("Reprendre Partie");}
+        else {changeMode = new Button("Nouvelle Partie");}
         changeMode.setPrefSize(150.,30.);
         changeMode.setOnAction(event -> this.mastermind.setScene(changeMode.getText()));
 
@@ -91,13 +91,13 @@ public class ChoixJoueurM {
 
         Label titre = new Label();
         titre.setPadding(new Insets(50,0,30,0));
-        if (mode == "New Game"){titre.setText("Contre qui souhaitez-vous jouer ?");}
+        if (mode == "Nouvelle Partie"){titre.setText("Contre qui souhaitez-vous jouer ?");}
         else {titre.setText("Quelle partie voulez-vous reprendre ?");}
         titre.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,45.));
 
 
         Label lab = new Label();
-        if (mode == "New Game"){lab.setText("Votre liste d'ami :");}
+        if (mode == "Nouvelle Partie"){lab.setText("Votre liste d'ami :");}
         else {lab.setText("Parties en cour :");}
         lab.setFont(Font.font("Verdana",FontWeight.BOLD,30.));
 
@@ -108,7 +108,7 @@ public class ChoixJoueurM {
 
 
         // LISTE DES CONTACTS
-        if (mode == "New Game"){this.listeCour = this.listeAmis;}
+        if (mode == "Nouvelle Partie"){this.listeCour = this.listeAmis;}
         else {this.listeCour = this.listeAdvers;}
 
         this.contacts = new GridPane();
