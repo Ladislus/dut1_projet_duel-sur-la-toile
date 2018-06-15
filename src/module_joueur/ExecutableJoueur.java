@@ -1,23 +1,32 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
 import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
+
+import java.io.File;
 
 public class ExecutableJoueur extends Application {
 
   public static void main(String [] args) { launch(args); }
 
-  @Override
-  public void start(Stage primaryStage) {
+    @Override
+    public void start(Stage primaryStage) {
 
-    EditionProfil editionProfil = new EditionProfil(primaryStage);
+      ConnexionJoueur cj = new ConnexionJoueur(primaryStage);
 
-    primaryStage.setTitle(editionProfil.getTitle());
-    primaryStage.setScene(new Scene(editionProfil, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
-
-    primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
-    primaryStage.getIcons().add(VariablesJoueur.LOGO);
-    primaryStage.show(); }}
+      primaryStage.setTitle(cj.getTitle());
+      primaryStage.setScene(new Scene(cj, 500, 290));
+      primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
+      primaryStage.getIcons().add(VariablesJoueur.LOGO);
+      primaryStage.show(); }}

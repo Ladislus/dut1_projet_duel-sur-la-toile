@@ -21,6 +21,9 @@ class VariablesJoueur {
   public final static double DEFAULT_CONNECTION_WIDTH = 500;
   public final static double DEFAULT_CONNECTION_HEIGHT = 290;
 
+  public final static double DEFAULT_EDITERPROFILE_HEIGHT = 335;
+  public final static double DEFAULT_EDITERPROFILE_WIDTH = 555;
+
   public final static double DEFAULT_REGISTRATION_WIDTH = 500;
   public final static double  DEFAULT_REGISTRATION_HEIGHT = 430;
 
