@@ -15,6 +15,8 @@ import java.lang.Math;
 public class GererJoueur extends BorderPane {
 
     PageAccueil pa;
+    Button activer;
+    Button supprimer;
 
     public GererJoueur(PageAccueil pa) {
       super();
@@ -22,6 +24,14 @@ public class GererJoueur extends BorderPane {
       this.haut();
       this.gauche();
       this.centre();
+    }
+
+    public Button getButtonActiver() {
+        return this.activer;
+    }
+
+    public Button getButtonSupprimer() {
+        return this.supprimer;
     }
 
     public void haut() {
@@ -37,32 +47,32 @@ public class GererJoueur extends BorderPane {
     }
 
     public Button creerBoutonSupprimer() {
-        Button supprimer = new Button("Supprimer");
+        this.supprimer = new Button("Supprimer");
         ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
-        supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
-        supprimer.setTextFill(Color.web("white"));
-        supprimer.setPrefWidth(200);
-        supprimer.setPrefHeight(50);
-        supprimer.setOnAction(asj);
-        return supprimer;
+        this.supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
+        this.supprimer.setTextFill(Color.web("white"));
+        this.supprimer.setPrefWidth(200);
+        this.supprimer.setPrefHeight(50);
+        this.supprimer.setOnAction(asj);
+        return this.supprimer;
     }
 
     public Button creerBoutonActiver() {
-        Button activer = new Button("Activer");
+        this.activer = new Button("Activer");
         ActionActiverJoueur acj = new ActionActiverJoueur(this);
-        activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
-        activer.setTextFill(Color.web("white"));
-        activer.setPrefWidth(200);
-        activer.setPrefHeight(50);
-        activer.setOnAction(acj);
-        return activer;
+        this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
+        this.activer.setTextFill(Color.web("white"));
+        this.activer.setPrefWidth(200);
+        this.activer.setPrefHeight(50);
+        this.activer.setOnAction(acj);
+        return this.activer;
     }
 
     public HBox creerJoueurActiver() {
         HBox joueur = new HBox();
         Label lj = new Label("Joueur1");
         CheckBox cb = new CheckBox();
-        cb.setOnAction(new ActionActiverJoueur(this));
+        cb.setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), "Joueur1"));
         joueur.getChildren().addAll(lj, cb);
         joueur.setSpacing(185);
         return joueur;
@@ -86,12 +96,12 @@ public class GererJoueur extends BorderPane {
             v.getChildren().addAll(creerJoueurActiver());
         }
 
-       listeJoueur.setStyle("-fx-border-color: black;");
+        listeJoueur.setStyle("-fx-border-color: black;");
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(10);
 
         listeJoueur.setContent(v);
-        centre.getChildren().addAll(l, bouton, listeJoueur);
+        centre.getChildren().addAll(l, bouton, recherche, listeJoueur);
         centre.setSpacing(10);
         centre.setPadding(new Insets(0,25,15,25));
         this.setCenter(centre);
@@ -99,15 +109,17 @@ public class GererJoueur extends BorderPane {
 
     public HBox creerJoueurListeJoueur() {
         HBox joueur = new HBox();
-        String pseudo = "lethrthrhtrhtro";
-        int longPseudo = pseudo.length();
-        Label lj = new Label("- "+pseudo+" ");
-        for (int i=0; i<42-(longPseudo-6) ; i++) {
-          lj.setText(lj.getText()+".");
-        }
+      //  String pseudo = "l";
+      //  int longPseudo = pseudo.length();
+      //  Label lj = new Label("- "+pseudo+" ");
+      //  for (int i=0; i<36-(longPseudo-6) ; i++) {
+      //    lj.setText(lj.getText()+".");
+      //  }
+      //  lj.setText("- Joueur ....................................");
+        Label lj = new Label("- Joueur ");
         Hyperlink hl = new Hyperlink("Profil");
         hl.setOnAction(new ActionProfilJoueur(this.pa, this, "Joueur"));
-      //  joueur.setSpacing(150);
+        joueur.setSpacing(150);
         joueur.getChildren().addAll(lj, hl);
         return joueur;
     }
@@ -130,7 +142,7 @@ public class GererJoueur extends BorderPane {
 
         }
         listeJoueur.setContent(v);
-        gauche.getChildren().addAll(l, listeJoueur);
+        gauche.getChildren().addAll(l, recherche, listeJoueur);
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(5);
         gauche.setPadding(new Insets(0,0,15,25));
