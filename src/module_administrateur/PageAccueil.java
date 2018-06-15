@@ -10,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class PageAccueil extends Application {
 
@@ -30,15 +32,13 @@ public class PageAccueil extends Application {
 
     public VBox bas() {
         VBox bas = new VBox();
-<<<<<<< HEAD
+
       //  Image rapport = new Image(getClass().getResourceAsStream("../img/module_administrateur/rapport.png"));
 //        Button bRapport = new Button("Lire les rapports des joueurs", new ImageView(rapport));
           Button bRapport = new Button("Lire les rapports des joueurs");
 
-        bRapport.setContentDisplay(ContentDisplay.TOP);
-=======
-        Button bRapport = new Button("Lire les rapports des joueurs");
->>>>>>> e90dcd33555f839fd06db3c23c52654359c55694
+    //    bRapport.setContentDisplay(ContentDisplay.TOP);
+
         bRapport.setOnAction(new ActionRapport(this));
         bRapport.setPrefWidth(600);
         bRapport.setPrefHeight(100);
@@ -50,15 +50,12 @@ public class PageAccueil extends Application {
 
     public VBox gauche() {
         VBox gauche = new VBox();
-<<<<<<< HEAD
-      //  Image utilisateurs = new Image(getClass().getResourceAsStream("../img/module_administrateur/profil.png"));
-//        Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
+    //    Image utilisateurs = new Image(getClass().getResourceAsStream("./../img/module_administrateur/profil.png"));
+      //  Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
         Button bJoueur = new Button("Gérer les utilisateurs");
 
-        bJoueur.setContentDisplay(ContentDisplay.TOP);
-=======
-        Button bJoueur = new Button("Gérer les utilisateurs");
->>>>>>> e90dcd33555f839fd06db3c23c52654359c55694
+    //    bJoueur.setContentDisplay(ContentDisplay.TOP);
+
         bJoueur.setPrefWidth(200);
         bJoueur.setPrefHeight(250);
         bJoueur.setOnAction(new ActionUtilisateurs(this));
@@ -69,23 +66,18 @@ public class PageAccueil extends Application {
 
     public VBox centre() {
         VBox centre = new VBox();
-<<<<<<< HEAD
       //  Image jeu = new Image(getClass().getResourceAsStream("../img/module_administrateur/jeu.png"));
         //Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
         Button bJeu = new Button("Gérer les jeux");
 
-        bJeu.setContentDisplay(ContentDisplay.TOP);
+  //      bJeu.setContentDisplay(ContentDisplay.TOP);
         bJeu.setOnAction(new ActionJeu(this));
       //  Image stat = new Image(getClass().getResourceAsStream("../img/module_administrateur/stat.png"));
         //Button bStat = new Button("Voir les statistiques", new ImageView(stat));
         Button bStat = new Button("Voir les statistiques");
 
-        bStat.setContentDisplay(ContentDisplay.TOP);
-=======
-        Button bJeu = new Button("Gérer les jeux");
-        bJeu.setOnAction(new ActionJeu(this));
-        Button bStat = new Button("Voir les statistiques");
->>>>>>> e90dcd33555f839fd06db3c23c52654359c55694
+  //      bStat.setContentDisplay(ContentDisplay.TOP);
+
         bStat.setOnAction(new ActionStatistiques(this));
         bJeu.setPrefWidth(388);
         bJeu.setPrefHeight(117);
