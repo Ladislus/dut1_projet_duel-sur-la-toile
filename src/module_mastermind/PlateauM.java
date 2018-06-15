@@ -6,7 +6,7 @@ import module_puissance4.Joueur;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plateau { // Modèle du plateau du Mastermind
+public class PlateauM { // Modèle du plateau du Mastermind
 
     private List<Combinaison> listeEssais, listeResultats;
 
@@ -14,7 +14,7 @@ public class Plateau { // Modèle du plateau du Mastermind
 
     private Joueur joueur1, joueur2;
 
-    public Plateau(String j1, String j2){
+    public PlateauM(String j1, String j2){
         this.joueur1 = new Joueur(j1);
         this.joueur2 = new Joueur(j2);
         this.listeEssais = new ArrayList<>();

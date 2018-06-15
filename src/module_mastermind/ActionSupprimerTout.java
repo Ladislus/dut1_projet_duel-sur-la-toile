@@ -13,8 +13,8 @@ public class ActionSupprimerTout implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent){
-        Plateau plateau = this.mastermind.getPlateau();
-        Combinaison combCour = plateau.getCombiCour();
+        PlateauM plateauM = this.mastermind.getPlateau();
+        Combinaison combCour = plateauM.getCombiCour();
         for (int i = 0; i < 4; i++){
             combCour.set(i,0);
         }

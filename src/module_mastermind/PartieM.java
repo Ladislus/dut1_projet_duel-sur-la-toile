@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -25,7 +24,7 @@ public class PartieM {
 
     public List<Button> listeCouleurs;
 
-    private Plateau p;
+    private PlateauM p;
 
     private Joueur j1,j2;
 
@@ -36,10 +35,10 @@ public class PartieM {
 
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
-        this.p = new Plateau(j1,j2);
+        this.p = new PlateauM(j1,j2);
     }
 
-    public Plateau getPlateau(){
+    public PlateauM getPlateau(){
         return this.p;
     }
 
@@ -102,7 +101,7 @@ public class PartieM {
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
 
-        Label timer = new Label("Time : 00:00:00");
+        Label timer = new Label("Time : 200");
         timer.setPadding(new Insets(75,0,0,0));
 
         Label couleurs = new Label("Couleurs :");
@@ -135,11 +134,10 @@ public class PartieM {
         cyan.setOnMouseClicked(new ActionMettreCouleur(this));
 
 
-        File intero = new File(chem+"intero.png");
-        ImageView inter = new ImageView();
-        inter.setImage(new Image(intero.toURI().toString()));
-
-        Button aide = new Button("",inter);
+        Button aide = new Button("?");
+        aide.setFont(Font.font("Verdana", FontWeight.BOLD,25));
+        aide.setTextFill(Color.WHITE);
+        aide.setStyle("-fx-background-color: #202020");
         aide.setOnAction(new ActionHelpM());
 
 
@@ -172,9 +170,9 @@ public class PartieM {
             HBox temp = new HBox(20);
 
             for(int k=0; k<4;k++){
-                Circle cercleBleu = new Circle(25);
-                cercleBleu.setFill(Color.DARKGREY);
-                temp.getChildren().addAll(cercleBleu);
+                Circle cercleGris = new Circle(25);
+                cercleGris.setFill(Color.DARKGREY);
+                temp.getChildren().addAll(cercleGris);
             }
 
             GridPane plateau = new GridPane();
