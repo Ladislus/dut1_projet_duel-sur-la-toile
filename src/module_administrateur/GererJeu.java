@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 public class GererJeu extends BorderPane {
 
     PageAccueil pa;
+    private ToggleGroup groupe = new ToggleGroup();
 
     public GererJeu(PageAccueil pa) {
       super();
@@ -188,85 +189,105 @@ public class GererJeu extends BorderPane {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void centre(){
-      VBox centre = new VBox();
-      VBox vbaddjeu = new VBox(15);
-      HBox hbactiverjeu = new HBox(18);
-      HBox hbajouterjeu = new HBox();
-      HBox hbfilechooser = new HBox(5);
-      ToggleGroup groupe = new ToggleGroup();
-      ActionAjouterJeu aaj = new ActionAjouterJeu(this);
+    public Label creerLabelAjouterJeu(){
       Label laddjeu = new Label("Ajouter un jeu");
       laddjeu.setFont(Font.font ("Arial", 18));
+
+      return laddjeu;
+    }
+
+
+    public TextField creerTextFieldNomJeu(){
       TextField tnom = new TextField();
       tnom.setPromptText("Entrez le nom du jeu");
+
+      return tnom;
+    }
+
+
+    public TextArea creerTextAreaDescriptionJeu(){
       TextArea tdescription = new TextArea();
       tdescription.setPrefWidth(80);
       tdescription.setWrapText(true);
       tdescription.setPromptText("Entrez la description du jeu");
-      ObservableList<String> optionstype = FXCollections.observableArrayList("Tour par tour",
-        "Score le plus élevé par manche", "Le plus rapide par manche");
-      ComboBox cbmodes = new ComboBox(optionstype);
-      cbmodes.setPrefWidth(297);
-      TextField tfilechooser = new TextField();
-      tfilechooser.setPromptText("Choisissez une image");
-      tfilechooser.setDisable(true);
-      Button bplus = new Button("+");
-      ActionFileChooser afc = new ActionFileChooser(this);
-      bplus.setOnAction(afc);
+
+      return tdescription;
+    }
+
+
+    public Label creerLabelActiverJeu(){
       Label lactiver = new Label("Activer maintenant ?");
+
+      return lactiver;
+    }
+
+
+    public RadioButton creerRadioBoutonActiverJeu(){
       RadioButton rbactiver = new RadioButton("Oui");
+      rbactiver.setSelected(true);
+      rbactiver.setToggleGroup(this.groupe);
+
+      return rbactiver;
+    }
+
+
+    public RadioButton creerRadioBoutonPasActiverJeu(){
       RadioButton rbpasactiver = new RadioButton("Non");
+      rbpasactiver.setToggleGroup(this.groupe);
+
+      return rbpasactiver;
+    }
+
+
+    public HBox creerHBoxRadioBoutonsActivationJeu(){
+      HBox hbactiverjeu = new HBox(18);
+      hbactiverjeu.getChildren().addAll(creerLabelActiverJeu(), creerRadioBoutonActiverJeu(),
+        creerRadioBoutonPasActiverJeu());
+
+      return hbactiverjeu;
+    }
+
+
+    public Button creerBoutonAjouterJeu(){
+      ActionAjouterJeu aaj = new ActionAjouterJeu(this);
       Button bajouter = new Button("Ajouter");
       bajouter.setOnAction(aaj);
-      rbactiver.setSelected(true);
-      rbactiver.setToggleGroup(groupe);
-      rbpasactiver.setToggleGroup(groupe);
 
-      hbactiverjeu.getChildren().addAll(lactiver, rbactiver, rbpasactiver);
-      hbajouterjeu.getChildren().add(bajouter);
+      return bajouter;
+    }
+
+
+    public HBox creerHBoxBoutonAjouterJeu(){
+      HBox hbajouterjeu = new HBox();
+      hbajouterjeu.getChildren().add(creerBoutonAjouterJeu());
       hbajouterjeu.setAlignment(Pos.CENTER);
 
-      hbfilechooser.getChildren().addAll(tfilechooser, bplus);
+      return hbajouterjeu;
+    }
 
-      vbaddjeu.getChildren().addAll(laddjeu, tnom, tdescription, cbmodes, hbfilechooser,
-        hbactiverjeu, hbajouterjeu);
+
+    public VBox creerVBoxAjouterJeu(){
+      VBox vbaddjeu = new VBox(15);
+      vbaddjeu.getChildren().addAll(creerLabelAjouterJeu(), creerTextFieldNomJeu(),
+        creerTextAreaDescriptionJeu(), creerComboBoxModes(), creerHBoxFileChooser(),
+          creerHBoxRadioBoutonsActivationJeu(), creerHBoxBoutonAjouterJeu());
       vbaddjeu.setPadding(new Insets(5,10,5,10));
       vbaddjeu.setStyle("-fx-border-color: black;");
       vbaddjeu.setPrefHeight(350);
       vbaddjeu.setSpacing(10);
 
-      centre.getChildren().add(vbaddjeu);
+      return vbaddjeu;
+    }
+
+
+
+    public void centre(){
+      VBox centre = new VBox();
+      centre.getChildren().add(creerVBoxAjouterJeu());
       centre.setSpacing(10);
       centre.setPadding(new Insets(5,10,5,5));
 
       this.setCenter(centre);
-
     }
 
 }
