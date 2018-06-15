@@ -16,9 +16,10 @@ public class ExempleExecutable {
         }
 
         try {
-            Utilisateur.creerUtilisateur(co,"test","test@gmail.com","couscous","admin");
+            Utilisateur.creerUtilisateur(co,"test","test@gmail.com","M","couscous","admin");
             System.out.println(Utilisateur.isMdpValide(co,"test","couscous"));
             System.out.println(Utilisateur.isMdpValide(co,"test","test"));
+            System.out.println(Utilisateur.isActivated(co,"test"));
             System.out.println(Utilisateur.isMdpValide(co,"test2","test"));
         } catch (UtilisateurException e) {
             e.printMessage();
