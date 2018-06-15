@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.io.File;
 class EditionProfil extends BorderPane {
 
     String title;
+    TextField tfEmail;
 
     public EditionProfil(Stage primaryStage){
         super();
@@ -99,7 +101,7 @@ class EditionProfil extends BorderPane {
         //For email
         Label lEmail = new Label("Email :");
         lEmail.setFont(Font.font("Arial", 22));
-        TextField tfEmail = new TextField();
+        tfEmail = new TextField();
         tfEmail.setDisable(true);
         Button btEditionEmail = new Button("",ivImageEdit);
         btEditionEmail.setOnAction(actionEvent -> tfEmail.setDisable(false));
@@ -168,6 +170,10 @@ class EditionProfil extends BorderPane {
 
     public String getTitle(){
         return this.title;
+    }
+
+    public TextField getTfEmail(){
+        return this.tfEmail;
     }
 
 }
