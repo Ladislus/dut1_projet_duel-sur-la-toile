@@ -24,6 +24,7 @@ public class Chronometre extends Label {
         this.timeline.setCycleCount(Animation.INDEFINITE);
     }
 
+
     public void setTime(long tempsMillisec){
         long tpsSec = (tempsMillisec / 1000) % 60;
 

@@ -122,6 +122,7 @@ public class ChoixJoueurM {
         return res;
     }
 
+    /** Mettre à jour la liste des contacts affichées dans la vue */
     public void majContacts() {
         this.contacts.getChildren().clear();
 

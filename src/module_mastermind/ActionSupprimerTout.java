@@ -11,6 +11,9 @@ public class ActionSupprimerTout implements EventHandler<ActionEvent> {
         this.mastermind = mastermind;
     }
 
+    /**
+     * Remet tout les elements la liste à 0
+     */
     @Override
     public void handle(ActionEvent actionEvent){
         PlateauM plateauM = this.mastermind.getPlateau();

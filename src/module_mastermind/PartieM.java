@@ -43,6 +43,7 @@ public class PartieM {
         return this.p;
     }
 
+
     public void majAffichage(){
 
         lCercle = new ArrayList<>();
@@ -77,6 +78,9 @@ public class PartieM {
         }
     }
 
+    /**
+     * Créer la Scene du Mastermind
+     */
     public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
         res.setLeft(menu(m));

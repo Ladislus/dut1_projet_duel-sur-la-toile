@@ -15,7 +15,8 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
 
     @Override
     /**
-     *
+     * Test si la combinaison est complete, si oui, le plateauM est actualisé, en cas de victoire, affiche une pop up
+     * si non, affiche une pop up d'erreur
      */
     public void handle(ActionEvent actionEvent){
         PlateauM plateauM = this.mastermind.getPlateau();

@@ -12,6 +12,9 @@ public class ActionSupprimerCouleur implements EventHandler<Event> {
         this.mastermind = mastermind;
     }
 
+    /**
+     * Remet la couleur cliqué à 0
+     */
     @Override
     public void handle(Event event){
         Circle cercle = (Circle)event.getSource();

@@ -42,12 +42,20 @@ public class PlateauM { // Modèle du plateau du Mastermind
         return listeResultats;
     }
 
+    /**
+     * Ajoute la combinaison essayer a la liste des combinaisons essayer auparavant
+     * donne les resultats
+     * recréer une nouvelle combinaison vide
+     */
     public void jouerUnCoup(){
         this.listeEssais.add(combiCour);
         this.listeResultats.add(Resultat.compare(combiMystere,combiCour));
         this.combiCour = new Combinaison();
     }
 
+    /**
+     * test si la derniere combinaison testée est la meme que celle recherchée
+     */
     public boolean aTrouveCombi(){
         Combinaison dernier = this.listeResultats.get(this.listeResultats.size()-1);
         for (int p : dernier){
