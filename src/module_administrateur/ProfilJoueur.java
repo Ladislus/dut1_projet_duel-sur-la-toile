@@ -60,6 +60,7 @@ public class ProfilJoueur extends BorderPane {
       TextField temail = new TextField();
       ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
       ComboBox cbrole = new ComboBox(optionsRoles);
+      cbrole.setPrefWidth(175);
       Label active = new Label("Activer ?");
       RadioButton rbactiver = new RadioButton("Oui");
       RadioButton rbpasactiver = new RadioButton("Non");
