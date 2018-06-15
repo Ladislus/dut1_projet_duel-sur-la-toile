@@ -1,35 +1,22 @@
 package APIMySQL;
 
-import APIMySQL.GestionBD;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class ExempleExecutable {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        GestionBD gestionBD = new GestionBD("192.168.1.100", "serveurDeJeux", "dst", "dst");
-        //Exemple pour ajouter des données
-        //ArrayList<Object> donnee = new ArrayList<>();
-        //donnee.add("ADMIN");
-        //donnee.add("USER");
-        //gestionBD.insertRequete("insert into ROLE values (?)", donnee);
-        HashMap<String, List<Object>> res = gestionBD.selectRequestWithPreparedStatement("Select * from ROLE;");
-        //retourne {nomRole=[ADMIN, USER]}
-        System.out.println(res);
-
-        gestionBD.statement("INSERT INTO ROLE VALUES ('ADMIN')");
-
-        Utilisateur utilisateur = new Utilisateur(gestionBD);
-        utilisateur.creerUtilisateur("test","test@gmail.com","couscous","admin");
-
+    public static void main(String[] args) throws ClassNotFoundException {
         // TEST : Essai de passer en bibliothèques statiques.
 
-        ConnexionMySQL co = new ConnexionMySQL();
-        co.connecter("192.168.1.100", "serveurDeJeux", "dst", "dst");
+        ConnexionMySQL co = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst");
 
-        System.out.println(UtilisateurStatic.mdpValide(co,1,"couscous"));
+        GestionBD.updateStatement(co,"INSERT INTO ROLE VALUES ('ADMIN')");
+
+        Utilisateur.creerUtilisateur(co,"test","test@gmail.com","couscous","admin");
+
+        try {
+            System.out.println(Utilisateur.isMdpValide(co,"test","couscous"));
+            System.out.println(Utilisateur.isMdpValide(co,"test","test"));
+            System.out.println(Utilisateur.isMdpValide(co,"test2","test"));
+        } catch (UtilisateurException e) {
+            e.printStackTrace();
+        }
 
     }
 }

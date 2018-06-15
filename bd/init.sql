@@ -10,7 +10,7 @@ CREATE TABLE UTILISATEUR (
   idUt SMALLINT NOT NULL AUTO_INCREMENT,
   pseudoUt varchar(30) UNIQUE NOT NULL,
   emailUt varchar(100) NOT NULL,
-  activeUt BIT NOT NULL,
+  activeUt BOOLEAN NOT NULL,
   nomRole varchar(10) NOT NULL,
   hash varchar(100) NOT NULL,
   salt varchar(100) NOT NULL,
