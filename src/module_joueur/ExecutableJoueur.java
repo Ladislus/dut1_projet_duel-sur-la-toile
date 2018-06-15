@@ -1,10 +1,11 @@
 package module_joueur;
 
 import APIMySQL.ConnexionMySQL;
+
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 public class ExecutableJoueur extends Application {
 
@@ -16,7 +17,14 @@ public class ExecutableJoueur extends Application {
     ConnexionMySQL laConnection = null;
 
     try { laConnection = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
-    catch(ClassNotFoundException e) {} //TODO faire l'alerte
+    catch(ClassNotFoundException ex) {
+
+      Alert a = new Alert(Alert.AlertType.ERROR);
+      a.setTitle("CRITICAL ERROR");
+      a.setHeaderText("Impossible de se connecter à la base de donnée");
+      a.showAndWait();
+
+      primaryStage.close(); }
 
     ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
 

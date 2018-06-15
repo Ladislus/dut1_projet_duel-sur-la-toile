@@ -32,7 +32,7 @@ public class Utilisateur {
             return GestionBD.selectPreparedStatement(co,"SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return "";
         }
     }
 
@@ -44,13 +44,13 @@ public class Utilisateur {
         }
     }
 
-    public static void creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole) throws UtilisateurException {
+    public static void creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String sexe, String mdp, String nomRole) throws UtilisateurException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
         try {
-            Collections.addAll(donnees,pseudo,email,1,nomRole,getHash((mdp + salt).getBytes()),salt);
-            GestionBD.updatePreparedStatement(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
+            Collections.addAll(donnees,pseudo,email,sexe,1,nomRole,getHash((mdp + salt).getBytes()),salt);
+            GestionBD.updatePreparedStatement(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new UtilisateurException("pseudoTaken");
@@ -66,5 +66,9 @@ public class Utilisateur {
           e.printStackTrace();
             throw new UtilisateurException("unknownPseudo");
         }
+    }
+
+    public static boolean isActivated(ConnexionMySQL co, String pseudoUt){
+        return getUserInfo(co, "activeUt", "pseudoUt", pseudoUt).equals("true");
     }
 }
