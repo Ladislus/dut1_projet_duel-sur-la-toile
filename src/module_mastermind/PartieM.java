@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -92,6 +93,7 @@ public class PartieM {
         titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
         res.getChildren().addAll(titre);
         res.setAlignment(Pos.CENTER);
+        res.setPadding(new Insets(0,0,20,0));
         return res;
     }
 
@@ -160,7 +162,7 @@ public class PartieM {
         return res;
     }
 
-    public static VBox plateau(){
+    public static ScrollPane plateau(){
         VBox res = new VBox(10);
         res.setAlignment(Pos.CENTER_RIGHT);
         res.setSpacing(20.);
@@ -202,29 +204,28 @@ public class PartieM {
             res.getChildren().addAll(temp);
         }
 
-//        ScrollPane sp = new ScrollPane(res);
-//        sp.setHmin(200.);
-//        sp.setPadding(new Insets(0,0,0,0));
-//        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        ScrollPane sp = new ScrollPane(res);
+        sp.setHmin(200.);
+        sp.setPadding(new Insets(0,0,0,0));
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        res.setPadding(new Insets(20,100,0,0));
+        sp.setPadding(new Insets(0,0,0,0));
+        sp.setPrefViewportWidth(412);
 
-        return res;
+        return sp;
     }
 
     public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
         res.setSpacing(20.);
-        res.setPadding(new Insets(30,0,30,0));
         res.setPrefHeight(100.);
 
         Button suppr = new Button("Supprimer");
         suppr.setOnAction(new ActionSupprimerTout(this));
 
         Button valider = new Button("Valider");
-        valider.setOnAction(new ActionTestComb(this));
 
         HBox adders = new HBox();
 
@@ -253,7 +254,7 @@ public class PartieM {
 
         res.getChildren().addAll(suppr,c1,c2,c3,c4,valider);
 
-        res.setPadding(new Insets(0,0,0,75));
+        res.setPadding(new Insets(-50,0,0,75));
         return res;
     }
 

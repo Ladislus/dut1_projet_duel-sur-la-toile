@@ -68,16 +68,16 @@ public class ChoixJoueurM {
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
 
-        Button retour = new Button("Home");
+        Button retour = new Button("Accueil");
         retour.setPrefSize(100.,30.);
         retour.setOnAction(event -> this.mastermind.setScene("Home"));
         Button changeMode;
-        if (mode == "New Game"){changeMode = new Button("Resume Game");}
+        if (mode == "New Game"){changeMode = new Button("Reprendre partie");}
         else {changeMode = new Button("New Game");}
         changeMode.setPrefSize(150.,30.);
         changeMode.setOnAction(event -> this.mastermind.setScene(changeMode.getText()));
 
-        res.getChildren().addAll(iv,retour,changeMode,new Label("Welcome "+"Bernard"+" !"));
+        res.getChildren().addAll(iv,retour,changeMode,new Label("Bienvenu "+"Bernard"+" !"));
 
         return res;
     }
@@ -91,18 +91,18 @@ public class ChoixJoueurM {
 
         Label titre = new Label();
         titre.setPadding(new Insets(50,0,30,0));
-        if (mode == "New Game"){titre.setText("Against whom do you want to play ?");}
-        else {titre.setText("Which game do you want to resume ?");}
+        if (mode == "New Game"){titre.setText("Contre qui souhaitez-vous jouer ?");}
+        else {titre.setText("Quelle partie voulez-vous reprendre ?");}
         titre.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,45.));
 
 
         Label lab = new Label();
-        if (mode == "New Game"){lab.setText("Your friendlist :");}
-        else {lab.setText("Games in progress :");}
+        if (mode == "New Game"){lab.setText("Votre liste d'ami :");}
+        else {lab.setText("Parties en cour :");}
         lab.setFont(Font.font("Verdana",FontWeight.BOLD,30.));
 
         barre = new TextField();
-        barre.setPromptText("Search");
+        barre.setPromptText("Rechercher");
         barre.setMaxWidth(250.);
         barre.setOnKeyReleased(new ActionRechercherJoueurM(this));
 

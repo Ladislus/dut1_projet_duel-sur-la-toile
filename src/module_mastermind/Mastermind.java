@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.HashMap;
 
-
 public class Mastermind extends Application {
 
     private Stage primaryStage;
@@ -29,6 +28,13 @@ public class Mastermind extends Application {
         launch(args);
     }
 
+    /**
+     *
+     * @param primaryStage
+     *
+     * Peut modifier la fenetre où l'on se trouve
+     * Initialiser a Accueil
+     */
     @Override
     public void start(Stage primaryStage) {
         this.attribution = new HashMap<>();
@@ -44,17 +50,31 @@ public class Mastermind extends Application {
         primaryStage.show();
     }
 
-
+    /**
+     * Créer une nouvelle partie avec les joueurs en parametre
+     * @param j1
+     * @param j2
+     */
     public void newGame(String j1, String j2){primaryStage.setScene(new PartieM(this,j1,j2).getScene(this));}
 
+    /**
+     * Change la scene en fonction du titre placer en parametre
+     * @param titre
+     */
     public void setScene(String titre){
         primaryStage.setScene(this.attribution.get(titre));
     }
 
+    /**
+     * Quitte la plateforme
+     */
     public void exit(){
         Platform.exit();
     }
 
+    /**
+     * Créer la vue des Bouttons de l'accueil
+     */
     private HBox boutonsAccueil() {
         HBox res = new HBox();
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
@@ -87,6 +107,9 @@ public class Mastermind extends Application {
         return res;
     }
 
+    /**
+     * Créer la scene de la page d'accueil complete
+     */
     private Scene pageAccueil(){
         BorderPane res = new BorderPane();
 
