@@ -17,24 +17,37 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.HashMap;
 
+/**
+ * Le Stage principal du Puissance 4
+ * Étend Application
+ */
 public class Puissance4 extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    /** chemin relatif pour retrouver les images du puissance 4 */
     public static String chem = "./img/module_puissance4/";
 
+    /** Le stage principal */
     private Stage primaryStage;
 
-    public static HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
+    /** Le dictionnaire qui relie un titre String à une Scène, pour en changer plus facilement */
+    public static HashMap<String,Scene> attribution;
 
+    /** Initialiser le puissance 4, avec le dictionnaire <titre,scène>*/
     @Override
-    public void start(Stage primaryStage) {
+    public void init(){
         this.attribution = new HashMap<>();
         this.attribution.put("Home",this.pageAccueil());
         this.attribution.put("New Game",new ChoixJoueurP4(this).getScene("New Game"));
         this.attribution.put("Resume Game",new ChoixJoueurP4(this).getScene("Resume Game"));
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        this.init();
 
         this.primaryStage = primaryStage;
         primaryStage.setResizable(false);
@@ -43,10 +56,12 @@ public class Puissance4 extends Application {
         primaryStage.show();
     }
 
+    /** Changer de page dans le module */
     public void setScene(String titre){
         primaryStage.setScene(this.attribution.get(titre));
     }
 
+/** Démarrer une partie de Puissance 4 */
     public void newGame(Puissance4 p4,String j1,String j2){primaryStage.setScene(new PartieP4(p4,j1,j2).getScene());}
 
     public HBox boutonsAccueil(){

@@ -68,6 +68,8 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       catch(UtilisateurException ex) {
 
+        ex.printStackTrace();
+
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle("ERREUR");
         a.setHeaderText("Le compte existe déjà");

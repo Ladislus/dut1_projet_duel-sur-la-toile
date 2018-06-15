@@ -27,11 +27,28 @@ public class Utilisateur {
         return Base64.getEncoder().encodeToString(hash);
     }
 
-    public static String getUserInfo(ConnexionMySQL co, String colonne, String pseudoUt) throws SQLException {
-        return GestionBD.selectPreparedStatement(co,"SELECT " + colonne + " FROM UTILISATEUR WHERE pseudoUt='"+pseudoUt+"'").get(colonne).get(0).toString();
+    public static String getUserInfo(ConnexionMySQL co, String columnInfoName, String columnName, String columnValue){
+        try {
+            return GestionBD.selectPreparedStatement(co,"SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    public static void setUserInfo(ConnexionMySQL co, String columnInfoName, Object columInfoValue, String columnName, String columnValue){
+        try {
+            GestionBD.updateStatement(co,"UPDATE UTILISATEUR SET " + columnInfoName + "=" + columInfoValue + " WHERE " + columnName + "='" + columnValue + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+<<<<<<< HEAD
     public static boolean creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole) throws UtilisateurException {
+=======
+    public static void creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole) throws UtilisateurException {
+>>>>>>> e0d98be32e79b887b8687659bb663004dd9fdfa0
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
@@ -39,17 +56,21 @@ public class Utilisateur {
             Collections.addAll(donnees,pseudo,email,1,nomRole,getHash((mdp + salt).getBytes()),salt);
             GestionBD.updatePreparedStatement(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
+<<<<<<< HEAD
             throw new UtilisateurException("Erreur SQL");
+=======
+            e.printStackTrace();
+            throw new UtilisateurException("pseudoTaken");
+>>>>>>> e0d98be32e79b887b8687659bb663004dd9fdfa0
         }
-        return true;
     }
 
     public static boolean isMdpValide(ConnexionMySQL co, String pseudoUt, String mdp) throws UtilisateurException {
         try {
-            String hash = getUserInfo(co,"hash",pseudoUt);
-            String salt = getUserInfo(co,"salt",pseudoUt);
-            return hash.equals(getHash((mdp+salt).getBytes()));
-        } catch (SQLException | NullPointerException e) {
+            String hash = getUserInfo(co,"hash","pseudoUt",pseudoUt);
+            String salt = getUserInfo(co,"salt","pseudoUt",pseudoUt);
+            return getHash((mdp+salt).getBytes()).equals(hash);
+        } catch (NullPointerException e) {
             throw new UtilisateurException("unknownPseudo");
         }
     }
