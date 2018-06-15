@@ -18,6 +18,8 @@ public class ExecutableJoueur extends Application {
     try { laConnection = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
     catch(ClassNotFoundException e) {} //TODO faire l'alerte
 
+    ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
+
     primaryStage.setTitle(connection.getTitle());
     primaryStage.setScene(new Scene(connection, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
 
