@@ -27,11 +27,15 @@ public class Utilisateur {
         return Base64.getEncoder().encodeToString(hash);
     }
 
-    public static String getUserInfo(ConnexionMySQL co, String colonne, String pseudoUt) throws SQLException {
-        return GestionBD.selectPreparedStatement(co,"SELECT " + colonne + " FROM UTILISATEUR WHERE pseudoUt='"+pseudoUt+"'").get(colonne).get(0).toString();
+    public static String getUserInfo(ConnexionMySQL co, String columnInfoName, String columnName, String columnValue) throws SQLException {
+        return GestionBD.selectPreparedStatement(co,"SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
     }
 
-    public static boolean creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole){
+    public static void setUserInfo(ConnexionMySQL co, String columnInfoName, Object columInfoValue, String columnName, String columnValue) throws SQLException {
+        GestionBD.updateStatement(co,"UPDATE UTILISATEUR SET " + columnInfoName + "=" + columInfoValue + " WHERE " + columnName + "='" + columnValue + "'");
+    }
+
+    public static void creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole){
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
@@ -41,15 +45,15 @@ public class Utilisateur {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
     }
 
     public static boolean isMdpValide(ConnexionMySQL co, String pseudoUt, String mdp) throws UtilisateurException {
         try {
-            String hash = getUserInfo(co,"hash",pseudoUt);
-            String salt = getUserInfo(co,"salt",pseudoUt);
+            String hash = getUserInfo(co,"hash","pseudoUt",pseudoUt);
+            String salt = getUserInfo(co,"salt","pseudoUt",pseudoUt);
             return hash.equals(getHash((mdp+salt).getBytes()));
         } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
             throw new UtilisateurException("unknownPseudo");
         }
     }
