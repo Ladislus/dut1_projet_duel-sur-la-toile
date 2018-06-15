@@ -64,4 +64,10 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
         while (this.get(i) != p){i++;}
         this.set(i,0);
     }
+
+    public void clear(){
+        for (int i=0;i<4;i++){
+            this.set(i,0);
+        }
+    }
 }

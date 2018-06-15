@@ -6,17 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import module_puissance4.Joueur;
-
-import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PartieM {
@@ -33,10 +30,25 @@ public class PartieM {
 
     private Circle c1,c2,c3,c4;
     private List<Circle> lCercle;
+    private VBox listeComb;
+
+    private HashMap<Integer,Color> attributionCouleur;
 
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
+        this.listeComb = new VBox(10);
+        this.listeComb.setAlignment(Pos.CENTER_RIGHT);
+        this.listeComb.setSpacing(20.);
+        this.listeComb.setPrefWidth(160.);
         this.p = new PlateauM(j1,j2);
+        this.attributionCouleur = new HashMap<>();
+        this.attributionCouleur.put(0,Color.DARKGREY);
+        this.attributionCouleur.put(1,Color.YELLOW);
+        this.attributionCouleur.put(2,Color.RED);
+        this.attributionCouleur.put(3,Color.BLUE);
+        this.attributionCouleur.put(4,Color.SADDLEBROWN);
+        this.attributionCouleur.put(5,Color.FORESTGREEN);
+        this.attributionCouleur.put(6,Color.CYAN);
     }
 
     public PlateauM getPlateau(){
@@ -54,27 +66,23 @@ public class PartieM {
 
         for (Circle c : lCercle){
             int pos = this.getPlateau().getCombiCour().get(lCercle.indexOf(c));
-            if (pos == 0){
-                c.setFill(Color.DARKGREY);
+            c.setFill(this.attributionCouleur.get(pos));
+        }
+    }
+
+    public void ajouteResultat(){
+        if (this.p.getListeEssais().size() > 0 && this.p.getListeEssais() != null){
+            HBox nouvEssai = new HBox();
+            nouvEssai.setSpacing(10.);
+            Label numEssai = new Label(1+"");
+            numEssai.setFont(Font.font(40));
+            nouvEssai.getChildren().add(numEssai);
+            Combinaison dernierEssai = this.p.getListeEssais().get(this.p.getListeEssais().size()-1);
+            for (int c : dernierEssai){
+                System.out.println(c);
+                nouvEssai.getChildren().add(new Circle(25,this.attributionCouleur.get(c)));
             }
-            else if (pos == 1){
-                c.setFill(Color.YELLOW);
-            }
-            else if (pos == 2){
-                c.setFill(Color.RED);
-            }
-            else if (pos == 3){
-                c.setFill(Color.BLUE);
-            }
-            else if (pos == 4){
-                c.setFill(Color.SADDLEBROWN);
-            }
-            else if (pos == 5){
-                c.setFill(Color.FORESTGREEN);
-            }
-            else if (pos == 6){
-                c.setFill(Color.CYAN);
-            }
+            this.listeComb.getChildren().add(nouvEssai);
         }
     }
 
@@ -85,7 +93,7 @@ public class PartieM {
         BorderPane res = new BorderPane();
         res.setLeft(menu(m));
         res.setTop(haut());
-        res.setRight(plateau());
+        res.setRight(plateauSP(this.listeComb));
         res.setBottom(bas());
 
         return new Scene(res, 700, 650);
@@ -115,30 +123,15 @@ public class PartieM {
 
         GridPane tabCouleurs = new GridPane();
 
-        Circle jaune = new Circle(25);
-        jaune.setFill(Color.YELLOW);
-        jaune.setOnMouseClicked(new ActionMettreCouleur(this));
+        for (int i = 1; i <7; i++){
+            Circle cercle = new Circle(25);
+            cercle.setFill(this.attributionCouleur.get(i));
+            cercle.setUserData(i);
+            cercle.setOnMouseClicked(new ActionMettreCouleur(this));
 
-        Circle rouge = new Circle(25);
-        rouge.setFill(Color.RED);
-        rouge.setOnMouseClicked(new ActionMettreCouleur(this));
-
-        Circle bleu = new Circle(25);
-        bleu.setFill(Color.BLUE);
-        bleu.setOnMouseClicked(new ActionMettreCouleur(this));
-
-        Circle marron = new Circle(25);
-        marron.setFill(Color.SADDLEBROWN);
-        marron.setOnMouseClicked(new ActionMettreCouleur(this));
-
-        Circle vert = new Circle(25);
-        vert.setFill(Color.FORESTGREEN);
-        vert.setOnMouseClicked(new ActionMettreCouleur(this));
-
-        Circle cyan = new Circle(25);
-        cyan.setFill(Color.CYAN);
-        cyan.setOnMouseClicked(new ActionMettreCouleur(this));
-
+//          gridpane.add(truc, colonne, ligne);
+            tabCouleurs.add(cercle,(i-1)%3,(i-1)/3);
+        }
 
         Button aide = new Button("?");
         aide.setFont(Font.font("Verdana", FontWeight.BOLD,25));
@@ -147,13 +140,6 @@ public class PartieM {
         aide.setOnAction(new ActionHelpM());
 
 
-        //gridpane.add(truc, colonne, ligne);
-        tabCouleurs.add(jaune,0,0);
-        tabCouleurs.add(rouge,1,0);
-        tabCouleurs.add(bleu,2,0);
-        tabCouleurs.add(marron,0,1);
-        tabCouleurs.add(vert,1,1);
-        tabCouleurs.add(cyan,2,1);
         tabCouleurs.setHgap(5);
         tabCouleurs.setVgap(5);
 
@@ -166,49 +152,50 @@ public class PartieM {
         return res;
     }
 
-    public static ScrollPane plateau(){
-        VBox res = new VBox(10);
-        res.setAlignment(Pos.CENTER_RIGHT);
-        res.setSpacing(20.);
-        res.setPrefWidth(160.);
+//    public VBox plateau(){
+//        return res;
+//    }
 
-        for(int i=0; i<7;i++){
-            HBox temp = new HBox(20);
+    public ScrollPane plateauSP(VBox plateau){
 
-            for(int k=0; k<4;k++){
-                Circle cercleGris = new Circle(25);
-                cercleGris.setFill(Color.DARKGREY);
-                temp.getChildren().addAll(cercleGris);
-            }
+//        HBox temp = new HBox(20);
+//        Label num = new Label(1+"");
+//        num.setFont(Font.font(40));
+//        temp.getChildren().add(num);
+//
+//        for(int k=0; k<4;k++){
+//            Circle cercleGris = new Circle(25);
+//            cercleGris.setFill(Color.DARKGREY);
+//            temp.getChildren().addAll(cercleGris);
+//        }
+//
+//        GridPane plateau = new GridPane();
+//
+//        Circle cercleIndice1 = new Circle(10);
+//        cercleIndice1.setFill(Color.BLACK);
+//
+//        Circle cercleIndice2 = new Circle(10);
+//        cercleIndice2.setFill(Color.BLACK);
+//
+//        Circle cercleIndice3 = new Circle(10);
+//        cercleIndice3.setFill(Color.BLACK);
+//
+//        Circle cercleIndice4 = new Circle(10);
+//        cercleIndice4.setFill(Color.BLACK);
+//
+//        plateau.add(cercleIndice1,1,0);
+//        plateau.add(cercleIndice2,2,0);
+//        plateau.add(cercleIndice3,1,1);
+//        plateau.add(cercleIndice4,2,1);
+//
+//        plateau.setHgap(5);
+//        plateau.setVgap(5);
+//
+//        temp.getChildren().addAll(plateau);
+//
+//        res.getChildren().addAll(temp);
 
-            GridPane plateau = new GridPane();
-
-            Circle cercleIndice1 = new Circle(10);
-            cercleIndice1.setFill(Color.BLACK);
-
-            Circle cercleIndice2 = new Circle(10);
-            cercleIndice2.setFill(Color.BLACK);
-
-            Circle cercleIndice3 = new Circle(10);
-            cercleIndice3.setFill(Color.BLACK);
-
-            Circle cercleIndice4 = new Circle(10);
-            cercleIndice4.setFill(Color.BLACK);
-
-            plateau.add(cercleIndice1,1,0);
-            plateau.add(cercleIndice2,2,0);
-            plateau.add(cercleIndice3,1,1);
-            plateau.add(cercleIndice4,2,1);
-
-            plateau.setHgap(5);
-            plateau.setVgap(5);
-
-            temp.getChildren().addAll(plateau);
-
-            res.getChildren().addAll(temp);
-        }
-
-        ScrollPane sp = new ScrollPane(res);
+        ScrollPane sp = new ScrollPane(plateau);
         sp.setHmin(200.);
         sp.setPadding(new Insets(0,0,0,0));
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
