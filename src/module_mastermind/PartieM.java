@@ -45,7 +45,7 @@ public class PartieM {
 
     public void majAffichage(){
 
-        lCercle = new ArrayList<>();0
+        lCercle = new ArrayList<>();
         lCercle.add(c1);
         lCercle.add(c2);
         lCercle.add(c3);
