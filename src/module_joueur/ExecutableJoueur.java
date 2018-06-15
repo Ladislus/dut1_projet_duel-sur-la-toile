@@ -15,9 +15,6 @@ public class ExecutableJoueur extends Application {
 
     GestionBD laConnection = null;
 
-    try { laConnection = new GestionBD("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
-    catch (ClassNotFoundException e) {} //TODO faire l'alerte
-
     ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
 
     primaryStage.setTitle(connection.getTitle());
