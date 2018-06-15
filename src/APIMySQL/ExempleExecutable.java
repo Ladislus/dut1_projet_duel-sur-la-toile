@@ -11,17 +11,17 @@ public class ExempleExecutable {
         try {
             GestionBD.updateStatement(co,"INSERT INTO ROLE VALUES ('ADMIN')");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
         }
 
-        Utilisateur.creerUtilisateur(co,"test","test@gmail.com","couscous","admin");
-
         try {
+            Utilisateur.creerUtilisateur(co,"test","test@gmail.com","couscous","admin");
             System.out.println(Utilisateur.isMdpValide(co,"test","couscous"));
             System.out.println(Utilisateur.isMdpValide(co,"test","test"));
             System.out.println(Utilisateur.isMdpValide(co,"test2","test"));
         } catch (UtilisateurException e) {
-            e.printStackTrace();
+            e.printMessage();
         }
 
     }

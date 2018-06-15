@@ -27,15 +27,24 @@ public class Utilisateur {
         return Base64.getEncoder().encodeToString(hash);
     }
 
-    public static String getUserInfo(ConnexionMySQL co, String columnInfoName, String columnName, String columnValue) throws SQLException {
-        return GestionBD.selectPreparedStatement(co,"SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
+    public static String getUserInfo(ConnexionMySQL co, String columnInfoName, String columnName, String columnValue){
+        try {
+            return GestionBD.selectPreparedStatement(co,"SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public static void setUserInfo(ConnexionMySQL co, String columnInfoName, Object columInfoValue, String columnName, String columnValue) throws SQLException {
-        GestionBD.updateStatement(co,"UPDATE UTILISATEUR SET " + columnInfoName + "=" + columInfoValue + " WHERE " + columnName + "='" + columnValue + "'");
+    public static void setUserInfo(ConnexionMySQL co, String columnInfoName, Object columInfoValue, String columnName, String columnValue){
+        try {
+            GestionBD.updateStatement(co,"UPDATE UTILISATEUR SET " + columnInfoName + "=" + columInfoValue + " WHERE " + columnName + "='" + columnValue + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole){
+    public static void creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole) throws UtilisateurException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
@@ -44,6 +53,7 @@ public class Utilisateur {
             GestionBD.updatePreparedStatement(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new UtilisateurException("pseudoTaken");
         }
     }
 
@@ -51,9 +61,8 @@ public class Utilisateur {
         try {
             String hash = getUserInfo(co,"hash","pseudoUt",pseudoUt);
             String salt = getUserInfo(co,"salt","pseudoUt",pseudoUt);
-            return hash.equals(getHash((mdp+salt).getBytes()));
-        } catch (SQLException | NullPointerException e) {
-            e.printStackTrace();
+            return getHash((mdp+salt).getBytes()).equals(hash);
+        } catch (NullPointerException e) {
             throw new UtilisateurException("unknownPseudo");
         }
     }
