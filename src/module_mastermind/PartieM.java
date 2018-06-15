@@ -224,6 +224,7 @@ public class PartieM {
         suppr.setOnAction(new ActionSupprimerTout(this));
 
         Button valider = new Button("Valider");
+        valider.setOnAction(new ActionTestComb(this));
 
         HBox adders = new HBox();
 
