@@ -22,12 +22,14 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.HashMap;
 
 
 public class Mastermind extends Application {
 
     private Stage primaryStage;
     public static String chem = "./img/module_mastermind/";
+    public static HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
         launch(args);
@@ -35,6 +37,11 @@ public class Mastermind extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        this.attribution = new HashMap<>();
+        this.attribution.put("Home",this.pageAccueil());
+        this.attribution.put("New Game",new ChoixJoueurM(this).getScene("New Game"));
+        this.attribution.put("Resume Game",new ChoixJoueurM(this).getScene("Resume Game"));
+
         this.primaryStage = primaryStage;
 
         primaryStage.setResizable(false);
@@ -43,11 +50,11 @@ public class Mastermind extends Application {
         primaryStage.show();
     }
 
-    public void setScene(int n){
-        if (n==1)
-            primaryStage.setScene(pageAccueil());
-        else if (n==2)
-            primaryStage.setScene(PartieM.getScene(this));
+
+    public void newGame(String j1, String j2){primaryStage.setScene(new PartieM(this,j1,j2).getScene(this));}
+
+    public void setScene(String titre){
+        primaryStage.setScene(this.attribution.get(titre));
     }
 
     public void exit(){
@@ -56,7 +63,6 @@ public class Mastermind extends Application {
 
     public HBox boutonsAccueil() {
         HBox res = new HBox();
-        ActionBoutonsAccueil handler = new ActionBoutonsAccueil(this);
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
         File imageami = new File(chem+"jouerAmi.png");
@@ -67,7 +73,7 @@ public class Mastermind extends Application {
         b1.setFont(bouton);
         b1.setContentDisplay(ContentDisplay.TOP);
         b1.setPrefSize(390,75.);
-        b1.setOnAction(handler);
+        b1.setOnAction(event -> this.setScene("New Game"));
         res.getChildren().add(b1);
 
         File continu = new File(chem+"continuerPartie.png");
@@ -78,7 +84,7 @@ public class Mastermind extends Application {
         b2.setFont(bouton);
         b2.setContentDisplay(ContentDisplay.TOP);
         b2.setPrefSize(390,75.);
-        b2.setOnAction(handler);
+        b2.setOnAction(event -> this.setScene("Resume Game"));
         res.getChildren().add(b2);
 
         res.setAlignment(Pos.CENTER);

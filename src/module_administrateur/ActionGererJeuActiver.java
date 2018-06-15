@@ -19,12 +19,11 @@ public class ActionGererJeuActiver implements EventHandler<ActionEvent>{
   public void handle(ActionEvent actionEvent){
 
     Button b = (Button) actionEvent.getSource();
-    if((b.getText()) == "Activer"){
-      b.setDisable(true);
-    }
-    else{
-      b.setDisable(false);
-    }
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle("Validation de l'activation");
+    alert.setHeaderText(null);
+    alert.setContentText("Le jeu sera activé.");
+    alert.showAndWait();
   }
 
 }

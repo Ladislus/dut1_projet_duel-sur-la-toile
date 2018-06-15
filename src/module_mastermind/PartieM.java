@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import module_puissance4.Joueur;
 
 import java.io.File;
 import java.util.List;
@@ -25,18 +26,23 @@ public class PartieM {
 
     private Plateau p;
 
+    private Joueur j1,j2;
+
     private Mastermind mastermind;
 
-    public PartieM(String j1){
-        this.p = new Plateau();
+    public PartieM(Mastermind m,String j1,String j2){
+        this.mastermind = m;
+        this.p = new Plateau(j1,j2);
     }
 
-    public Plateau getPlateau(){return this.p;}
+    public Plateau getPlateau(){
+        return this.p;
+    }
 
-    public void majAffichage(int l, int c){}
+    public void majAffichage(){}
 //
 
-    public static Scene getScene(Mastermind m) {
+    public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
         res.setLeft(menu(m));
         res.setTop(haut());
@@ -46,8 +52,8 @@ public class PartieM {
         return new Scene(res, 700, 650);
     }
 
-    public static VBox haut(){
-        VBox res = new VBox(5);
+    public static HBox haut(){
+        HBox res = new HBox(5);
         Label titre = new Label("Mastermind");
         titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
         res.getChildren().addAll(titre);
@@ -55,7 +61,7 @@ public class PartieM {
         return res;
     }
 
-    public static VBox menu(Mastermind m){
+    public VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
         Button quitter = new Button("Quitter");
@@ -71,21 +77,27 @@ public class PartieM {
 
         Circle jaune = new Circle(25);
         jaune.setFill(Color.YELLOW);
+        jaune.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle rouge = new Circle(25);
         rouge.setFill(Color.RED);
+        rouge.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle bleu = new Circle(25);
         bleu.setFill(Color.BLUE);
+        bleu.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle marron = new Circle(25);
         marron.setFill(Color.SADDLEBROWN);
+        marron.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle vert = new Circle(25);
         vert.setFill(Color.FORESTGREEN);
+        vert.setOnMouseClicked(new ActionMettreCouleur(this));
 
         Circle cyan = new Circle(25);
         cyan.setFill(Color.CYAN);
+        cyan.setOnMouseClicked(new ActionMettreCouleur(this));
 
 
         File intero = new File(chem+"intero.png");
@@ -168,7 +180,7 @@ public class PartieM {
         return res;
     }
 
-    public static HBox bas(){
+    public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
         res.setSpacing(20.);
@@ -182,12 +194,24 @@ public class PartieM {
 
         Circle c1 = new Circle(20);
         c1.setFill(Color.DARKGREY);
+        c1.setUserData(0);
+        c1.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
         Circle c2 = new Circle(20);
         c2.setFill(Color.DARKGREY);
+        c2.setUserData(0);
+        c2.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
         Circle c3 = new Circle(20);
         c3.setFill(Color.DARKGREY);
+        c3.setUserData(0);
+        c3.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
         Circle c4 = new Circle(20);
         c4.setFill(Color.DARKGREY);
+        c4.setUserData(0);
+        c4.setOnMouseClicked(new ActionSupprimerCouleur(this));
+
 
         adders.getChildren().addAll(c1,c2,c3,c4);
 

@@ -19,12 +19,11 @@ public class ActionGererJeuDesactiver implements EventHandler<ActionEvent>{
   public void handle(ActionEvent actionEvent){
 
     Button b = (Button) actionEvent.getSource();
-    if((b.getText()) == "Désactiver"){
-      b.setDisable(true);
-    }
-    else{
-      b.setDisable(false);
-    }
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle("Validation de la désactivation");
+    alert.setHeaderText(null);
+    alert.setContentText("Le jeu ne sera pas activé.");
+    alert.showAndWait();
   }
 
 }

@@ -12,27 +12,28 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static module_puissance4.Puissance4.chem;
+
 
 public class PartieP4 {
     // Vue de la plateforme de jeu Puissance 4
 
-    public static String chem = "./img/module_puissance4/";
-
+    private Puissance4 puissance4;
     private PlateauP4 p; // Modèle du jeu
 
     private List<List<Circle>> tableau; // Le tableau de pion
     private List<Button> listeBoutons; // Liste des boutons pour sélectionner une colonne
     private Button boutActiv; // Bouton de colonne activé
 
-    public PartieP4(){
-        p = new PlateauP4("Bernard","xX-Dark-Xx");
+    public PartieP4(Puissance4 p4,String j1,String j2){
+        this.puissance4 = p4;
+        p = new PlateauP4(j1,j2);
     }
 
     public Scene getScene() {
@@ -81,6 +82,8 @@ public class PartieP4 {
         save.setOnMouseEntered(e -> save.setStyle(saveHover));
         save.setOnMouseExited(e -> save.setStyle(saveNormal));
         save.setPrefWidth(115.);
+        save.setOnAction(event -> this.puissance4.setScene("Home"));
+
 
         Button forfeit = new Button("Forfeit");
 
@@ -95,6 +98,7 @@ public class PartieP4 {
         forfeit.setOnMouseEntered(e -> forfeit.setStyle(forfeitHover));
         forfeit.setOnMouseExited(e -> forfeit.setStyle(forfeitNormal));
         forfeit.setPrefWidth(115.);
+        forfeit.setOnAction(event -> this.puissance4.setScene("Home"));
 
 
         res.getChildren().addAll(save,forfeit);
@@ -224,15 +228,17 @@ public class PartieP4 {
             this.tableau.get(c).get(l).setFill(Color.YELLOW);
         if (this.p.getCol(c).isFull())
             this.listeBoutons.get(c).setDisable(true); // on désactive le bouton si sa colonne est pleine
-        if (this.p.aUnPuissance4(l,c)){
+        ResultatP4 etatJeu = this.p.etatDuJeu(l,c);
+        if (etatJeu.contientPuissance){
             // Il y a un puissance 4
             int numJGagne = this.p.getJCour();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Connect 4 - Victory");
             alert.setHeaderText("And the winner is..."+this.p.getJ(numJGagne).getNom()+" !");
+            alert.setContentText("Le score du gagnant est de : "+this.p.nbPionsRest*etatJeu.nbPionsAlignes+" points !");
             alert.showAndWait();
         }
-        if (this.p.aUnPuissance4(l,c) || this.p.isFull()){
+        if (etatJeu.contientPuissance || this.p.isFull()){
             for (Button b : listeBoutons)
                 b.setDisable(true);
         }

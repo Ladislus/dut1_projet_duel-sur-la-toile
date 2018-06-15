@@ -60,6 +60,7 @@ public class GererJeu extends BorderPane {
       ActionGererJeuDesactiver agjd = new ActionGererJeuDesactiver(this);
       ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
       ComboBox cbjeux = new ComboBox(optionsjeu);
+      cbjeux.setPrefWidth(297);
       Label etatjeu = new Label("Etat du jeu : ");
       Button bactiverjeu = new Button("Activer");
       bactiverjeu.setStyle("-fx-background-color: #009e0f;");
@@ -78,6 +79,7 @@ public class GererJeu extends BorderPane {
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
       ComboBox cbmodes = new ComboBox(optionsmode);
+      cbmodes.setPrefWidth(297);
       TextField tfilechooser = new TextField();
       tfilechooser.setPromptText("Choisissez une image");
       tfilechooser.setDisable(true);
@@ -131,6 +133,7 @@ public class GererJeu extends BorderPane {
       ObservableList<String> optionstype = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
       ComboBox cbmodes = new ComboBox(optionstype);
+      cbmodes.setPrefWidth(297);
       TextField tfilechooser = new TextField();
       tfilechooser.setPromptText("Choisissez une image");
       tfilechooser.setDisable(true);
