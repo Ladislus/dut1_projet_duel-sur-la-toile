@@ -15,10 +15,18 @@ import javafx.collections.*;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.geometry.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+
+import APIMySQL.GestionBD;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class GererJeu extends BorderPane {
 
     PageAccueil pa;
+    //GestionBD gestionBD = new GestionBD("192.168.1.100", "dbnmartins", "dst", "dst");
 
     public GererJeu(PageAccueil pa) {
       super();
@@ -48,11 +56,19 @@ public class GererJeu extends BorderPane {
       HBox hbetatjeu = new HBox(30);
       HBox hbfilechooser = new HBox(5);
       ActionSauvegardeModifsJeu asmj = new ActionSauvegardeModifsJeu(this);
+      ActionGererJeuActiver agja = new ActionGererJeuActiver(this);
+      ActionGererJeuDesactiver agjd = new ActionGererJeuDesactiver(this);
       ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
       ComboBox cbjeux = new ComboBox(optionsjeu);
       Label etatjeu = new Label("Etat du jeu : ");
       Button bactiverjeu = new Button("Activer");
+      bactiverjeu.setStyle("-fx-background-color: #009e0f;");
+      bactiverjeu.setTextFill(Color.web("white"));
+      bactiverjeu.setOnAction(agja);
       Button bdesactiverjeu = new Button("Désactiver");
+      bdesactiverjeu.setStyle("-fx-background-color: #cf2a27;");
+      bdesactiverjeu.setTextFill(Color.web("white"));
+      bdesactiverjeu.setOnAction(agjd);
       TextField tetatjeu = new TextField();
       tetatjeu.setPromptText("Entrez le nom du jeu");
       TextArea treglejeu = new TextArea();
