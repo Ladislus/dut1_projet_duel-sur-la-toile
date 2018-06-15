@@ -14,7 +14,7 @@ public class ExecutableJoueur extends Application {
   public void start(Stage primaryStage) {
 
     ConnexionMySQL laConnection = null;
-    
+
     try { laConnection = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
     catch(ClassNotFoundException e) {} //TODO faire l'alerte
 
