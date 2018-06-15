@@ -14,11 +14,11 @@ public class ExecutableJoueur extends Application {
   @Override
   public void start(Stage primaryStage) {
       GestionBD laConnection = null;
-      EditionProfil connection = new EditionProfil(primaryStage);
+      EditionProfil editionProfil = new EditionProfil(primaryStage);
       ConnexionJoueur cj = new ConnexionJoueur(primaryStage, laConnection);
 
-      primaryStage.setTitle(connection.getTitle());
-      primaryStage.setScene(new Scene(connection, VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));
+      primaryStage.setTitle(editionProfil.getTitle());
+      primaryStage.setScene(new Scene(editionProfil, VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));
       primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
       primaryStage.getIcons().add(VariablesJoueur.LOGO);
       primaryStage.show();
