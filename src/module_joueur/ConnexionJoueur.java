@@ -68,7 +68,7 @@ class ConnexionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    hlRegister = new Hyperlink("Pas de compte ? S'inscrire maintenant");
+    hlRegister = new Hyperlink("Pas de compte ? S'inscrire");
     hlRegister.setOnAction(new ActionToInscription(this.primaryStage, this.laConnection));
 
     hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");

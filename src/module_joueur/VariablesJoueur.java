@@ -6,6 +6,8 @@ import javafx.scene.text.Font;
 
 import java.io.File;
 
+import java.util.regex.Pattern;
+
 class VariablesJoueur {
 
   public final static Font DEFAULT_TITLE_FONT = Font.font("Arial", 19);
@@ -33,4 +35,7 @@ class VariablesJoueur {
   public final static Image LOGO_TEXT = new Image(new File("./img/pub/logo.png").toURI().toString());
   public final static Image HELP = new Image(new File("./img/pub/help.png").toURI().toString());
   public final static Image CONTACT = new Image(new File("./img/pub/contact.png").toURI().toString());
-  public final static Image LOGOUT = new Image(new File("./img/pub/log_out.png").toURI().toString()); }
+  public final static Image LOGOUT = new Image(new File("./img/pub/log_out.png").toURI().toString());
+
+  public final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9.]+@[A-Z0-9]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+  public final static Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9]{8,30}$"); }

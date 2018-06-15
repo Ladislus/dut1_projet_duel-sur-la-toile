@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 class InscriptionJoueur extends BorderPane {
 
-  private TextField tfName;
-  private TextField tfFirstName;
   private TextField tfMail;
   private TextField tfPseudo;
 
@@ -47,24 +45,24 @@ class InscriptionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    Label lName = new Label("Nom : ");
-    tfName = new TextField();
-
-    Label lFirstName = new Label("Prenom : ");
-    tfFirstName = new TextField();
-
     Label lSex = new Label("Sexe : ");
 
     tgSex = new ToggleGroup();
 
     RadioButton rdMan = new RadioButton("Homme");
     rdMan.setToggleGroup(tgSex);
+    rdMan.setUserData("H");
+    rdMan.setPadding(new Insets(0, 5, 0, 0));
+    rdMan.setSelected(true);
 
     RadioButton rdWoman = new RadioButton("Femme");
     rdWoman.setToggleGroup(tgSex);
+    rdWoman.setUserData("F");
+    rdWoman.setPadding(new Insets(0, 5, 0, 0));
 
     RadioButton rdOther = new RadioButton("Autre");
     rdOther.setToggleGroup(tgSex);
+    rdOther.setUserData("O");
 
     HBox hSex = new HBox();
     hSex.getChildren().addAll(rdMan, rdWoman, rdOther);
@@ -81,13 +79,18 @@ class InscriptionJoueur extends BorderPane {
     Label lPasswordConfirm = new Label("Confirmer mot de passe : ");
     tfPasswordConfirm = new PasswordField();
 
-    Button btDashBoard = new Button("Accéder a la plateforme !");
-    btDashBoard.setOnAction(new ActionInscription(this.primaryStage, this.laConnection));
 
-    candidate.getChildren().addAll(lName, tfName, lFirstName, tfFirstName, lSex, hSex, lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, btDashBoard);
-    candidate.setPadding(new Insets(15,15,0,0));
-    candidate.setSpacing(3);
-    //candidate.setAlignment(Pos.);
+    Button btConnect = new Button("S'inscrire !");
+    btConnect.setOnAction(new ActionInscription(this.primaryStage, this.laConnection));
+
+    HBox hBtConnect = new HBox();
+    hBtConnect.getChildren().add(btConnect);
+    hBtConnect.setAlignment(Pos.BASELINE_CENTER);
+    hBtConnect.setPadding(new Insets(15, 0, 0, 0));
+
+    candidate.getChildren().addAll(lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, lSex, hSex, hBtConnect);
+    candidate.setPadding(new Insets(20,20,0,0));
+    candidate.setSpacing(7);
 
     return candidate; }
 
@@ -100,7 +103,7 @@ class InscriptionJoueur extends BorderPane {
     imageLogo.setFitWidth(100);
     imageLogo.setPreserveRatio(true);
 
-    Hyperlink hlHelp = new Hyperlink("Besoin d'aide ?");
+    Hyperlink hlHelp = new Hyperlink("Besoin d'aide");
     //hlHelp.setOnAction(new ActionHelp());
 
     ImageView imageHelp = new ImageView();
@@ -148,10 +151,6 @@ class InscriptionJoueur extends BorderPane {
     candidate.setPadding(new Insets(0,0,5,5));
 
     return candidate; }
-
-  public TextField getTfName() { return this.tfName; }
-
-  public TextField getTfFirstName() { return this.tfFirstName; }
 
   public TextField getTfMail() { return this.tfMail; }
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExempleExecutable {
+class ExempleExecutable {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         GestionBD gestionBD = new GestionBD("192.168.1.100", "serveurDeJeux", "dst", "dst");
         System.out.println(gestionBD.init());

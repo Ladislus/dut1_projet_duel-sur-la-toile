@@ -133,7 +133,7 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-    //todo: make that
+    //TODO: make that
     VBox candidate = new VBox();
     VBox vJeux = new VBox();
     VBox vNouveaute = new VBox();
