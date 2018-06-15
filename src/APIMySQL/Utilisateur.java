@@ -63,6 +63,7 @@ public class Utilisateur {
             String salt = getUserInfo(co,"salt","pseudoUt",pseudoUt);
             return getHash((mdp+salt).getBytes()).equals(hash);
         } catch (NullPointerException e) {
+          e.printStackTrace();
             throw new UtilisateurException("unknownPseudo");
         }
     }

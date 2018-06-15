@@ -1,6 +1,6 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
+import APIMySQL.ConnexionMySQL;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -13,7 +13,10 @@ public class ExecutableJoueur extends Application {
   @Override
   public void start(Stage primaryStage) {
 
-    GestionBD laConnection = null;
+    ConnexionMySQL laConnection = null;
+    
+    try { laConnection = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
+    catch(ClassNotFoundException e) {} //TODO faire l'alerte
 
     ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
 
