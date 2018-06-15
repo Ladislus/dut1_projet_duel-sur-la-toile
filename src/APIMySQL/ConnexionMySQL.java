@@ -2,7 +2,7 @@ package APIMySQL;
 
 import java.sql.*;
 
-public class ConnexionMySQL {
+class ConnexionMySQL {
 	private Connection mysql;
 	private boolean connecte = false;
 	public ConnexionMySQL(String IP, String database, String user, String mdp) throws ClassNotFoundException {
