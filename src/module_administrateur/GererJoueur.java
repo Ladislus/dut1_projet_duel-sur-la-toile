@@ -62,6 +62,7 @@ public class GererJoueur extends BorderPane {
         HBox joueur = new HBox();
         Label lj = new Label("Joueur1");
         CheckBox cb = new CheckBox();
+        cb.setOnAction(new ActionActiverJoueur(this));
         joueur.getChildren().addAll(lj, cb);
         joueur.setSpacing(185);
         return joueur;
@@ -98,12 +99,12 @@ public class GererJoueur extends BorderPane {
 
     public HBox creerJoueurListeJoueur() {
         HBox joueur = new HBox();
-        String pseudo = "letggrttgo";
+        String pseudo = "lethrthrhtrhtro";
         int longPseudo = pseudo.length();
         Label lj = new Label("- "+pseudo+" ");
-      //  for (int i=0; i<Math.abs(6-longPseudo)+41; i++) {
+        for (int i=0; i<42-(longPseudo-6) ; i++) {
           lj.setText(lj.getText()+".");
-    //    }
+        }
         Hyperlink hl = new Hyperlink("Profil");
         hl.setOnAction(new ActionProfilJoueur(this.pa, this, "Joueur"));
       //  joueur.setSpacing(150);
