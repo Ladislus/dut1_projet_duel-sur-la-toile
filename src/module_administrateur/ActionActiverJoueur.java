@@ -25,14 +25,22 @@ public class ActionActiverJoueur implements EventHandler<ActionEvent>{
       Alert alert = new Alert(AlertType.CONFIRMATION);
       alert.setTitle("Confirmation de l'activation");
       alert.setHeaderText("Confirmation activation");
+<<<<<<< HEAD
       alert.setContentText("Voulez-vous vraiment activer le(s) joueur(s) ?");
+=======
+      alert.setContentText("Voulez-vous vraiment activer ces joueurs ?");
+>>>>>>> e0d98be32e79b887b8687659bb663004dd9fdfa0
       alert.getButtonTypes().setAll(btoui, btnon);
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == btoui){
         alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Validation de l'activation");
         alert.setHeaderText(null);
+<<<<<<< HEAD
         alert.setContentText("Le(s) joueur(s) a/ont bien été activé.");
+=======
+        alert.setContentText("Les joueurs ont bien été activés.");
+>>>>>>> e0d98be32e79b887b8687659bb663004dd9fdfa0
         alert.showAndWait();
       }
     }

@@ -7,43 +7,33 @@ import javafx.scene.control.CheckBox;
 
 public class ActionCheckActiver implements EventHandler<ActionEvent> {
 
-    VoirRapport rapp;
+    GererJoueur gJoueur;
     Administration a;
+    String joueur;
 
-    public ActionRapportCheck(VoirRapport rapp, Administration a) {
-        this.rapp = rapp;
+    public ActionCheckActiver(GererJoueur gJoueur, Administration a, String joueur) {
+        this.gJoueur = gJoueur;
         this.a = a;
-        this.r = r;
+        this.joueur = joueur;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         CheckBox cb = (CheckBox) actionEvent.getSource();
-        System.out.println(this.a.getRapport().size()-this.a.getRapportLu().size());
-
         if (cb.isSelected()) {
-            this.r.getLabPseudo().setStyle("-fx-font-style: italic;-fx-underline: true;-fx-font-color:#cccccc");
-            this.r.getLabContenu().setStyle("-fx-font-style: italic;-fx-font-color:#cccccc");
-            this.a.ajouterRapportLu(this.r);
-            this.r.setLu(true);
+            this.a.ajouterListeActiver(this.joueur);
         }
         else {
-            this.r.getLabPseudo().setStyle("-fx-font-weight: bold;-fx-underline: true;");
-            this.r.getLabContenu().setStyle("-fx-font-style: normal;-fx-font-color:black");
-            this.a.retirerRapportLu(this.r);
-            this.r.setLu(false);
+            this.a.retirerListeActiver(this.joueur);
         }
-        if (this.a.getRapportLu().size() > 0) {
-            this.rapp.getButtonSuppr().setDisable(false);
+        if (this.a.getJoueurAactiver().size() == 0) {
+            this.gJoueur.getButtonSupprimer().setDisable(true);
+            this.gJoueur.getButtonActiver().setDisable(true);
         }
         else {
-            this.rapp.getButtonSuppr().setDisable(true);
+            this.gJoueur.getButtonSupprimer().setDisable(false);
+            this.gJoueur.getButtonActiver().setDisable(false);
         }
-
-        Collections.sort(this.rapp.getListe(), new CompCheck());
-
-        System.out.println(this.rapp.getListe());
-
-    //  this.rapp.getLabel().setText("Nombre de rapport non lus : "+(this.a.getRapport().size()-this.a.getRapportLu().size()));
+        System.out.println(this.a.getJoueurAactiver());
     }
 }

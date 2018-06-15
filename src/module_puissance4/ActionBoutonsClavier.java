@@ -4,16 +4,22 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
+/**
+ * Contrôleur pour jouer au puissance 4 avec le clavier
+ * Touches utilisées : Q (aller à la colonne de gauche) - D (celle de droite) - M (sélectionner colonne et jouer un coup)
+ */
 public class ActionBoutonsClavier implements EventHandler<KeyEvent> {
 
+    /** Vue de la page du jeu du puissance 4 */
     private PartieP4 jeu;
 
     public ActionBoutonsClavier(PartieP4 puissance4) {
         this.jeu = puissance4;
     }
 
-
+    /**
+     * Identifie la touche actionnée et agit en fonction
+     */
     @Override
     public void handle(KeyEvent event) {
         KeyCode touche = event.getCode();

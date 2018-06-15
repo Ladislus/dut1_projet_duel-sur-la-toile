@@ -37,11 +37,11 @@ public class ActionMettreCouleur implements EventHandler<Event> {
         else{
             intCouleur = 6;
         }
-        Plateau plateau = this.mastermind.getPlateau();
-        Combinaison combCour = plateau.getCombiCour();
-        if (!combCour.isFull()){
-            combCour.addPion(intCouleur);
-        }
+        PlateauM plateauM = this.mastermind.getPlateau();
+        Combinaison combCour = plateauM.getCombiCour();
+
+        combCour.addPion(intCouleur);
+
         this.mastermind.majAffichage();
     }
 }
