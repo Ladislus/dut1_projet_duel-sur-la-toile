@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -20,16 +21,25 @@ import java.util.List;
 
 import static module_puissance4.Puissance4.chem;
 
-
+/**
+ * Vue de la plateforme de jeu Puissance 4
+ */
 public class PartieP4 {
-    // Vue de la plateforme de jeu Puissance 4
 
+    /** Le Stage principal, qui étend Application */
     private Puissance4 puissance4;
-    private PlateauP4 p; // Modèle du jeu
 
-    private List<List<Circle>> tableau; // Le tableau de pion
-    private List<Button> listeBoutons; // Liste des boutons pour sélectionner une colonne
-    private Button boutActiv; // Bouton de colonne activé
+    /** Le modèle du jeu */
+    private PlateauP4 p;
+
+    /** Le tableau de pion */
+    private List<List<Circle>> tableau;
+
+    /** Liste des boutons pour sélectionner une colonne */
+    private List<Button> listeBoutons;
+
+    /** Bouton de colonne activé */
+    private Button boutActiv;
 
     public PartieP4(Puissance4 p4,String j1,String j2){
         this.puissance4 = p4;
@@ -110,7 +120,7 @@ public class PartieP4 {
         res.setPrefWidth(160.);
         res.setPadding(new Insets(50,5,0,10));
 
-        Text info = new Text("TIPS !\nYou can play with the mouse or the keyboard !\n\nClick on the arrow on the columns\nOR\nTo move among the columns, press keys \nQ (left) and D (right).\n\nTo put a token,\n press key M.\n\nGood luck !");
+        Text info = new Text("TIPS !\nYou can play with the mouse or the keyboard !\n\nClick on the arrows on the columns\nOR\nTo move among the columns, press keys \nQ (left) and D (right).\n\nTo put a token,\n press key M.\n\nGood luck !");
         info.setWrappingWidth(140.);
 
         ImageView touches = new ImageView(new Image(new File(chem+"touchesP4.png").toURI().toString()));
