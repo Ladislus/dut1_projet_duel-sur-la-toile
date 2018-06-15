@@ -17,16 +17,9 @@ import javafx.geometry.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-import APIMySQL.GestionBD;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class GererJeu extends BorderPane {
 
     PageAccueil pa;
-    //GestionBD gestionBD = new GestionBD("192.168.1.100", "dbnmartins", "dst", "dst");
 
     public GererJeu(PageAccueil pa) {
       super();
