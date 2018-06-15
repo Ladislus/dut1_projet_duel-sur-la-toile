@@ -214,7 +214,6 @@ public class PartieM {
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        sp.setPadding(new Insets(0,0,0,0));
         sp.setPrefViewportWidth(412);
 
         return sp;

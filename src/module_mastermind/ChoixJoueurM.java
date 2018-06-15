@@ -77,7 +77,7 @@ public class ChoixJoueurM {
         changeMode.setPrefSize(150.,30.);
         changeMode.setOnAction(event -> this.mastermind.setScene(changeMode.getText()));
 
-        res.getChildren().addAll(iv,retour,changeMode,new Label("Bienvenu "+"Bernard"+" !"));
+        res.getChildren().addAll(iv,retour,changeMode,new Label("Bienvenue "+"Bernard"+" !"));
 
         return res;
     }
@@ -97,8 +97,8 @@ public class ChoixJoueurM {
 
 
         Label lab = new Label();
-        if (mode == "Nouvelle Partie"){lab.setText("Votre liste d'ami :");}
-        else {lab.setText("Parties en cour :");}
+        if (mode == "Nouvelle Partie"){lab.setText("Votre liste d'amis :");}
+        else {lab.setText("Parties en cours :");}
         lab.setFont(Font.font("Verdana",FontWeight.BOLD,30.));
 
         barre = new TextField();
