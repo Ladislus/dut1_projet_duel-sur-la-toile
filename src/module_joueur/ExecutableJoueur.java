@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,10 +21,19 @@ public class ExecutableJoueur extends Application {
 
   public static void main(String [] args) { launch(args); }
 
-    @Override
-    public void start(Stage primaryStage) {
 
-      ConnexionJoueur cj = new ConnexionJoueur(primaryStage);
+  @Override
+  public void start(Stage primaryStage) {
+
+    GestionBD laConnection = null;
+
+    try { laConnection = new GestionBD("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
+    catch (ClassNotFoundException e) {} //TODO faire l'alerte
+
+    ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
+
+
+      ConnexionJoueur cj = new ConnexionJoueur(primaryStage, laConnection);
 
       primaryStage.setTitle(cj.getTitle());
       primaryStage.setScene(new Scene(cj, 500, 290));
