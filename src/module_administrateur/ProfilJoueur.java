@@ -36,7 +36,7 @@ public class ProfilJoueur extends BorderPane {
         Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
+      //  bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);
@@ -60,6 +60,7 @@ public class ProfilJoueur extends BorderPane {
       TextField temail = new TextField();
       ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
       ComboBox cbrole = new ComboBox(optionsRoles);
+      cbrole.setPrefWidth(175);
       Label active = new Label("Activer ?");
       RadioButton rbactiver = new RadioButton("Oui");
       RadioButton rbpasactiver = new RadioButton("Non");

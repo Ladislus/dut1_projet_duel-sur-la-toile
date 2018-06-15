@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -11,11 +12,6 @@ import javafx.stage.Stage;
 
 class InscriptionJoueur extends BorderPane {
 
-  private Button btBack;
-  private Button btDashBoard;
-
-  private TextField tfName;
-  private TextField tfFirstName;
   private TextField tfMail;
   private TextField tfPseudo;
 
@@ -24,17 +20,19 @@ class InscriptionJoueur extends BorderPane {
   private PasswordField tfPassword;
   private PasswordField tfPasswordConfirm;
 
-  private Hyperlink hlHelp;
-
   private String title;
 
   private Stage primaryStage;
 
-  public InscriptionJoueur(Stage primaryStage) {
+  private GestionBD laConnection;
+
+  public InscriptionJoueur(Stage primaryStage, GestionBD laConnection) {
 
     super();
 
     this.primaryStage = primaryStage;
+
+    this.laConnection = laConnection;
 
     this.title = "Acceuil : Inscription";
 
@@ -47,24 +45,24 @@ class InscriptionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    Label lName = new Label("Nom : ");
-    tfName = new TextField();
-
-    Label lFirstName = new Label("Prenom : ");
-    tfFirstName = new TextField();
-
     Label lSex = new Label("Sexe : ");
 
     tgSex = new ToggleGroup();
 
     RadioButton rdMan = new RadioButton("Homme");
     rdMan.setToggleGroup(tgSex);
+    rdMan.setUserData("H");
+    rdMan.setPadding(new Insets(0, 5, 0, 0));
+    rdMan.setSelected(true);
 
     RadioButton rdWoman = new RadioButton("Femme");
     rdWoman.setToggleGroup(tgSex);
+    rdWoman.setUserData("F");
+    rdWoman.setPadding(new Insets(0, 5, 0, 0));
 
     RadioButton rdOther = new RadioButton("Autre");
     rdOther.setToggleGroup(tgSex);
+    rdOther.setUserData("O");
 
     HBox hSex = new HBox();
     hSex.getChildren().addAll(rdMan, rdWoman, rdOther);
@@ -81,13 +79,18 @@ class InscriptionJoueur extends BorderPane {
     Label lPasswordConfirm = new Label("Confirmer mot de passe : ");
     tfPasswordConfirm = new PasswordField();
 
-    btDashBoard = new Button("Accéder a la plateforme !");
-    btDashBoard.setPrefWidth(170);
 
-    candidate.getChildren().addAll(lName, tfName, lFirstName, tfFirstName, lSex, hSex, lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, btDashBoard);
-    candidate.setPadding(new Insets(15,15,0,0));
-    candidate.setSpacing(3);
-    //candidate.setAlignment(Pos.);
+    Button btConnect = new Button("S'inscrire !");
+    btConnect.setOnAction(new ActionInscription(this.primaryStage, this.laConnection));
+
+    HBox hBtConnect = new HBox();
+    hBtConnect.getChildren().add(btConnect);
+    hBtConnect.setAlignment(Pos.BASELINE_CENTER);
+    hBtConnect.setPadding(new Insets(15, 0, 0, 0));
+
+    candidate.getChildren().addAll(lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, lSex, hSex, hBtConnect);
+    candidate.setPadding(new Insets(20,20,0,0));
+    candidate.setSpacing(7);
 
     return candidate; }
 
@@ -100,7 +103,8 @@ class InscriptionJoueur extends BorderPane {
     imageLogo.setFitWidth(100);
     imageLogo.setPreserveRatio(true);
 
-    hlHelp = new Hyperlink("Besoin d'aide ?");
+    Hyperlink hlHelp = new Hyperlink("Besoin d'aide");
+    //hlHelp.setOnAction(new ActionHelp());
 
     ImageView imageHelp = new ImageView();
     imageHelp.setImage(VariablesJoueur.HELP);
@@ -111,13 +115,13 @@ class InscriptionJoueur extends BorderPane {
     hHelp.getChildren().addAll(hlHelp, imageHelp);
     hHelp.setAlignment(Pos.TOP_CENTER);
 
-    btBack = new Button("Retour");
-    btBack.setOnAction(new ActionBouton(this.primaryStage));
+    Button btBack = new Button("Retour");
+    btBack.setOnAction(new ActionBack(this.primaryStage, this.laConnection));
     btBack.setPrefWidth(100);
 
     candidate.getChildren().addAll(imageLogo, hHelp, btBack);
     candidate.setSpacing(50);
-    candidate.setPrefWidth(315);
+    candidate.setPrefWidth(270);
     candidate.setPadding(new Insets(25,0,0,0));
     candidate.setAlignment(Pos.TOP_CENTER);
 
@@ -148,16 +152,6 @@ class InscriptionJoueur extends BorderPane {
 
     return candidate; }
 
-  public Button getbtBack() { return this.btBack; }
-
-  public Button getBtBack() { return this.btBack; }
-
-  public Button getBtDashBoard() { return this.btDashBoard; }
-
-  public TextField getTfName() { return this.tfName; }
-
-  public TextField getTfFirstName() { return this.tfFirstName; }
-
   public TextField getTfMail() { return this.tfMail; }
 
   public TextField getTfPseudo() { return this.tfPseudo; }
@@ -168,8 +162,4 @@ class InscriptionJoueur extends BorderPane {
 
   public PasswordField getTfPasswordConfirm() {return this.tfPasswordConfirm; }
 
-  public Hyperlink getHlHelp() { return this.hlHelp; }
-
-  public String getTitle() { return this.title; }
-
-  public Stage getPrimaryStage() { return this.primaryStage; }}
+  public String getTitle() { return this.title; }}

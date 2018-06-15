@@ -7,12 +7,12 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
 
-public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
+public class ActionSauvegardeModifsJeu implements EventHandler<ActionEvent>{
 
-  ProfilJoueur pJoueur;
+  GererJeu gJeu;
 
-  public ActionProfilJoueurSauvegarde(ProfilJoueur pJoueur){
-    this.pJoueur = pJoueur;
+  public ActionSauvegardeModifsJeu(GererJeu gJeu){
+    this.gJeu = gJeu;
   }
 
   @Override

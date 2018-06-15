@@ -1,73 +1,75 @@
--- CREATE DATABASE IF NOT EXISTS serveurDeJeux DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
--- USE serveurDeJeux;
-USE dbmirloup;
+DROP DATABASE IF EXISTS serveurDeJeux;
+CREATE DATABASE serveurDeJeux DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE serveurDeJeux;
 CREATE TABLE ROLE (
-  nomRole varchar(10),
+  nomRole varchar(10) NOT NULL,
   PRIMARY KEY (nomRole)
 );
 
 CREATE TABLE UTILISATEUR (
-  idUt decimal(6,0),
-  pseudoUt varchar(10) unique,
-  emailUt varchar(100),
-  mdpUt varchar(100),
-  activeUt char(1),
-  nomRole varchar(10),
+  idUt SMALLINT NOT NULL AUTO_INCREMENT,
+  pseudoUt varchar(30) UNIQUE NOT NULL,
+  emailUt varchar(100) NOT NULL,
+  activeUt BOOLEAN NOT NULL,
+  nomRole varchar(10) NOT NULL,
+  hash varchar(100) NOT NULL,
+  salt varchar(100) NOT NULL,
   PRIMARY KEY (idUt)
 );
 
+
 CREATE TABLE ETREAMI (
-  idUt decimal(6,0),
-  idUt1 decimal(6,0),
+  idUt SMALLINT NOT NULL,
+  idUt1 SMALLINT NOT NULL,
   PRIMARY KEY (idUt, idUt1)
 );
 
 CREATE TABLE MESSAGE (
-  idMsg decimal(6,0),
-  dateMsg datetime,
+  idMsg SMALLINT NOT NULL AUTO_INCREMENT,
+  dateMsg datetime NOT NULL,
   contenuMsg text,
-  luMsg char(1),
-  idUt decimal(6,0),
-  idUt1 decimal(6,0),
+  luMsg char(1) NOT NULL,
+  idUt SMALLINT NOT NULL,
+  idUt1 SMALLINT NOT NULL,
   PRIMARY KEY (idMsg)
 );
 
 
 CREATE TABLE INVITATION (
-  idInv decimal(6,0),
-  dateInv datetime,
-  etatInv char(1),
-  idUt decimal(6,0),
-  idUt1 decimal(6,0),
+  idInv SMALLINT NOT NULL AUTO_INCREMENT,
+  dateInv datetime NOT NULL,
+  etatInv char(1) NOT NULL,
+  idUt SMALLINT NOT NULL,
+  idUt1 SMALLINT NOT NULL,
   PRIMARY KEY (idInv)
 );
 
 CREATE TABLE PARTIE (
-  idPa decimal(6,0),
-  debutPa datetime,
-  numEtape char(1),
-  etatPartie text,
-  idJeu decimal(6,0),
-  idUt1 decimal(6,0),
-  score1 VARCHAR(42),
-  idUt2 decimal(6,0),
-  score2 VARCHAR(42),
+  idPa SMALLINT NOT NULL AUTO_INCREMENT,
+  debutPa datetime NOT NULL,
+  numEtape char(1) NOT NULL,
+  etatPartie text NOT NULL,
+  idJeu SMALLINT NOT NULL,
+  idUt1 SMALLINT NOT NULL,
+  score1 VARCHAR(42) NOT NULL,
+  idUt2 SMALLINT NOT NULL,
+  score2 VARCHAR(42) NOT NULL,
   PRIMARY KEY (idPa)
 );
 
 CREATE TABLE JEU (
-  idJeu decimal(6,0),
-  nomJeu varchar(20),
+  idJeu SMALLINT NOT NULL AUTO_INCREMENT,
+  nomJeu varchar(20) NOT NULL,
   regleJeu text,
-  jarJeu blob,
-  activeJeu char(1),
-  idTy decimal(6,0),
+  jarJeu blob NOT NULL,
+  activeJeu char(1) NOT NULL,
+  idTy SMALLINT NOT NULL,
   PRIMARY KEY (idJeu)
 );
 
 CREATE TABLE TYPEJEU (
-  idTy decimal(6,0),
-  nomTy varchar(20),
+  idTy SMALLINT NOT NULL AUTO_INCREMENT,
+  nomTy varchar(20) NOT NULL,
   PRIMARY KEY (idTy)
 );
 
