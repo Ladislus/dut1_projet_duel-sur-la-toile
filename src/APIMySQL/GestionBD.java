@@ -47,11 +47,8 @@ public class GestionBD {
         return res;
     }
 
-    public static boolean updatePreparedStatement(ConnexionMySQL co, String requete, List<Object> listeDonnee) throws SQLException {
+    public static void updatePreparedStatement(ConnexionMySQL co, String requete, List<Object> listeDonnee) throws SQLException {
         //todo : make an exception
-        if(!requete.contains("?")){
-            return true;
-        }
         int nbPointDinterrogation = 0;
         for(int i =0; i<requete.length(); i++){
             if(requete.charAt(i) == '?'){
@@ -63,21 +60,11 @@ public class GestionBD {
         for(int i =0; i<nbPointDinterrogation; i++){
             ps.setObject(i+1, listeDonnee.get(i).toString());
         }
-        int nb=ps.executeUpdate();
-        if(nb ==0){
-            return false;
-        }
-        return true;
+        ps.executeUpdate();
     }
 
-    public static boolean updateStatement(ConnexionMySQL co, String requete){
-        try {
-            Statement s = co.createStatement();
-            s.executeUpdate(requete);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public static void updateStatement(ConnexionMySQL co, String requete) throws SQLException{
+        Statement s = co.createStatement();
+        s.executeUpdate(requete);
     }
 }

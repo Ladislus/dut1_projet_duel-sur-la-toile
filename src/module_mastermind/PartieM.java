@@ -16,32 +16,71 @@ import javafx.scene.text.FontWeight;
 import module_puissance4.Joueur;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PartieM {
-//
+
     public static String chem = "./img/module_mastermind/";
 
     public List<Button> listeCouleurs;
 
-    private Plateau p;
+    private PlateauM p;
 
     private Joueur j1,j2;
 
     private Mastermind mastermind;
 
+    private Circle c1,c2,c3,c4;
+    private List<Circle> lCercle;
+
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
-        this.p = new Plateau(j1,j2);
+        this.p = new PlateauM(j1,j2);
     }
 
-    public Plateau getPlateau(){
+    public PlateauM getPlateau(){
         return this.p;
     }
 
-    public void majAffichage(){}
-//
 
+    public void majAffichage(){
+
+        lCercle = new ArrayList<>();
+        lCercle.add(c1);
+        lCercle.add(c2);
+        lCercle.add(c3);
+        lCercle.add(c4);
+
+        for (Circle c : lCercle){
+            int pos = this.getPlateau().getCombiCour().get(lCercle.indexOf(c));
+            if (pos == 0){
+                c.setFill(Color.DARKGREY);
+            }
+            else if (pos == 1){
+                c.setFill(Color.YELLOW);
+            }
+            else if (pos == 2){
+                c.setFill(Color.RED);
+            }
+            else if (pos == 3){
+                c.setFill(Color.BLUE);
+            }
+            else if (pos == 4){
+                c.setFill(Color.SADDLEBROWN);
+            }
+            else if (pos == 5){
+                c.setFill(Color.FORESTGREEN);
+            }
+            else if (pos == 6){
+                c.setFill(Color.CYAN);
+            }
+        }
+    }
+
+    /**
+     * Créer la Scene du Mastermind
+     */
     public Scene getScene(Mastermind m) {
         BorderPane res = new BorderPane();
         res.setLeft(menu(m));
@@ -58,6 +97,7 @@ public class PartieM {
         titre.setFont(Font.font("Verdana", FontWeight.BOLD, 45));
         res.getChildren().addAll(titre);
         res.setAlignment(Pos.CENTER);
+        res.setPadding(new Insets(0,0,20,0));
         return res;
     }
 
@@ -67,7 +107,7 @@ public class PartieM {
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
 
-        Label timer = new Label("Time : 00:00:00");
+        Label timer = new Label("Time : 200");
         timer.setPadding(new Insets(75,0,0,0));
 
         Label couleurs = new Label("Couleurs :");
@@ -100,11 +140,10 @@ public class PartieM {
         cyan.setOnMouseClicked(new ActionMettreCouleur(this));
 
 
-        File intero = new File(chem+"intero.png");
-        ImageView inter = new ImageView();
-        inter.setImage(new Image(intero.toURI().toString()));
-
-        Button aide = new Button("",inter);
+        Button aide = new Button("?");
+        aide.setFont(Font.font("Verdana", FontWeight.BOLD,25));
+        aide.setTextFill(Color.WHITE);
+        aide.setStyle("-fx-background-color: #202020");
         aide.setOnAction(new ActionHelpM());
 
 
@@ -127,7 +166,7 @@ public class PartieM {
         return res;
     }
 
-    public static VBox plateau(){
+    public static ScrollPane plateau(){
         VBox res = new VBox(10);
         res.setAlignment(Pos.CENTER_RIGHT);
         res.setSpacing(20.);
@@ -137,9 +176,9 @@ public class PartieM {
             HBox temp = new HBox(20);
 
             for(int k=0; k<4;k++){
-                Circle cercleBleu = new Circle(25);
-                cercleBleu.setFill(Color.DARKGREY);
-                temp.getChildren().addAll(cercleBleu);
+                Circle cercleGris = new Circle(25);
+                cercleGris.setFill(Color.DARKGREY);
+                temp.getChildren().addAll(cercleGris);
             }
 
             GridPane plateau = new GridPane();
@@ -169,47 +208,49 @@ public class PartieM {
             res.getChildren().addAll(temp);
         }
 
-//        ScrollPane sp = new ScrollPane(res);
-//        sp.setHmin(200.);
-//        sp.setPadding(new Insets(0,0,0,0));
-//        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        ScrollPane sp = new ScrollPane(res);
+        sp.setHmin(200.);
+        sp.setPadding(new Insets(0,0,0,0));
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        res.setPadding(new Insets(20,100,0,0));
+        sp.setPrefViewportWidth(412);
 
-        return res;
+        return sp;
     }
 
     public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
         res.setSpacing(20.);
-        res.setPadding(new Insets(30,0,30,0));
         res.setPrefHeight(100.);
 
         Button suppr = new Button("Supprimer");
+        suppr.setOnAction(new ActionSupprimerTout(this));
+
         Button valider = new Button("Valider");
+        valider.setOnAction(new ActionTestComb(this));
 
         HBox adders = new HBox();
 
-        Circle c1 = new Circle(20);
+        c1 = new Circle(20);
         c1.setFill(Color.DARKGREY);
         c1.setUserData(0);
         c1.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
-        Circle c2 = new Circle(20);
+        c2 = new Circle(20);
         c2.setFill(Color.DARKGREY);
-        c2.setUserData(0);
+        c2.setUserData(1);
         c2.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
-        Circle c3 = new Circle(20);
+        c3 = new Circle(20);
         c3.setFill(Color.DARKGREY);
-        c3.setUserData(0);
+        c3.setUserData(2);
         c3.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
-        Circle c4 = new Circle(20);
+        c4 = new Circle(20);
         c4.setFill(Color.DARKGREY);
-        c4.setUserData(0);
+        c4.setUserData(3);
         c4.setOnMouseClicked(new ActionSupprimerCouleur(this));
 
 
@@ -217,7 +258,7 @@ public class PartieM {
 
         res.getChildren().addAll(suppr,c1,c2,c3,c4,valider);
 
-        res.setPadding(new Insets(0,0,0,75));
+        res.setPadding(new Insets(-50,0,0,75));
         return res;
     }
 

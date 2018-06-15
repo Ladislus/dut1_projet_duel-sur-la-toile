@@ -7,8 +7,13 @@ import java.util.HashMap;
 
 import static module_puissance4.Puissance4.chem;
 
+/**
+ * Vue des boutons au-dessus des colonnes
+ * un bouton sera soit désactivé (gris), rouge ou jaune en fonction du joueur qui passe sa souris dessus
+ */
 public class ImgBouton extends ImageView {
 
+    /** dictionnaire reliant un titre String à son image File */
     private static HashMap<String,File> dicoImage;
 
     public ImgBouton(String type) {
