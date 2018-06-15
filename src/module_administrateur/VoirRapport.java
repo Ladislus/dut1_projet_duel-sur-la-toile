@@ -72,6 +72,7 @@ public class VoirRapport extends BorderPane {
         r.getLabContenu().setPadding(new Insets(0,0,0,10));
         r.getLabPseudo().setStyle("-fx-font-weight: bold;-fx-underline: true;");
         CheckBox lu = new CheckBox();
+        lu.setPadding(new Insets(15,0,0,0));
         lu.setOnAction(new ActionRapportCheck(this, this.pa.getAdmin(), r));
         VBox v = new VBox();
         v.getChildren().addAll(r.getLabPseudo(), r.getLabContenu());
@@ -93,7 +94,6 @@ public class VoirRapport extends BorderPane {
         suppr.setPrefHeight(50);
         entete.setLeft(this.l);
         entete.setRight(suppr);
-        l.setPadding(new Insets(15,0,0,0));
         return entete;
     }
 
