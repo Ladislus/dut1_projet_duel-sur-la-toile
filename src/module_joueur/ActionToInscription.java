@@ -1,6 +1,6 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
+import APIMySQL.ConnexionMySQL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,9 +10,9 @@ class ActionToInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  private ConnexionMySQL laConnection;
 
-  public ActionToInscription(Stage primaryStage, GestionBD laConnection) {
+  public ActionToInscription(Stage primaryStage, ConnexionMySQL laConnection) {
 
     this.primaryStage = primaryStage;
     this.laConnection = laConnection; }

@@ -69,8 +69,6 @@ public class GestionBD {
         }
         return true;
     }
-<<<<<<< HEAD
-=======
 
     public static boolean updateStatement(ConnexionMySQL co, String requete){
         try {
@@ -82,5 +80,4 @@ public class GestionBD {
         }
         return true;
     }
->>>>>>> 9ea1129d9fef9e602bd64fec7f0ba6ea05d50ed3
 }

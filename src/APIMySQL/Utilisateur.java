@@ -31,7 +31,7 @@ public class Utilisateur {
         return GestionBD.selectPreparedStatement(co,"SELECT " + colonne + " FROM UTILISATEUR WHERE pseudoUt='"+pseudoUt+"'").get(colonne).get(0).toString();
     }
 
-    public static boolean creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole){
+    public static boolean creerUtilisateur(ConnexionMySQL co, String pseudo, String email, String mdp, String nomRole) throws UtilisateurException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class Utilisateur {
             Collections.addAll(donnees,pseudo,email,1,nomRole,getHash((mdp + salt).getBytes()),salt);
             GestionBD.updatePreparedStatement(co,"INSERT INTO UTILISATEUR (pseudoUt,emailUt,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new UtilisateurException("Erreur SQL");
         }
         return true;
     }

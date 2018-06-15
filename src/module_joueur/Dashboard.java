@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import APIMySQL.GestionBD;
+import APIMySQL.ConnexionMySQL;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,9 @@ class Dashboard extends BorderPane {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  private ConnexionMySQL laConnection;
 
-  public Dashboard(Stage primaryStage, GestionBD laConnection) {
+  public Dashboard(Stage primaryStage, ConnexionMySQL laConnection) {
 
     super();
 

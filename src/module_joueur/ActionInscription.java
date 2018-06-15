@@ -1,8 +1,9 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
+import APIMySQL.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
@@ -13,9 +14,9 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  private ConnexionMySQL laConnection;
 
-  public ActionInscription(Stage primaryStage, GestionBD laConnection) {
+  public ActionInscription(Stage primaryStage, ConnexionMySQL laConnection) {
 
     this.primaryStage = primaryStage;
     this.laConnection = laConnection; }
@@ -49,4 +50,25 @@ class ActionInscription implements EventHandler<ActionEvent> {
       a.setContentText(erreur);
       a.showAndWait(); }
 
-    else{}}}
+    else {
+
+      try {
+
+        Utilisateur.creerUtilisateur(laConnection, pseudo, mail, password, "USER");
+
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("INFORMATION");
+        a.setHeaderText("Le compte a été créé avec succès");
+        a.showAndWait();
+
+        ConnexionJoueur connexion = new ConnexionJoueur(primaryStage, laConnection);
+
+        this.primaryStage.setTitle(connexion.getTitle());
+        this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }
+
+      catch(UtilisateurException ex) {
+
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("ERREUR");
+        a.setHeaderText("Le compte existe déjà");
+        a.showAndWait(); }}}}
