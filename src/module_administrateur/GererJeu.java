@@ -194,32 +194,6 @@ public class GererJeu extends BorderPane {
       this.setLeft(gauche);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void centre(){
       VBox centre = new VBox();
       VBox vbaddjeu = new VBox(15);
