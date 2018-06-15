@@ -5,9 +5,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class Joueur extends Label{ // Vue des joueurs
+/**
+ * Vue des joueurs
+ */
+public class Joueur extends Label{
 
+    /** Nom du joueur */
     private String nom;
+
+    /** Booléen pour dire si c'est au tour du joueur ou non */
     private boolean jCourant;
 
 
