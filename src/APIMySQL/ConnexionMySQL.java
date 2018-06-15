@@ -4,20 +4,17 @@ import java.sql.*;
 
 class ConnexionMySQL {
 	private Connection mysql;
-	private boolean connecte=false;
-	public ConnexionMySQL() throws ClassNotFoundException{
-		this.mysql=null;
-		this.connecte=false;
+	private boolean connecte = false;
+	public ConnexionMySQL(String IP, String database, String user, String mdp) throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
+		try {
+			this.mysql = DriverManager.getConnection("jdbc:mysql://"+ IP +":3306/"+ database, user, mdp);
+			this.connecte=true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void connecter(String nomServeur, String nomBase, String nomLogin, String motDePasse) throws SQLException {
-		this.mysql=null;
-		this.connecte=false;
-		this.mysql = DriverManager.getConnection(
-				"jdbc:mysql://"+nomServeur+":3306/"+nomBase,nomLogin, motDePasse);
-		this.connecte=true;
-	}
 	public void close() throws SQLException {
 		this.mysql.close();
 		this.connecte=false;

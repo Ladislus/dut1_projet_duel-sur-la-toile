@@ -1,6 +1,7 @@
 package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
+import com.mysql.jdbc.exceptions.MySQLDataException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,39 +10,10 @@ import java.util.List;
 
 public class GestionBD {
 
-    private String url;
-    private String nomBase;
-    private String username;
-    private String password;
-    ConnexionMySQL connexionMySQL;
+    private GestionBD(){}
 
-    /*
-     * Constructeur qui se connecte a la base de donnée
-     *
-     */
-    public GestionBD(String url, String nomBase, String username, String password) throws ClassNotFoundException {
-        this.url = url;
-        this.nomBase = nomBase;
-        this.username = username;
-        this.password = password;
-        connexionMySQL = new ConnexionMySQL();
-    }
-
-    /*
-    Initialise la connexion a la base de donnée
-    Retourne vraie si elle c'est connectée, sinon faux
-     */
-    public boolean init(){
-        try{
-            this.connexionMySQL.connecter(this.url, this.nomBase, this.username, this.password);
-        } catch (SQLException e) {
-            System.out.println("Est casser -->");
-        }
-        return this.connexionMySQL.isConnecte();
-    }
-
-    public HashMap<String, List<Object>> selectRequestWithPreparedStatement(String requete) throws SQLException {
-        Statement st=connexionMySQL.createStatement();
+    public static HashMap<String, List<Object>> selectPreparedStatement(ConnexionMySQL co, String requete) throws SQLException {
+        Statement st=co.createStatement();
         ResultSet rs=st.executeQuery(requete);
         ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
         int columns = md.getColumnCount();
@@ -75,7 +47,7 @@ public class GestionBD {
         return res;
     }
 
-    public boolean insertRequete(String requete, List<Object> listeDonnee) throws SQLException {
+    public static boolean updatePreparedStatement(ConnexionMySQL co, String requete, List<Object> listeDonnee) throws SQLException {
         //todo : make an exception
         if(!requete.contains("?")){
             return true;
@@ -87,7 +59,7 @@ public class GestionBD {
             }
         }
         //
-        PreparedStatement ps = this.connexionMySQL.prepareStatement(requete);
+        PreparedStatement ps = co.prepareStatement(requete);
         for(int i =0; i<nbPointDinterrogation; i++){
             ps.setObject(i+1, listeDonnee.get(i).toString());
         }
@@ -97,4 +69,18 @@ public class GestionBD {
         }
         return true;
     }
+<<<<<<< HEAD
+=======
+
+    public static boolean updateStatement(ConnexionMySQL co, String requete){
+        try {
+            Statement s = co.createStatement();
+            s.executeUpdate(requete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+>>>>>>> 9ea1129d9fef9e602bd64fec7f0ba6ea05d50ed3
 }
