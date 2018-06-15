@@ -1,6 +1,7 @@
 package module_puissance4;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PlateauP4 { // Modèle du plateau du puissance 4
@@ -10,6 +11,8 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
     private Joueur joueur2;
 
     private int joueurCourant; // vaut 1 ou 2
+
+    public int nbPionsRest; // le nombre de pions restants
 
     private List<Colonne> tableau;
 
@@ -24,6 +27,8 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
         for (int c=0;c<7;c++){
             tableau.add(new Colonne());
         }
+
+        this.nbPionsRest = 42;
     }
 
     public Joueur getJ(int n){
@@ -106,10 +111,11 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
     }
 
     public int jouerUnCoup(int numCol){
+        this.nbPionsRest--;
         return this.getTableau().get(numCol).addPion(joueurCourant);
     }
 
-    public boolean aUnPuissance4(int l, int c){
+    public ResultatP4 etatDuJeu(int l, int c){
         // Renvoie le numéro du joueur gagnant s'il y a un puissance 4, 0 sinon
         List<String> possibilites = this.directions(l,c);
         int p = this.getPion(l,c);
@@ -128,9 +134,9 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
             else if (test=="diagInv"){
                 n = this.plusLongueSuite(this.getDiagInv(l,c));
             }
-            if (n>=4){return true;}
+            if (n>=4){return new ResultatP4(true,n);}
         }
-        return false;
+        return new ResultatP4(false,0);
     }
 
     public int plusLongueSuite(List<Integer> l) {

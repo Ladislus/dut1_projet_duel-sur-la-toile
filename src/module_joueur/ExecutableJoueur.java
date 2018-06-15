@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;

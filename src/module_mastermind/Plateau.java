@@ -1,6 +1,8 @@
 package module_mastermind;
 
 
+import module_puissance4.Joueur;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,11 @@ public class Plateau { // Modèle du plateau du Mastermind
 
     private Combinaison combiMystere, combiCour;
 
-    public Plateau(){
+    private Joueur joueur1, joueur2;
+
+    public Plateau(String j1, String j2){
+        this.joueur1 = new Joueur(j1);
+        this.joueur2 = new Joueur(j2);
         this.listeEssais = new ArrayList<>();
         this.listeResultats = new ArrayList<>();
         combiMystere = new Combinaison();

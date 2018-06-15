@@ -68,6 +68,7 @@ public class VoirRapport extends BorderPane {
         this.setTop(haut);
     }
 
+<<<<<<< HEAD
     public BorderPane creerRapportJoueur(Rapport r) {
         r.getLabContenu().setPadding(new Insets(0,0,0,10));
         r.getLabPseudo().setStyle("-fx-font-weight: bold;-fx-underline: true;");
@@ -81,6 +82,23 @@ public class VoirRapport extends BorderPane {
         v.setSpacing(10);
         this.pa.getAdmin().ajouterRapport(r);
         return r.getB();
+=======
+    public BorderPane rapportJoueur() {
+      this.b = new BorderPane();
+      this.pseudo = new Label("Joueur1");
+      this.rapport = new Label("J'adore cette plateforme");
+      rapport.setPadding(new Insets(0,0,0,10));
+      pseudo.setStyle("-fx-font-weight: bold;-fx-underline: true;");
+      CheckBox lu = new CheckBox();
+      lu.setOnAction(new ActionRapportCheck(this, this.pa.getAdmin(), "Joueur1", "J'adore cette plateforme"));
+      VBox v = new VBox();
+      v.getChildren().addAll(pseudo, rapport);
+      b.setLeft(v);
+      b.setRight(lu);
+      v.setSpacing(10);
+    //  this.pa.ajouterRapport(this.pseudo+" : "+this.rapport);
+      return b;
+>>>>>>> e90dcd33555f839fd06db3c23c52654359c55694
     }
 
     public BorderPane entete() {

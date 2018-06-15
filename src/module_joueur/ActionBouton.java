@@ -30,7 +30,4 @@ class ActionBouton implements EventHandler<ActionEvent> {
       String login = connexion.getTfLogin().getText();
       String password = connexion.getTfPassword().getText();
 
-      if (login.size() && password.size()){}
-
-      //TODO avec le dashboard
     }}}
