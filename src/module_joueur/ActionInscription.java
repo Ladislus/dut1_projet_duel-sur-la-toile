@@ -54,7 +54,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       try {
 
-        Utilisateur.creerUtilisateur(laConnection, pseudo, mail, password, "USER");
+        Utilisateur.creerUtilisateur(laConnection, pseudo, mail, sex, password, "USER");
 
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("INFORMATION");

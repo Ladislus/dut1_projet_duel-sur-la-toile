@@ -51,7 +51,7 @@ class InscriptionJoueur extends BorderPane {
 
     RadioButton rdMan = new RadioButton("Homme");
     rdMan.setToggleGroup(tgSex);
-    rdMan.setUserData("H");
+    rdMan.setUserData("M");
     rdMan.setPadding(new Insets(0, 5, 0, 0));
     rdMan.setSelected(true);
 

@@ -36,6 +36,15 @@ class ActionConnection implements EventHandler<ActionEvent> {
         a.setHeaderText("Le mot de passe est invalide");
         a.showAndWait(); }
 
+      else if (!Utilisateur.isActivated(laConnection, login)) {
+
+        page.setTfPassword("");
+
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("ERREUR");
+        a.setHeaderText("Le compte est désactivé");
+        a.showAndWait(); }
+
       else {
 
         Dashboard dashboard = new Dashboard(this.primaryStage, this.laConnection);
@@ -49,5 +58,5 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
       Alert a = new Alert(Alert.AlertType.ERROR);
       a.setTitle("ERREUR");
-      a.setHeaderText("Ce compte n'existe pas");
+      a.setHeaderText("Ce compte n'existe");
       a.showAndWait(); }}}
