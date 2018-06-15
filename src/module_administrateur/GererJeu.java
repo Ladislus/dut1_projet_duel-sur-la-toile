@@ -49,69 +49,175 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public void gauche(){
-      VBox gauche = new VBox();
-      VBox vbjeu = new VBox();
-      HBox hbsave = new HBox();
-      HBox hbetatjeu = new HBox(30);
-      HBox hbfilechooser = new HBox(5);
-      ActionSauvegardeModifsJeu asmj = new ActionSauvegardeModifsJeu(this);
+    public Label creerLabelEtatJeu(){
+      Label letatjeu = new Label("Etat du jeu : ");
+
+      return letatjeu;
+    }
+
+
+    public Button creerBoutonActiverJeu(){
       ActionGererJeuActiver agja = new ActionGererJeuActiver(this);
-      ActionGererJeuDesactiver agjd = new ActionGererJeuDesactiver(this);
-      ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
-      ComboBox cbjeux = new ComboBox(optionsjeu);
-      cbjeux.setPrefWidth(297);
-      Label etatjeu = new Label("Etat du jeu : ");
       Button bactiverjeu = new Button("Activer");
       bactiverjeu.setStyle("-fx-background-color: #009e0f;");
       bactiverjeu.setTextFill(Color.web("white"));
       bactiverjeu.setOnAction(agja);
+
+      return bactiverjeu;
+    }
+
+
+    public Button creerBoutonDesactiverJeu(){
+      ActionGererJeuDesactiver agjd = new ActionGererJeuDesactiver(this);
       Button bdesactiverjeu = new Button("Désactiver");
       bdesactiverjeu.setStyle("-fx-background-color: #cf2a27;");
       bdesactiverjeu.setTextFill(Color.web("white"));
       bdesactiverjeu.setOnAction(agjd);
+
+      return bdesactiverjeu;
+    }
+
+
+    public HBox creerHBoxEtatJeu(){
+      HBox hbetatjeu = new HBox(30);
+      hbetatjeu.getChildren().addAll(creerLabelEtatJeu(), creerBoutonActiverJeu(),
+        creerBoutonDesactiverJeu());
+
+      return hbetatjeu;
+    }
+
+
+
+    public Button creerBoutonSauvegarderModifs(){
+      Button bsave = new Button("Sauvegarder");
+      ActionSauvegardeModifsJeu asmj = new ActionSauvegardeModifsJeu(this);
+      bsave.setOnAction(asmj);
+      bsave.setPrefWidth(120);
+
+      return bsave;
+    }
+
+    public HBox creerHBoxSauvegarder(){
+      HBox hbsave = new HBox();
+
+      hbsave.getChildren().add(creerBoutonSauvegarderModifs());
+      hbsave.setAlignment(Pos.CENTER);
+
+      return hbsave;
+    }
+
+
+    public TextField creerTextFieldFileChooser(){
+      TextField tfilechooser = new TextField();
+      tfilechooser.setPromptText("Choisissez une image");
+      tfilechooser.setDisable(true);
+
+      return tfilechooser;
+    }
+
+
+    public Button creerBoutonFileChooser(){
+      Button bplus = new Button("+");
+      ActionFileChooser afc = new ActionFileChooser(this);
+      bplus.setOnAction(afc);
+
+      return bplus;
+    }
+
+
+    public HBox creerHBoxFileChooser(){
+      HBox hbfilechooser = new HBox(5);
+      hbfilechooser.getChildren().addAll(creerTextFieldFileChooser(), creerBoutonFileChooser());
+
+      return hbfilechooser;
+    }
+
+
+    public ComboBox creerComboBoxJeux(){
+      ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
+      ComboBox cbjeux = new ComboBox(optionsjeu);
+      cbjeux.setPrefWidth(297);
+
+      return cbjeux;
+    }
+
+
+    public TextField creerTextFieldEtatJeu(){
       TextField tetatjeu = new TextField();
       tetatjeu.setPromptText("Entrez le nom du jeu");
+
+      return tetatjeu;
+    }
+
+
+    public TextArea creerTextAreaRegleJeu(){
       TextArea treglejeu = new TextArea();
       treglejeu.setPromptText("Entrez les règles du jeu");
       treglejeu.setPrefWidth(80);
       treglejeu.setWrapText(true);
+
+      return treglejeu;
+    }
+
+
+    public ComboBox creerComboBoxModes(){
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
       ComboBox cbmodes = new ComboBox(optionsmode);
       cbmodes.setPrefWidth(297);
-      TextField tfilechooser = new TextField();
-      tfilechooser.setPromptText("Choisissez une image");
-      tfilechooser.setDisable(true);
-      Button bplus = new Button("+");
-      ActionFileChooser afc = new ActionFileChooser(this);
-      bplus.setOnAction(afc);
-      Button bsave = new Button("Sauvegarder");
-      bsave.setOnAction(asmj);
 
-      hbfilechooser.getChildren().addAll(tfilechooser, bplus);
+      return cbmodes;
+    }
 
-      hbsave.getChildren().add(bsave);
-      hbsave.setAlignment(Pos.CENTER);
 
-      hbetatjeu.getChildren().addAll(etatjeu, bactiverjeu, bdesactiverjeu);
-
-      vbjeu.getChildren().addAll(cbjeux, hbetatjeu, tetatjeu, treglejeu, cbmodes,
-        hbfilechooser, hbsave);
+    public VBox creerVBoxDescriptionJeu(){
+      VBox vbjeu = new VBox();
+      vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldEtatJeu(),
+        creerTextAreaRegleJeu(), creerComboBoxModes(), creerHBoxFileChooser(),
+          creerHBoxSauvegarder());
       vbjeu.setPadding(new Insets(10,15,10,15));
       vbjeu.setStyle("-fx-border-color: black;");
       vbjeu.setPrefHeight(350);
       vbjeu.setSpacing(10);
 
-      gauche.getChildren().add(vbjeu);
+      return vbjeu;
+    }
+
+
+    public void gauche(){
+      VBox gauche = new VBox();
+
+      gauche.getChildren().add(creerVBoxDescriptionJeu());
       gauche.setSpacing(10);
       gauche.setPadding(new Insets(5,5,5,10));
 
-      bsave.setPrefWidth(120);
-
       this.setLeft(gauche);
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void centre(){
