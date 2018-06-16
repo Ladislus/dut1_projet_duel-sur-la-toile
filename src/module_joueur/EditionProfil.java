@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -19,7 +18,7 @@ class EditionProfil extends BorderPane {
 
     TextField tfEmail;
 
-    public EditionProfil(Stage primaryStage){
+    public EditionProfil(){
         super();
 
         this.title = "Editez mon profil";
@@ -153,6 +152,7 @@ class EditionProfil extends BorderPane {
         BorderPane bp = new BorderPane();
         Button btRetour = new Button("<-- Retour");
         btRetour.setStyle("-fx-background-color: #2355a0; -fx-text-fill: #ffffff");
+        btRetour.setOnAction(new ActionRetourToDashboard());
         Button btSuppressionCompte = new Button("Supprimer mon compte");
         btSuppressionCompte.setStyle("-fx-background-color: #cc250c; -fx-text-fill: #ffffff");
         Button btEnregistrer = new Button("Enregistrer");

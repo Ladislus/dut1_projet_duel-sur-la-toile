@@ -119,7 +119,7 @@ class InscriptionJoueur extends BorderPane {
     hHelp.setAlignment(Pos.TOP_CENTER);
 
     Button btBack = new Button("Retour");
-    btBack.setOnAction(new ActionBack(this.primaryStage, this.laConnection));
+    btBack.setOnAction(new ActionRetourToConnexion(this.primaryStage, this.laConnection));
     btBack.setPrefWidth(100);
 
     candidate.getChildren().addAll(imageLogo, hHelp, btBack);

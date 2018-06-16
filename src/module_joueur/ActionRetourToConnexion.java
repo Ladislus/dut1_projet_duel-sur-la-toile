@@ -6,13 +6,13 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-class ActionBack implements EventHandler<ActionEvent> {
+class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
   private ConnexionMySQL laConnection;
 
-  public ActionBack(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ActionRetourToConnexion(Stage primaryStage, ConnexionMySQL laConnection) {
 
     this.primaryStage = primaryStage;
     this.laConnection = laConnection; }

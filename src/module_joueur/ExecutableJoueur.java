@@ -16,7 +16,7 @@ public class ExecutableJoueur extends Application {
 
     ConnexionMySQL laConnection = null;
 
-    try { laConnection = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
+    try { laConnection = new ConnexionMySQL("localhost", "serveurDeJeux", "root", "marlou06"); }
     catch(ClassNotFoundException ex) {
 
       Alert a = new Alert(Alert.AlertType.ERROR);

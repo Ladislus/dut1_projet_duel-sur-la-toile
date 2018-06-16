@@ -65,12 +65,14 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditez mon profil");
+    btEditerProfile.setOnAction(new ActionToEditerProfile());
     btEditerProfile.setPrefWidth(150);
 
     Button btParametre = new Button("Mes paramètres");
     btParametre.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
+    btExit.setOnAction(new ActionDeconnexion(primaryStage, laConnection));
 
     param.getChildren().addAll(btParametre, btExit);
     param.setSpacing(10);
