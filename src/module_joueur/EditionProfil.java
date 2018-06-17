@@ -1,13 +1,11 @@
 package module_joueur;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import APIMySQL.ConnexionMySQL;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,10 +18,24 @@ class EditionProfil extends BorderPane {
 
     String title;
 
-    public EditionProfil(Stage primaryStage){
+    ConnexionMySQL laConnection;
+
+    Stage primaryStage;
+
+    Joueur joueur;
+
+    TextField tfEmail;
+
+    int globalTitleFont;
+
+    public EditionProfil(ConnexionMySQL laConnection, Stage primaryStage, Joueur joueur){
         super();
 
         this.title = "Editez mon profil";
+        this.joueur = joueur;
+        this.laConnection = laConnection;
+        this.primaryStage = primaryStage;
+        this.globalTitleFont = 20;
         this.setLeft(creerGauche());
         this.setRight(creerDroite());
         this.setBottom(creerBas());
@@ -37,7 +49,7 @@ class EditionProfil extends BorderPane {
 
         // for image :
         Label lImage = new Label("Mon image");
-        lImage.setFont(Font.font("Arial", 22));
+        lImage.setFont(Font.font("Arial", globalTitleFont));
         File fileImageUser = new File("./img/pub/user.png");
         ImageView ivImageUser = new ImageView();
         ivImageUser.setImage(new Image(fileImageUser.toURI().toString()));
@@ -54,9 +66,10 @@ class EditionProfil extends BorderPane {
 
         // for pseudo
         Label lPseudo = new Label("Mon pseudo");
-        lPseudo.setFont(Font.font("Arial", 22));
+        lPseudo.setFont(Font.font("Arial", globalTitleFont));
         //Hbox vPseudo
         TextField tfPseudo = new TextField();
+        tfPseudo.setText(joueur.getPseudo());
         tfPseudo.setDisable(true);
         Button btEdition = new Button("", ivImageEditPseudo);
         btEdition.setOnAction(actionEvent -> tfPseudo.setDisable(false));
@@ -73,7 +86,7 @@ class EditionProfil extends BorderPane {
 
         vPrincipal.setPadding(new Insets(15,0,0,15));
         vPrincipal.setSpacing(25);
-        vPrincipal.setPrefWidth(170);
+        vPrincipal.setPrefWidth(230);
         vPrincipal.getChildren().addAll(vImage, vPseudo);
 
         return vPrincipal;
@@ -98,8 +111,9 @@ class EditionProfil extends BorderPane {
 
         //For email
         Label lEmail = new Label("Email :");
-        lEmail.setFont(Font.font("Arial", 22));
-        TextField tfEmail = new TextField();
+        lEmail.setFont(Font.font("Arial", globalTitleFont));
+        tfEmail = new TextField();
+        tfEmail.setText(joueur.getEmail());
         tfEmail.setDisable(true);
         Button btEditionEmail = new Button("",ivImageEdit);
         btEditionEmail.setOnAction(actionEvent -> tfEmail.setDisable(false));
@@ -119,7 +133,7 @@ class EditionProfil extends BorderPane {
 
         //for mot de passe
         Label lMotDePasse = new Label("Nouveau mot de passe :");
-        lMotDePasse.setFont(Font.font("Arial", 22));
+        lMotDePasse.setFont(Font.font("Arial", globalTitleFont));
         PasswordField tfMotDePasse = new PasswordField();
         tfMotDePasse.setDisable(true);
         Button btEditionMotPasse = new Button("", ivImageEditMdp);
@@ -132,7 +146,7 @@ class EditionProfil extends BorderPane {
 
         //for confirm mot de passe
         Label lConfirmMotDePasse = new Label("Confirmation :");
-        lConfirmMotDePasse.setFont(Font.font("Arial",22));
+        lConfirmMotDePasse.setFont(Font.font("Arial",globalTitleFont));
         PasswordField tfConfirmMotDePasse = new PasswordField();
         tfConfirmMotDePasse.setDisable(true);
         vConfirmMotDePasse.setAlignment(Pos.TOP_CENTER);
@@ -146,7 +160,7 @@ class EditionProfil extends BorderPane {
         vPrincipal.getChildren().addAll(vEmail, vMotDePasse, vConfirmMotDePasse);
         vPrincipal.setPadding(new Insets(15,6,0,0));
         vPrincipal.setSpacing(22);
-        vPrincipal.setPrefWidth(350);
+        vPrincipal.setPrefWidth(300);
         return vPrincipal;
     }
 
@@ -154,8 +168,10 @@ class EditionProfil extends BorderPane {
         BorderPane bp = new BorderPane();
         Button btRetour = new Button("<-- Retour");
         btRetour.setStyle("-fx-background-color: #2355a0; -fx-text-fill: #ffffff");
+        btRetour.setOnAction(new ActionRetourToDashboard());
         Button btSuppressionCompte = new Button("Supprimer mon compte");
         btSuppressionCompte.setStyle("-fx-background-color: #cc250c; -fx-text-fill: #ffffff");
+        btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, laConnection, joueur));
         Button btEnregistrer = new Button("Enregistrer");
         btEnregistrer.setStyle("-fx-background-color: #40b70c; -fx-text-fill: #ffffff");
         bp.setLeft(btRetour);
@@ -168,6 +184,10 @@ class EditionProfil extends BorderPane {
 
     public String getTitle(){
         return this.title;
+    }
+
+    public TextField getTfEmail(){
+        return this.tfEmail;
     }
 
 }

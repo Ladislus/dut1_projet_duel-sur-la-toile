@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import APIMySQL.GestionBD;
+import APIMySQL.ConnexionMySQL;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,11 @@ class Dashboard extends BorderPane {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  private ConnexionMySQL laConnection;
 
-  public Dashboard(Stage primaryStage, GestionBD laConnection) {
+  private Joueur joueur;
+
+  public Dashboard(Stage primaryStage, ConnexionMySQL laConnection, Joueur joueur) {
 
     super();
 
@@ -30,6 +32,8 @@ class Dashboard extends BorderPane {
 
     this.laConnection = laConnection;
 
+    this.joueur = joueur;
+
     this.setTop(creerHaut());
     this.setLeft(creerGauche());
     this.setCenter(creerCentre());
@@ -37,7 +41,7 @@ class Dashboard extends BorderPane {
 
   public HBox creerHaut() {
 
-    Label lTitre = new Label("Bienvenue XxX_DarkSasuke-69_XxX ");
+    Label lTitre = new Label("Bienvenue "+joueur.getPseudo());
     lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     HBox candidate = new HBox();
@@ -65,12 +69,14 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditez mon profil");
+    btEditerProfile.setOnAction(new ActionToEditerProfile(laConnection, primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
     Button btParametre = new Button("Mes paramètres");
     btParametre.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
+    btExit.setOnAction(new ActionDeconnexion(primaryStage, laConnection));
 
     param.getChildren().addAll(btParametre, btExit);
     param.setSpacing(10);

@@ -63,11 +63,24 @@ public class Utilisateur {
             String salt = getUserInfo(co,"salt","pseudoUt",pseudoUt);
             return getHash((mdp+salt).getBytes()).equals(hash);
         } catch (NullPointerException e) {
+          e.printStackTrace();
             throw new UtilisateurException("unknownPseudo");
         }
     }
 
     public static boolean isActivated(ConnexionMySQL co, String pseudoUt){
         return getUserInfo(co, "activeUt", "pseudoUt", pseudoUt).equals("true");
+    }
+
+    public static void deactivateUser(ConnexionMySQL co, String pseudo){
+        setUserInfo(co, "activeUt", 0, "pseudoUt", pseudo);
+    }
+
+    public static int getIdByPseudo(ConnexionMySQL co, String pseudoUt){
+        return Integer.parseInt(getUserInfo(co, "idUt", "pseudoUt", pseudoUt));
+    }
+
+    public static String getEmailByPseudo(ConnexionMySQL co, String pseudoUt){
+        return getUserInfo(co, "emailUt", "pseudoUt", pseudoUt);
     }
 }

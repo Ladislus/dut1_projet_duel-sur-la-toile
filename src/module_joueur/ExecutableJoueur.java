@@ -1,42 +1,36 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
+import APIMySQL.ConnexionMySQL;
 
-import java.io.File;
+import javafx.application.Application;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 public class ExecutableJoueur extends Application {
 
   public static void main(String [] args) { launch(args); }
 
-
   @Override
   public void start(Stage primaryStage) {
 
-    GestionBD laConnection = null;
+    ConnexionMySQL laConnection = null;
 
-    try { laConnection = new GestionBD("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
-    catch (ClassNotFoundException e) {} //TODO faire l'alerte
+    try { laConnection = new ConnexionMySQL("localhost", "serveurDeJeux", "root", "marlou06"); }
+    catch(ClassNotFoundException ex) {
+
+      Alert a = new Alert(Alert.AlertType.ERROR);
+      a.setTitle("CRITICAL ERROR");
+      a.setHeaderText("Impossible de se connecter à la base de donnée");
+      a.showAndWait();
+
+      primaryStage.close(); }
 
     ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
 
+    primaryStage.setTitle(connection.getTitle());
+    primaryStage.setScene(new Scene(connection, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
 
-      ConnexionJoueur cj = new ConnexionJoueur(primaryStage, laConnection);
-
-      primaryStage.setTitle(cj.getTitle());
-      primaryStage.setScene(new Scene(cj, 500, 290));
-      primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
-      primaryStage.getIcons().add(VariablesJoueur.LOGO);
-      primaryStage.show(); }}
+    primaryStage.setResizable(VariablesJoueur.IS_RESIZABLE);
+    primaryStage.getIcons().add(VariablesJoueur.LOGO);
+    primaryStage.show(); }}
