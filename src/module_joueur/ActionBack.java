@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.ConnexionMySQL;
 import APIMySQL.GestionBD;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,9 +11,9 @@ class ActionBack implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  private ConnexionMySQL laConnection;
 
-  public ActionBack(Stage primaryStage, GestionBD laConnection) {
+  public ActionBack(Stage primaryStage, ConnexionMySQL laConnection) {
 
     this.primaryStage = primaryStage;
     this.laConnection = laConnection; }
