@@ -26,7 +26,7 @@ public class ExempleExecutable {
             System.out.println(Utilisateur.isActivated(co,"test"));
             System.out.println(Utilisateur.isMdpValide(co,"test2","test"));
         } catch (UtilisateurException e) {
-            e.printMessage();
+            //e.printMessage();
         }
 
     }
