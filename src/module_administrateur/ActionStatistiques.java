@@ -1,4 +1,4 @@
-package module_administrateur;
+/*package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,14 +6,15 @@ import javafx.stage.Stage;
 
 public class ActionStatistiques implements EventHandler<ActionEvent> {
 
-    PageAccueil pAccueil;
+    PageAccueil pa;
 
-    public ActionStatistiques(PageAccueil pAccueil) {
-        this.pAccueil = pAccueil;
+    public ActionStatistiques(PageAccueil pa) {
+        this.pa = pa;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.pAccueil.getBp().setCenter(new VoirStatistiques(this.pAccueil));
+        this.pa.getBp().setCenter(new VoirStatistiques(this.pa));
     }
 }
+*/

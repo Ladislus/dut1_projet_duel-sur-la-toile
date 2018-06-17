@@ -10,10 +10,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.lang.Math;
 
 public class GererJoueur extends BorderPane {
 
     PageAccueil pa;
+    Button activer;
+    Button supprimer;
 
     public GererJoueur(PageAccueil pa) {
       super();
@@ -21,6 +24,14 @@ public class GererJoueur extends BorderPane {
       this.haut();
       this.gauche();
       this.centre();
+    }
+
+    public Button getButtonActiver() {
+        return this.activer;
+    }
+
+    public Button getButtonSupprimer() {
+        return this.supprimer;
     }
 
     public void haut() {
@@ -35,96 +46,103 @@ public class GererJoueur extends BorderPane {
         this.setTop(haut);
     }
 
+    public Button creerBoutonSupprimer() {
+        this.supprimer = new Button("Supprimer");
+        ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
+        this.supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
+        this.supprimer.setTextFill(Color.web("white"));
+        this.supprimer.setPrefWidth(200);
+        this.supprimer.setPrefHeight(50);
+        this.supprimer.setOnAction(asj);
+        return this.supprimer;
+    }
+
+    public Button creerBoutonActiver() {
+        this.activer = new Button("Activer");
+        ActionActiverJoueur acj = new ActionActiverJoueur(this);
+        this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
+        this.activer.setTextFill(Color.web("white"));
+        this.activer.setPrefWidth(200);
+        this.activer.setPrefHeight(50);
+        this.activer.setOnAction(acj);
+        return this.activer;
+    }
+
+    public HBox creerJoueurActiver() {
+        HBox joueur = new HBox();
+        Label lj = new Label("Joueur1");
+        CheckBox cb = new CheckBox();
+        cb.setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), "Joueur1"));
+        joueur.getChildren().addAll(lj, cb);
+        joueur.setSpacing(185);
+        return joueur;
+    }
+
     public void centre() {
         VBox centre = new VBox();
-
         Label l = new Label("Nombre de joueurs à activer : ");
-        Button activer = new Button("Activer");
-        Button supprimer = new Button("Supprimer");
-        activer.setStyle("-fx-background-color: #009e0f;");
-        supprimer.setStyle("-fx-background-color: #cf2a27;");
-        activer.setTextFill(Color.web("white"));
-        supprimer.setTextFill(Color.web("white"));
-        activer.setPrefWidth(200);
-        activer.setPrefHeight(50);
-        supprimer.setPrefWidth(200);
-        supprimer.setPrefHeight(50);
         HBox bouton = new HBox();
-        bouton.getChildren().addAll(activer, supprimer);
+        bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
         bouton.setSpacing(10);
-        VBox listeJoueur = new VBox();
-        TextField recherche = new TextField("Rechercher un joueur");
+        TextField recherche = new TextField();
+        recherche.setPromptText("Rechercher un joueur");
+
+        ScrollPane listeJoueur = new ScrollPane();
+        listeJoueur.setPrefSize(280, 1000);
 
         VBox v = new VBox();
 
-        //POUR CHAQUE JOUEUR
-        BorderPane joueur = new BorderPane();
-        Label lj = new Label("Joueur1");
-        CheckBox cb = new CheckBox();
-        joueur.setLeft(lj);
-        joueur.setRight(cb);
-        BorderPane joueur2 = new BorderPane();
-        Label lj2 = new Label("Joueur2");
-        CheckBox cb2 = new CheckBox();
-        joueur2.setLeft(lj2);
-        joueur2.setRight(cb2);
+        for (int i=0; i<20; i++) {
+            v.getChildren().addAll(creerJoueurActiver());
+        }
 
-        v.getChildren().addAll(joueur, joueur2);
-        listeJoueur.getChildren().addAll(recherche, v);
         listeJoueur.setStyle("-fx-border-color: black;");
-        listeJoueur.setPrefHeight(300);
-        listeJoueur.setSpacing(5);
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(10);
 
-
-        centre.getChildren().addAll(l, bouton, listeJoueur);
+        listeJoueur.setContent(v);
+        centre.getChildren().addAll(l, bouton, recherche, listeJoueur);
         centre.setSpacing(10);
-
         centre.setPadding(new Insets(0,25,15,25));
-
         this.setCenter(centre);
+    }
+
+    public HBox creerJoueurListeJoueur() {
+        HBox joueur = new HBox();
+      //  String pseudo = "l";
+      //  int longPseudo = pseudo.length();
+      //  Label lj = new Label("- "+pseudo+" ");
+      //  for (int i=0; i<36-(longPseudo-6) ; i++) {
+      //    lj.setText(lj.getText()+".");
+      //  }
+      //  lj.setText("- Joueur ....................................");
+        Label lj = new Label("- Joueur ");
+        Hyperlink hl = new Hyperlink("Profil");
+        hl.setOnAction(new ActionProfilJoueur(this.pa, this, "Joueur"));
+        joueur.setSpacing(150);
+        joueur.getChildren().addAll(lj, hl);
+        return joueur;
     }
 
     public void gauche() {
         VBox gauche = new VBox();
         Label l = new Label("Liste des joueurs");
-        l.setPadding(new Insets(0,0,12,0));
-        TextField recherche = new TextField("Rechercher un joueur");
-        VBox listeJoueur = new VBox();
-        listeJoueur.setPrefHeight(450);
-        listeJoueur.setStyle("-fx-border-color: black;");
+        l.setPadding(new Insets(0,0,9,0));
+        TextField recherche = new TextField();
+        recherche.setPromptText("Rechercher un joueur");
 
-//SI NOMBRE DE JOUEUR EST SUPERIEUR A VALEUR ALORS AFFICHER UNE BARRE DE DEFILEMENT
+        ScrollPane listeJoueur = new ScrollPane();
+        listeJoueur.setPrefSize(280, 1000);
+        listeJoueur.setStyle("-fx-border-color: black;");
 
         VBox v = new VBox();
 
-       //POUR CHAQUE JOUEUR
-        HBox joueur = new HBox();
-        Label lj = new Label("- Joueur1");
-        Hyperlink hl = new Hyperlink("Profil");
-        hl.setOnAction(new ActionProfilJoueur(this.pa, this));
-        joueur.setSpacing(150);
-        joueur.getChildren().addAll(lj, hl);
+        for (int i=0; i<20; i++) {
+          v.getChildren().addAll(creerJoueurListeJoueur());
 
-        HBox joueur2 = new HBox();
-        Label lj2 = new Label("- Joueur2");
-        Hyperlink hl2 = new Hyperlink("Profil");
-        hl2.setOnAction(new ActionProfilJoueur(this.pa, this));
-        joueur2.setSpacing(150);
-        joueur2.getChildren().addAll(lj2, hl2);
-
-        HBox joueur3 = new HBox();
-        Label lj3 = new Label("- Joueur3");
-        Hyperlink hl3 = new Hyperlink("Profil");
-        hl3.setOnAction(new ActionProfilJoueur(this.pa, this));
-        joueur3.setSpacing(150);
-        joueur3.getChildren().addAll(lj3, hl3);
-        //
-
-        v.getChildren().addAll(joueur, joueur2, joueur3);
-        listeJoueur.getChildren().addAll(recherche, v);
-        gauche.getChildren().addAll(l, listeJoueur);
+        }
+        listeJoueur.setContent(v);
+        gauche.getChildren().addAll(l, recherche, listeJoueur);
         v.setPadding(new Insets(5,0,0,10));
         v.setSpacing(5);
         gauche.setPadding(new Insets(0,0,15,25));

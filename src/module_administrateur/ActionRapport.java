@@ -6,14 +6,14 @@ import javafx.stage.Stage;
 
 public class ActionRapport implements EventHandler<ActionEvent> {
 
-    PageAccueil pAccueil;
+    PageAccueil pa;
 
-    public ActionRapport(PageAccueil pAccueil) {
-        this.pAccueil = pAccueil;
+    public ActionRapport(PageAccueil pa) {
+        this.pa = pa;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.pAccueil.getBp().setCenter(new VoirRapport(this.pAccueil));
+        this.pa.getBp().setCenter(new VoirRapport(this.pa));
     }
 }

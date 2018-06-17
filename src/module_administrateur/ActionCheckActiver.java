@@ -8,13 +8,13 @@ import javafx.scene.control.CheckBox;
 public class ActionCheckActiver implements EventHandler<ActionEvent> {
 
     GererJoueur gJoueur;
-    String joueur;
     Administration a;
+    String joueur;
 
-    public ActionCheckActiver(GererJoueur gJoueur, String joueur, Administration a) {
+    public ActionCheckActiver(GererJoueur gJoueur, Administration a, String joueur) {
         this.gJoueur = gJoueur;
-        this.joueur = joueur;
         this.a = a;
+        this.joueur = joueur;
     }
 
     @Override
@@ -25,6 +25,14 @@ public class ActionCheckActiver implements EventHandler<ActionEvent> {
         }
         else {
             this.a.retirerListeActiver(this.joueur);
+        }
+        if (this.a.getJoueurAactiver().size() == 0) {
+            this.gJoueur.getButtonSupprimer().setDisable(true);
+            this.gJoueur.getButtonActiver().setDisable(true);
+        }
+        else {
+            this.gJoueur.getButtonSupprimer().setDisable(false);
+            this.gJoueur.getButtonActiver().setDisable(false);
         }
         System.out.println(this.a.getJoueurAactiver());
     }

@@ -17,8 +17,9 @@ import javafx.scene.chart.*;
 
 public class ProfilJoueur extends BorderPane {
 
-    GererJoueur gJoueur;
-    PageAccueil pa;
+    private GererJoueur gJoueur;
+    private PageAccueil pa;
+
 
     public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur) {
         super();
@@ -35,7 +36,7 @@ public class ProfilJoueur extends BorderPane {
         Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
+      //  bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);
@@ -59,6 +60,7 @@ public class ProfilJoueur extends BorderPane {
       TextField temail = new TextField();
       ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
       ComboBox cbrole = new ComboBox(optionsRoles);
+      cbrole.setPrefWidth(175);
       Label active = new Label("Activer ?");
       RadioButton rbactiver = new RadioButton("Oui");
       RadioButton rbpasactiver = new RadioButton("Non");
@@ -68,9 +70,12 @@ public class ProfilJoueur extends BorderPane {
       Label limageprofil = new Label("Image de profil");
       TextField tfilechooser = new TextField();
       tfilechooser.setPromptText("Choisissez une image");
+      tfilechooser.setDisable(true);
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);
       bplus.setOnAction(afc);
+      ActionProfilJoueurSauvegarde apjs = new ActionProfilJoueurSauvegarde(this);
+      bsave.setOnAction(apjs);
 
 
       gpgauche.add(pseudo, 1, 40);
@@ -99,8 +104,6 @@ public class ProfilJoueur extends BorderPane {
       vbgauche.setPadding(new Insets(0,0,0,25));
 
       this.setLeft(vbgauche);
-
-
     }
 
     public void centre() {

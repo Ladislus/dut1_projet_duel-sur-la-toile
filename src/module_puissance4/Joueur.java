@@ -5,9 +5,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class Joueur extends Label{ // Vue des joueurs
+/**
+ * Vue des joueurs
+ */
+public class Joueur extends Label{
 
+    /** Nom du joueur */
     private String nom;
+
+    /** Booléen pour dire si c'est au tour du joueur ou non */
     private boolean jCourant;
 
 
@@ -19,6 +25,10 @@ public class Joueur extends Label{ // Vue des joueurs
 
     public String getNom() {return nom;}
 
+    /** Changer la valeur du booléen jCourant
+     * Si le joueur devient le joueur courant, le texte devient plus gros et noir
+     * Sinon, le texte devient plus petit est gris
+     */
     public void setCour(boolean b){
         this.jCourant = b;
         if (jCourant){
