@@ -20,7 +20,21 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
      */
     public void handle(ActionEvent actionEvent){
         PlateauM plateauM = this.mastermind.getPlateau();
-        if (!plateauM.getCombiCour().isFull()){
+        if (plateauM.getCombiCour().isFull()){
+            plateauM.jouerUnCoup();
+            if (plateauM.aTrouveCombi()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("VICTOIRE !");
+                alert.setHeaderText("Vous avez gagné !");
+                alert.setContentText("Bravo, vous avez trouvé la combinaison !\n" +
+                        " Votre score est de xxx points ! \n" +
+                        "Cliquer sur le bouton \"Rejouer\" pour refaire une partie, et sur \"Quitter\" pour arrêter.\n" +
+                        "Bon jeu !");
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                alert.showAndWait();
+            }
+        }
+        else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erreur");
             alert.setHeaderText("Combinaison incomplète");
@@ -28,18 +42,8 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
-        plateauM.jouerUnCoup();
-        if (plateauM.aTrouveCombi()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("VICTOIRE !");
-            alert.setHeaderText("Vous avez gagné !");
-            alert.setContentText("Bravo, vous avez trouvé la combinaison !\n" +
-                    " Votre score est de xxx points ! \n" +
-                    "Cliquer sur le bouton \"Rejouer\" pour refaire une partie, et sur \"Quitter\" pour arrêter.\n" +
-                    "Bon jeu !");
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.showAndWait();
-        }
+//        System.out.println(plateauM.getListeEssais());
+        this.mastermind.ajouteResultat();
         this.mastermind.majAffichage();
     }
 }

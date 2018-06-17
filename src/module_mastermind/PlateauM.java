@@ -48,7 +48,11 @@ public class PlateauM { // Modèle du plateau du Mastermind
      * recréer une nouvelle combinaison vide
      */
     public void jouerUnCoup(){
-        this.listeEssais.add(combiCour);
+        Combinaison coup = new Combinaison();
+        for (int i =0; i <4; i++){
+            coup.set(i,this.combiCour.get(i));
+        }
+        this.listeEssais.add(coup);
         this.listeResultats.add(Resultat.compare(combiMystere,combiCour));
         this.combiCour = new Combinaison();
     }
