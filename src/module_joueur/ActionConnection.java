@@ -47,7 +47,8 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
       else {
 
-        Dashboard dashboard = new Dashboard(this.primaryStage, this.laConnection);
+        Dashboard dashboard = new Dashboard(this.primaryStage, this.laConnection, new Joueur(Utilisateur.getIdByPseudo(laConnection, login),
+                login, Utilisateur.getEmailByPseudo(laConnection, login)));
 
         this.primaryStage.setTitle(dashboard.getTitle());
         this.primaryStage.setScene(new Scene(dashboard, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT)); }}
