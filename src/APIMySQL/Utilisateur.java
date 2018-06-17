@@ -80,6 +80,24 @@ public class Utilisateur {
         return Integer.parseInt(getUserInfo(co, "idUt", "pseudoUt", pseudoUt));
     }
 
+    public static String getPseudoById(ConnexionMySQL co, Integer id){
+        return getUserInfo(co, "pseudoUt", "idUt", id.toString());
+    }
+
+    public static ArrayList<String> getListeDamis(ConnexionMySQL co, String pseudo){
+        try {
+            ArrayList<String> listePseudo = new ArrayList<>();
+            List<Object> listeId = GestionBD.selectPreparedStatement(co,"SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(co, pseudo)).get("idUt1");
+            for(Object elem : listeId){
+                listePseudo.add(String.valueOf(getPseudoById(co, (Integer) elem)));
+            }
+            return listePseudo;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getEmailByPseudo(ConnexionMySQL co, String pseudoUt){
         return getUserInfo(co, "emailUt", "pseudoUt", pseudoUt);
     }

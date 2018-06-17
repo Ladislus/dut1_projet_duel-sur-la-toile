@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.Utilisateur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import APIMySQL.ConnexionMySQL;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 class Dashboard extends BorderPane {
 
@@ -21,6 +23,8 @@ class Dashboard extends BorderPane {
   private ConnexionMySQL laConnection;
 
   private Joueur joueur;
+
+  private ArrayList<Button> listeBoutton;
 
   public Dashboard(Stage primaryStage, ConnexionMySQL laConnection, Joueur joueur) {
 
@@ -33,6 +37,10 @@ class Dashboard extends BorderPane {
     this.laConnection = laConnection;
 
     this.joueur = joueur;
+
+    this.listeBoutton = new ArrayList<>();
+
+    majAffichage();
 
     this.setTop(creerHaut());
     this.setLeft(creerGauche());
@@ -96,7 +104,7 @@ class Dashboard extends BorderPane {
 
     ScrollPane sDroiteListeDamis = new ScrollPane();
 
-    Label lbTotalContact = new Label("Total : 8 contacts");
+    Label lbTotalContact = new Label("Total : "+listeBoutton.size()+" contact(s)");
     Label lListeDamis = new Label("Ma liste d'amis");
     lListeDamis.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
@@ -106,25 +114,7 @@ class Dashboard extends BorderPane {
     Button btListeDamis = new Button("Mes amis");
     btListeDamis.setPrefWidth(150);
 
-    //todo : Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
-
-    String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "Sergine", "Anastasia"};
-
-    ArrayList<Button> listeButton = new ArrayList<>();
-
-    for (String name : btName) {
-
-      ImageView imageContact = new ImageView();
-      imageContact.setImage(VariablesJoueur.CONTACT);
-      imageContact.setPreserveRatio(true);
-      imageContact.setFitWidth(20);
-
-      Button btContact = new Button(name, imageContact);
-      btContact.setPrefWidth(150);
-      btContact.setAlignment(Pos.CENTER_LEFT);
-      listeButton.add(btContact); }
-
-    hDroiteListeDamis.getChildren().addAll(listeButton);
+    hDroiteListeDamis.getChildren().addAll(listeBoutton);
     hDroiteListeDamis.setSpacing(5);
     hDroiteListeDamis.setPrefHeight(375);
 
@@ -166,6 +156,31 @@ class Dashboard extends BorderPane {
     candidate.setSpacing(10);
     candidate.setPadding(new Insets(0,15,9,15));
 
-    return candidate; }
+    return candidate;
+  }
 
-  public String getTitle() { return this.title; }}
+  public void majAffichage(){
+
+      //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
+      ArrayList<String> btName = Utilisateur.getListeDamis(laConnection, joueur.getPseudo());
+      if(!Objects.equals(btName, null)){
+          for (String name : btName) {
+              ImageView imageContact = new ImageView();
+              imageContact.setImage(VariablesJoueur.CONTACT);
+              imageContact.setPreserveRatio(true);
+              imageContact.setFitWidth(20);
+
+              Button btContact = new Button(name, imageContact);
+              btContact.setPrefWidth(150);
+              btContact.setAlignment(Pos.CENTER_LEFT);
+              listeBoutton.add(btContact);
+          }
+      }
+
+  }
+
+  public String getTitle() {
+      return this.title;
+  }
+
+}
