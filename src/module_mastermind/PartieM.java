@@ -15,6 +15,7 @@ import module_puissance4.Joueur;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PartieM {
 
@@ -32,15 +33,19 @@ public class PartieM {
     private List<Circle> lCercle;
     private VBox listeComb;
 
-    private HashMap<Integer,Color> attributionCouleur;
+    private Map<Integer,Color> attributionCouleur;
+    private Map<Integer,Color> attributionIndices;
 
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
+
         this.listeComb = new VBox(10);
         this.listeComb.setAlignment(Pos.CENTER_RIGHT);
         this.listeComb.setSpacing(20.);
         this.listeComb.setPrefWidth(160.);
+
         this.p = new PlateauM(j1,j2);
+
         this.attributionCouleur = new HashMap<>();
         this.attributionCouleur.put(0,Color.DARKGREY);
         this.attributionCouleur.put(1,Color.YELLOW);
@@ -49,6 +54,11 @@ public class PartieM {
         this.attributionCouleur.put(4,Color.SADDLEBROWN);
         this.attributionCouleur.put(5,Color.FORESTGREEN);
         this.attributionCouleur.put(6,Color.CYAN);
+
+        this.attributionIndices = new HashMap<>();
+        this.attributionIndices.put(0,Color.LIGHTGRAY);
+        this.attributionIndices.put(1,Color.BLACK);
+        this.attributionIndices.put(2,Color.STEELBLUE);
     }
 
     public PlateauM getPlateau(){
@@ -71,18 +81,26 @@ public class PartieM {
     }
 
     public void ajouteResultat(){
-        if (this.p.getListeEssais().size() > 0 && this.p.getListeEssais() != null){
+        if ((this.p.getListeEssais().size() > 0 && this.p.getListeEssais() != null) && (this.p.getListeResultats().size() > 0 && this.p.getListeResultats() != null)){
             HBox nouvEssai = new HBox();
             nouvEssai.setSpacing(10.);
-            Label numEssai = new Label(1+"");
+            Label numEssai = new Label(this.p.getListeEssais().size()+"");
             numEssai.setFont(Font.font(40));
             nouvEssai.getChildren().add(numEssai);
             Combinaison dernierEssai = this.p.getListeEssais().get(this.p.getListeEssais().size()-1);
             for (int c : dernierEssai){
-                System.out.println(c);
+//                System.out.println(c);
                 nouvEssai.getChildren().add(new Circle(25,this.attributionCouleur.get(c)));
             }
-            this.listeComb.getChildren().add(nouvEssai);
+            GridPane indices = new GridPane();
+            Combinaison dernierIndices = this.p.getListeResultats().get(this.p.getListeResultats().size()-1);
+            for (int i = 1; i<5; i++){
+                indices.add(new Circle(10,this.attributionIndices.get(dernierIndices.get(i-1))),(i-1)%2,(i-1)/2);
+            }
+            indices.setVgap(5);
+            indices.setHgap(5);
+            nouvEssai.getChildren().add(indices);
+            this.listeComb.getChildren().addAll(nouvEssai);
         }
     }
 
@@ -152,9 +170,6 @@ public class PartieM {
         return res;
     }
 
-//    public VBox plateau(){
-//        return res;
-//    }
 
     public ScrollPane plateauSP(VBox plateau){
 
