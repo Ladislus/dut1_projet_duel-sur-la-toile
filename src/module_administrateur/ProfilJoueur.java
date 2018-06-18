@@ -1,5 +1,6 @@
 package module_administrateur;
 
+import APIMySQL.Utilisateur;
 import javafx.application.Application;
 import javafx.geometry.*;
 import javafx.scene.Scene;
@@ -47,7 +48,7 @@ public class ProfilJoueur extends BorderPane {
 
 
     public Label creerLabelPseudo(){
-      Label pseudo = new Label("Pseudo : ");
+      Label pseudo = new Label("Pseudo : " + Utilisateur.getPseudoById(1));
 
       return pseudo;
     }
