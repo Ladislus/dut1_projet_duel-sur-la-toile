@@ -1,6 +1,6 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
+import APIMySQL.ConnexionMySQL;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -24,15 +24,15 @@ class InscriptionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  
 
-  public InscriptionJoueur(Stage primaryStage, GestionBD laConnection) {
+  public InscriptionJoueur(Stage primaryStage) {
 
     super();
 
     this.primaryStage = primaryStage;
 
-    this.laConnection = laConnection;
+    
 
     this.title = "Acceuil : Inscription";
 
@@ -51,7 +51,7 @@ class InscriptionJoueur extends BorderPane {
 
     RadioButton rdMan = new RadioButton("Homme");
     rdMan.setToggleGroup(tgSex);
-    rdMan.setUserData("H");
+    rdMan.setUserData("M");
     rdMan.setPadding(new Insets(0, 5, 0, 0));
     rdMan.setSelected(true);
 
@@ -69,19 +69,22 @@ class InscriptionJoueur extends BorderPane {
 
     Label lMail = new Label("E-mail : ");
     tfMail = new TextField();
+    tfMail.setPromptText("Entrez votre email ici");
 
     Label lPseudo = new Label("Pseudonyme : ");
     tfPseudo = new TextField();
+    tfPseudo.setPromptText("Entrez votre pseudo ici");
 
     Label lPassword = new Label("Mot de passe : ");
     tfPassword = new PasswordField();
+    tfPassword.setPromptText("Entrez votre mot de passe ici");
 
     Label lPasswordConfirm = new Label("Confirmer mot de passe : ");
     tfPasswordConfirm = new PasswordField();
-
+    tfPasswordConfirm.setPromptText("Confirmez votre mot de passe ici");
 
     Button btConnect = new Button("S'inscrire !");
-    btConnect.setOnAction(new ActionInscription(this.primaryStage, this.laConnection));
+    btConnect.setOnAction(new ActionInscription(this.primaryStage));
 
     HBox hBtConnect = new HBox();
     hBtConnect.getChildren().add(btConnect);
@@ -116,7 +119,7 @@ class InscriptionJoueur extends BorderPane {
     hHelp.setAlignment(Pos.TOP_CENTER);
 
     Button btBack = new Button("Retour");
-    btBack.setOnAction(new ActionBack(this.primaryStage, this.laConnection));
+    btBack.setOnAction(new ActionRetourToConnexion(this.primaryStage));
     btBack.setPrefWidth(100);
 
     candidate.getChildren().addAll(imageLogo, hHelp, btBack);
