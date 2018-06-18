@@ -157,7 +157,6 @@ public class GererJoueur extends BorderPane {
 
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
-
         Joueur j1 = new Joueur("Leo", 2, true);
         Joueur j2 = new Joueur("ab", 5, true);
         Joueur j3 = new Joueur("zf", 1, false);
