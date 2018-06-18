@@ -18,8 +18,8 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
     ConnexionJoueur page = (ConnexionJoueur) this.primaryStage.getScene().getRoot();
 
-    String login = page.getTfLogin().getText();
-    String password = page.getTfPassword().getText();
+    String login = page.getTfLogin();
+    String password = page.getTfPassword();
 
     try {
 
@@ -27,19 +27,13 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
         page.setTfPassword("");
 
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setTitle("ERREUR");
-        a.setHeaderText("Le mot de passe est invalide");
-        a.showAndWait(); }
+        page.setInfo("Le mot de passe est invalide"); }
 
       else if (!Utilisateur.isActivated(login)) {
 
         page.setTfPassword("");
 
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setTitle("ERREUR");
-        a.setHeaderText("Le compte est désactivé");
-        a.showAndWait(); }
+        page.setInfo("Le compte est désactivé"); }
 
       else {
 
@@ -52,7 +46,4 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
       page.setTfPassword("");
 
-      Alert a = new Alert(Alert.AlertType.ERROR);
-      a.setTitle("ERREUR");
-      a.setHeaderText("Ce compte n'existe pas");
-      a.showAndWait(); }}}
+      page.setInfo("Ce compte n'existe pas"); }}}
