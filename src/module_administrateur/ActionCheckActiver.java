@@ -9,9 +9,9 @@ public class ActionCheckActiver implements EventHandler<ActionEvent> {
 
     GererJoueur gJoueur;
     Administration a;
-    String joueur;
+    Joueur joueur;
 
-    public ActionCheckActiver(GererJoueur gJoueur, Administration a, String joueur) {
+    public ActionCheckActiver(GererJoueur gJoueur, Administration a, Joueur joueur) {
         this.gJoueur = gJoueur;
         this.a = a;
         this.joueur = joueur;

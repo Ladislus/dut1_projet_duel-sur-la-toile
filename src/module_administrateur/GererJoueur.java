@@ -10,14 +10,23 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import java.lang.Math;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.cell.*;
+import javafx.geometry.Pos;
+import javafx.beans.property.SimpleStringProperty;
 
 public class GererJoueur extends BorderPane {
 
-    PageAccueil pa;
-    Button activer;
-    Button supprimer;
+    private PageAccueil pa;
+    private Button activer;
+    private Button supprimer;
 
+    /** Constructeur de la page pour gérer les joueurs */
     public GererJoueur(PageAccueil pa) {
       super();
       this.pa = pa;
@@ -26,14 +35,17 @@ public class GererJoueur extends BorderPane {
       this.centre();
     }
 
+    /** Retourne le bouton pour activer les joueurs cochés */
     public Button getButtonActiver() {
         return this.activer;
     }
 
+    /** Retourne le bouton pour supprimer les joueurs cochés */
     public Button getButtonSupprimer() {
         return this.supprimer;
     }
 
+    /** Création de l'entête de la page */
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des joueurs");
@@ -46,19 +58,10 @@ public class GererJoueur extends BorderPane {
         this.setTop(haut);
     }
 
-    public Button creerBoutonSupprimer() {
-        this.supprimer = new Button("Supprimer");
-        ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
-        this.supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
-        this.supprimer.setTextFill(Color.web("white"));
-        this.supprimer.setPrefWidth(200);
-        this.supprimer.setPrefHeight(50);
-        this.supprimer.setOnAction(asj);
-        return this.supprimer;
-    }
-
+    /** Création du bouton pour activer les joueurs cochés */
     public Button creerBoutonActiver() {
         this.activer = new Button("Activer");
+        this.activer.setDisable(true);
         ActionActiverJoueur acj = new ActionActiverJoueur(this);
         this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
         this.activer.setTextFill(Color.web("white"));
@@ -68,83 +71,138 @@ public class GererJoueur extends BorderPane {
         return this.activer;
     }
 
-    public HBox creerJoueurActiver() {
-        HBox joueur = new HBox();
-        Label lj = new Label("Joueur1");
-        CheckBox cb = new CheckBox();
-        cb.setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), "Joueur1"));
-        joueur.getChildren().addAll(lj, cb);
-        joueur.setSpacing(185);
-        return joueur;
+    /** Création du bouton pour supprimer les joueurs cochés */
+    public Button creerBoutonSupprimer() {
+        this.supprimer = new Button("Supprimer");
+        this.supprimer.setDisable(true);
+        ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
+        this.supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
+        this.supprimer.setTextFill(Color.web("white"));
+        this.supprimer.setPrefWidth(200);
+        this.supprimer.setPrefHeight(50);
+        this.supprimer.setOnAction(asj);
+        return this.supprimer;
     }
 
+    /** Création de la barre de recherche des joueurs avec le bouton rechercher */
+    public HBox creerBarreRecherche() {
+        HBox h = new HBox();
+        TextField recherche = new TextField("");
+        recherche.setPromptText("Rechercher un joueur");
+        Button rechercher = new Button("Rechercher");
+        recherche.setPrefWidth(190);
+        h.getChildren().addAll(recherche, rechercher);
+        return h;
+    }
+
+    /** Création du tableau contenant la liste de tous les joueurs à activer */
+    public TableView<Joueur> creerTableListeJoueurAactiver() {
+        TableView<Joueur> table = new TableView<Joueur>();
+        TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
+        TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
+        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
+        TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
+        pseudo.setResizable(false);
+        id.setResizable(false);
+        profil.setResizable(false);
+        activer.setResizable(false);
+        pseudo.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
+        id.setMaxWidth(43);
+        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
+        activer.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
+        pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
+        activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
+        ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
+        table.setItems(liste);
+        table.getColumns().addAll(pseudo, id, profil, activer);
+        table.setPrefWidth(100);
+        return table;
+    }
+
+    /** Création de la liste contenant les joueurs à activer */
+    public ObservableList<Joueur> getListeJoueursTableViewAactiver() {
+        // EXEMPLE => METTRE REQUETTE ICI
+        Joueur j1 = new Joueur("Leo", 2, true);
+        Joueur j2 = new Joueur("ab", 5, true);
+        Joueur j3 = new Joueur("zf", 1, false);
+        Joueur j4 = new Joueur("b", 4, false);
+        Joueur j5 = new Joueur("za", 3, true);
+        ObservableList<Joueur> liste = FXCollections.observableArrayList(j1, j2, j3, j4, j5);
+        for (Joueur j : liste) {
+            j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
+        }
+        return liste;
+    }
+
+    /** Création du centre de la page => liste de tous les joueurs à activer */
     public void centre() {
         VBox centre = new VBox();
         Label l = new Label("Nombre de joueurs à activer : ");
         HBox bouton = new HBox();
         bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
         bouton.setSpacing(10);
-        TextField recherche = new TextField();
-        recherche.setPromptText("Rechercher un joueur");
-
-        ScrollPane listeJoueur = new ScrollPane();
-        listeJoueur.setPrefSize(280, 1000);
-
-        VBox v = new VBox();
-
-        for (int i=0; i<20; i++) {
-            v.getChildren().addAll(creerJoueurActiver());
-        }
-
-        listeJoueur.setStyle("-fx-border-color: black;");
-        v.setPadding(new Insets(5,0,0,10));
-        v.setSpacing(10);
-
-        listeJoueur.setContent(v);
-        centre.getChildren().addAll(l, bouton, recherche, listeJoueur);
+        centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
         centre.setSpacing(10);
         centre.setPadding(new Insets(0,25,15,25));
         this.setCenter(centre);
     }
 
-    public HBox creerJoueurListeJoueur() {
-        HBox joueur = new HBox();
-      //  String pseudo = "l";
-      //  int longPseudo = pseudo.length();
-      //  Label lj = new Label("- "+pseudo+" ");
-      //  for (int i=0; i<36-(longPseudo-6) ; i++) {
-      //    lj.setText(lj.getText()+".");
-      //  }
-      //  lj.setText("- Joueur ....................................");
-        Label lj = new Label("- Joueur ");
-        Hyperlink hl = new Hyperlink("Profil");
-        hl.setOnAction(new ActionProfilJoueur(this.pa, this, "Joueur"));
-        joueur.setSpacing(150);
-        joueur.getChildren().addAll(lj, hl);
-        return joueur;
+    /** Création de la liste de tous les joueurs */
+    public ObservableList<Joueur> getListeJoueursTableView() {
+        // EXEMPLE => METTRE REQUETTE ICI
+        Joueur j1 = new Joueur("Leo", 2, true);
+        Joueur j2 = new Joueur("ab", 5, true);
+        Joueur j3 = new Joueur("zf", 1, false);
+        Joueur j4 = new Joueur("b", 4, false);
+        Joueur j5 = new Joueur("za", 3, true);
+        ObservableList<Joueur> liste = FXCollections.observableArrayList(j1, j2, j3, j4, j5);
+        for (Joueur j : liste) {
+            j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+        }
+        return liste;
     }
 
+    /** Création du tableau contenant la liste de tous les joueurs */
+    public TableView<Joueur> creerTableListeJoueur() {
+        TableView<Joueur> table = new TableView<Joueur>();
+        TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
+        TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
+        TableColumn<Joueur, String> connecte = new TableColumn<Joueur, String>("Statut");
+        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
+        pseudo.setResizable(false);
+        id.setResizable(false);
+        connecte.setResizable(false);
+        profil.setResizable(false);
+        pseudo.setMaxWidth(1f * Integer.MAX_VALUE * 75 );
+        id.setMaxWidth(41);
+        connecte.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
+        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
+        pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        connecte.setCellValueFactory(cellData -> {
+          if (cellData.getValue().getConnecte()) {
+            return new SimpleStringProperty("connecte");
+          }
+          else {
+            return new SimpleStringProperty("deconnecte");
+          }
+        });
+        profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
+        ObservableList<Joueur> list = getListeJoueursTableView();
+        table.setItems(list);
+        table.getColumns().addAll(pseudo, id, connecte, profil);
+        table.setPrefWidth(100);
+        return table;
+    }
+
+    /** Création de la gauche de la page => liste de tous les joueurs */
     public void gauche() {
         VBox gauche = new VBox();
-        Label l = new Label("Liste des joueurs");
+        Label l = new Label("Liste des joueurs actifs");
         l.setPadding(new Insets(0,0,9,0));
-        TextField recherche = new TextField();
-        recherche.setPromptText("Rechercher un joueur");
-
-        ScrollPane listeJoueur = new ScrollPane();
-        listeJoueur.setPrefSize(280, 1000);
-        listeJoueur.setStyle("-fx-border-color: black;");
-
-        VBox v = new VBox();
-
-        for (int i=0; i<20; i++) {
-          v.getChildren().addAll(creerJoueurListeJoueur());
-
-        }
-        listeJoueur.setContent(v);
-        gauche.getChildren().addAll(l, recherche, listeJoueur);
-        v.setPadding(new Insets(5,0,0,10));
-        v.setSpacing(5);
+        gauche.getChildren().addAll(l, creerBarreRecherche(), creerTableListeJoueur());
         gauche.setPadding(new Insets(0,0,15,25));
         this.setLeft(gauche);
     }

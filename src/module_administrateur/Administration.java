@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Administration {
 
-    private ArrayList<String> joueurAactiver;
+    private ArrayList<Joueur> joueurAactiver;
 
     private ArrayList<Rapport> listeRapport;
     private ArrayList<Rapport> listeRapportLu;
@@ -16,15 +16,15 @@ public class Administration {
     }
 
     //GERER JOUEUR
-    public void ajouterListeActiver(String joueur) {
+    public void ajouterListeActiver(Joueur joueur) {
         this.joueurAactiver.add(joueur);
     }
 
-    public void retirerListeActiver(String joueur) {
+    public void retirerListeActiver(Joueur joueur) {
         this.joueurAactiver.remove(joueur);
     }
 
-    public ArrayList<String> getJoueurAactiver() {
+    public ArrayList<Joueur> getJoueurAactiver() {
         return this.joueurAactiver;
     }
 

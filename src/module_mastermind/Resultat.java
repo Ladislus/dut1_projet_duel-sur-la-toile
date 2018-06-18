@@ -13,20 +13,29 @@ public class Resultat { // Modèle des résultats du mastermind
      */
     public static Combinaison compare(Combinaison rep,Combinaison essai){
         Combinaison courant = essai;
+        Combinaison resultat = rep;
+        System.out.println(rep);
         List<Integer> listeIndices = new ArrayList<>();
-        for (int i=0;i<4;i++){ // On regarde d'abord les pions bien placés
-            if (courant.get(i) == rep.get(i)){
-                listeIndices.add(1);
-                courant.remove(i);
-            }
-        }
-        for (int i=0;i<4;i++){ // Puis on regarde les pions mal placés
-            int p = courant.get(i);
-            if (p!=0 && rep.contains(p)){
-                listeIndices.add(2);
-                courant.removePion(p);
-            }
-        }
+
+//        for (int i=0;i<resultat.size();i++){ // On regarde d'abord les pions bien placés
+//            int p = courant.get(i);
+//            if (p == resultat.get(i)){
+//                listeIndices.add(1);
+//                courant.remove(i);
+////                rep.remove(i);
+//            }
+//        }
+//
+//        for (int i=0;i<resultat.size();i++){ // Puis on regarde les pions mal placés
+//            int p = courant.get(i);
+//            if (p!=0 && resultat.contains(p)){
+//                listeIndices.add(2);
+////                resultat.removePion(p);
+//                courant.removePion(p);
+//            }
+//        }
+        
+
         Collections.shuffle(listeIndices);
 
         Combinaison res = new Combinaison();
