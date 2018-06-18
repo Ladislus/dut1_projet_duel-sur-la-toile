@@ -26,7 +26,13 @@ class EditionProfil extends BorderPane {
 
     Joueur joueur;
 
+    TextField tfPseudo;
+
     TextField tfEmail;
+
+    PasswordField pfMotDePasse;
+
+    PasswordField pfConfirmMotDePasse;
 
     int globalTitleFont;
 
@@ -70,7 +76,7 @@ class EditionProfil extends BorderPane {
         Label lPseudo = new Label("Mon pseudo");
         lPseudo.setFont(Font.font("Arial", globalTitleFont));
         //Hbox vPseudo
-        TextField tfPseudo = new TextField();
+        tfPseudo = new TextField();
         tfPseudo.setText(joueur.getPseudo());
         tfPseudo.setDisable(true);
         Button btEdition = new Button("", ivImageEditPseudo);
@@ -136,30 +142,30 @@ class EditionProfil extends BorderPane {
         //for mot de passe
         Label lMotDePasse = new Label("Nouveau mot de passe :");
         lMotDePasse.setFont(Font.font("Arial", globalTitleFont));
-        PasswordField tfMotDePasse = new PasswordField();
-        tfMotDePasse.setDisable(true);
+        pfMotDePasse = new PasswordField();
+        pfMotDePasse.setDisable(true);
         Button btEditionMotPasse = new Button("", ivImageEditMdp);
 
         vMotDePasse.getChildren().addAll(lMotDePasse, hMotDePasse);
         vMotDePasse.setAlignment(Pos.TOP_CENTER);
         vMotDePasse.setSpacing(12);
         hMotDePasse.setAlignment(Pos.TOP_CENTER);
-        hMotDePasse.getChildren().addAll(tfMotDePasse, btEditionMotPasse);
+        hMotDePasse.getChildren().addAll(pfMotDePasse, btEditionMotPasse);
 
         //for confirm mot de passe
         Label lConfirmMotDePasse = new Label("Confirmation :");
         lConfirmMotDePasse.setFont(Font.font("Arial",globalTitleFont));
-        PasswordField tfConfirmMotDePasse = new PasswordField();
-        tfConfirmMotDePasse.setDisable(true);
+        pfConfirmMotDePasse = new PasswordField();
+        pfConfirmMotDePasse.setDisable(true);
         vConfirmMotDePasse.setAlignment(Pos.TOP_CENTER);
         vConfirmMotDePasse.setSpacing(12);
-        hConfirmMotDePasse.getChildren().addAll(tfConfirmMotDePasse);
+        hConfirmMotDePasse.getChildren().addAll(pfConfirmMotDePasse);
         hConfirmMotDePasse.setAlignment(Pos.TOP_CENTER);
-        tfConfirmMotDePasse.setPrefWidth(203);
+        pfConfirmMotDePasse.setPrefWidth(203);
         vConfirmMotDePasse.getChildren().addAll(lConfirmMotDePasse, hConfirmMotDePasse);
         btEditionMotPasse.setOnAction(actionEvent -> {
-            tfMotDePasse.setDisable(false);
-            tfConfirmMotDePasse.setDisable(false);
+            pfMotDePasse.setDisable(false);
+            pfConfirmMotDePasse.setDisable(false);
         });
         vPrincipal.getChildren().addAll(vEmail, vMotDePasse, vConfirmMotDePasse);
         vPrincipal.setPadding(new Insets(15,6,0,0));
@@ -194,4 +200,15 @@ class EditionProfil extends BorderPane {
         return this.tfEmail;
     }
 
+    public TextField getTfPseudo(){
+        return this.tfPseudo;
+    }
+
+    public PasswordField getPfMotDePasse() {
+        return pfMotDePasse;
+    }
+
+    public PasswordField getPfConfirmMotDePasse() {
+        return pfConfirmMotDePasse;
+    }
 }
