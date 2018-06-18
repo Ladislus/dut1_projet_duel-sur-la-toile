@@ -20,7 +20,7 @@ class EditionProfil extends BorderPane {
 
     String title;
 
-    ConnexionMySQL laConnection;
+
 
     Stage primaryStage;
 
@@ -36,12 +36,12 @@ class EditionProfil extends BorderPane {
 
     int globalTitleFont;
 
-    public EditionProfil(ConnexionMySQL laConnection, Stage primaryStage, Joueur joueur){
+    public EditionProfil(Stage primaryStage, Joueur joueur){
         super();
 
         this.title = "Editez mon profil";
         this.joueur = joueur;
-        this.laConnection = laConnection;
+
         this.primaryStage = primaryStage;
         this.globalTitleFont = 20;
         this.setLeft(creerGauche());
@@ -176,12 +176,12 @@ class EditionProfil extends BorderPane {
 
     public BorderPane creerBas(){
         BorderPane bp = new BorderPane();
-        Button btRetour = new Button("<-- Retour");
+        Button btRetour = new Button("Retour");
         btRetour.setStyle("-fx-background-color: #2355a0; -fx-text-fill: #ffffff");
         btRetour.setOnAction(new ActionRetourToDashboard());
         Button btSuppressionCompte = new Button("Supprimer mon compte");
         btSuppressionCompte.setStyle("-fx-background-color: #cc250c; -fx-text-fill: #ffffff");
-        btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, laConnection, joueur));
+        btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, joueur));
         Button btEnregistrer = new Button("Enregistrer");
         btEnregistrer.setStyle("-fx-background-color: #40b70c; -fx-text-fill: #ffffff");
         bp.setLeft(btRetour);

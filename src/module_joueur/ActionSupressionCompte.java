@@ -16,11 +16,11 @@ import javafx.stage.Stage;
 public class ActionSupressionCompte implements EventHandler<ActionEvent> {
 
     Stage primaryStage;
-    ConnexionMySQL laConnection;
+
     Joueur joueur;
 
-    public ActionSupressionCompte(Stage primaryStage, ConnexionMySQL laConnection, Joueur joueur){
-        this.laConnection = laConnection;
+    public ActionSupressionCompte(Stage primaryStage, Joueur joueur){
+        
         this.primaryStage = primaryStage;
         this.joueur = joueur;
     }
@@ -29,18 +29,18 @@ public class ActionSupressionCompte implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Button btToEditionProfile = (Button) actionEvent.getSource();
         Stage stageEditionProfile = (Stage) btToEditionProfile.getScene().getWindow();
-        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
+        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Attention");
-        alert.setContentText("Etes vous sure de vouloir supprimer votre compte ?");
+        alert.setTitle("ATTENTION");
+        alert.setHeaderText("Etes vous sure de vouloir supprimer votre compte ?");
         ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
         ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
         alert.getButtonTypes().setAll(okButton, noButton);
         alert.showAndWait().ifPresent(type -> {
             if (type.getButtonData().toString().equals("YES")) {
                 //todo: change activeUt into the BD
-                Utilisateur.deactivateUser(laConnection, joueur.getPseudo());
+                Utilisateur.deactivateUser(joueur.getPseudo());
                 stageEditionProfile.close();
                 this.primaryStage.setTitle(connexion.getTitle());
                 this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));

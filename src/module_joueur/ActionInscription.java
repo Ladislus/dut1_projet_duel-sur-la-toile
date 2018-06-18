@@ -14,12 +14,12 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
 
-  public ActionInscription(Stage primaryStage, ConnexionMySQL laConnection) {
+
+  public ActionInscription(Stage primaryStage) {
 
     this.primaryStage = primaryStage;
-    this.laConnection = laConnection; }
+    }
 
   public void handle(ActionEvent actionEvent) {
 
@@ -54,14 +54,14 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       try {
 
-        Utilisateur.creerUtilisateur(laConnection, pseudo, mail, sex, password, "USER");
+        Utilisateur.creerUtilisateur(pseudo, mail, sex, password, "USER");
 
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("INFORMATION");
         a.setHeaderText("Le compte a été créé avec succès");
         a.showAndWait();
 
-        ConnexionJoueur connexion = new ConnexionJoueur(primaryStage, laConnection);
+        ConnexionJoueur connexion = new ConnexionJoueur(primaryStage);
 
         this.primaryStage.setTitle(connexion.getTitle());
         this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }

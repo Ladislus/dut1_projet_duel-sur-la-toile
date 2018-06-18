@@ -12,20 +12,20 @@ import javafx.stage.Stage;
 public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
     Stage primaryStage;
-    ConnexionMySQL laConnection;
+    
 
-    public ActionDeconnexion(Stage primaryStage, ConnexionMySQL laConnection){
-        this.laConnection = laConnection;
+    public ActionDeconnexion(Stage primaryStage){
+        
         this.primaryStage = primaryStage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
+        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Attention");
-        alert.setContentText("Voulez-vous vraiment vous deconnecter ?");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("INFORMATION");
+        alert.setHeaderText("Voulez-vous vraiment vous deconnecter ?");
         ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
         ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
         alert.getButtonTypes().setAll(okButton, noButton);

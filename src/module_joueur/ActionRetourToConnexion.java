@@ -10,16 +10,16 @@ class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public ActionRetourToConnexion(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ActionRetourToConnexion(Stage primaryStage) {
 
     this.primaryStage = primaryStage;
-    this.laConnection = laConnection; }
+    }
 
   public void handle(ActionEvent actionEvent) {
 
-    ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
+    ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
     this.primaryStage.setTitle(connexion.getTitle());
     this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }}

@@ -24,15 +24,15 @@ class InscriptionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public InscriptionJoueur(Stage primaryStage, ConnexionMySQL laConnection) {
+  public InscriptionJoueur(Stage primaryStage) {
 
     super();
 
     this.primaryStage = primaryStage;
 
-    this.laConnection = laConnection;
+    
 
     this.title = "Acceuil : Inscription";
 
@@ -84,7 +84,7 @@ class InscriptionJoueur extends BorderPane {
     tfPasswordConfirm.setPromptText("Confirmez votre mot de passe ici");
 
     Button btConnect = new Button("S'inscrire !");
-    btConnect.setOnAction(new ActionInscription(this.primaryStage, this.laConnection));
+    btConnect.setOnAction(new ActionInscription(this.primaryStage));
 
     HBox hBtConnect = new HBox();
     hBtConnect.getChildren().add(btConnect);
@@ -119,7 +119,7 @@ class InscriptionJoueur extends BorderPane {
     hHelp.setAlignment(Pos.TOP_CENTER);
 
     Button btBack = new Button("Retour");
-    btBack.setOnAction(new ActionRetourToConnexion(this.primaryStage, this.laConnection));
+    btBack.setOnAction(new ActionRetourToConnexion(this.primaryStage));
     btBack.setPrefWidth(100);
 
     candidate.getChildren().addAll(imageLogo, hHelp, btBack);

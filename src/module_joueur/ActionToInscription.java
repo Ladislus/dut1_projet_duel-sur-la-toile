@@ -10,16 +10,16 @@ class ActionToInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public ActionToInscription(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ActionToInscription(Stage primaryStage) {
 
     this.primaryStage = primaryStage;
-    this.laConnection = laConnection; }
+    }
 
   public void handle(ActionEvent actionEvent) {
 
-    InscriptionJoueur inscription = new InscriptionJoueur(this.primaryStage, this.laConnection);
+    InscriptionJoueur inscription = new InscriptionJoueur(this.primaryStage);
 
     primaryStage.setTitle(inscription.getTitle());
     primaryStage.setScene(new Scene(inscription, VariablesJoueur.DEFAULT_REGISTRATION_WIDTH, VariablesJoueur.DEFAULT_REGISTRATION_HEIGHT)); }}

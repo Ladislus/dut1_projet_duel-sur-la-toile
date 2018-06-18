@@ -21,13 +21,13 @@ class ConnexionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public ConnexionJoueur(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ConnexionJoueur(Stage primaryStage) {
 
     super();
 
-    this.laConnection = laConnection;
+    
 
     this.primaryStage = primaryStage;
 
@@ -64,10 +64,10 @@ class ConnexionJoueur extends BorderPane {
     VBox candidate = new VBox();
 
     Hyperlink hlRegister = new Hyperlink("Pas de compte ? S'inscrire");
-    hlRegister.setOnAction(new ActionToInscription(this.primaryStage, this.laConnection));
+    hlRegister.setOnAction(new ActionToInscription(this.primaryStage));
 
     Hyperlink hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
-    //hlPasswordForgotten.setOnAction(new ActionToForgottenPassword(this.primaryStage, this.laConnection));
+    //hlPasswordForgotten.setOnAction(new ActionToForgottenPassword(this.primaryStage));
 
     Label title = new Label("Connexion");
     title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -81,7 +81,7 @@ class ConnexionJoueur extends BorderPane {
     tfPassword.setPromptText("Entrez votre mot de passe ici");
 
     Button btConnection = new Button("Vers l'aventure !");
-    btConnection.setOnAction(new ActionConnection(this.primaryStage, this.laConnection));
+    btConnection.setOnAction(new ActionConnection(this.primaryStage));
 
     candidate.setAlignment(Pos.TOP_CENTER);
     candidate.setPadding(new Insets(18,15,0,0));
