@@ -46,7 +46,7 @@ public class ProfilJoueur extends BorderPane {
 
     public Label creerLabelPseudo(){
       Label pseudo = new Label("Pseudo : ");
-
+      
       return pseudo;
     }
 
