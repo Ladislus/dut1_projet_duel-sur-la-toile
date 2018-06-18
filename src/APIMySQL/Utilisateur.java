@@ -72,6 +72,7 @@ public class Utilisateur {
         return getUserInfo(co, "activeUt", "pseudoUt", pseudoUt).equals("true");
     }
 
+
     public static void deactivateUser(ConnexionMySQL co, String pseudo){
         setUserInfo(co, "activeUt", 0, "pseudoUt", pseudo);
     }
