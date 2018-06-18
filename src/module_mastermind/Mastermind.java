@@ -23,8 +23,6 @@ public class Mastermind extends Application {
     private Stage primaryStage;
     private static String chem = "./img/module_mastermind/";
     private HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
-    private PartieM partieM;
-    private String j1,j2;
 
     public static void main(String[] args) {
         launch(args);
@@ -120,14 +118,6 @@ public class Mastermind extends Application {
         return new Scene(res,850,650);
     }
 
-    public String etatPartie(){
-        return
-                "- Combinaison à trouver: " + this.partieM.getPlateau().getCombiMystere() +
-                "- Liste des essais: " + this.partieM.getPlateau().getListeEssais() +
-                "- Liste des indices: " + this.partieM.getPlateau().getListeResultats() +
-                "- Combinaison en cours: " + this.partieM.getPlateau().getCombiCour() +
-                "- Fini: " + this.partieM.getPlateau().aTrouveCombi() +
-                "- Joueurs: " + this.partieM.getJ1() + this.partieM.getJ2();
-    }
+
 }
 
