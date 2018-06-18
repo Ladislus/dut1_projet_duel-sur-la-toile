@@ -39,6 +39,8 @@ class VariablesJoueur {
   public final static Image HELP = new Image(new File("./img/pub/help.png").toURI().toString());
   public final static Image CONTACT = new Image(new File("./img/pub/contact.png").toURI().toString());
   public final static Image LOGOUT = new Image(new File("./img/pub/log_out.png").toURI().toString());
+  public final static Image USER = new Image(new File("./img/pub/user.png").toURI().toString());
+  public final static Image EDIT = new Image(new File("./img/pub/edit.png").toURI().toString());
 
   public final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9.]+@[A-Z0-9]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
   public final static Pattern PASSWORD_PATTERN = Pattern.compile("^^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$"); }

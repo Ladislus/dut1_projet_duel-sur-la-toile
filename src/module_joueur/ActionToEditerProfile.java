@@ -7,22 +7,20 @@ import javafx.stage.Stage;
 
 public class ActionToEditerProfile implements EventHandler<ActionEvent> {
 
-    Joueur joueur;
+  Joueur joueur;
 
-    Stage primaryStage;
+  Stage primaryStage;
 
-    public ActionToEditerProfile(Stage primaryStage, Joueur joueur){
-        this.joueur = joueur;
-        
-        this.primaryStage = primaryStage;
-    }
+  public ActionToEditerProfile(Stage primaryStage, Joueur joueur) {
 
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        Stage stageEditionProfile = new Stage();
-        stageEditionProfile.setTitle("Edition de mon profile");
-        stageEditionProfile.setResizable(false);
-        stageEditionProfile.setScene(new Scene(new EditionProfil(primaryStage, joueur), VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));
-        stageEditionProfile.show();
-    }
-}
+    this.joueur = joueur;
+    this.primaryStage = primaryStage; }
+
+  @Override
+  public void handle(ActionEvent actionEvent) {
+
+    Stage stageEditionProfile = new Stage();
+    stageEditionProfile.setTitle("Edition de mon profile");
+    stageEditionProfile.setResizable(false);
+    stageEditionProfile.setScene(new Scene(new EditionProfil(primaryStage, joueur), VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));
+    stageEditionProfile.show(); }}

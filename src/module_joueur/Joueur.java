@@ -5,25 +5,18 @@ import APIMySQL.Utilisateur;
 public class Joueur {
 
     int id;
+
     String pseudo;
     String email;
 
-    public Joueur(int id, String pseudo, String email){
+    public Joueur(int id, String pseudo, String email) {
+
         this.id = id;
         this.pseudo = pseudo;
-        this.email = email;
-    }
+        this.email = email; }
 
-    public String getPseudo() {
-        return pseudo;
-    }
+    public String getPseudo() { return pseudo; }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public String getEmail(){
-        return this.email;
-    }
-
-}
+    public String getEmail() { return this.email; }}
