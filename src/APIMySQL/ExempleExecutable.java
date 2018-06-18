@@ -1,20 +1,13 @@
 package APIMySQL;
 
-import java.sql.SQLException;
-
 public class ExempleExecutable {
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) {
         // TEST : Essai de passer en bibliothèques statiques.
-        try {
-            GestionBD.updateStatement("INSERT INTO ROLE VALUES ('ADMIN')");
-        } catch (SQLException e) {
-            //e.printStackTrace();
-        }
 
         try {
-            Utilisateur.creerUtilisateur("test","test@gmail.com","M","couscous","admin");
+            Utilisateur.creerUtilisateur("test","test@gmail.com","M","Mr","Test","couscous","admin");
         } catch (UtilisateurException e) {
-            //e.printMessage();
+            e.printMessage();
         }
 
         try {
