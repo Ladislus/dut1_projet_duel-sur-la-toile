@@ -1,6 +1,5 @@
 package module_joueur;
 
-import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
@@ -14,9 +13,6 @@ class VariablesJoueur {
   public final static Font DEFAULT_TEXT_FONT = Font.font("Arial", 10);
   public final static Font DEFAULT_SLOGAN_FONT = Font.font("Arial", 15);
 
-  public final static Color DEFAULT_BACKGROUND_COLOR = Color.LIGHTBLUE;
-  public final static Color DEFAULT_TEXT_COLOR = Color.LIGHTCORAL;
-
   public final static double DEFAULT_APPLICATION_WIDTH = 850;
   public final static double DEFAULT_APPLICATION_HEIGHT = 650;
 
@@ -27,7 +23,7 @@ class VariablesJoueur {
   public final static double DEFAULT_EDITERPROFILE_WIDTH = 555;
 
   public final static double DEFAULT_REGISTRATION_WIDTH = 500;
-  public final static double DEFAULT_REGISTRATION_HEIGHT = 430;
+  public final static double DEFAULT_REGISTRATION_HEIGHT = 500;
 
   public final static boolean IS_RESIZABLE = false;
 

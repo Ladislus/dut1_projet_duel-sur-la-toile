@@ -1,7 +1,6 @@
 package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
-import com.mysql.jdbc.exceptions.MySQLDataException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +14,11 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
+<<<<<<< HEAD
+            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100:3306/serveurDeJeux", "dst", "dst");
+=======
             co = DriverManager.getConnection("jdbc:mysql://localhost:3306/serveurDeJeux", "root", "marlou06");
+>>>>>>> b61aaa676a3db4b47480dea81d52c2ad3a035bea
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
