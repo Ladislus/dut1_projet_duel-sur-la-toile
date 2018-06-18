@@ -1,6 +1,8 @@
 package module_joueur;
 
 import APIMySQL.ConnexionMySQL;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -137,7 +139,7 @@ class EditionProfil extends BorderPane {
         PasswordField tfMotDePasse = new PasswordField();
         tfMotDePasse.setDisable(true);
         Button btEditionMotPasse = new Button("", ivImageEditMdp);
-        btEditionMotPasse.setOnAction(actionEvent -> tfMotDePasse.setDisable(false));
+
         vMotDePasse.getChildren().addAll(lMotDePasse, hMotDePasse);
         vMotDePasse.setAlignment(Pos.TOP_CENTER);
         vMotDePasse.setSpacing(12);
@@ -153,10 +155,12 @@ class EditionProfil extends BorderPane {
         vConfirmMotDePasse.setSpacing(12);
         hConfirmMotDePasse.getChildren().addAll(tfConfirmMotDePasse);
         hConfirmMotDePasse.setAlignment(Pos.TOP_CENTER);
-        tfConfirmMotDePasse.setPrefWidth(220);
+        tfConfirmMotDePasse.setPrefWidth(203);
         vConfirmMotDePasse.getChildren().addAll(lConfirmMotDePasse, hConfirmMotDePasse);
-
-
+        btEditionMotPasse.setOnAction(actionEvent -> {
+            tfMotDePasse.setDisable(false);
+            tfConfirmMotDePasse.setDisable(false);
+        });
         vPrincipal.getChildren().addAll(vEmail, vMotDePasse, vConfirmMotDePasse);
         vPrincipal.setPadding(new Insets(15,6,0,0));
         vPrincipal.setSpacing(22);
