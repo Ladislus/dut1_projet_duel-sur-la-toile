@@ -2,7 +2,6 @@ package module_joueur;
 
 
 import javafx.application.Application;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
