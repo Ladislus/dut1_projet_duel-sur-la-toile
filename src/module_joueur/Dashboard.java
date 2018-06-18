@@ -10,9 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
-import java.util.Objects;
 
 class Dashboard extends BorderPane {
 
@@ -23,6 +21,8 @@ class Dashboard extends BorderPane {
   
 
   private Joueur joueur;
+
+  private Label lTitre;
 
   private ArrayList<Button> listeBoutton;
 
@@ -49,7 +49,7 @@ class Dashboard extends BorderPane {
 
   public HBox creerHaut() {
 
-    Label lTitre = new Label("Bienvenue "+joueur.getPseudo());
+    lTitre = new Label("Bienvenue "+joueur.getPseudo());
     lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     HBox candidate = new HBox();
@@ -77,7 +77,7 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditez mon profil");
-    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
+    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur, this));
     btEditerProfile.setPrefWidth(150);
 
     Button btParametre = new Button("Mes paramètres");
@@ -163,6 +163,7 @@ class Dashboard extends BorderPane {
 
       //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
       ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
+      lTitre.setText("Bienvenue "+joueur.getPseudo());
       if(btName == null){
           btName = new ArrayList<>();
           btName.add("Ajouter un amis");

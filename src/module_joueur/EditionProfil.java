@@ -29,17 +29,20 @@ class EditionProfil extends BorderPane {
 
     TextField tfEmail;
 
+    Dashboard dashboard;
+
     PasswordField pfMotDePasse;
 
     PasswordField pfConfirmMotDePasse;
 
     int globalTitleFont;
 
-    public EditionProfil(Stage primaryStage, Joueur joueur){
+    public EditionProfil(Stage primaryStage, Joueur joueur, Dashboard dashboard){
         super();
 
         this.title = "Editez mon profil";
         this.joueur = joueur;
+        this.dashboard = dashboard;
 
         this.primaryStage = primaryStage;
         this.globalTitleFont = 20;
@@ -183,7 +186,7 @@ class EditionProfil extends BorderPane {
         btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, joueur));
         Button btEnregistrer = new Button("Enregistrer");
         btEnregistrer.setStyle("-fx-background-color: #40b70c; -fx-text-fill: #ffffff");
-        btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
+        btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur, dashboard));
         bp.setLeft(btRetour);
         bp.setCenter(btSuppressionCompte);
         bp.setRight(btEnregistrer);
