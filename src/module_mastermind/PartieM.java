@@ -40,9 +40,11 @@ public class PartieM {
         this.mastermind = m;
 
         this.listeComb = new VBox(10);
-        this.listeComb.setAlignment(Pos.CENTER_RIGHT);
         this.listeComb.setSpacing(20.);
-        this.listeComb.setPrefWidth(160.);
+        this.listeComb.setPrefWidth(450.);
+        this.listeComb.setPrefHeight(600.);
+        this.listeComb.setStyle("-fx-background-color: #DCDCDC");
+
 
         this.p = new PlateauM(j1,j2);
 
@@ -56,9 +58,9 @@ public class PartieM {
         this.attributionCouleur.put(6,Color.CYAN);
 
         this.attributionIndices = new HashMap<>();
-        this.attributionIndices.put(0,Color.LIGHTGRAY);
-        this.attributionIndices.put(1,Color.BLACK);
-        this.attributionIndices.put(2,Color.RED);
+        this.attributionIndices.put(0,Color.valueOf("#979797"));
+        this.attributionIndices.put(1,Color.RED);
+        this.attributionIndices.put(2,Color.WHITE);
 
         this.j1 = new Joueur(j1);
         this.j2 = new Joueur(j2);
@@ -93,7 +95,7 @@ public class PartieM {
     public void ajouteResultat(){
         if ((this.p.getListeEssais().size() > 0 && this.p.getListeEssais() != null) && (this.p.getListeResultats().size() > 0 && this.p.getListeResultats() != null)){
             HBox nouvEssai = new HBox();
-            nouvEssai.setSpacing(10.);
+            nouvEssai.setSpacing(20);
             Label numEssai = new Label(this.p.getListeEssais().size()+"");
             numEssai.setFont(Font.font(30));
             nouvEssai.getChildren().add(numEssai);
@@ -112,7 +114,7 @@ public class PartieM {
             nouvEssai.getChildren().add(indices);
             nouvEssai.setMinWidth(425);
             nouvEssai.setAlignment(Pos.CENTER_RIGHT);
-            nouvEssai.setPadding(new Insets(0,80,0,0));
+            nouvEssai.setPadding(new Insets(0,30,0,0));
             this.listeComb.getChildren().addAll(nouvEssai);
         }
     }
@@ -128,7 +130,7 @@ public class PartieM {
         res.setBottom(bas());
         res.setPadding(new Insets(0,50,0,0));
 
-        return new Scene(res, 700, 650);
+        return new Scene(res, 850, 650);
     }
 
     public static HBox haut(){
@@ -148,9 +150,11 @@ public class PartieM {
         quitter.setOnAction(new ActionQuitterM(m));
 
         Label timer = new Label("Time : 200");
+        timer.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         timer.setPadding(new Insets(75,0,0,0));
 
         Label couleurs = new Label("Couleurs :");
+        couleurs.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         couleurs.setPadding(new Insets(50,0,0,0));
 
         GridPane tabCouleurs = new GridPane();
@@ -172,14 +176,14 @@ public class PartieM {
         aide.setOnAction(new ActionHelpM());
 
 
-        tabCouleurs.setHgap(5);
-        tabCouleurs.setVgap(5);
+        tabCouleurs.setHgap(20);
+        tabCouleurs.setVgap(20);
 
-        tabCouleurs.setPadding(new Insets(0,0,90,15));
+        tabCouleurs.setPadding(new Insets(0,0,50,30));
 
         res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs,aide);
 
-        res.setPadding(new Insets(0,0,0,10));
+        res.setPadding(new Insets(0,0,0,20));
 
         return res;
     }
@@ -226,11 +230,14 @@ public class PartieM {
 
         ScrollPane sp = new ScrollPane(plateau);
         sp.setHmin(200.);
-        sp.setPadding(new Insets(0,0,0,0));
+        sp.setPadding(new Insets(15,0,0,0));
+        sp.setStyle("-fx-background-color: #DCDCDC;" +
+                "-fx-border-color: black;");
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         sp.setPrefViewportWidth(425);
+        sp.setPrefHeight(800.);
 
         return sp;
     }
@@ -296,7 +303,7 @@ public class PartieM {
 
         res.getChildren().addAll(suppr,c1,c2,c3,c4,valider);
 
-        res.setPadding(new Insets(-50,0,0,75));
+        res.setPadding(new Insets(-50,0,0,240));
         return res;
     }
 
