@@ -10,11 +10,15 @@ import java.util.List;
 
 public class GestionBD {
 
-    private static ConnexionMySQL co = null;
+    private static Connection co = null;
 
-    static {
-        try {co = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst");}
-        catch (ClassNotFoundException e) {}
+    static{
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            co = DriverManager.getConnection("jdbc:mysql://localhost:3306/serveurDeJeux", "dst", "dst");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private GestionBD(){}
