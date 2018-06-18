@@ -167,7 +167,6 @@ class Dashboard extends BorderPane {
           btName = new ArrayList<>();
           btName.add("Ajouter un amis");
           for (String name : btName) {
-              System.out.println(name);
               ImageView imageContact = new ImageView();
               imageContact.setImage(VariablesJoueur.CONTACT);
               imageContact.setPreserveRatio(true);
