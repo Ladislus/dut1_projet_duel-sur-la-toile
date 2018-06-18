@@ -74,8 +74,8 @@ public class GestionBD {
             if (o.getClass().getName().equals("com.mysql.jdbc.Blob")){
                 ps.setBlob(i+1,(Blob)o);
             }
-            else if (o.getClass().getName().equals("java.sql.Date")){
-                ps.setDate(i+1,(Date)o);
+            else if (o.getClass().getName().equals("java.util.Date")){
+                ps.setTimestamp(i+1,(Timestamp) o);
             }
             else ps.setObject(i+1, o.toString());
         }

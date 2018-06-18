@@ -21,7 +21,6 @@ public class Jeu {
         } catch (SQLException e) {
             throw new APIMySQLException("gameNameTaken");
         }
-
     }
 
     public static HashMap<String, List<Object>> recupListeJeux(){
