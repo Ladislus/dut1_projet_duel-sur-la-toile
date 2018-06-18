@@ -42,6 +42,8 @@ public class ActionValiderCoup implements EventHandler<ActionEvent> {
             lesBatons.get(i).active();
         }
 
+    this.partie.getPlateau().changeJCour();
+
     }
 
     private int getPremActive(List<Batonnet> lesBatons) {
