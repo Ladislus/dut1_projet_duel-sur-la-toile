@@ -19,13 +19,15 @@ public class ProfilJoueur extends BorderPane {
 
     private GererJoueur gJoueur;
     private PageAccueil pa;
-    private ToggleGroup groupe = new ToggleGroup();
+    private ToggleGroup groupe;
+    private Joueur joueur;
 
-    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur) {
+    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
         super();
         this.gJoueur = gJoueur;
         this.joueur = joueur;
         this.pa = pa;
+        this.groupe = new ToggleGroup();
         this.haut();
         this.gauche();
         this.centre();
@@ -33,7 +35,7 @@ public class ProfilJoueur extends BorderPane {
 
     public void haut() {
         BorderPane haut = new BorderPane();
-        Label l = new Label("Profil de ");
+        Label l = new Label("Profil de "+this.joueur.getPseudo());
         Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
@@ -46,7 +48,7 @@ public class ProfilJoueur extends BorderPane {
 
     public Label creerLabelPseudo(){
       Label pseudo = new Label("Pseudo : ");
-      
+
       return pseudo;
     }
 
