@@ -19,8 +19,9 @@ public class ProfilJoueur extends BorderPane {
 
     private GererJoueur gJoueur;
     private PageAccueil pa;
+    private Joueur joueur;
 
-    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur) {
+    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
         super();
         this.gJoueur = gJoueur;
         this.joueur = joueur;
@@ -32,7 +33,7 @@ public class ProfilJoueur extends BorderPane {
 
     public void haut() {
         BorderPane haut = new BorderPane();
-        Label l = new Label("Profil de ");
+        Label l = new Label("Profil de "+this.joueur.getPseudo());
         Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
