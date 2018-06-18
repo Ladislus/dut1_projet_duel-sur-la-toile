@@ -30,7 +30,7 @@ class VariablesJoueur {
   public final static String SLOGAN = "La plateforme de jeux vidéos innovante !";
   public final static String COPYRIGHT = "© Copyright : Duel sur la toile";
 
-  public final static Image LOGO = new Image(new File("./img/pub/logoWithoutText.png").toURI().toString());
+  public final static Image LOGO = new Image(new File("./img/pub/icon.png").toURI().toString());
   public final static Image LOGO_TEXT = new Image(new File("./img/pub/logo.png").toURI().toString());
   public final static Image HELP = new Image(new File("./img/pub/help.png").toURI().toString());
   public final static Image CONTACT = new Image(new File("./img/pub/contact.png").toURI().toString());
