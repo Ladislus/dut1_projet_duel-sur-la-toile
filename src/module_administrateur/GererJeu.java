@@ -19,7 +19,7 @@ import javafx.scene.layout.*;
 
 public class GererJeu extends BorderPane {
 
-    PageAccueil pa;
+    private PageAccueil pa;
     private ToggleGroup groupe = new ToggleGroup();
 
     public GererJeu(PageAccueil pa) {

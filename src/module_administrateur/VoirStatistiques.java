@@ -14,7 +14,7 @@ import javafx.collections.*;
 
 public class VoirStatistiques extends BorderPane {
 
-    PageAccueil pa;
+    private PageAccueil pa;
 
     public VoirStatistiques(PageAccueil pa) {
         super();
