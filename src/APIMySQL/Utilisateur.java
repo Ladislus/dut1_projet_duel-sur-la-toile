@@ -74,6 +74,15 @@ public class Utilisateur {
     public static void deactivateUser(String pseudo){
         setUserInfo("activeUt", 0, "pseudoUt", pseudo);
     }
+    public static void deleteUser(String pseudo) throws SQLException {
+        ArrayList<String> pseudoList = new ArrayList<>();
+        pseudoList.add(pseudo);
+        ArrayList<Object> idListFromPseudo = new ArrayList<>();
+        for(String name : pseudoList){
+            idListFromPseudo.add(getIdByPseudo(name));
+        }
+        GestionBD.updatePreparedStatement("delete from UTILISATEUR where idUt=?", idListFromPseudo);
+    }
 
     public static int getIdByPseudo(String pseudoUt){
         return Integer.parseInt(getUserInfo("idUt", "pseudoUt", pseudoUt));
@@ -104,8 +113,10 @@ public class Utilisateur {
         String salt = getSalt();
         setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
         setUserInfo("emailUt", email, "idUt", String.valueOf(id));
-        setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
-        setUserInfo("salt", salt, "idUt", String.valueOf(id));
+        if(!(motDePasse.length() == 0)){
+            setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
+            setUserInfo("salt", salt, "idUt", String.valueOf(id));
+        }
     }
 
     public static String getEmailByPseudo(String pseudoUt){

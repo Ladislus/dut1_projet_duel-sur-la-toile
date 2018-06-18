@@ -25,7 +25,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
         String confirmMotDePasse = editionProfil.getPfConfirmMotDePasse().getText();
 
         if(motdepasse.equals(confirmMotDePasse)){
-            if (!VariablesJoueur.PASSWORD_PATTERN.matcher(motdepasse).find()){
+            if (!VariablesJoueur.PASSWORD_PATTERN.matcher(motdepasse).find()&&!editionProfil.getPfMotDePasse().isDisable()){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Edition utilisateur");
                 alert.setHeaderText("Votre mot de passe n'est pas valide");
