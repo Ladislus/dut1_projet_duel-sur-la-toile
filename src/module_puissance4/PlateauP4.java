@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PlateauP4 { // Modèle du plateau du puissance 4
+/**
+ * Modèle du plateau du puissance 4
+ */
+public class PlateauP4 {
 
-    private Joueur joueur1;
+    /** les joueurs qui s'opposent */
+    private Joueur joueur1,joueur2;
 
-    private Joueur joueur2;
-
+    /** numéro du joueur à qui c'est le tour de jouer */
     private int joueurCourant; // vaut 1 ou 2
 
-    public int nbPionsRest; // le nombre de pions restants
+    /** le nombre de pions restants */
+    public int nbPionsRest;
 
+    /** la liste des Colonnes du plateau */
     private List<Colonne> tableau;
 
     public PlateauP4(String j1, String j2){
@@ -38,6 +43,7 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
             return joueur2;
     }
 
+    /** Obtenir le numéro du joueur courant */
     public int getJCour(){return joueurCourant;}
 
     public List<Colonne> getTableau() {
@@ -62,6 +68,7 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
         return res;
     }
 
+    /** Obtenir la liste des pions qui composent la diagonale classique qui contient le pion de coordonnées (l,c) en paramètres */
     public List<Integer> getDiag(int l,int c){
         // Diagonale classique (Nord-Ouest à Sud-Est)
         List<Integer> res = new ArrayList<>();
@@ -83,6 +90,7 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
         return res;
     }
 
+    /** Obtenir la liste des pions qui composent la diagonale inversée qui contient le pion de coordonnées (l,c) en paramètres */
     public List<Integer> getDiagInv(int l,int c){
         // Diagonale inversée (Sud-Ouest à Nord-Est)
         List<Integer> res = new ArrayList<>();
@@ -104,6 +112,7 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
         return res;
     }
 
+    /** Changer le joueur courant */
     public void changeJCour(){
         this.getJ(joueurCourant).setCour(false);
         this.joueurCourant = (joueurCourant)%2+1;
@@ -115,6 +124,7 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
         return this.getTableau().get(numCol).addPion(joueurCourant);
     }
 
+    /** Obtenir l'état du jeu, avec un booléen (gagné ou non) et le nombre de pions aligné si c'est gagné */
     public ResultatP4 etatDuJeu(int l, int c){
         // Renvoie le numéro du joueur gagnant s'il y a un puissance 4, 0 sinon
         List<String> possibilites = this.directions(l,c);
@@ -173,6 +183,7 @@ public class PlateauP4 { // Modèle du plateau du puissance 4
         return res;
     }
 
+    /** Savoir si le tableau est plein ou non */
     public boolean isFull(){
         for (Colonne c : tableau){
             if (c.isNotFull()){return false;}

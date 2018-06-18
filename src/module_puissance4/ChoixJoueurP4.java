@@ -16,12 +16,16 @@ import java.util.*;
 
 import static module_puissance4.Puissance4.chem;
 
+/**
+ *  Vue de la fenêtre pour choisir contre qui jouer
+ */
 public class ChoixJoueurP4 {
-    // Vue de la fenêtre pour choisir contre qui jouer
 
+    /** Le Stage principal, qui étend Application */
     private Puissance4 puissance4;
 
-    public String mode; // New Game ou Resume Game
+    /** "New Game" ou "Resume Game" */
+    public String mode;
 
     public Set<String> listeAmis;
     public Set<String> listeAdvers; // Liste des joueurs avec qui une partie est en cours
@@ -121,6 +125,7 @@ public class ChoixJoueurP4 {
         return res;
     }
 
+    /** Mettre à jour la liste des contacts affichées dans la vue */
     public void majContacts() {
         this.contacts.getChildren().clear();
 
