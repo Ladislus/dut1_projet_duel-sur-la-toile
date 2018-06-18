@@ -32,8 +32,8 @@ public class ActionSupressionCompte implements EventHandler<ActionEvent> {
         ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Attention");
-        alert.setContentText("Etes vous sure de vouloir supprimer votre compte ?");
+        alert.setTitle("ATTENTION");
+        alert.setHeaderText("Etes vous sure de vouloir supprimer votre compte ?");
         ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
         ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
         alert.getButtonTypes().setAll(okButton, noButton);
