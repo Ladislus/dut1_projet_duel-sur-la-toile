@@ -19,7 +19,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.cell.*;
 import javafx.geometry.Pos;
 import javafx.beans.property.SimpleStringProperty;
-
+import APIMySQL.*;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.List;
 public class GererJoueur extends BorderPane {
 
     private PageAccueil pa;
@@ -97,10 +100,10 @@ public class GererJoueur extends BorderPane {
 
     /** Création du tableau contenant la liste de tous les joueurs à activer */
     public TableView<Joueur> creerTableListeJoueurAactiver() {
-        TableView<Joueur> table = new TableView<Joueur>();
-        TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
-        TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
-        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
+        TableView<Joueur> table = new TableView<>();
+        TableColumn<Joueur, String> pseudo = new TableColumn<>("Pseudo");
+        TableColumn<Joueur, Integer> id = new TableColumn<>("ID");
+        TableColumn<Joueur, Hyperlink> profil = new TableColumn<>("Profil");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
         pseudo.setResizable(false);
         id.setResizable(false);
@@ -116,7 +119,10 @@ public class GererJoueur extends BorderPane {
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
         ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
         table.setItems(liste);
-        table.getColumns().addAll(pseudo, id, profil, activer);
+        table.getColumns().add(pseudo);
+        table.getColumns().add(id);
+        table.getColumns().add(profil);
+        table.getColumns().add(activer);
         table.setPrefWidth(100);
         return table;
     }
@@ -151,7 +157,7 @@ public class GererJoueur extends BorderPane {
 
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
-        // EXEMPLE => METTRE REQUETTE ICI
+
         Joueur j1 = new Joueur("Leo", 2, true);
         Joueur j2 = new Joueur("ab", 5, true);
         Joueur j3 = new Joueur("zf", 1, false);
@@ -192,7 +198,10 @@ public class GererJoueur extends BorderPane {
         profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         ObservableList<Joueur> list = getListeJoueursTableView();
         table.setItems(list);
-        table.getColumns().addAll(pseudo, id, connecte, profil);
+        table.getColumns().add(pseudo);
+        table.getColumns().add(id);
+        table.getColumns().add(connecte);
+        table.getColumns().add(profil);
         table.setPrefWidth(100);
         return table;
     }
