@@ -15,8 +15,14 @@ public class Joueur {
         this.pseudo = pseudo;
         this.email = email; }
 
-    public String getPseudo() { return pseudo; }
+    public String getPseudo() { return this.pseudo; }
 
-    public int getId() { return id; }
+    public int getId() { return this.id; }
 
-    public String getEmail() { return this.email; }}
+    public String getEmail() { return this.email; }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public void setId(int id) { this.id = id; }
+
+    public void setPseudo(String pseudo) { this.pseudo = pseudo; }}
