@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 class InscriptionJoueur extends BorderPane {
 
+  private TextField tfPrenom;
+  private TextField tfName;
   private TextField tfMail;
   private TextField tfPseudo;
 
@@ -20,6 +22,8 @@ class InscriptionJoueur extends BorderPane {
   private PasswordField tfPasswordConfirm;
 
   private String title;
+
+  private Label lInfo;
 
   private Stage primaryStage;
 
@@ -42,7 +46,7 @@ class InscriptionJoueur extends BorderPane {
 
     Label lSex = new Label("Sexe : ");
 
-    tgSex = new ToggleGroup();
+    this.tgSex = new ToggleGroup();
 
     RadioButton rdMan = new RadioButton("Homme");
     rdMan.setToggleGroup(tgSex);
@@ -62,20 +66,28 @@ class InscriptionJoueur extends BorderPane {
     HBox hSex = new HBox();
     hSex.getChildren().addAll(rdMan, rdWoman, rdOther);
 
+    Label lPrenom = new Label("Prénom : ");
+    this.tfPrenom = new TextField();
+    tfPrenom.setPromptText("Entrez votre prénom ici");
+
+    Label lName = new Label("Nom : ");
+    this.tfName = new TextField();
+    tfName.setPromptText("Entrez votre nom ici");
+
     Label lMail = new Label("E-mail : ");
-    tfMail = new TextField();
+    this.tfMail = new TextField();
     tfMail.setPromptText("Entrez votre email ici");
 
     Label lPseudo = new Label("Pseudonyme : ");
-    tfPseudo = new TextField();
+    this.tfPseudo = new TextField();
     tfPseudo.setPromptText("Entrez votre pseudo ici");
 
     Label lPassword = new Label("Mot de passe : ");
-    tfPassword = new PasswordField();
+    this.tfPassword = new PasswordField();
     tfPassword.setPromptText("Entrez votre mot de passe ici");
 
     Label lPasswordConfirm = new Label("Confirmer mot de passe : ");
-    tfPasswordConfirm = new PasswordField();
+    this.tfPasswordConfirm = new PasswordField();
     tfPasswordConfirm.setPromptText("Confirmez votre mot de passe ici");
 
     Button btConnect = new Button("S'inscrire !");
@@ -86,7 +98,7 @@ class InscriptionJoueur extends BorderPane {
     hBtConnect.setAlignment(Pos.BASELINE_CENTER);
     hBtConnect.setPadding(new Insets(15, 0, 0, 0));
 
-    candidate.getChildren().addAll(lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, lSex, hSex, hBtConnect);
+    candidate.getChildren().addAll(lPrenom, tfPrenom, lName, tfName, lMail, tfMail, lPseudo, tfPseudo, lPassword, tfPassword, lPasswordConfirm, tfPasswordConfirm, lSex, hSex, hBtConnect);
     candidate.setPadding(new Insets(20,20,0,0));
     candidate.setSpacing(7);
 
@@ -101,8 +113,7 @@ class InscriptionJoueur extends BorderPane {
     imageLogo.setFitWidth(100);
     imageLogo.setPreserveRatio(true);
 
-    Hyperlink hlHelp = new Hyperlink("Besoin d'aide");
-    //hlHelp.setOnAction(new ActionHelp());
+    this.lInfo = new Label("");
 
     ImageView imageHelp = new ImageView();
     imageHelp.setImage(VariablesJoueur.HELP);
@@ -110,7 +121,7 @@ class InscriptionJoueur extends BorderPane {
     imageHelp.setFitWidth(20);
 
     HBox hHelp = new HBox();
-    hHelp.getChildren().addAll(hlHelp, imageHelp);
+    hHelp.getChildren().addAll(lInfo, imageHelp);
     hHelp.setAlignment(Pos.TOP_CENTER);
 
     Button btBack = new Button("Retour");
@@ -150,14 +161,20 @@ class InscriptionJoueur extends BorderPane {
 
     return candidate; }
 
-  public TextField getTfMail() { return this.tfMail; }
+  public String getPrenom() { return this.tfPrenom.getText(); }
 
-  public TextField getTfPseudo() { return this.tfPseudo; }
+  public String getName() { return this.tfName.getText(); }
 
-  public ToggleGroup getTgSex() { return this.tgSex; }
+  public String getMail() { return this.tfMail.getText(); }
 
-  public PasswordField getTfPassword() { return this.tfPassword; }
+  public String getPseudo() { return this.tfPseudo.getText(); }
 
-  public PasswordField getTfPasswordConfirm() {return this.tfPasswordConfirm; }
+  public String getSex() { return (String) this.tgSex.getSelectedToggle().getUserData(); }
 
-  public String getTitle() { return this.title; }}
+  public String getPassword() { return this.tfPassword.getText(); }
+
+  public String getPasswordConfirm() {return this.tfPasswordConfirm.getText(); }
+
+  public String getTitle() { return this.title; }
+
+  public void setInfo(String message) { this.lInfo.setText(message); }}

@@ -23,22 +23,28 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
     List<String> listeErreur = new ArrayList<>();
 
-    String mail = page.getTfMail().getText();
+    String prenom = page.getPrenom();
+    if (prenom.length() < 2) { listeErreur.add("Veuillez entrez un prénom"); }
+
+    String name = page.getName().toUpperCase();
+    if (prenom.length() < 2) { listeErreur.add("Veuillez entrez un nom"); }
+
+    String mail = page.getMail();
     if (!VariablesJoueur.EMAIL_PATTERN.matcher(mail).find()) { listeErreur.add("L'adresse mail n'est pas valide"); }
 
-    String pseudo = page.getTfPseudo().getText();
+    String pseudo = page.getPseudo();
     if (pseudo.length() < 4 || pseudo.length() > 30) { listeErreur.add("Le pseudonyme n'est pas valide"); }
 
-    String password = page.getTfPassword().getText();
+    String password = page.getPassword();
     if (!VariablesJoueur.PASSWORD_PATTERN.matcher(password).find()) { listeErreur.add("Le mot de passe n'est pas valide"); }
-    else if (!page.getTfPasswordConfirm().getText().equals(password)) { listeErreur.add("Les mots de passe ne correspondent pas"); }
+    else if (!page.getPasswordConfirm().equals(password)) { listeErreur.add("Les mots de passe ne correspondent pas"); }
 
-    String sex = (String) page.getTgSex().getSelectedToggle().getUserData();
+    String sex = page.getSex();
 
     if ( listeErreur.size() != 0) {
 
       String erreur = "";
-      
+
       for (String elem : listeErreur) { erreur += elem + "\n"; }
 
       Alert a = new Alert(Alert.AlertType.ERROR);
@@ -51,7 +57,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       try {
 
-        Utilisateur.creerUtilisateur(pseudo, mail, sex, "test", "test", password, "USER");
+        Utilisateur.creerUtilisateur(pseudo, mail, sex, prenom, name, password, "USER");
 
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("INFORMATION");
