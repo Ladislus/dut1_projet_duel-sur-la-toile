@@ -182,7 +182,6 @@ class Dashboard extends BorderPane {
       }
       else{
           for (String name : btName) {
-              System.out.println(name);
               ImageView imageContact = new ImageView();
               imageContact.setImage(VariablesJoueur.CONTACT);
               imageContact.setPreserveRatio(true);

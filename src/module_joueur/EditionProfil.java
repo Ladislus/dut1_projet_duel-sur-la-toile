@@ -184,6 +184,7 @@ class EditionProfil extends BorderPane {
         btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, joueur));
         Button btEnregistrer = new Button("Enregistrer");
         btEnregistrer.setStyle("-fx-background-color: #40b70c; -fx-text-fill: #ffffff");
+        btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
         bp.setLeft(btRetour);
         bp.setCenter(btSuppressionCompte);
         bp.setRight(btEnregistrer);
