@@ -1,6 +1,5 @@
 package module_joueur;
 
-import APIMySQL.ConnexionMySQL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +17,7 @@ import java.io.File;
 
 class EditionProfil extends BorderPane {
 
+<<<<<<< HEAD
   String title;
 
   Stage primaryStage;
@@ -192,3 +192,200 @@ class EditionProfil extends BorderPane {
     public String getTitle() { return this.title; }
 
     public TextField getTfEmail() { return this.tfEmail; }}
+=======
+    String title;
+
+
+
+    Stage primaryStage;
+
+    Joueur joueur;
+
+    TextField tfPseudo;
+
+    TextField tfEmail;
+
+    PasswordField pfMotDePasse;
+
+    PasswordField pfConfirmMotDePasse;
+
+    int globalTitleFont;
+
+    public EditionProfil(Stage primaryStage, Joueur joueur){
+        super();
+
+        this.title = "Editez mon profil";
+        this.joueur = joueur;
+
+        this.primaryStage = primaryStage;
+        this.globalTitleFont = 20;
+        this.setLeft(creerGauche());
+        this.setRight(creerDroite());
+        this.setBottom(creerBas());
+    }
+
+    public VBox creerGauche(){
+        VBox vPrincipal = new VBox();
+        VBox vImage = new VBox();
+        VBox vPseudo = new VBox();
+        HBox hPseudoWithEditionButton = new HBox();
+
+        // for image :
+        Label lImage = new Label("Mon image");
+        lImage.setFont(Font.font("Arial", globalTitleFont));
+        File fileImageUser = new File("./img/pub/user.png");
+        ImageView ivImageUser = new ImageView();
+        ivImageUser.setImage(new Image(fileImageUser.toURI().toString()));
+        ivImageUser.setPreserveRatio(true);
+        ivImageUser.setFitWidth(50);
+        Button btModifier = new Button("Modifier");
+
+        //image for edit pseudo
+        File fileEditPseudo = new File("./img/pub/edit.png");
+        ImageView ivImageEditPseudo = new ImageView();
+        ivImageEditPseudo.setImage(new Image(fileEditPseudo.toURI().toString()));
+        ivImageEditPseudo.setPreserveRatio(true);
+        ivImageEditPseudo.setFitWidth(15);
+
+        // for pseudo
+        Label lPseudo = new Label("Mon pseudo");
+        lPseudo.setFont(Font.font("Arial", globalTitleFont));
+        //Hbox vPseudo
+        tfPseudo = new TextField();
+        tfPseudo.setText(joueur.getPseudo());
+        tfPseudo.setDisable(true);
+        Button btEdition = new Button("", ivImageEditPseudo);
+        btEdition.setOnAction(actionEvent -> tfPseudo.setDisable(false));
+
+        vImage.getChildren().addAll(lImage,ivImageUser, btModifier);
+        vImage.setAlignment(Pos.TOP_CENTER);
+        vImage.setSpacing(15);
+
+        hPseudoWithEditionButton.getChildren().addAll(tfPseudo, btEdition);
+        hPseudoWithEditionButton.setAlignment(Pos.TOP_CENTER);
+        vPseudo.setAlignment(Pos.TOP_CENTER);
+        vPseudo.setSpacing(10);
+        vPseudo.getChildren().addAll(lPseudo, hPseudoWithEditionButton);
+
+        vPrincipal.setPadding(new Insets(15,0,0,15));
+        vPrincipal.setSpacing(25);
+        vPrincipal.setPrefWidth(230);
+        vPrincipal.getChildren().addAll(vImage, vPseudo);
+
+        return vPrincipal;
+    }
+
+    public VBox creerDroite(){
+        VBox vPrincipal = new VBox();
+        VBox vEmail = new VBox();
+        VBox vMotDePasse = new VBox();
+        VBox vConfirmMotDePasse = new VBox();
+
+        HBox hEmail = new HBox();
+        HBox hMotDePasse = new HBox();
+        HBox hConfirmMotDePasse = new HBox();
+
+        //For edition Image email
+        File fileEdit = new File("./img/pub/edit.png");
+        ImageView ivImageEdit = new ImageView();
+        ivImageEdit.setImage(new Image(fileEdit.toURI().toString()));
+        ivImageEdit.setPreserveRatio(true);
+        ivImageEdit.setFitWidth(15);
+
+        //For email
+        Label lEmail = new Label("Email :");
+        lEmail.setFont(Font.font("Arial", globalTitleFont));
+        tfEmail = new TextField();
+        tfEmail.setText(joueur.getEmail());
+        tfEmail.setDisable(true);
+        Button btEditionEmail = new Button("",ivImageEdit);
+        btEditionEmail.setOnAction(actionEvent -> tfEmail.setDisable(false));
+
+        vEmail.getChildren().addAll(lEmail, hEmail);
+        vEmail.setAlignment(Pos.TOP_CENTER);
+        vEmail.setSpacing(12);
+        hEmail.setAlignment(Pos.TOP_CENTER);
+        hEmail.getChildren().addAll(tfEmail, btEditionEmail);
+
+        //For edition image mot de passe
+        File fileEditMdp = new File("./img/pub/edit.png");
+        ImageView ivImageEditMdp = new ImageView();
+        ivImageEditMdp.setImage(new Image(fileEdit.toURI().toString()));
+        ivImageEditMdp.setPreserveRatio(true);
+        ivImageEditMdp.setFitWidth(15);
+
+        //for mot de passe
+        Label lMotDePasse = new Label("Nouveau mot de passe :");
+        lMotDePasse.setFont(Font.font("Arial", globalTitleFont));
+        pfMotDePasse = new PasswordField();
+        pfMotDePasse.setDisable(true);
+        Button btEditionMotPasse = new Button("", ivImageEditMdp);
+
+        vMotDePasse.getChildren().addAll(lMotDePasse, hMotDePasse);
+        vMotDePasse.setAlignment(Pos.TOP_CENTER);
+        vMotDePasse.setSpacing(12);
+        hMotDePasse.setAlignment(Pos.TOP_CENTER);
+        hMotDePasse.getChildren().addAll(pfMotDePasse, btEditionMotPasse);
+
+        //for confirm mot de passe
+        Label lConfirmMotDePasse = new Label("Confirmation :");
+        lConfirmMotDePasse.setFont(Font.font("Arial",globalTitleFont));
+        pfConfirmMotDePasse = new PasswordField();
+        pfConfirmMotDePasse.setDisable(true);
+        vConfirmMotDePasse.setAlignment(Pos.TOP_CENTER);
+        vConfirmMotDePasse.setSpacing(12);
+        hConfirmMotDePasse.getChildren().addAll(pfConfirmMotDePasse);
+        hConfirmMotDePasse.setAlignment(Pos.TOP_CENTER);
+        pfConfirmMotDePasse.setPrefWidth(203);
+        vConfirmMotDePasse.getChildren().addAll(lConfirmMotDePasse, hConfirmMotDePasse);
+        btEditionMotPasse.setOnAction(actionEvent -> {
+            pfMotDePasse.setDisable(false);
+            pfConfirmMotDePasse.setDisable(false);
+        });
+        vPrincipal.getChildren().addAll(vEmail, vMotDePasse, vConfirmMotDePasse);
+        vPrincipal.setPadding(new Insets(15,6,0,0));
+        vPrincipal.setSpacing(22);
+        vPrincipal.setPrefWidth(300);
+        return vPrincipal;
+    }
+
+    public BorderPane creerBas(){
+        BorderPane bp = new BorderPane();
+        Button btRetour = new Button("Retour");
+        btRetour.setStyle("-fx-background-color: #2355a0; -fx-text-fill: #ffffff");
+        btRetour.setOnAction(new ActionRetourToDashboard());
+        Button btSuppressionCompte = new Button("Supprimer mon compte");
+        btSuppressionCompte.setStyle("-fx-background-color: #cc250c; -fx-text-fill: #ffffff");
+        btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, joueur));
+        Button btEnregistrer = new Button("Enregistrer");
+        btEnregistrer.setStyle("-fx-background-color: #40b70c; -fx-text-fill: #ffffff");
+        btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
+        bp.setLeft(btRetour);
+        bp.setCenter(btSuppressionCompte);
+        bp.setRight(btEnregistrer);
+        bp.setPadding(new Insets(0,10,10,10));
+
+        return bp;
+    }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public TextField getTfEmail(){
+        return this.tfEmail;
+    }
+
+    public TextField getTfPseudo(){
+        return this.tfPseudo;
+    }
+
+    public PasswordField getPfMotDePasse() {
+        return pfMotDePasse;
+    }
+
+    public PasswordField getPfConfirmMotDePasse() {
+        return pfConfirmMotDePasse;
+    }
+}
+>>>>>>> 59c0d48566c7328af77653d0af4a0874eae7bd88

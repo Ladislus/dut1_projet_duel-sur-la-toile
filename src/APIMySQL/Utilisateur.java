@@ -38,7 +38,7 @@ public class Utilisateur {
 
     public static void setUserInfo(String columnInfoName, Object columInfoValue, String columnName, String columnValue){
         try {
-            GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "=" + columInfoValue + " WHERE " + columnName + "='" + columnValue + "'");
+            GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "='" + columInfoValue + "' WHERE " + columnName + "='" + columnValue + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,12 +92,20 @@ public class Utilisateur {
             }
             return listePseudo;
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
         catch (NullPointerException e){
             return null;
         }
+    }
+
+    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse){
+        int id = getIdByPseudo(ancientMotDePasse);
+        String salt = getSalt();
+        setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
+        setUserInfo("emailUt", email, "idUt", String.valueOf(id));
+        setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
+        setUserInfo("salt", salt, "idUt", String.valueOf(id));
     }
 
     public static String getEmailByPseudo(String pseudoUt){

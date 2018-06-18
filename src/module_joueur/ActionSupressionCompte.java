@@ -1,7 +1,6 @@
 package module_joueur;
 
 
-import APIMySQL.ConnexionMySQL;
 import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;

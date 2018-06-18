@@ -47,8 +47,8 @@ class ActionInscription implements EventHandler<ActionEvent> {
       a.showAndWait(); }
 
     else {
-
-      try {
+//FIXME : Champs manquants pour Utilisateur.creerUtilisateur (prenom et nom entre sex et password)
+      /*try {
 
         Utilisateur.creerUtilisateur(pseudo, mail, sex, "test", "test", password, "USER");
 
@@ -69,4 +69,4 @@ class ActionInscription implements EventHandler<ActionEvent> {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle("ERREUR");
         a.setHeaderText("Le compte existe déjà");
-        a.showAndWait(); }}}}
+        a.showAndWait(); }*/}}}

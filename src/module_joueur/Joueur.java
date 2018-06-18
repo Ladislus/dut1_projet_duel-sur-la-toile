@@ -17,6 +17,6 @@ public class Joueur {
 
     public String getPseudo() { return pseudo; }
 
-    public int getId() { return id; }
+    public int getId() { return this.id; }
 
     public String getEmail() { return this.email; }}

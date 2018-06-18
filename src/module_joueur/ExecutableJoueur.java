@@ -1,6 +1,5 @@
 package module_joueur;
 
-import APIMySQL.ConnexionMySQL;
 
 import javafx.application.Application;
 import javafx.scene.control.Alert;
