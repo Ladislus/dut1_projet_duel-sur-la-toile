@@ -11,10 +11,7 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  public ActionConnection(Stage primaryStage) {
-
-    this.primaryStage = primaryStage;
-    }
+  public ActionConnection(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(ActionEvent actionEvent) {
 

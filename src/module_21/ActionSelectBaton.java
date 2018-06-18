@@ -17,9 +17,16 @@ public class ActionSelectBaton implements EventHandler<MouseEvent> {
         int jCour = this.partie.getPlateau().getJCour();
         int next = this.partie.getPlateau().getListe21batons().getNext();
 
-        if (this.partie.getListeBatons().get(next).nbJoueur == 0) {
+        if (bat.nbJoueur > 0){
+            bat.setSelect(0);
+            this.partie.removeBatonSelect();
+            this.partie.getPlateau().getListe21batons().set((int) bat.getUserData(),0);
+        }
+
+        else if (this.partie.getListeBatons().get(next).nbJoueur == 0) {
             this.partie.getListeBatons().get(next).setSelect(jCour);
             this.partie.getPlateau().getListe21batons().set(next,jCour);
+            this.partie.addBatonSelect();
         }
         else {
             this.partie.getPlateau().getListe21batons().set(next,0);
@@ -28,6 +35,11 @@ public class ActionSelectBaton implements EventHandler<MouseEvent> {
             else
                 this.partie.getListeBatons().get(next).setSelect(0);
         }
+
+        this.partie.getValider().setDisable(this.partie.getNbBatonsSelect()==0);
+
+        // Si plus d'un Bâtonnet est sélectionné, le bouton Valider s'active
+
 
     }
 }

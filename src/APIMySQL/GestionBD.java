@@ -10,16 +10,9 @@ import java.util.List;
 
 public class GestionBD {
 
-    private static ConnexionMySQL co = null;
-
-    static {
-        try {co = new ConnexionMySQL("localhost", "serveurDeJeux", "root", "marlou06");}
-        catch (ClassNotFoundException e) {}
-    }
-
     private GestionBD(){}
 
-    public static HashMap<String, List<Object>> selectPreparedStatement(String requete) throws SQLException {
+    public static HashMap<String, List<Object>> selectPreparedStatement(ConnexionMySQL co, String requete) throws SQLException {
         Statement st=co.createStatement();
         ResultSet rs=st.executeQuery(requete);
         ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
@@ -54,7 +47,7 @@ public class GestionBD {
         return res;
     }
 
-    public static void updatePreparedStatement(String requete, List<Object> listeDonnee) throws SQLException {
+    public static void updatePreparedStatement(ConnexionMySQL co, String requete, List<Object> listeDonnee) throws SQLException {
         //todo : make an exception
         int nbPointDinterrogation = 0;
         for(int i =0; i<requete.length(); i++){
@@ -70,7 +63,7 @@ public class GestionBD {
         ps.executeUpdate();
     }
 
-    public static void updateStatement(String requete) throws SQLException{
+    public static void updateStatement(ConnexionMySQL co, String requete) throws SQLException{
         Statement s = co.createStatement();
         s.executeUpdate(requete);
     }

@@ -3,6 +3,7 @@ package module_21;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -28,6 +29,12 @@ public class Partie21 {
 
     /** La liste des Bâtonnets de la vue */
     private List<Batonnet> listeBatons;
+
+    /** Nombre de Bâtonnets sélectionnés */
+    private int nbBatonsSelect;
+
+    /** Bouton Valider un coup */
+    private Button valider;
 
 
     public Partie21(Jeu21Batonnets jeu21Batonnets,String j1,String j2) {
@@ -165,7 +172,7 @@ public class Partie21 {
                 "-fx-background-radius: 5;"+
                 "-fx-font-size: 15;";
 
-        Button valider = new Button("Valider\nle coup");
+        this.valider = new Button("Valider\nle coup");
         valider.setAlignment(Pos.CENTER);
         valider.setStyle(valideNormal);
         valider.setOnMouseEntered(e -> valider.setStyle(valideHover));
@@ -205,5 +212,21 @@ public class Partie21 {
 
     public Plateau21 getPlateau() {
         return p;
+    }
+
+    public void removeBatonSelect() {
+        this.nbBatonsSelect--;
+    }
+
+    public void addBatonSelect() {
+        this.nbBatonsSelect++;
+    }
+
+    public Button getValider() {
+        return this.valider;
+    }
+
+    public int getNbBatonsSelect() {
+        return this.nbBatonsSelect;
     }
 }

@@ -44,15 +44,14 @@ public class Utilisateur {
         }
     }
 
-    public static void creerUtilisateur(String pseudo, String email, String sexe, String mdp, String nomRole) throws UtilisateurException {
+    public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, String mdp, String nomRole) throws UtilisateurException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
         try {
-            Collections.addAll(donnees,pseudo,email,sexe,1,nomRole,getHash((mdp + salt).getBytes()),salt);
-            GestionBD.updatePreparedStatement("INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?,?)", donnees);
+            Collections.addAll(donnees,pseudo,email,sexe,prenom,nom,1,nomRole,getHash((mdp + salt).getBytes()),salt);
+            GestionBD.updatePreparedStatement("INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,prenom,nom,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new UtilisateurException("pseudoTaken");
         }
     }
@@ -63,7 +62,6 @@ public class Utilisateur {
             String salt = getUserInfo("salt","pseudoUt",pseudoUt);
             return getHash((mdp+salt).getBytes()).equals(hash);
         } catch (NullPointerException e) {
-          e.printStackTrace();
             throw new UtilisateurException("unknownPseudo");
         }
     }
