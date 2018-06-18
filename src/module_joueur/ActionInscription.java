@@ -1,6 +1,7 @@
 package module_joueur;
 
 import APIMySQL.*;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -14,12 +15,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-
-
-  public ActionInscription(Stage primaryStage) {
-
-    this.primaryStage = primaryStage;
-    }
+  public ActionInscription(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(ActionEvent actionEvent) {
 
@@ -42,6 +38,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
     if ( listeErreur.size() != 0) {
 
       String erreur = "";
+      
       for (String elem : listeErreur) { erreur += elem + "\n"; }
 
       Alert a = new Alert(Alert.AlertType.ERROR);
@@ -51,10 +48,10 @@ class ActionInscription implements EventHandler<ActionEvent> {
       a.showAndWait(); }
 
     else {
-//FIXME : Champs manquants pour Utilisateur.creerUtilisateur (prenom et nom entre sex et password)
-      /*try {
 
-        Utilisateur.creerUtilisateur(pseudo, mail, sex, password, "USER");
+      try {
+
+        Utilisateur.creerUtilisateur(pseudo, mail, sex, "test", "test", password, "USER");
 
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("INFORMATION");
@@ -73,4 +70,4 @@ class ActionInscription implements EventHandler<ActionEvent> {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle("ERREUR");
         a.setHeaderText("Le compte existe déjà");
-        a.showAndWait(); }*/}}}
+        a.showAndWait(); }}}}
