@@ -78,7 +78,7 @@ public class PageAccueil extends Application {
 
   //      bStat.setContentDisplay(ContentDisplay.TOP);
 
-  //      bStat.setOnAction(new ActionStatistiques(this));
+        bStat.setOnAction(new ActionStatistiques(this));
         bJeu.setPrefWidth(388);
         bJeu.setPrefHeight(117);
         bStat.setPrefWidth(388);

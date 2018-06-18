@@ -63,6 +63,7 @@ public class Utilisateur {
             String salt = getUserInfo(co,"salt","pseudoUt",pseudoUt);
             return getHash((mdp+salt).getBytes()).equals(hash);
         } catch (NullPointerException e) {
+          e.printStackTrace();
             throw new UtilisateurException("unknownPseudo");
         }
     }
@@ -71,12 +72,34 @@ public class Utilisateur {
         return getUserInfo(co, "activeUt", "pseudoUt", pseudoUt).equals("true");
     }
 
+
     public static void deactivateUser(ConnexionMySQL co, String pseudo){
         setUserInfo(co, "activeUt", 0, "pseudoUt", pseudo);
     }
 
     public static int getIdByPseudo(ConnexionMySQL co, String pseudoUt){
         return Integer.parseInt(getUserInfo(co, "idUt", "pseudoUt", pseudoUt));
+    }
+
+    public static String getPseudoById(ConnexionMySQL co, Integer id){
+        return getUserInfo(co, "pseudoUt", "idUt", id.toString());
+    }
+
+    public static ArrayList<String> getListeDamis(ConnexionMySQL co, String pseudo){
+        try {
+            ArrayList<String> listePseudo = new ArrayList<>();
+            List<Object> listeId = GestionBD.selectPreparedStatement(co,"SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(co, pseudo)).get("idUt1");
+            for(Object elem : listeId){
+                listePseudo.add(String.valueOf(getPseudoById(co, (Integer) elem)));
+            }
+            return listePseudo;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        catch (NullPointerException e){
+            return null;
+        }
     }
 
     public static String getEmailByPseudo(ConnexionMySQL co, String pseudoUt){

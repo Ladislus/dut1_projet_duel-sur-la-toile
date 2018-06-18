@@ -19,6 +19,7 @@ public class ProfilJoueur extends BorderPane {
 
     private GererJoueur gJoueur;
     private PageAccueil pa;
+    private ToggleGroup groupe = new ToggleGroup();
 
 
     public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur) {
@@ -42,80 +43,242 @@ public class ProfilJoueur extends BorderPane {
         this.setTop(haut);
     }
 
-    public void gauche() {
-      VBox vbgauche = new VBox(18);
-      GridPane gpgauche = new GridPane();
-      HBox hbactiverjoueur = new HBox(20);
-      HBox hbsave = new HBox();
-      HBox hbfilechooser = new HBox(5);
-      ToggleGroup groupe = new ToggleGroup();
+
+    public Label creerLabelPseudo(){
       Label pseudo = new Label("Pseudo : ");
+      
+      return pseudo;
+    }
+
+
+    public Label creerLabelPrenom(){
       Label prenom = new Label("Prénom : ");
+
+      return prenom;
+    }
+
+
+    public Label creerLabelNom(){
       Label nom = new Label("Nom : ");
+
+      return nom;
+    }
+
+
+    public Label creerLabelEmail(){
       Label email = new Label("Email : ");
+
+      return email;
+    }
+
+
+    public Label creerLabelRole(){
       Label role = new Label("Rôle : ");
+
+      return role;
+    }
+
+
+    public TextField creerTextFieldPseudo(){
       TextField tpseudo = new TextField();
+
+      return tpseudo;
+    }
+
+
+    public TextField creerTextFieldPrenom(){
       TextField tprenom = new TextField();
+
+      return tprenom;
+    }
+
+
+    public TextField creerTextFieldNom(){
       TextField tnom = new TextField();
+
+      return tnom;
+    }
+
+
+    public TextField creerTextFieldEmail(){
       TextField temail = new TextField();
+
+      return temail;
+    }
+
+
+    public ComboBox creerComboBoxRoles(){
       ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
       ComboBox cbrole = new ComboBox(optionsRoles);
       cbrole.setPrefWidth(175);
+
+      return cbrole;
+    }
+
+
+    public GridPane creerGridPaneInfos(){
+      GridPane gpinfos = new GridPane();
+
+      gpinfos.add(creerLabelPseudo(), 1, 40);
+      gpinfos.add(creerLabelPrenom(), 1, 45);
+      gpinfos.add(creerLabelNom(), 1, 50);
+      gpinfos.add(creerLabelEmail(), 1, 55);
+      gpinfos.add(creerLabelRole(), 1, 60);
+
+      gpinfos.add(creerTextFieldPseudo(), 2, 40);
+      gpinfos.add(creerTextFieldPrenom(), 2, 45);
+      gpinfos.add(creerTextFieldNom(), 2, 50);
+      gpinfos.add(creerTextFieldEmail(), 2, 55);
+      gpinfos.add(creerComboBoxRoles(), 2, 60);
+
+      gpinfos.setVgap(1);
+
+      return gpinfos;
+    }
+
+
+    public Label creerLabelActiver(){
       Label active = new Label("Activer ?");
+
+      return active;
+    }
+
+
+    public RadioButton creerRadioBoutonActiverJoueur(){
       RadioButton rbactiver = new RadioButton("Oui");
+      rbactiver.setToggleGroup(this.groupe);
+
+      return rbactiver;
+    }
+
+
+    public RadioButton creerRadioBoutonDesactiverJoueur(){
       RadioButton rbpasactiver = new RadioButton("Non");
-      rbactiver.setToggleGroup(groupe);
-      rbpasactiver.setToggleGroup(groupe);
+      rbpasactiver.setToggleGroup(this.groupe);
+
+      return rbpasactiver;
+    }
+
+
+    public HBox creerHBoxActivationJoueur(){
+      HBox hbactiverjoueur = new HBox(20);
+      hbactiverjoueur.getChildren().addAll(creerLabelActiver(), creerRadioBoutonActiverJoueur(),
+        creerRadioBoutonDesactiverJoueur());
+
+      return hbactiverjoueur;
+    }
+
+
+    public Button creerBoutonSauvegarderModifs(){
       Button bsave = new Button("Sauvegarder");
-      Label limageprofil = new Label("Image de profil");
-      TextField tfilechooser = new TextField();
-      tfilechooser.setPromptText("Choisissez une image");
-      tfilechooser.setDisable(true);
-      Button bplus = new Button("+");
-      ActionFileChooser afc = new ActionFileChooser(this);
-      bplus.setOnAction(afc);
       ActionProfilJoueurSauvegarde apjs = new ActionProfilJoueurSauvegarde(this);
       bsave.setOnAction(apjs);
 
+      return bsave;
+    }
 
-      gpgauche.add(pseudo, 1, 40);
-      gpgauche.add(prenom, 1, 45);
-      gpgauche.add(nom, 1, 50);
-      gpgauche.add(email, 1, 55);
-      gpgauche.add(role, 1, 60);
 
-      gpgauche.add(tpseudo, 2, 40);
-      gpgauche.add(tprenom, 2, 45);
-      gpgauche.add(tnom, 2, 50);
-      gpgauche.add(temail, 2, 55);
-      gpgauche.add(cbrole, 2, 60);
-
-      gpgauche.setVgap(1);
-
-      hbactiverjoueur.getChildren().addAll(active, rbactiver, rbpasactiver);
-
-      hbfilechooser.getChildren().addAll(tfilechooser, bplus);
-
-      hbsave.getChildren().add(bsave);
+    public HBox creerHBoxSauvegarderModifs(){
+      HBox hbsave = new HBox();
+      hbsave.getChildren().add(creerBoutonSauvegarderModifs());
       hbsave.setAlignment(Pos.CENTER);
-      vbgauche.getChildren().addAll(gpgauche, limageprofil, hbfilechooser,
-        hbactiverjoueur, hbsave);
 
+      return hbsave;
+    }
+
+
+    public Label creerLabelImageProfil(){
+      Label limageprofil = new Label("Image de profil");
+
+      return limageprofil;
+    }
+
+
+    public TextField creerTextFieldFileChooser(){
+      TextField tfilechooser = new TextField();
+      tfilechooser.setPromptText("Choisissez une image");
+      tfilechooser.setDisable(true);
+
+      return tfilechooser;
+    }
+
+
+    public Button creerBoutonFileChooser(){
+      Button bplus = new Button("+");
+      ActionFileChooser afc = new ActionFileChooser(this);
+      bplus.setOnAction(afc);
+
+      return bplus;
+    }
+
+
+    public HBox creerHBoxFileChooser(){
+      HBox hbfilechooser = new HBox(5);
+      hbfilechooser.getChildren().addAll(creerTextFieldFileChooser(), creerBoutonFileChooser());
+
+      return hbfilechooser;
+    }
+
+
+    public void gauche() {
+      VBox vbgauche = new VBox(18);
+      vbgauche.getChildren().addAll(creerGridPaneInfos(), creerLabelImageProfil(),
+        creerHBoxFileChooser(), creerHBoxActivationJoueur(), creerHBoxSauvegarderModifs());
       vbgauche.setPadding(new Insets(0,0,0,25));
 
       this.setLeft(vbgauche);
     }
 
-    public void centre() {
-      VBox vbcentre = new VBox(15);
-      VBox vbstats = new VBox(15);
+
+    public Label creerLabelStats(){
       Label stats = new Label("Statistiques");
       stats.setStyle("-fx-font-weight: bold");
+
+      return stats;
+    }
+
+
+    public Label creerLabelJeuPlusJoue(){
       Label jeuplusjoue = new Label("Jeu le plus joué : ");
+
+      return jeuplusjoue;
+    }
+
+
+    public Label creerLabelTempsPlateforme(){
       Label tempsplateforme = new Label("Temps passé sur la plateforme : ");
+
+      return tempsplateforme;
+    }
+
+
+    public Label creerLabelNbPartiesJouees(){
       Label nbpartiesjouees = new Label("Nombre de parties jouées : ");
+
+      return nbpartiesjouees;
+    }
+
+
+    public Label creerLabelNbAmis(){
       Label nbamis = new Label("Nombre d'amis : ");
 
+      return nbamis;
+    }
+
+
+    public VBox creerVBoxStats(){
+      VBox vbstats = new VBox(15);
+      vbstats.getChildren().addAll(creerLabelStats(), creerLabelJeuPlusJoue(),
+        creerLabelTempsPlateforme(), creerLabelNbPartiesJouees(), creerLabelNbAmis());
+      vbstats.setPadding(new Insets(5,10,5,10));
+      vbstats.setStyle("-fx-border-color: black;");
+      vbstats.setPrefHeight(200);
+
+      return vbstats;
+    }
+
+
+    public PieChart creerPieChart(){
       ObservableList<PieChart.Data> donneesdiagramme = FXCollections.observableArrayList(
         new PieChart.Data("Victoires", 60),
         new PieChart.Data("Défaites", 40));
@@ -124,14 +287,13 @@ public class ProfilJoueur extends BorderPane {
       diagramme.setTitle("Ratio Victoires/Défaites");
       diagramme.setStartAngle(90);
 
-      vbstats.getChildren().addAll(stats, jeuplusjoue, tempsplateforme, nbpartiesjouees, nbamis);
+      return diagramme;
+    }
 
-      vbstats.setPadding(new Insets(5,10,5,10));
-      vbstats.setStyle("-fx-border-color: black;");
-      vbstats.setPrefHeight(200);
 
-      vbcentre.getChildren().addAll(vbstats, diagramme);
-
+    public void centre() {
+      VBox vbcentre = new VBox(15);
+      vbcentre.getChildren().addAll(creerVBoxStats(), creerPieChart());
       vbcentre.setPadding(new Insets(40,25,20,25));
 
       this.setCenter(vbcentre);

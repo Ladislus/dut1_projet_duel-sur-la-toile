@@ -1,4 +1,4 @@
-/*package module_administrateur;
+package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,4 +17,3 @@ public class ActionStatistiques implements EventHandler<ActionEvent> {
         this.pa.getBp().setCenter(new VoirStatistiques(this.pa));
     }
 }
-*/
