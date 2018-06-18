@@ -21,8 +21,6 @@ class Dashboard extends BorderPane {
 
   private Stage primaryStage;
 
-  
-
   private Joueur joueur;
 
   private ArrayList<Button> listeBoutton;
@@ -34,8 +32,6 @@ class Dashboard extends BorderPane {
     this.title = "Dashboard";
 
     this.primaryStage = primaryStage;
-
-    
 
     this.joueur = joueur;
 
@@ -62,7 +58,6 @@ class Dashboard extends BorderPane {
 
   public VBox creerGauche() {
 
-    //todo : make to correspond to the IHM --> fini
     VBox candidate = new VBox();
     VBox param = new VBox();
 
@@ -146,7 +141,7 @@ class Dashboard extends BorderPane {
     scrollPaneNouveaute.setContent(vNouveaute);
     scrollPaneNouveaute.setPrefHeight(310);
 
-    //todo remove that and place image
+    //TODO remove that and place image
 
     for(int i = 0; i < 150; i++) {
 
@@ -157,47 +152,41 @@ class Dashboard extends BorderPane {
     candidate.setSpacing(10);
     candidate.setPadding(new Insets(0,15,9,15));
 
-    return candidate;
-  }
+    return candidate; }
 
   public void majAffichage(){
 
-      //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
-      ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
-      if(btName == null){
-          btName = new ArrayList<>();
-          btName.add("Ajouter un amis");
-          for (String name : btName) {
-              System.out.println(name);
-              ImageView imageContact = new ImageView();
-              imageContact.setImage(VariablesJoueur.CONTACT);
-              imageContact.setPreserveRatio(true);
-              imageContact.setFitWidth(20);
+    ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
 
-              Button btContact = new Button(name, imageContact);
-              btContact.setPrefWidth(150);
-              btContact.setAlignment(Pos.CENTER_LEFT);
-              listeBoutton.add(btContact);
-          }
-      }
-      else{
-          for (String name : btName) {
-              System.out.println(name);
-              ImageView imageContact = new ImageView();
-              imageContact.setImage(VariablesJoueur.CONTACT);
-              imageContact.setPreserveRatio(true);
-              imageContact.setFitWidth(20);
+    if(btName == null) {
 
-              Button btContact = new Button(name, imageContact);
-              btContact.setPrefWidth(150);
-              btContact.setAlignment(Pos.CENTER_LEFT);
-              listeBoutton.add(btContact);
-          }
-      }
-  }
+      btName = new ArrayList<>();
+      btName.add("Ajouter un amis");
 
-  public String getTitle() {
-      return this.title;
-  }
+      for (String name : btName) {
 
-}
+        ImageView imageContact = new ImageView();
+        imageContact.setImage(VariablesJoueur.CONTACT);
+        imageContact.setPreserveRatio(true);
+        imageContact.setFitWidth(20);
+
+        Button btContact = new Button(name, imageContact);
+        btContact.setPrefWidth(150);
+        btContact.setAlignment(Pos.CENTER_LEFT);
+        listeBoutton.add(btContact); }}
+
+      else {
+
+        for (String name : btName) {
+
+          ImageView imageContact = new ImageView();
+          imageContact.setImage(VariablesJoueur.CONTACT);
+          imageContact.setPreserveRatio(true);
+          imageContact.setFitWidth(20);
+
+          Button btContact = new Button(name, imageContact);
+          btContact.setPrefWidth(150);
+          btContact.setAlignment(Pos.CENTER_LEFT);
+          listeBoutton.add(btContact); }}}
+
+  public String getTitle() { return this.title; }}

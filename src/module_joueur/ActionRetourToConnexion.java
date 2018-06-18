@@ -10,12 +10,7 @@ class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  
-
-  public ActionRetourToConnexion(Stage primaryStage) {
-
-    this.primaryStage = primaryStage;
-    }
+  public ActionRetourToConnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(ActionEvent actionEvent) {
 

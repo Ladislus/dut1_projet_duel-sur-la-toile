@@ -14,12 +14,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-
-
-  public ActionInscription(Stage primaryStage) {
-
-    this.primaryStage = primaryStage;
-    }
+  public ActionInscription(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(ActionEvent actionEvent) {
 
@@ -42,6 +37,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
     if ( listeErreur.size() != 0) {
 
       String erreur = "";
+      
       for (String elem : listeErreur) { erreur += elem + "\n"; }
 
       Alert a = new Alert(Alert.AlertType.ERROR);
@@ -54,7 +50,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       try {
 
-        Utilisateur.creerUtilisateur(pseudo, mail, sex, password, "USER");
+        Utilisateur.creerUtilisateur(pseudo, mail, sex, "test", "test", password, "USER");
 
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("INFORMATION");
