@@ -19,13 +19,15 @@ public class ProfilJoueur extends BorderPane {
 
     private GererJoueur gJoueur;
     private PageAccueil pa;
-    private ToggleGroup groupe = new ToggleGroup();
+    private ToggleGroup groupe;
+    private Joueur joueur;
 
     public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
         super();
         this.gJoueur = gJoueur;
         this.joueur = joueur;
         this.pa = pa;
+        this.groupe = new ToggleGroup();
         this.haut();
         this.gauche();
         this.centre();

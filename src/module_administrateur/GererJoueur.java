@@ -100,19 +100,24 @@ public class GererJoueur extends BorderPane {
         TableView<Joueur> table = new TableView<Joueur>();
         TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
         TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
+        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
         pseudo.setResizable(false);
         id.setResizable(false);
+        profil.setResizable(false);
         activer.setResizable(false);
         pseudo.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
-        id.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
+        id.setMaxWidth(43);
+        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
         activer.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
         ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
         table.setItems(liste);
-        table.getColumns().addAll(pseudo, id, activer);
+        table.getColumns().addAll(pseudo, id, profil, activer);
+        table.setPrefWidth(100);
         return table;
     }
 
@@ -170,10 +175,10 @@ public class GererJoueur extends BorderPane {
         id.setResizable(false);
         connecte.setResizable(false);
         profil.setResizable(false);
-        pseudo.setMaxWidth(100);
-        id.setMaxWidth(50);
-        connecte.setMaxWidth(75);
-        profil.setMaxWidth(100);
+        pseudo.setMaxWidth(1f * Integer.MAX_VALUE * 75 );
+        id.setMaxWidth(41);
+        connecte.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
+        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         connecte.setCellValueFactory(cellData -> {
@@ -189,6 +194,7 @@ public class GererJoueur extends BorderPane {
         ObservableList<Joueur> list = getListeJoueursTableView();
         table.setItems(list);
         table.getColumns().addAll(pseudo, id, connecte, profil);
+        table.setPrefWidth(100);
         return table;
     }
 
