@@ -5,24 +5,28 @@ import java.sql.SQLException;
 public class ExempleExecutable {
     public static void main(String[] args) throws ClassNotFoundException {
         // TEST : Essai de passer en bibliothèques statiques.
-
-        ConnexionMySQL co = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst");
-
         try {
-            GestionBD.updateStatement(co,"INSERT INTO ROLE VALUES ('ADMIN')");
+            GestionBD.updateStatement("INSERT INTO ROLE VALUES ('ADMIN')");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             //e.printStackTrace();
         }
 
         try {
-            Utilisateur.creerUtilisateur(co,"test","test@gmail.com","couscous","admin");
-            System.out.println(Utilisateur.isMdpValide(co,"test","couscous"));
-            System.out.println(Utilisateur.isMdpValide(co,"test","test"));
-            System.out.println(Utilisateur.isMdpValide(co,"test2","test"));
+            Utilisateur.creerUtilisateur("test","test@gmail.com","M","couscous","admin");
         } catch (UtilisateurException e) {
-            e.printMessage();
+            //e.printMessage();
         }
+
+        try {
+            System.out.println(Utilisateur.isMdpValide("test","couscous"));
+            System.out.println(Utilisateur.isMdpValide("test","test"));
+            System.out.println(Utilisateur.isActivated("test"));
+            System.out.println(Utilisateur.isMdpValide("test2","test"));
+        } catch (UtilisateurException e) {
+            //e.printMessage();
+        }
+
+        //Partie.creerPartie();
 
     }
 }

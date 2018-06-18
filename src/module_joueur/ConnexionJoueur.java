@@ -1,6 +1,6 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
+import APIMySQL.ConnexionMySQL;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -15,24 +15,19 @@ class ConnexionJoueur extends BorderPane {
 
   private String title;
 
-  private Hyperlink hlRegister;
-  private Hyperlink hlPasswordForgotten;
-
   private TextField tfLogin;
 
   private PasswordField tfPassword;
 
-  private Button btConnection;
-
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  
 
-  public ConnexionJoueur(Stage primaryStage, GestionBD laConnection) {
+  public ConnexionJoueur(Stage primaryStage) {
 
     super();
 
-    this.laConnection = laConnection;
+    
 
     this.primaryStage = primaryStage;
 
@@ -68,23 +63,25 @@ class ConnexionJoueur extends BorderPane {
 
     VBox candidate = new VBox();
 
-    hlRegister = new Hyperlink("Pas de compte ? S'inscrire");
-    hlRegister.setOnAction(new ActionToInscription(this.primaryStage, this.laConnection));
+    Hyperlink hlRegister = new Hyperlink("Pas de compte ? S'inscrire");
+    hlRegister.setOnAction(new ActionToInscription(this.primaryStage));
 
-    hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
-    //hlPasswordForgotten.setOnAction(new ActionToForgottenPassword(this.primaryStage, this.laConnection));
+    Hyperlink hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
+    //hlPasswordForgotten.setOnAction(new ActionToForgottenPassword(this.primaryStage));
 
     Label title = new Label("Connexion");
     title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
-    Label lLogin = new Label("Votre nom d'utilisateur : ");
+    Label lLogin = new Label("Pseudonyme : ");
     tfLogin = new TextField();
+    tfLogin.setPromptText("Entrez votre pseudonyme ici");
 
     Label lPassword = new Label("Votre mot de passe : ");
     tfPassword = new PasswordField();
+    tfPassword.setPromptText("Entrez votre mot de passe ici");
 
-    btConnection = new Button("Vers l'aventure !");
-    btConnection.setOnAction(new ActionConnection(this.primaryStage, this.laConnection));
+    Button btConnection = new Button("Vers l'aventure !");
+    btConnection.setOnAction(new ActionConnection(this.primaryStage));
 
     candidate.setAlignment(Pos.TOP_CENTER);
     candidate.setPadding(new Insets(18,15,0,0));
@@ -102,12 +99,14 @@ class ConnexionJoueur extends BorderPane {
     lCopyright.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
 
     candidate.getChildren().add(lCopyright);
-    candidate.setPadding(new Insets(0,0,5,5));
+    candidate.setPadding(new Insets(0, 0, 5, 5));
 
     return candidate; }
 
   public TextField getTfLogin() { return this.tfLogin; }
 
   public PasswordField getTfPassword() { return this.tfPassword; }
+
+  public void setTfPassword(String s) { this.tfPassword.setText(s); }
 
   public String getTitle() { return this.title; }}
