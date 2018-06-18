@@ -1,6 +1,7 @@
 package module_joueur;
 
 import APIMySQL.*;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -42,8 +43,7 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
       else {
 
-        Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(login),
-                login, Utilisateur.getEmailByPseudo(login)));
+        Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(login), login, Utilisateur.getEmailByPseudo(login)));
 
         this.primaryStage.setTitle(dashboard.getTitle());
         this.primaryStage.setScene(new Scene(dashboard, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT)); }}

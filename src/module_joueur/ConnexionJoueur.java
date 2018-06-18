@@ -20,17 +20,13 @@ class ConnexionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  
-
   public ConnexionJoueur(Stage primaryStage) {
 
     super();
 
-    
-
     this.primaryStage = primaryStage;
 
-    this.title = "Acceuil : Connexion";
+    this.title = "Accueil : Connexion";
 
     this.setLeft(creerGauche());
     this.setRight(creerDroite());
@@ -65,7 +61,7 @@ class ConnexionJoueur extends BorderPane {
     Hyperlink hlRegister = new Hyperlink("Pas de compte ? S'inscrire");
     hlRegister.setOnAction(new ActionToInscription(this.primaryStage));
 
-    Hyperlink hlPasswordForgotten = new Hyperlink("Mot de passe oubliée ?");
+    Hyperlink hlPasswordForgotten = new Hyperlink("Mot de passe oublié ?");
     //hlPasswordForgotten.setOnAction(new ActionToForgottenPassword(this.primaryStage));
 
     Label title = new Label("Connexion");

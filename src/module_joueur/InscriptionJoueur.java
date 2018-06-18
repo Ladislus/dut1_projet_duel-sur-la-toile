@@ -23,17 +23,13 @@ class InscriptionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  
-
   public InscriptionJoueur(Stage primaryStage) {
 
     super();
 
     this.primaryStage = primaryStage;
 
-    
-
-    this.title = "Acceuil : Inscription";
+    this.title = "Accueil : Inscription";
 
     this.setTop(creerHaut());
     this.setLeft(creerGauche());
