@@ -65,10 +65,10 @@ CREATE TABLE JEU (
   idJeu SMALLINT NOT NULL AUTO_INCREMENT,
   nomJeu VARCHAR(20) UNIQUE NOT NULL,
   regleJeu TEXT,
-  jarJeu BLOB,
+  jarJeu MEDIUMBLOB,
   activeJeu CHAR(1) NOT NULL,
   idTy SMALLINT NOT NULL,
-  image BLOB,
+  image MEDIUMBLOB,
   PRIMARY KEY (idJeu)
 );
 
