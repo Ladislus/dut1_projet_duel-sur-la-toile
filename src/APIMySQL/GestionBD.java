@@ -13,7 +13,7 @@ public class GestionBD {
     private static ConnexionMySQL co = null;
 
     static {
-        try {co = new ConnexionMySQL("localhost", "serveurDeJeux", "dst", "dst");}
+        try {co = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst");}
         catch (ClassNotFoundException e) {}
     }
 

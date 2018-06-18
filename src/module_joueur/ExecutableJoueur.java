@@ -14,19 +14,7 @@ public class ExecutableJoueur extends Application {
   @Override
   public void start(Stage primaryStage) {
 
-    ConnexionMySQL laConnection = null;
-
-    try { laConnection = new ConnexionMySQL("192.168.1.100", "serveurDeJeux", "dst", "dst"); }
-    catch(ClassNotFoundException ex) {
-
-      Alert a = new Alert(Alert.AlertType.ERROR);
-      a.setTitle("CRITICAL ERROR");
-      a.setHeaderText("Impossible de se connecter à la base de donnée");
-      a.showAndWait();
-
-      primaryStage.close(); }
-
-    ConnexionJoueur connection = new ConnexionJoueur(primaryStage, laConnection);
+    ConnexionJoueur connection = new ConnexionJoueur(primaryStage);
 
     primaryStage.setTitle(connection.getTitle());
     primaryStage.setScene(new Scene(connection, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));

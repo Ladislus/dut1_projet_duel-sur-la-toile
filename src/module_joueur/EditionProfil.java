@@ -20,7 +20,7 @@ class EditionProfil extends BorderPane {
 
     String title;
 
-    ConnexionMySQL laConnection;
+
 
     Stage primaryStage;
 

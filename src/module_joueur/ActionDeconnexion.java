@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
     Stage primaryStage;
-    ConnexionMySQL laConnection;
+    
 
     public ActionDeconnexion(Stage primaryStage){
         
@@ -21,7 +21,7 @@ public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
+        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("INFORMATION");

@@ -85,7 +85,7 @@ class Dashboard extends BorderPane {
     btParametre.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
-    btExit.setOnAction(new ActionDeconnexion(primaryStage, laConnection));
+    btExit.setOnAction(new ActionDeconnexion(primaryStage));
 
     param.getChildren().addAll(btParametre, btExit);
     param.setSpacing(10);

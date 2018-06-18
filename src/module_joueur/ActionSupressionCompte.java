@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class ActionSupressionCompte implements EventHandler<ActionEvent> {
 
     Stage primaryStage;
-    ConnexionMySQL laConnection;
+
     Joueur joueur;
 
     public ActionSupressionCompte(Stage primaryStage, Joueur joueur){
@@ -29,7 +29,7 @@ public class ActionSupressionCompte implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Button btToEditionProfile = (Button) actionEvent.getSource();
         Stage stageEditionProfile = (Stage) btToEditionProfile.getScene().getWindow();
-        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
+        ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("ATTENTION");

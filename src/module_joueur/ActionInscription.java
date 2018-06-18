@@ -61,7 +61,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
         a.setHeaderText("Le compte a été créé avec succès");
         a.showAndWait();
 
-        ConnexionJoueur connexion = new ConnexionJoueur(primaryStage, laConnection);
+        ConnexionJoueur connexion = new ConnexionJoueur(primaryStage);
 
         this.primaryStage.setTitle(connexion.getTitle());
         this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }

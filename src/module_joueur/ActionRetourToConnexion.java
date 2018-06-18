@@ -19,7 +19,7 @@ class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   public void handle(ActionEvent actionEvent) {
 
-    ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage, this.laConnection);
+    ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
     this.primaryStage.setTitle(connexion.getTitle());
     this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }}

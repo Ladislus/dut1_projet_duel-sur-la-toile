@@ -19,7 +19,7 @@ class ActionToInscription implements EventHandler<ActionEvent> {
 
   public void handle(ActionEvent actionEvent) {
 
-    InscriptionJoueur inscription = new InscriptionJoueur(this.primaryStage, this.laConnection);
+    InscriptionJoueur inscription = new InscriptionJoueur(this.primaryStage);
 
     primaryStage.setTitle(inscription.getTitle());
     primaryStage.setScene(new Scene(inscription, VariablesJoueur.DEFAULT_REGISTRATION_WIDTH, VariablesJoueur.DEFAULT_REGISTRATION_HEIGHT)); }}

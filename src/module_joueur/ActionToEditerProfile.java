@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class ActionToEditerProfile implements EventHandler<ActionEvent> {
 
     Joueur joueur;
-    ConnexionMySQL laConnection;
+
     Stage primaryStage;
 
     public ActionToEditerProfile(Stage primaryStage, Joueur joueur){
