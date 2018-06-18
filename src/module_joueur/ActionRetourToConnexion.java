@@ -1,6 +1,5 @@
 package module_joueur;
 
-import APIMySQL.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,12 +9,7 @@ class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  
-
-  public ActionRetourToConnexion(Stage primaryStage) {
-
-    this.primaryStage = primaryStage;
-    }
+  public ActionRetourToConnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(ActionEvent actionEvent) {
 

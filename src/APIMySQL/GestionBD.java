@@ -15,7 +15,7 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://localhost:3306/serveurDeJeux", "root", "marlou06");
+            co = DriverManager.getConnection("jdbc:mysql://localhost:3306/serveurDeJeux", "dst", "dst");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
