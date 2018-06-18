@@ -154,6 +154,7 @@ class Dashboard extends BorderPane {
     scrollPaneJeux.setContent(hJeux);
     scrollPaneJeux.setFitToWidth(true);
     scrollPaneJeux.setPrefHeight(310);
+    scrollPaneJeux.setStyle("-fx-background-color:black;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
     scrollPaneJeux.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     hJeux.setPadding(new Insets(15,8,0,15));
     hJeux.setPrefWidth(scrollPaneJeux.getWidth());
@@ -161,6 +162,7 @@ class Dashboard extends BorderPane {
     ScrollPane scrollPaneNouveaute = new ScrollPane();
     scrollPaneNouveaute.setContent(hNouveaute);
     scrollPaneNouveaute.setFitToWidth(true);
+    scrollPaneNouveaute.setStyle("-fx-background-color:black;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
     scrollPaneNouveaute.setPrefHeight(310);
     scrollPaneNouveaute.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     hNouveaute.setPrefWidth(scrollPaneJeux.getWidth());
@@ -215,19 +217,20 @@ class Dashboard extends BorderPane {
       }
       for(int i = 0; i < listeTitleJeux.size(); i++) {
           VBox vBoxJeux = new VBox();
-
+          module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
           File fileImage = new File("./img/pub/logo.png");//todo: recuperer le blob de la bd
           ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
           ivJeux.setPreserveRatio(true);
           ivJeux.setFitWidth(50);
 
-          vBoxJeux.getChildren().addAll(ivJeux, new Label(listeTitleJeux.get(i)));
+          vBoxJeux.getChildren().addAll(ivJeux, new Label(jeu.getTitle()));
           vBoxJeux.setAlignment(Pos.TOP_CENTER);
 
           vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
 
           vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
           vBoxJeux.setPadding(new Insets(9,15,0,15));
+          vBoxJeux.setOnMouseClicked(new ActionToMainJeux(this.primaryStage, jeu));
 
           hJeux.getChildren().add(vBoxJeux);
       }
