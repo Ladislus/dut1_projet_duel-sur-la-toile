@@ -3,7 +3,9 @@ package APIMySQL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+
 import java.sql.SQLException;
+
 import java.util.*;
 
 public class Utilisateur {
@@ -38,7 +40,7 @@ public class Utilisateur {
 
     public static void setUserInfo(String columnInfoName, Object columInfoValue, String columnName, String columnValue){
         try {
-            GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "=" + columInfoValue + " WHERE " + columnName + "='" + columnValue + "'");
+            GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "='" + columInfoValue + "' WHERE " + columnName + "='" + columnValue + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,6 +76,15 @@ public class Utilisateur {
     public static void deactivateUser(String pseudo){
         setUserInfo("activeUt", 0, "pseudoUt", pseudo);
     }
+    public static void deleteUser(String pseudo) throws SQLException {
+        ArrayList<String> pseudoList = new ArrayList<>();
+        pseudoList.add(pseudo);
+        ArrayList<Object> idListFromPseudo = new ArrayList<>();
+        for(String name : pseudoList){
+            idListFromPseudo.add(getIdByPseudo(name));
+        }
+        GestionBD.updatePreparedStatement("delete from UTILISATEUR where idUt=?", idListFromPseudo);
+    }
 
     public static int getIdByPseudo(String pseudoUt){
         return Integer.parseInt(getUserInfo("idUt", "pseudoUt", pseudoUt));
@@ -92,11 +103,21 @@ public class Utilisateur {
             }
             return listePseudo;
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
         catch (NullPointerException e){
             return null;
+        }
+    }
+
+    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse){
+        int id = getIdByPseudo(ancientMotDePasse);
+        String salt = getSalt();
+        setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
+        setUserInfo("emailUt", email, "idUt", String.valueOf(id));
+        if(!(motDePasse.length() == 0)){
+            setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
+            setUserInfo("salt", salt, "idUt", String.valueOf(id));
         }
     }
 

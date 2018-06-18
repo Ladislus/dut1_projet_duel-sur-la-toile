@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class Jeu {
     private Jeu(){}
@@ -20,5 +22,14 @@ public class Jeu {
             throw new APIMySQLException("gameNameTaken");
         }
 
+    }
+
+    public static HashMap<String, List<Object>> recupListeJeux(){
+        try {
+            return GestionBD.selectPreparedStatement("select * from JEU");
+        } catch (SQLException e) {
+            System.out.println("[Error] Probleme avec la recuperation de la liste des jeux");
+        }
+        return null;
     }
 }
