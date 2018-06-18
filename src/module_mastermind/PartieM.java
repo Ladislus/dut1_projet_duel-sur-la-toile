@@ -58,13 +58,23 @@ public class PartieM {
         this.attributionIndices = new HashMap<>();
         this.attributionIndices.put(0,Color.LIGHTGRAY);
         this.attributionIndices.put(1,Color.BLACK);
-        this.attributionIndices.put(2,Color.STEELBLUE);
+        this.attributionIndices.put(2,Color.RED);
+
+        this.j1 = new Joueur(j1);
+        this.j2 = new Joueur(j2);
     }
 
     public PlateauM getPlateau(){
         return this.p;
     }
 
+    public Joueur getJ1() {
+        return j1;
+    }
+
+    public Joueur getJ2() {
+        return j2;
+    }
 
     public void majAffichage(){
 
@@ -85,7 +95,7 @@ public class PartieM {
             HBox nouvEssai = new HBox();
             nouvEssai.setSpacing(10.);
             Label numEssai = new Label(this.p.getListeEssais().size()+"");
-            numEssai.setFont(Font.font(40));
+            numEssai.setFont(Font.font(30));
             nouvEssai.getChildren().add(numEssai);
             Combinaison dernierEssai = this.p.getListeEssais().get(this.p.getListeEssais().size()-1);
             for (int c : dernierEssai){
@@ -116,6 +126,7 @@ public class PartieM {
         res.setTop(haut());
         res.setRight(plateauSP(this.listeComb));
         res.setBottom(bas());
+        res.setPadding(new Insets(0,50,0,0));
 
         return new Scene(res, 700, 650);
     }
@@ -230,11 +241,33 @@ public class PartieM {
         res.setSpacing(20.);
         res.setPrefHeight(100.);
 
+        String supprNormal = "-fx-background-color: linear-gradient(#FFA500,#F40000);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+        String supprHover = "-fx-background-color: linear-gradient(#ff8d80, #ff8d80);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+
         Button suppr = new Button("Supprimer");
         suppr.setOnAction(new ActionSupprimerTout(this));
 
+        suppr.setStyle(supprNormal);
+        suppr.setOnMouseEntered(e -> suppr.setStyle(supprHover));
+        suppr.setOnMouseExited(e -> suppr.setStyle(supprNormal));
+
+        String valNormal = "-fx-background-color: linear-gradient(#78EA21,#4FB601);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+        String valHover = "-fx-background-color: linear-gradient(#00FF80, #00FF80);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+
         Button valider = new Button("Valider");
         valider.setOnAction(new ActionTestComb(this));
+
+        valider.setStyle(valNormal);
+        valider.setOnMouseEntered(e -> valider.setStyle(valHover));
+        valider.setOnMouseExited(e -> valider.setStyle(valNormal));
 
         HBox adders = new HBox();
 
