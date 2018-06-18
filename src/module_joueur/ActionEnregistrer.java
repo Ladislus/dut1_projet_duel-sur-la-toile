@@ -1,7 +1,5 @@
 package module_joueur;
 
-
-import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +23,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
         String confirmMotDePasse = editionProfil.getPfConfirmMotDePasse().getText();
 
         if(motdepasse.equals(confirmMotDePasse)){
-            if (!VariablesJoueur.PASSWORD_PATTERN.matcher(motdepasse).find()&&!editionProfil.getPfMotDePasse().isDisable()){
+            if (!VariablesJoueur.PASSWORD_PATTERN.matcher(motdepasse).find() && !editionProfil.getPfMotDePasse().isDisable()){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Edition utilisateur");
                 alert.setHeaderText("Votre mot de passe n'est pas valide");
@@ -44,9 +42,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Edition utilisateur");
                 alert.setHeaderText("Votre modification a bien été enregistrer");
-                alert.showAndWait();
-            }
-        }
+                alert.showAndWait(); }}
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Edition utilisateur");

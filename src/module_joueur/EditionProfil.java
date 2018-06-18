@@ -41,6 +41,7 @@ class EditionProfil extends BorderPane {
     Label lImage = new Label("Mon image");
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
+    //TODO : si blob non-null, mettre l'image du joueur
     ImageView ivImageUser = new ImageView();
     ivImageUser.setImage(VariablesJoueur.USER);
     ivImageUser.setPreserveRatio(true);

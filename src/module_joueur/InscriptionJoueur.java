@@ -114,21 +114,19 @@ class InscriptionJoueur extends BorderPane {
     imageLogo.setPreserveRatio(true);
 
     this.lInfo = new Label("");
+    lInfo.setAlignment(Pos.CENTER_LEFT);
+    lInfo.setTextFill(VariablesJoueur.DEFAULT_ERROR_COLOR);
 
     ImageView imageHelp = new ImageView();
     imageHelp.setImage(VariablesJoueur.HELP);
     imageHelp.setPreserveRatio(true);
     imageHelp.setFitWidth(20);
 
-    HBox hHelp = new HBox();
-    hHelp.getChildren().addAll(lInfo, imageHelp);
-    hHelp.setAlignment(Pos.TOP_CENTER);
-
     Button btBack = new Button("Retour");
     btBack.setOnAction(new ActionRetourToConnexion(this.primaryStage));
     btBack.setPrefWidth(100);
 
-    candidate.getChildren().addAll(imageLogo, hHelp, btBack);
+    candidate.getChildren().addAll(imageLogo, btBack, lInfo);
     candidate.setSpacing(50);
     candidate.setPrefWidth(270);
     candidate.setPadding(new Insets(25,0,0,0));

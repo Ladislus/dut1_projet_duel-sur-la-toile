@@ -24,19 +24,22 @@ class ActionInscription implements EventHandler<ActionEvent> {
     List<String> listeErreur = new ArrayList<>();
 
     String prenom = page.getPrenom();
-    if (prenom.length() < 2) { listeErreur.add("Veuillez entrez un prénom"); }
+    if (prenom.length() == 0) { listeErreur.add("Veuillez entrez un prénom"); }
 
     String name = page.getName().toUpperCase();
-    if (prenom.length() < 2) { listeErreur.add("Veuillez entrez un nom"); }
+    if (name.length() == 0) { listeErreur.add("Veuillez entrez un nom"); }
 
     String mail = page.getMail();
-    if (!VariablesJoueur.EMAIL_PATTERN.matcher(mail).find()) { listeErreur.add("L'adresse mail n'est pas valide"); }
+    if (mail.length() == 0) { listeErreur.add("Veuillez entrez une adresse mail"); }
+    else if (!VariablesJoueur.EMAIL_PATTERN.matcher(mail).find()) { listeErreur.add("L'adresse mail n'est pas valide"); }
 
     String pseudo = page.getPseudo();
-    if (pseudo.length() < 4 || pseudo.length() > 30) { listeErreur.add("Le pseudonyme n'est pas valide"); }
+    if (pseudo.length() == 0) { listeErreur.add("Veuillez entrez un pseudo"); }
+    else if (pseudo.length() < 4 || pseudo.length() > 30) { listeErreur.add("Le pseudo n'est pas valide"); }
 
     String password = page.getPassword();
-    if (!VariablesJoueur.PASSWORD_PATTERN.matcher(password).find()) { listeErreur.add("Le mot de passe n'est pas valide"); }
+    if (password.length() == 0) { listeErreur.add("Veuillez entrez un mot de passe"); }
+    else if (!VariablesJoueur.PASSWORD_PATTERN.matcher(password).find()) { listeErreur.add("Le mot de passe n'est pas valide"); }
     else if (!page.getPasswordConfirm().equals(password)) { listeErreur.add("Les mots de passe ne correspondent pas"); }
 
     String sex = page.getSex();
@@ -47,11 +50,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       for (String elem : listeErreur) { erreur += elem + "\n"; }
 
-      Alert a = new Alert(Alert.AlertType.ERROR);
-      a.setTitle("ERREUR");
-      a.setHeaderText("Il y a des erreurs dans le formulaire");
-      a.setContentText(erreur);
-      a.showAndWait(); }
+      page.setInfo(erreur); }
 
     else {
 
@@ -59,15 +58,16 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
         Utilisateur.creerUtilisateur(pseudo, mail, sex, prenom, name, password, "USER");
 
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setTitle("INFORMATION");
-        a.setHeaderText("Le compte a été créé avec succès");
-        a.showAndWait();
-
         ConnexionJoueur connexion = new ConnexionJoueur(primaryStage);
 
         this.primaryStage.setTitle(connexion.getTitle());
-        this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }
+        this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
+
+
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("INFORMATION");
+        a.setHeaderText("Le compte a été créé avec succès");
+        a.showAndWait(); }
 
       catch(UtilisateurException ex) {
 

@@ -13,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +23,6 @@ class Dashboard extends BorderPane {
   private String title;
 
   private Stage primaryStage;
-
-  
 
   private Joueur joueur;
 
@@ -38,8 +35,6 @@ class Dashboard extends BorderPane {
     this.title = "Dashboard";
 
     this.primaryStage = primaryStage;
-
-    
 
     this.joueur = joueur;
 
@@ -54,7 +49,7 @@ class Dashboard extends BorderPane {
 
   public HBox creerHaut() {
 
-    Label lTitre = new Label("Bienvenue "+joueur.getPseudo());
+    Label lTitre = new Label("Bienvenue " + joueur.getPseudo());
     lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     HBox candidate = new HBox();
@@ -66,7 +61,6 @@ class Dashboard extends BorderPane {
 
   public VBox creerGauche() {
 
-    //todo : make to correspond to the IHM --> fini
     VBox candidate = new VBox();
     VBox param = new VBox();
 

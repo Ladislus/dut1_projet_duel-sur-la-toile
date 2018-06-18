@@ -20,6 +20,8 @@ class ConnexionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
+  private Label lInfo;
+
   public ConnexionJoueur(Stage primaryStage) {
 
     super();
@@ -46,7 +48,11 @@ class ConnexionJoueur extends BorderPane {
     logo.setFitWidth(100);
     logo.setFitHeight(100);
 
-    candidate.getChildren().addAll(logo, slogan);
+    this.lInfo = new Label("");
+    lInfo.setAlignment(Pos.CENTER_LEFT);
+    lInfo.setTextFill(VariablesJoueur.DEFAULT_ERROR_COLOR);
+
+    candidate.getChildren().addAll(logo, slogan, lInfo);
     candidate.setPrefWidth(250);
     candidate.setSpacing(20);
     candidate.setPadding(new Insets(25,0,0,25));
@@ -98,10 +104,12 @@ class ConnexionJoueur extends BorderPane {
 
     return candidate; }
 
-  public TextField getTfLogin() { return this.tfLogin; }
+  public String getTfLogin() { return this.tfLogin.getText(); }
 
-  public PasswordField getTfPassword() { return this.tfPassword; }
+  public String getTfPassword() { return this.tfPassword.getText(); }
+
+  public String getTitle() { return this.title; }
 
   public void setTfPassword(String s) { this.tfPassword.setText(s); }
 
-  public String getTitle() { return this.title; }}
+  public void setInfo(String message) { this.lInfo.setText(message); }}
