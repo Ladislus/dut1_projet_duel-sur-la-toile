@@ -36,6 +36,16 @@ public class PartieM {
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
 
+    public String etatPartie(){
+        return "" +
+                this.p.getCombiMystere() + "\n" +
+                this.p.getListeEssais() + "\n" +
+                this.p.getListeResultats() + "\n" +
+                this.p.getCombiCour() + "\n" +
+                this.getJ1() + "\n" +
+                this.getJ2();
+    }
+
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
 
@@ -64,6 +74,8 @@ public class PartieM {
 
         this.j1 = new Joueur(j1);
         this.j2 = new Joueur(j2);
+
+        System.out.println(this.etatPartie());
     }
 
     public PlateauM getPlateau(){
