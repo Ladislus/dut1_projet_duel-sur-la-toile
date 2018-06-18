@@ -83,7 +83,7 @@ public class Mastermind extends Application {
         ImageView ami = new ImageView();
         ami.setImage(new Image(imageami.toURI().toString()));
 
-        Button b1 = new Button("Duel contre un ami",ami);
+        Button b1 = new Button("Nouveau duel",ami);
         b1.setFont(bouton);
         b1.setContentDisplay(ContentDisplay.TOP);
         b1.setPrefSize(390,75.);
