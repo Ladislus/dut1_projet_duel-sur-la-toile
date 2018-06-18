@@ -48,7 +48,7 @@ class ActionConnection implements EventHandler<ActionEvent> {
         this.primaryStage.setTitle(dashboard.getTitle());
         this.primaryStage.setScene(new Scene(dashboard, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT)); }}
 
-    catch(UtilisateurException ex) {
+    catch(APIMySQLException ex) {
 
       page.setTfPassword("");
 

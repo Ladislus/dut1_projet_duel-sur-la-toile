@@ -66,7 +66,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
         this.primaryStage.setTitle(connexion.getTitle());
         this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }
 
-      catch(UtilisateurException ex) {
+      catch(APIMySQLException ex) {
 
         ex.printStackTrace();
 

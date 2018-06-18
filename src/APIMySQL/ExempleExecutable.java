@@ -1,8 +1,5 @@
 package APIMySQL;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
 
 public class ExempleExecutable {
@@ -11,7 +8,7 @@ public class ExempleExecutable {
 
         try {
             Utilisateur.creerUtilisateur("test","test@gmail.com","M","Mr","Test","couscous","admin");
-        } catch (UtilisateurException e) {
+        } catch (APIMySQLException e) {
             e.printMessage();
         }
 

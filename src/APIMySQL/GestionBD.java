@@ -89,15 +89,9 @@ public class GestionBD {
         s.executeUpdate(requete);
     }
 
-    public static Blob createBlob(String url){
-        Blob res = null;
-        Path path = Paths.get(url);
-        try {
-            res = co.createBlob();
-            res.setBytes(1,Files.readAllBytes(path));
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
+    public static Blob createBlob(String url) throws IOException, SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,Files.readAllBytes(Paths.get(url)));
         return res;
     }
 }
