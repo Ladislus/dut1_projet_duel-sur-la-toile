@@ -10,9 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
-import java.util.Objects;
 
 class Dashboard extends BorderPane {
 
@@ -155,7 +153,6 @@ class Dashboard extends BorderPane {
 
   public void majAffichage(){
 
-<<<<<<< HEAD
     ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
 
     if(btName == null) {
@@ -190,43 +187,3 @@ class Dashboard extends BorderPane {
           listeBoutton.add(btContact); }}}
 
   public String getTitle() { return this.title; }}
-=======
-      //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
-      ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
-      if(btName == null){
-          btName = new ArrayList<>();
-          btName.add("Ajouter un amis");
-          for (String name : btName) {
-              System.out.println(name);
-              ImageView imageContact = new ImageView();
-              imageContact.setImage(VariablesJoueur.CONTACT);
-              imageContact.setPreserveRatio(true);
-              imageContact.setFitWidth(20);
-
-              Button btContact = new Button(name, imageContact);
-              btContact.setPrefWidth(150);
-              btContact.setAlignment(Pos.CENTER_LEFT);
-              listeBoutton.add(btContact);
-          }
-      }
-      else{
-          for (String name : btName) {
-              ImageView imageContact = new ImageView();
-              imageContact.setImage(VariablesJoueur.CONTACT);
-              imageContact.setPreserveRatio(true);
-              imageContact.setFitWidth(20);
-
-              Button btContact = new Button(name, imageContact);
-              btContact.setPrefWidth(150);
-              btContact.setAlignment(Pos.CENTER_LEFT);
-              listeBoutton.add(btContact);
-          }
-      }
-  }
-
-  public String getTitle() {
-      return this.title;
-  }
-
-}
->>>>>>> 59c0d48566c7328af77653d0af4a0874eae7bd88

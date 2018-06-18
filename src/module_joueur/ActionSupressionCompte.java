@@ -1,7 +1,5 @@
 package module_joueur;
 
-
-import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

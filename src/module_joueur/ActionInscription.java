@@ -1,6 +1,7 @@
 package module_joueur;
 
 import APIMySQL.*;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -47,8 +48,8 @@ class ActionInscription implements EventHandler<ActionEvent> {
       a.showAndWait(); }
 
     else {
-//FIXME : Champs manquants pour Utilisateur.creerUtilisateur (prenom et nom entre sex et password)
-      /*try {
+
+      try {
 
         Utilisateur.creerUtilisateur(pseudo, mail, sex, "test", "test", password, "USER");
 
@@ -69,4 +70,4 @@ class ActionInscription implements EventHandler<ActionEvent> {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle("ERREUR");
         a.setHeaderText("Le compte existe déjà");
-        a.showAndWait(); }*/}}}
+        a.showAndWait(); }}}}
