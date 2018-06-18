@@ -59,12 +59,22 @@ public class PartieM {
         this.attributionIndices.put(0,Color.LIGHTGRAY);
         this.attributionIndices.put(1,Color.BLACK);
         this.attributionIndices.put(2,Color.STEELBLUE);
+
+        this.j1 = new Joueur(j1);
+        this.j2 = new Joueur(j2);
     }
 
     public PlateauM getPlateau(){
         return this.p;
     }
 
+    public Joueur getJ1() {
+        return j1;
+    }
+
+    public Joueur getJ2() {
+        return j2;
+    }
 
     public void majAffichage(){
 
