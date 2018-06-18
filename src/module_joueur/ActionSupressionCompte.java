@@ -19,8 +19,8 @@ public class ActionSupressionCompte implements EventHandler<ActionEvent> {
     ConnexionMySQL laConnection;
     Joueur joueur;
 
-    public ActionSupressionCompte(Stage primaryStage, ConnexionMySQL laConnection, Joueur joueur){
-        this.laConnection = laConnection;
+    public ActionSupressionCompte(Stage primaryStage, Joueur joueur){
+        
         this.primaryStage = primaryStage;
         this.joueur = joueur;
     }
@@ -40,7 +40,7 @@ public class ActionSupressionCompte implements EventHandler<ActionEvent> {
         alert.showAndWait().ifPresent(type -> {
             if (type.getButtonData().toString().equals("YES")) {
                 //todo: change activeUt into the BD
-                Utilisateur.deactivateUser(laConnection, joueur.getPseudo());
+                Utilisateur.deactivateUser(joueur.getPseudo());
                 stageEditionProfile.close();
                 this.primaryStage.setTitle(connexion.getTitle());
                 this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));

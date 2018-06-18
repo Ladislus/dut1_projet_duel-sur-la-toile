@@ -14,8 +14,8 @@ public class ActionDeconnexion implements EventHandler<ActionEvent> {
     Stage primaryStage;
     ConnexionMySQL laConnection;
 
-    public ActionDeconnexion(Stage primaryStage, ConnexionMySQL laConnection){
-        this.laConnection = laConnection;
+    public ActionDeconnexion(Stage primaryStage){
+        
         this.primaryStage = primaryStage;
     }
 

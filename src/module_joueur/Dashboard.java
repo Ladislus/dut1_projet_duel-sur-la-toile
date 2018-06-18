@@ -21,13 +21,13 @@ class Dashboard extends BorderPane {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
   private Joueur joueur;
 
   private ArrayList<Button> listeBoutton;
 
-  public Dashboard(Stage primaryStage, ConnexionMySQL laConnection, Joueur joueur) {
+  public Dashboard(Stage primaryStage, Joueur joueur) {
 
     super();
 
@@ -35,7 +35,7 @@ class Dashboard extends BorderPane {
 
     this.primaryStage = primaryStage;
 
-    this.laConnection = laConnection;
+    
 
     this.joueur = joueur;
 
@@ -78,7 +78,7 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditez mon profil");
-    btEditerProfile.setOnAction(new ActionToEditerProfile(laConnection, primaryStage, joueur));
+    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
     Button btParametre = new Button("Mes paramètres");
@@ -163,7 +163,7 @@ class Dashboard extends BorderPane {
   public void majAffichage(){
 
       //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
-      ArrayList<String> btName = Utilisateur.getListeDamis(laConnection, joueur.getPseudo());
+      ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
       if(btName == null){
           btName = new ArrayList<>();
           btName.add("Ajouter un amis");

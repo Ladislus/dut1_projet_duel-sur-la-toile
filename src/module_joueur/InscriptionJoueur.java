@@ -24,15 +24,15 @@ class InscriptionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public InscriptionJoueur(Stage primaryStage, ConnexionMySQL laConnection) {
+  public InscriptionJoueur(Stage primaryStage) {
 
     super();
 
     this.primaryStage = primaryStage;
 
-    this.laConnection = laConnection;
+    
 
     this.title = "Acceuil : Inscription";
 

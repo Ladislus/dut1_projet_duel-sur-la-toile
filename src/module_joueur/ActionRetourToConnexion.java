@@ -10,12 +10,12 @@ class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public ActionRetourToConnexion(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ActionRetourToConnexion(Stage primaryStage) {
 
     this.primaryStage = primaryStage;
-    this.laConnection = laConnection; }
+    }
 
   public void handle(ActionEvent actionEvent) {
 

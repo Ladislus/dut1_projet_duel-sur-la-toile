@@ -10,12 +10,12 @@ class ActionToInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public ActionToInscription(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ActionToInscription(Stage primaryStage) {
 
     this.primaryStage = primaryStage;
-    this.laConnection = laConnection; }
+    }
 
   public void handle(ActionEvent actionEvent) {
 

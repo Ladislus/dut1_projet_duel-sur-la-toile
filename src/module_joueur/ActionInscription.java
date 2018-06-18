@@ -14,12 +14,12 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
 
-  public ActionInscription(Stage primaryStage, ConnexionMySQL laConnection) {
+
+  public ActionInscription(Stage primaryStage) {
 
     this.primaryStage = primaryStage;
-    this.laConnection = laConnection; }
+    }
 
   public void handle(ActionEvent actionEvent) {
 
@@ -54,7 +54,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
       try {
 
-        Utilisateur.creerUtilisateur(laConnection, pseudo, mail, sex, password, "USER");
+        Utilisateur.creerUtilisateur(pseudo, mail, sex, password, "USER");
 
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("INFORMATION");

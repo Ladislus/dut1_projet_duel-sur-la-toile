@@ -21,13 +21,13 @@ class ConnexionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  private ConnexionMySQL laConnection;
+  
 
-  public ConnexionJoueur(Stage primaryStage, ConnexionMySQL laConnection) {
+  public ConnexionJoueur(Stage primaryStage) {
 
     super();
 
-    this.laConnection = laConnection;
+    
 
     this.primaryStage = primaryStage;
 
