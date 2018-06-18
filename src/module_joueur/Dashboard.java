@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.Utilisateur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -8,9 +9,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import APIMySQL.GestionBD;
 
+import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class Dashboard extends BorderPane {
 
@@ -18,9 +20,13 @@ class Dashboard extends BorderPane {
 
   private Stage primaryStage;
 
-  private GestionBD laConnection;
+  
 
-  public Dashboard(Stage primaryStage, GestionBD laConnection) {
+  private Joueur joueur;
+
+  private ArrayList<Button> listeBoutton;
+
+  public Dashboard(Stage primaryStage, Joueur joueur) {
 
     super();
 
@@ -28,7 +34,13 @@ class Dashboard extends BorderPane {
 
     this.primaryStage = primaryStage;
 
-    this.laConnection = laConnection;
+    
+
+    this.joueur = joueur;
+
+    this.listeBoutton = new ArrayList<>();
+
+    majAffichage();
 
     this.setTop(creerHaut());
     this.setLeft(creerGauche());
@@ -37,7 +49,7 @@ class Dashboard extends BorderPane {
 
   public HBox creerHaut() {
 
-    Label lTitre = new Label("Bienvenue XxX_DarkSasuke-69_XxX ");
+    Label lTitre = new Label("Bienvenue "+joueur.getPseudo());
     lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     HBox candidate = new HBox();
@@ -65,12 +77,14 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditez mon profil");
+    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
     Button btParametre = new Button("Mes paramètres");
     btParametre.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
+    btExit.setOnAction(new ActionDeconnexion(primaryStage));
 
     param.getChildren().addAll(btParametre, btExit);
     param.setSpacing(10);
@@ -90,7 +104,7 @@ class Dashboard extends BorderPane {
 
     ScrollPane sDroiteListeDamis = new ScrollPane();
 
-    Label lbTotalContact = new Label("Total : 8 contacts");
+    Label lbTotalContact = new Label("Total : "+listeBoutton.size()+" contact(s)");
     Label lListeDamis = new Label("Ma liste d'amis");
     lListeDamis.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
@@ -100,25 +114,7 @@ class Dashboard extends BorderPane {
     Button btListeDamis = new Button("Mes amis");
     btListeDamis.setPrefWidth(150);
 
-    //todo : Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
-
-    String[] btName = {"Jean Michel", "Jacque", "Titouan", "Pierre", "Michelle", "Mirene", "Sergine", "Anastasia"};
-
-    ArrayList<Button> listeButton = new ArrayList<>();
-
-    for (String name : btName) {
-
-      ImageView imageContact = new ImageView();
-      imageContact.setImage(VariablesJoueur.CONTACT);
-      imageContact.setPreserveRatio(true);
-      imageContact.setFitWidth(20);
-
-      Button btContact = new Button(name, imageContact);
-      btContact.setPrefWidth(150);
-      btContact.setAlignment(Pos.CENTER_LEFT);
-      listeButton.add(btContact); }
-
-    hDroiteListeDamis.getChildren().addAll(listeButton);
+    hDroiteListeDamis.getChildren().addAll(listeBoutton);
     hDroiteListeDamis.setSpacing(5);
     hDroiteListeDamis.setPrefHeight(375);
 
@@ -160,6 +156,47 @@ class Dashboard extends BorderPane {
     candidate.setSpacing(10);
     candidate.setPadding(new Insets(0,15,9,15));
 
-    return candidate; }
+    return candidate;
+  }
 
-  public String getTitle() { return this.title; }}
+  public void majAffichage(){
+
+      //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
+      ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
+      if(btName == null){
+          btName = new ArrayList<>();
+          btName.add("Ajouter un amis");
+          for (String name : btName) {
+              System.out.println(name);
+              ImageView imageContact = new ImageView();
+              imageContact.setImage(VariablesJoueur.CONTACT);
+              imageContact.setPreserveRatio(true);
+              imageContact.setFitWidth(20);
+
+              Button btContact = new Button(name, imageContact);
+              btContact.setPrefWidth(150);
+              btContact.setAlignment(Pos.CENTER_LEFT);
+              listeBoutton.add(btContact);
+          }
+      }
+      else{
+          for (String name : btName) {
+              System.out.println(name);
+              ImageView imageContact = new ImageView();
+              imageContact.setImage(VariablesJoueur.CONTACT);
+              imageContact.setPreserveRatio(true);
+              imageContact.setFitWidth(20);
+
+              Button btContact = new Button(name, imageContact);
+              btContact.setPrefWidth(150);
+              btContact.setAlignment(Pos.CENTER_LEFT);
+              listeBoutton.add(btContact);
+          }
+      }
+  }
+
+  public String getTitle() {
+      return this.title;
+  }
+
+}

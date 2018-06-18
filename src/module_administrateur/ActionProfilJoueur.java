@@ -8,9 +8,9 @@ public class ActionProfilJoueur implements EventHandler<ActionEvent> {
 
     PageAccueil pa;
     GererJoueur gJoueur;
-    String joueur;
+    Joueur joueur;
 
-    public ActionProfilJoueur(PageAccueil pa, GererJoueur gJoueur, String joueur) {
+    public ActionProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
         this.pa = pa;
         this.gJoueur = gJoueur;
         this.joueur = joueur;
@@ -19,6 +19,6 @@ public class ActionProfilJoueur implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.pa.getBp().setCenter(new ProfilJoueur(this.pa, this.gJoueur));
+        this.pa.getBp().setCenter(new ProfilJoueur(this.pa, this.gJoueur, this.joueur));
     }
 }

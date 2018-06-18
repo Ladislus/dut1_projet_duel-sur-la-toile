@@ -100,6 +100,9 @@ public class PartieM {
             indices.setVgap(5);
             indices.setHgap(5);
             nouvEssai.getChildren().add(indices);
+            nouvEssai.setMinWidth(425);
+            nouvEssai.setAlignment(Pos.CENTER_RIGHT);
+            nouvEssai.setPadding(new Insets(0,80,0,0));
             this.listeComb.getChildren().addAll(nouvEssai);
         }
     }
@@ -216,7 +219,7 @@ public class PartieM {
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        sp.setPrefViewportWidth(412);
+        sp.setPrefViewportWidth(425);
 
         return sp;
     }

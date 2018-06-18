@@ -47,4 +47,7 @@ public class Liste21 extends ArrayList<Integer> {
         if (this.getNbBatonsRest() == 0){ this.estComplet = true; }
     }
 
+    public boolean estComplet() {
+        return this.getNbBatonsRest() <= 1;
+    }
 }

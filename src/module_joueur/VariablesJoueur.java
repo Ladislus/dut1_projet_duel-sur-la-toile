@@ -41,4 +41,4 @@ class VariablesJoueur {
   public final static Image LOGOUT = new Image(new File("./img/pub/log_out.png").toURI().toString());
 
   public final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9.]+@[A-Z0-9]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-  public final static Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9]{8,30}$"); }
+  public final static Pattern PASSWORD_PATTERN = Pattern.compile("^^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$"); }

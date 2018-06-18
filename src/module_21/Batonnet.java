@@ -13,7 +13,7 @@ public class Batonnet extends Rectangle {
     /** Vaut 0 ou vaut le numéro du joueur qui l'a saisi */
     public int nbJoueur;
 
-    private static HashMap<Integer,Color> attributionCouleurs;
+    public static HashMap<Integer,Color> attributionCouleurs;
 
     public Batonnet(){
         super(12.,200.,Color.valueOf("#D7B2B2"));
