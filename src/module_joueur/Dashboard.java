@@ -3,16 +3,22 @@ package module_joueur;
 import APIMySQL.GestionBD;
 import APIMySQL.Jeu;
 import APIMySQL.Utilisateur;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +32,12 @@ class Dashboard extends BorderPane {
 
   private Joueur joueur;
 
+  private int nbJeux;
+
+  private FlowPane hJeux;
+
+  private FlowPane hNouveaute;
+
   private ArrayList<Button> listeBoutton;
 
   public Dashboard(Stage primaryStage, Joueur joueur) {
@@ -34,11 +46,16 @@ class Dashboard extends BorderPane {
 
     this.title = "Dashboard";
 
+    this.hJeux = new FlowPane();
+
+    this.hNouveaute = new FlowPane();
+
     this.primaryStage = primaryStage;
 
     this.joueur = joueur;
 
     this.listeBoutton = new ArrayList<>();
+
 
     majAffichage();
 
@@ -104,7 +121,7 @@ class Dashboard extends BorderPane {
     ScrollPane sDroiteListeDamis = new ScrollPane();
 
     Label lbTotalContact = new Label("Total : "+listeBoutton.size()+" contact(s)");
-    Label lListeDamis = new Label("Ma liste d'amis");
+    Label lListeDamis = new Label("Ma liste d'ami");
     lListeDamis.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     Button btMessage = new Button("4 messages non lu");
@@ -128,31 +145,27 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-    //TODO: make that
     VBox candidate = new VBox();
-    FlowPane hJeux = new FlowPane();
-    FlowPane hNouveaute = new FlowPane();
 
     Label lbJeux = new Label("Jeux : ");
     Label lbNouveaute = new Label("Nouveautés : ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
-    scrollPaneJeux.setPrefHeight(310);
     scrollPaneJeux.setContent(hJeux);
     scrollPaneJeux.setFitToWidth(true);
+    scrollPaneJeux.setPrefHeight(310);
     scrollPaneJeux.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    hJeux.setPadding(new Insets(15,8,0,15));
+    hJeux.setPrefWidth(scrollPaneJeux.getWidth());
 
     ScrollPane scrollPaneNouveaute = new ScrollPane();
     scrollPaneNouveaute.setContent(hNouveaute);
+    scrollPaneNouveaute.setFitToWidth(true);
     scrollPaneNouveaute.setPrefHeight(310);
     scrollPaneNouveaute.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    hNouveaute.setPrefWidth(scrollPaneJeux.getWidth());
 
-    //todo remove that and place image
 
-    for(int i = 0; i < 155; i++) {
-
-      hJeux.getChildren().add(new Label("test"));
-      hNouveaute.getChildren().add(new Label("test")); }
 
     candidate.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
     candidate.setSpacing(10);
@@ -195,9 +208,30 @@ class Dashboard extends BorderPane {
       }
       //On refresh la liste des jeux
       HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
-      for(String key: listeJeux.keySet()){
-          System.out.println(listeJeux.get(key).get(0));
+      ArrayList<String> listeTitleJeux = new ArrayList<>();
+      for(Object title : listeJeux.get("nomJeu")){
+          String titleString = title.toString();
+          listeTitleJeux.add(titleString);
       }
+      for(int i = 0; i < listeTitleJeux.size(); i++) {
+          VBox vBoxJeux = new VBox();
+
+          File fileImage = new File("./img/pub/logo.png");//todo: recuperer le blob de la bd
+          ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
+          ivJeux.setPreserveRatio(true);
+          ivJeux.setFitWidth(50);
+
+          vBoxJeux.getChildren().addAll(ivJeux, new Label(listeTitleJeux.get(i)));
+          vBoxJeux.setAlignment(Pos.TOP_CENTER);
+
+          vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
+
+          vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
+          vBoxJeux.setPadding(new Insets(9,15,0,15));
+
+          hJeux.getChildren().add(vBoxJeux);
+      }
+
   }
 
   public String getTitle() {
