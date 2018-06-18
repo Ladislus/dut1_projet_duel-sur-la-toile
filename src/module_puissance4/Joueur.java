@@ -43,6 +43,6 @@ public class Joueur extends Label{
 
     @Override
     public String toString(){
-        return "" + this.nom + this.jCourant;
+        return "" + this.nom + " " + this.jCourant;
     }
 }
