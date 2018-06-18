@@ -1,5 +1,6 @@
 package module_administrateur;
 
+import APIMySQL.Jeu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -165,6 +166,19 @@ public class GererJeu extends BorderPane {
     }
 
 
+    /*public int getType(){
+      if (cbmodes.getText() == "Tour par tour")
+        return 0;
+      else{
+        if (cbmodes.getText() == "Score le plus élevé par manche")
+          return 1;
+        else{
+          return 2;
+        }
+      }
+    }*/
+
+
     public VBox creerVBoxDescriptionJeu(){
       VBox vbjeu = new VBox();
       vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldEtatJeu(),
@@ -206,6 +220,11 @@ public class GererJeu extends BorderPane {
     }
 
 
+    public String getNom(){
+      return tnom.getText();
+    }
+
+
     public TextArea creerTextAreaDescriptionJeu(){
       TextArea tdescription = new TextArea();
       tdescription.setPrefWidth(80);
@@ -213,6 +232,11 @@ public class GererJeu extends BorderPane {
       tdescription.setPromptText("Entrez la description du jeu");
 
       return tdescription;
+    }
+
+
+    public String getRegles(){
+      return tdescription.getText();
     }
 
 
