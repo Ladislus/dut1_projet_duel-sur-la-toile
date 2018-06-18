@@ -1,6 +1,5 @@
 package module_joueur;
 
-import APIMySQL.ConnexionMySQL;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

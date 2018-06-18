@@ -78,4 +78,8 @@ public class GestionBD {
         Statement s = co.createStatement();
         s.executeUpdate(requete);
     }
+
+    public Blob createBlob() throws SQLException {
+        return co.createBlob();
+    }
 }
