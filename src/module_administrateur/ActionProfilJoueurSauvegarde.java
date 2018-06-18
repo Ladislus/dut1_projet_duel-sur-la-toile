@@ -10,14 +10,15 @@ import javafx.scene.control.ButtonBar.ButtonData;
 public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
 
   ProfilJoueur pJoueur;
+  Joueur joueur;
 
-  public ActionProfilJoueurSauvegarde(ProfilJoueur pJoueur){
+  public ActionProfilJoueurSauvegarde(ProfilJoueur pJoueur, Joueur joueur){
     this.pJoueur = pJoueur;
+    this.joueur = joueur;
   }
 
   @Override
   public void handle(ActionEvent actionEvent){
-
     Button b = (Button) actionEvent.getSource();
     if((b.getText()) == "Sauvegarder"){
       ButtonType btoui = new ButtonType("Oui");
@@ -29,6 +30,23 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
       alert.getButtonTypes().setAll(btoui, btnon);
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == btoui){
+          // GESTION DESACTIVATION JOUEUR
+        //  if (Utilisateur.isActivated(this.joueur) && this.pJoueur.getRbpasactiver()) {
+
+        //  }
+
+          // GESTION MODIFICATION INFO
+
+        /**
+        si joueur dans bdd est activé et état radiobutton sur oui = rien faire
+        si joueur dans bdd desactivé et etat radiobutton non = rien faire
+        si joueur dans bdd est activé et etat radiobutton non = le desactivé
+
+
+        */
+
+
+
         alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Validation de la sauvegarde");
         alert.setHeaderText(null);

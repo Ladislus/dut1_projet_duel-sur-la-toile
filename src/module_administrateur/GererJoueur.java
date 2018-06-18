@@ -28,6 +28,8 @@ public class GererJoueur extends BorderPane {
     private PageAccueil pa;
     private Button activer;
     private Button supprimer;
+    private ObservableList<Joueur> listeJoueur;
+    private ObservableList<Joueur> listeJoueurAactiver;
 
     /** Constructeur de la page pour gérer les joueurs */
     public GererJoueur(PageAccueil pa) {
@@ -65,12 +67,11 @@ public class GererJoueur extends BorderPane {
     public Button creerBoutonActiver() {
         this.activer = new Button("Activer");
         this.activer.setDisable(true);
-        ActionActiverJoueur acj = new ActionActiverJoueur(this);
         this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
         this.activer.setTextFill(Color.web("white"));
         this.activer.setPrefWidth(200);
         this.activer.setPrefHeight(50);
-        this.activer.setOnAction(acj);
+        this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
         return this.activer;
     }
 
@@ -129,17 +130,23 @@ public class GererJoueur extends BorderPane {
 
     /** Création de la liste contenant les joueurs à activer */
     public ObservableList<Joueur> getListeJoueursTableViewAactiver() {
-        // EXEMPLE => METTRE REQUETTE ICI
-        Joueur j1 = new Joueur("Leo", 2, true);
-        Joueur j2 = new Joueur("ab", 5, true);
-        Joueur j3 = new Joueur("zf", 1, false);
-        Joueur j4 = new Joueur("b", 4, false);
-        Joueur j5 = new Joueur("za", 3, true);
-        ObservableList<Joueur> liste = FXCollections.observableArrayList(j1, j2, j3, j4, j5);
-        for (Joueur j : liste) {
-            j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
+      this.listeJoueurAactiver = FXCollections.observableArrayList();
+      try {
+        HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;");
+        if (dico.size() == 0) {
+            return this.listeJoueurAactiver;
         }
-        return liste;
+        else {
+            for (int i = 0; i < dico.get("idUt").size(); i++) {
+                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)), (boolean) dico.get("activeUt").get(i));
+                this.listeJoueurAactiver.add(j);
+                j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+                j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
+            }
+        }
+      }
+      catch(SQLException e) {}
+      return this.listeJoueurAactiver;
     }
 
     /** Création du centre de la page => liste de tous les joueurs à activer */
@@ -157,16 +164,22 @@ public class GererJoueur extends BorderPane {
 
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
-        Joueur j1 = new Joueur("Leo", 2, true);
-        Joueur j2 = new Joueur("ab", 5, true);
-        Joueur j3 = new Joueur("zf", 1, false);
-        Joueur j4 = new Joueur("b", 4, false);
-        Joueur j5 = new Joueur("za", 3, true);
-        ObservableList<Joueur> liste = FXCollections.observableArrayList(j1, j2, j3, j4, j5);
-        for (Joueur j : liste) {
-            j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+        this.listeJoueur = FXCollections.observableArrayList();
+        try {
+          HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
+          if (dico.size() == 0) {
+              return this.listeJoueur;
+          }
+          else {
+              for (int i = 0; i < dico.get("idUt").size(); i++) {
+                  Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), i+1, (boolean) dico.get("activeUt").get(i));
+                  j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+                  this.listeJoueur.add(j);
+              }
+          }
         }
-        return liste;
+        catch(SQLException e) {}
+        return this.listeJoueur;
     }
 
     /** Création du tableau contenant la liste de tous les joueurs */
