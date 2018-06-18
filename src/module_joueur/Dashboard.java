@@ -1,17 +1,22 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
+import APIMySQL.Jeu;
 import APIMySQL.Utilisateur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 class Dashboard extends BorderPane {
@@ -131,26 +136,29 @@ class Dashboard extends BorderPane {
 
     //TODO: make that
     VBox candidate = new VBox();
-    VBox vJeux = new VBox();
-    VBox vNouveaute = new VBox();
+    FlowPane hJeux = new FlowPane();
+    FlowPane hNouveaute = new FlowPane();
 
     Label lbJeux = new Label("Jeux : ");
     Label lbNouveaute = new Label("Nouveautés : ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
     scrollPaneJeux.setPrefHeight(310);
-    scrollPaneJeux.setContent(vJeux);
+    scrollPaneJeux.setContent(hJeux);
+    scrollPaneJeux.setFitToWidth(true);
+    scrollPaneJeux.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
     ScrollPane scrollPaneNouveaute = new ScrollPane();
-    scrollPaneNouveaute.setContent(vNouveaute);
+    scrollPaneNouveaute.setContent(hNouveaute);
     scrollPaneNouveaute.setPrefHeight(310);
+    scrollPaneNouveaute.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
     //todo remove that and place image
 
-    for(int i = 0; i < 150; i++) {
+    for(int i = 0; i < 155; i++) {
 
-      vJeux.getChildren().add(new Label("test"));
-      vNouveaute.getChildren().add(new Label("test")); }
+      hJeux.getChildren().add(new Label("test"));
+      hNouveaute.getChildren().add(new Label("test")); }
 
     candidate.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
     candidate.setSpacing(10);
@@ -190,6 +198,11 @@ class Dashboard extends BorderPane {
               btContact.setAlignment(Pos.CENTER_LEFT);
               listeBoutton.add(btContact);
           }
+      }
+      //On refresh la liste des jeux
+      HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
+      for(String key: listeJeux.keySet()){
+          System.out.println(listeJeux.get(key).get(0));
       }
   }
 
