@@ -2,6 +2,8 @@ package module_21;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.Region;
 
 import java.util.List;
 
@@ -38,11 +40,26 @@ public class ActionValiderCoup implements EventHandler<ActionEvent> {
 
         // Enfin, on active les 3 suivants
         indice -= nbBat;
-        for (int i=indice;i>indice-3 && i>=0;i--){
+        for (int i=indice;i>indice-3 && i>=1;i--){
             lesBatons.get(i).active();
         }
 
-    this.partie.getPlateau().changeJCour();
+        this.partie.getPlateau().changeJCour();
+
+        // S'il ne reste que le dernier Bâtonnet, la partie est terminée
+        if (this.partie.getPlateau().getListe21batons().estComplet()){
+            Batonnet batFin = this.partie.getListeBatons().get(0);
+            batFin.sauver(this.partie.getPlateau().getJCour());
+            batFin.setHeight(150);
+            this.partie.getPlateau().changeJCour();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Aide");
+            alert.setHeaderText("Partie terminée !");
+            alert.setContentText(this.partie.getPlateau().getJ(this.partie.getPlateau().getJCour()).getNom()+" a gagné !\n");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+        }
+
 
     }
 
