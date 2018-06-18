@@ -109,9 +109,9 @@ public class ProfilJoueur extends BorderPane {
     }
 
 
-    public ComboBox creerComboBoxRoles(){
+    public ComboBox<String> creerComboBoxRoles(){
       ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
-      ComboBox cbrole = new ComboBox(optionsRoles);
+      ComboBox<String> cbrole = new ComboBox<String>(optionsRoles);
       cbrole.setPrefWidth(175);
 
       return cbrole;

@@ -19,14 +19,16 @@ public class ActionFileChooser implements EventHandler<ActionEvent> {
 
     private GererJeu gJeu;
     private ProfilJoueur pJoueur;
-    private ListView listview;
+    private ListView<String> listview;
 
     public ActionFileChooser(GererJeu gJeu){
       this.gJeu = gJeu;
+      this.listview = new ListView<>();
     }
 
     public ActionFileChooser(ProfilJoueur pJoueur){
       this.pJoueur = pJoueur;
+      this.listview = new ListView<>();
     }
 
     @Override

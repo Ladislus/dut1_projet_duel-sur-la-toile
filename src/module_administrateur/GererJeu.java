@@ -20,11 +20,12 @@ import javafx.scene.layout.*;
 public class GererJeu extends BorderPane {
 
     private PageAccueil pa;
-    private ToggleGroup groupe = new ToggleGroup();
+    private ToggleGroup groupe;
 
     public GererJeu(PageAccueil pa) {
       super();
       this.pa = pa;
+      this.groupe = new ToggleGroup();
       this.haut();
       this.gauche();
       this.centre();
@@ -127,9 +128,9 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public ComboBox creerComboBoxJeux(){
+    public ComboBox<String> creerComboBoxJeux(){
       ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
-      ComboBox cbjeux = new ComboBox(optionsjeu);
+      ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 
       return cbjeux;
@@ -154,10 +155,10 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public ComboBox creerComboBoxModes(){
+    public ComboBox<String> creerComboBoxModes(){
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
-      ComboBox cbmodes = new ComboBox(optionsmode);
+      ComboBox<String> cbmodes = new ComboBox<String>(optionsmode);
       cbmodes.setPrefWidth(297);
 
       return cbmodes;
