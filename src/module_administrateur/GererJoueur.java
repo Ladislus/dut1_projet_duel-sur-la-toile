@@ -119,7 +119,10 @@ public class GererJoueur extends BorderPane {
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
         ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
         table.setItems(liste);
-        table.getColumns().addAll(pseudo, id, profil, activer);
+        table.getColumns().add(pseudo);
+        table.getColumns().add(id);
+        table.getColumns().add(profil);
+        table.getColumns().add(activer);
         table.setPrefWidth(100);
         return table;
     }
@@ -196,7 +199,10 @@ public class GererJoueur extends BorderPane {
         profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         ObservableList<Joueur> list = getListeJoueursTableView();
         table.setItems(list);
-        table.getColumns().addAll(pseudo, id, connecte, profil);
+        table.getColumns().add(pseudo);
+        table.getColumns().add(id);
+        table.getColumns().add(connecte);
+        table.getColumns().add(profil);
         table.setPrefWidth(100);
         return table;
     }
