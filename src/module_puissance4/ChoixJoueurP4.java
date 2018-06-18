@@ -131,6 +131,13 @@ public class ChoixJoueurP4 {
 
 
         int i = 0;
+
+        Button bAleatoire = new Button("Aléatoire");
+        bAleatoire.setPrefSize(200.,60.);
+        this.contacts.add(bAleatoire,i%3,i/3);
+
+        i++;
+
         for (String nom : this.listeCour){
             ImageView img = new ImageView(new Image(new File(chem+"../pub/contact.png").toURI().toString()));
             img.setPreserveRatio(true);
