@@ -96,6 +96,9 @@ public class Utilisateur {
             e.printStackTrace();
             return null;
         }
+        catch (NullPointerException e){
+            return null;
+        }
     }
 
     public static String getEmailByPseudo(ConnexionMySQL co, String pseudoUt){

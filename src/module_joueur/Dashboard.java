@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import APIMySQL.ConnexionMySQL;
 
+import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -163,8 +164,11 @@ class Dashboard extends BorderPane {
 
       //Generation des bouton en fonction du nombre d'amis dans la bd et les afficher
       ArrayList<String> btName = Utilisateur.getListeDamis(laConnection, joueur.getPseudo());
-      if(!Objects.equals(btName, null)){
+      if(btName == null){
+          btName = new ArrayList<>();
+          btName.add("Ajouter un amis");
           for (String name : btName) {
+              System.out.println(name);
               ImageView imageContact = new ImageView();
               imageContact.setImage(VariablesJoueur.CONTACT);
               imageContact.setPreserveRatio(true);
@@ -176,7 +180,20 @@ class Dashboard extends BorderPane {
               listeBoutton.add(btContact);
           }
       }
+      else{
+          for (String name : btName) {
+              System.out.println(name);
+              ImageView imageContact = new ImageView();
+              imageContact.setImage(VariablesJoueur.CONTACT);
+              imageContact.setPreserveRatio(true);
+              imageContact.setFitWidth(20);
 
+              Button btContact = new Button(name, imageContact);
+              btContact.setPrefWidth(150);
+              btContact.setAlignment(Pos.CENTER_LEFT);
+              listeBoutton.add(btContact);
+          }
+      }
   }
 
   public String getTitle() {
