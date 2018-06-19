@@ -12,8 +12,8 @@ import java.sql.SQLException;
 public class ExempleExecutable {
     public static void main(String[] args) {
         try {
-            Utilisateur.creerUtilisateur("test","test@gmail.com","M","Mr","Test","couscous","admin");
-            Utilisateur.creerUtilisateur("test2","test2@gmail.com","F","Mme","Test2","tajine","admin");
+            Utilisateur.creerUtilisateur("test","test@gmail.com","M","Mr","Test","couscous","ADMIN");
+            Utilisateur.creerUtilisateur("test2","test2@gmail.com","F","Mme","Test2","tajine","ADMIN");
         } catch (APIMySQLException e) {
             e.printMessage();
         }
@@ -36,6 +36,7 @@ public class ExempleExecutable {
 
         try {
             Blob blob = GestionBD.createBlob("/run/media/lucas/Data/Downloads/DM Facturation - Lucas Mirloup.jpg");
+            Utilisateur.creerUtilisateur("testImage","testimage@gmail.com","O","Test","Image",1,"image","ADMIN",blob);
             Image image = GestionBD.blobToImage(blob);
         } catch (IOException | SQLException e) {
             e.printStackTrace();
