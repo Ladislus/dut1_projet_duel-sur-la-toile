@@ -1,13 +1,11 @@
 package module_joueur;
 
-import APIMySQL.Utilisateur;
-
 public class Joueur {
 
-    int id;
+    private int id;
 
-    String pseudo;
-    String email;
+    private String pseudo;
+    private String email;
 
     public Joueur(int id, String pseudo, String email) {
 

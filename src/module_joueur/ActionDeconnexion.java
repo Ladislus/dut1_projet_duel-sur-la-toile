@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
-  Stage primaryStage;
+  private Stage primaryStage;
 
   public ActionDeconnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
 

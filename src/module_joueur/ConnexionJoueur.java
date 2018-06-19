@@ -76,12 +76,12 @@ class ConnexionJoueur extends BorderPane {
     Label lLogin = new Label("Pseudonyme : ");
     this.tfLogin = new TextField();
     tfLogin.setPromptText("Entrez votre pseudonyme ici");
-    tfLogin.setOnKeyPressed(new ActionEntrer(this.primaryStage));
+    tfLogin.setOnKeyPressed(new ActionEntrerToDashboard(this.primaryStage));
 
     Label lPassword = new Label("Votre mot de passe : ");
     this.tfPassword = new PasswordField();
     tfPassword.setPromptText("Entrez votre mot de passe ici");
-    tfPassword.setOnKeyPressed(new ActionEntrer(this.primaryStage));
+    tfPassword.setOnKeyPressed(new ActionEntrerToDashboard(this.primaryStage));
 
     Button btConnection = new Button("Vers l'aventure !");
     btConnection.setOnAction(new ActionConnection(this.primaryStage));
