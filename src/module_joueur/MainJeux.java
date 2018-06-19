@@ -42,13 +42,14 @@ public class MainJeux extends VBox {
         ivImageJeux.setFitWidth(70);
 
         Label lbJeux = new Label(title);
-        lbJeux.setFont(Font.font("Arial", 22));
+        lbJeux.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
         vImageTitre.getChildren().addAll(ivImageJeux, lbJeux);
         vImageTitre.setSpacing(12);
 
         HBox hBtLaunch = new HBox();
         Button btLauch = new Button("Lancer le jeux");
+        btLauch.setOnAction(new ActionLaunch(jeu.getTitle()));
         btLauch.setPrefHeight(50);
         hBtLaunch.getChildren().addAll(btLauch);
         hBtLaunch.setPadding(new Insets(35,0,0,120));
@@ -63,7 +64,7 @@ public class MainJeux extends VBox {
         VBox vPrincipal = new VBox();
 
         Label lbTitle = new Label("Description : ");
-        lbTitle.setFont(Font.font("Arial", 19));
+        lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
         Label lbDescription = new Label("Sudoribus sudoribus sudoribus quam urbium legiones excidium" +
                 " matris Seleuciae amplificatis amplificatis ardore matris comes et fames desperatio bellicis et " +

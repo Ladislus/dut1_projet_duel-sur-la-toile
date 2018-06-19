@@ -43,7 +43,7 @@ public class Messagerie extends SplitPane {
 
         VBox contacts = new VBox();
         Label titre = new Label("Mes contacts",new ImageView(new Image(new File(chem+"messaging.png").toURI().toString(),50.,50.,true,true)));
-        titre.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,35));
+        titre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
         titre.setPadding(new Insets(4));
         contacts.getChildren().add(titre);
 
@@ -55,7 +55,7 @@ public class Messagerie extends SplitPane {
 
             Button b = new Button(nom,img);
             b.setAlignment(Pos.CENTER_LEFT);
-            b.setFont(Font.font(25.));
+            b.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
             b.setPrefWidth(300.);
             b.setPadding(new Insets(2));
             b.setStyle("-fx-border-radius: 0;" +

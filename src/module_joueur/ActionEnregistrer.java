@@ -36,7 +36,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
     String confirmMotDePasse = page.getPfConfirmMotDePasse().getText();
     String ancientPseudo = joueur.getPseudo();
 
-    //Blob blob = (Blob) page.getImageView().getImage();
+    //TODO : récupérer l'image' de l'ivImageUser en la transformer en blob
     Blob blob = (Blob) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
 
     PasswordDialog confirm = new PasswordDialog();
@@ -69,7 +69,6 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);
-              //TODO : Recuperer et modifier l'image
 
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Edition utilisateur");

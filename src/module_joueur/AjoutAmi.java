@@ -31,7 +31,7 @@ public class AjoutAmi extends VBox {
 
         VBox vRechercherJoueurTf = new VBox();
         Label lbTitle = new Label("Rechercher un joueur ...");
-        lbTitle.setFont(Font.font("Arial", 22));
+        lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
         TextField tfSearch = new TextField();
         tfSearch.setPromptText("Rechercher une personne ...");
         vRechercherJoueurTf.setPadding(new Insets(15,9,0,9));

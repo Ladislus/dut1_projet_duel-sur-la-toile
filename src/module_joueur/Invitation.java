@@ -45,7 +45,7 @@ public class Invitation extends VBox {
 
         VBox vRechercherJoueurTf = new VBox();
         Label lbTitle = new Label("Rechercher un joueur :");
-        lbTitle.setFont(Font.font("Arial", 22));
+        lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
         tfSearch.setPromptText("Rechercher une personne ...");
         tfSearch.setOnKeyReleased(new ActionRechercherJoueur(this));
         vRechercherJoueurTf.setPadding(new Insets(15,9,0,9));

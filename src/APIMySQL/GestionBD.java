@@ -101,6 +101,7 @@ public class GestionBD {
     }
 
     public static Image blobToImage(Blob blob){
+        //TODO : renvoie toujours null
         try {
             return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
         } catch (SQLException e) {
