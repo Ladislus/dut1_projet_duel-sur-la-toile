@@ -1,6 +1,12 @@
 package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -93,5 +99,18 @@ public class GestionBD {
         Blob res = co.createBlob();
         res.setBytes(1,Files.readAllBytes(Paths.get(url)));
         return res;
+    }
+
+    public static Image blobToImage(Blob blob){
+        try {
+            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image bytesToImage(byte[] bytes){
+        return new Image(new ByteArrayInputStream(bytes));
     }
 }
