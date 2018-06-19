@@ -6,14 +6,12 @@ public class Joueur {
 
   private String pseudo;
   private int id;
-  private boolean connecte;
   private CheckBox activer;
   private Hyperlink profil;
 
-  public Joueur(String pseudo, int id, boolean connecte) {
+  public Joueur(String pseudo, int id) {
     this.pseudo = pseudo;
     this.id = id;
-    this.connecte = connecte;
     this.activer = new CheckBox();
     this.profil = new Hyperlink("Profil");
   }
@@ -32,10 +30,6 @@ public class Joueur {
 
   public int getId() {
   	return this.id;
-  }
-
-  public boolean getConnecte() {
-  	return this.connecte;
   }
 
   public String toString() {
