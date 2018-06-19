@@ -142,13 +142,13 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-    Label lbJeux = new Label("Jeux : ");
+    Label lbJeux = new Label("Ma bibliothèque ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
     scrollPaneJeux.setContent(hJeux);
     scrollPaneJeux.setFitToWidth(true);
     scrollPaneJeux.setPrefHeight(310);
-    scrollPaneJeux.setStyle("-fx-background-color:black;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+    scrollPaneJeux.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-focus-color: transparent;");
     scrollPaneJeux.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     hJeux.setPadding(new Insets(15,8,0,15));
     hJeux.setPrefWidth(scrollPaneJeux.getWidth());
@@ -156,7 +156,7 @@ class Dashboard extends BorderPane {
     ScrollPane scrollPaneNouveaute = new ScrollPane();
     scrollPaneNouveaute.setContent(hNouveaute);
     scrollPaneNouveaute.setFitToWidth(true);
-    scrollPaneNouveaute.setStyle("-fx-background-color:black;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+    scrollPaneNouveaute.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);-fx-focus-color: transparent;");
     scrollPaneNouveaute.setPrefHeight(310);
     scrollPaneNouveaute.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
