@@ -13,7 +13,7 @@ public class ActionToEditerProfile implements EventHandler<ActionEvent> {
 
     public ActionToEditerProfile(Stage primaryStage, Joueur joueur){
         this.joueur = joueur;
-        
+
         this.primaryStage = primaryStage;
     }
 
@@ -22,7 +22,7 @@ public class ActionToEditerProfile implements EventHandler<ActionEvent> {
         Stage stageEditionProfile = new Stage();
         stageEditionProfile.setTitle("Edition de mon profile");
         stageEditionProfile.setResizable(false);
-        stageEditionProfile.setScene(new Scene(new EditionProfil(primaryStage, joueur), VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));
+        stageEditionProfile.setScene(new Scene(new EditionProfil(stageEditionProfile, joueur), VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));
         stageEditionProfile.show();
     }
 }

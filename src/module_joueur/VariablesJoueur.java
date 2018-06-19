@@ -1,6 +1,7 @@
 package module_joueur;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.File;
@@ -15,6 +16,8 @@ class VariablesJoueur {
 
   public final static double DEFAULT_APPLICATION_WIDTH = 850;
   public final static double DEFAULT_APPLICATION_HEIGHT = 650;
+
+  public final static Color DEFAULT_ERROR_COLOR = Color.RED;
 
   public final static double DEFAULT_CONNECTION_WIDTH = 500;
   public final static double DEFAULT_CONNECTION_HEIGHT = 290;
@@ -32,7 +35,6 @@ class VariablesJoueur {
 
   public final static Image LOGO = new Image(new File("./img/pub/icon.png").toURI().toString());
   public final static Image LOGO_TEXT = new Image(new File("./img/pub/logo.png").toURI().toString());
-  public final static Image HELP = new Image(new File("./img/pub/help.png").toURI().toString());
   public final static Image CONTACT = new Image(new File("./img/pub/contact.png").toURI().toString());
   public final static Image LOGOUT = new Image(new File("./img/pub/log_out.png").toURI().toString());
   public final static Image USER = new Image(new File("./img/pub/user.png").toURI().toString());

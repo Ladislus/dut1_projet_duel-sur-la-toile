@@ -41,6 +41,7 @@ class EditionProfil extends BorderPane {
     Label lImage = new Label("Mon image");
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
+    //TODO : si blob non-null, mettre l'image du joueur
     ImageView ivImageUser = new ImageView();
     ivImageUser.setImage(VariablesJoueur.USER);
     ivImageUser.setPreserveRatio(true);
@@ -175,7 +176,7 @@ class EditionProfil extends BorderPane {
     Button btEnregistrer = new Button("Enregistrer");
     btEnregistrer.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
     btEnregistrer.setTextFill(Color.WHITE);
-    btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
+    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, joueur));
 
     BorderPane candidate = new BorderPane();
     candidate.setLeft(btRetour);
