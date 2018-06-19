@@ -113,7 +113,7 @@ public class PartieM {
 
     /**
      * Renvoie l'attribut de classe j2, de la classe Joueur
-     * @return Joueur j2
+     * @return un Joueur j2
      */
     public Joueur getJ2() {
         return j2;
@@ -179,6 +179,10 @@ public class PartieM {
         return new Scene(res, 850, 650);
     }
 
+    /**
+     * Crée la partie haute de la vue, contenant le titre de la fenêtre
+     * @return la VBox
+     */
     public static HBox haut(){
         HBox res = new HBox(5);
         Label titre = new Label("Mastermind");
@@ -189,6 +193,11 @@ public class PartieM {
         return res;
     }
 
+    /**
+     * Crée la partie de la vue contenant le Timer, le bouton "Quitter", le bouton "Aide" ainsi que les boutons de contrôle des couleurs
+     * @param m un Mastermind
+     * @return une VBox
+     */
     public VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
@@ -234,7 +243,11 @@ public class PartieM {
         return res;
     }
 
-
+    /**
+     * Crée le plateau contenant les essais de combinaisons et les indices
+     * @param plateau un Plateau
+     * @return un ScrollPane
+     */
     public ScrollPane plateauSP(VBox plateau){
 
         ScrollPane sp = new ScrollPane(plateau);
@@ -251,6 +264,10 @@ public class PartieM {
         return sp;
     }
 
+    /**
+     * Crée la partie basse de la vue, contenant la combinaison et les boutons "Valider" et "Supprimer"
+     * @return une HBox
+     */
     public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);
