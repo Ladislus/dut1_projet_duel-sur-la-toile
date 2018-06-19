@@ -69,7 +69,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
         a.setHeaderText("Le compte a été créé avec succès");
         a.showAndWait(); }
 
-      catch(UtilisateurException ex) {
+      catch(APIMySQLException ex) {
 
         ex.printStackTrace();
 

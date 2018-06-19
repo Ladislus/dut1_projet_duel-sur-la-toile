@@ -46,7 +46,7 @@ public class Utilisateur {
         }
     }
 
-    public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, String mdp, String nomRole) throws UtilisateurException {
+    public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, String mdp, String nomRole) throws APIMySQLException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
 
@@ -54,17 +54,17 @@ public class Utilisateur {
             Collections.addAll(donnees,pseudo,email,sexe,prenom,nom,1,nomRole,getHash((mdp + salt).getBytes()),salt);
             GestionBD.updatePreparedStatement("INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,prenom,nom,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
-            throw new UtilisateurException("pseudoTaken");
+            throw new APIMySQLException("pseudoTaken");
         }
     }
 
-    public static boolean isMdpValide(String pseudoUt, String mdp) throws UtilisateurException {
+    public static boolean isMdpValide(String pseudoUt, String mdp) throws APIMySQLException {
         try {
             String hash = getUserInfo("hash","pseudoUt",pseudoUt);
             String salt = getUserInfo("salt","pseudoUt",pseudoUt);
             return getHash((mdp+salt).getBytes()).equals(hash);
         } catch (NullPointerException e) {
-            throw new UtilisateurException("unknownPseudo");
+            throw new APIMySQLException("unknownPseudo");
         }
     }
 

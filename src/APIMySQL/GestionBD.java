@@ -1,13 +1,8 @@
 package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +16,7 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://localhost:3306/serveurDeJeux", "root", "marlou06");
+            co = DriverManager.getConnection("jdbc:mysql://localhost:3306/serveurDeJeux", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -79,6 +74,9 @@ public class GestionBD {
             if (o.getClass().getName().equals("com.mysql.jdbc.Blob")){
                 ps.setBlob(i+1,(Blob)o);
             }
+            else if (o.getClass().getName().equals("java.util.Date")){
+                ps.setTimestamp(i+1,(Timestamp) o);
+            }
             else ps.setObject(i+1, o.toString());
         }
         ps.executeUpdate();
@@ -89,15 +87,9 @@ public class GestionBD {
         s.executeUpdate(requete);
     }
 
-    public static Blob createBlob(String url){
-        Blob res = null;
-        Path path = Paths.get(url);
-        try {
-            res = co.createBlob();
-            res.setBytes(1,Files.readAllBytes(path));
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
+    public static Blob createBlob(String url) throws IOException, SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,Files.readAllBytes(Paths.get(url)));
         return res;
     }
 }
