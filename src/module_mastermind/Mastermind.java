@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class Mastermind extends Application {
 
     private Stage primaryStage;
-    private static String chem = "./img/module_mastermind/";
+    private static String chem = "../src/module_mastermind/img/";
     private HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
@@ -117,5 +117,7 @@ public class Mastermind extends Application {
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
+
+
 }
 

@@ -1,26 +1,34 @@
 package module_joueur;
 
+import APIMySQL.APIMySQLException;
+import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.sql.Blob;
+import java.util.Optional;
+
 public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
-  Stage primaryStage;
+  private Stage primaryStage;
+  private Stage secondaryStage;
 
-  Joueur joueur;
+  private Joueur joueur;
 
-  public ActionEnregistrer(Stage primaryStage, Joueur joueur) {
+  public ActionEnregistrer(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     this.primaryStage = primaryStage;
+    this.secondaryStage = secondaryStage;
+
     this.joueur = joueur; }
 
   @Override
   public void handle(ActionEvent actionEvent) {
 
-    EditionProfil page = (EditionProfil) this.primaryStage.getScene().getRoot();
+    EditionProfil page = (EditionProfil) this.secondaryStage.getScene().getRoot();
 
     String email = page.getTfEmail().getText();
     String pseudo = page.getTfPseudo().getText();
@@ -28,40 +36,67 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
     String confirmMotDePasse = page.getPfConfirmMotDePasse().getText();
     String ancientPseudo = joueur.getPseudo();
 
-    if(motdepasse.equals(confirmMotDePasse)) {
+    //TODO : récupérer l'image' de l'ivImageUser en la transformer en blob
+    Blob blob = (Blob) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
 
-      if (!VariablesJoueur.PASSWORD_PATTERN.matcher(motdepasse).find() && !page.getPfMotDePasse().isDisable()) {
+    PasswordDialog confirm = new PasswordDialog();
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("ERREUR");
-        alert.setHeaderText("Votre mot de passe n'est pas valide");
-        alert.showAndWait(); }
+    Optional<String> res = confirm.showAndWait();
 
-      else if (!VariablesJoueur.EMAIL_PATTERN.matcher(email).find()) {
+    if (res.isPresent()) {
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("ERREUR");
-        alert.setHeaderText("Votre adresse email n'est pas valide");
-        alert.showAndWait(); }
+      try { if (Utilisateur.isMdpValide(joueur.getPseudo(), res.get())) {
 
-      else {
+          if(motdepasse.equals(confirmMotDePasse)) {
 
-        Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo);
+            if (!VariablesJoueur.PASSWORD_PATTERN.matcher(motdepasse).find() && !page.getPfMotDePasse().isDisable()) {
 
-        joueur.setEmail(email);
-        joueur.setPseudo(pseudo);
+              Alert alert = new Alert(Alert.AlertType.ERROR);
+              alert.setTitle("ERREUR");
+              alert.setHeaderText("Votre mot de passe n'est pas valide");
+              alert.showAndWait(); }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Edition utilisateur");
-        alert.setHeaderText("Votre modification a bien été enregistrer");
+            else if (!VariablesJoueur.EMAIL_PATTERN.matcher(email).find()) {
 
-        primaryStage.close();
+              Alert alert = new Alert(Alert.AlertType.ERROR);
+              alert.setTitle("ERREUR");
+              alert.setHeaderText("Votre adresse email n'est pas valide");
+              alert.showAndWait(); }
 
-        alert.showAndWait(); }}
+            else {
+
+              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, blob);
+
+              joueur.setEmail(email);
+              joueur.setPseudo(pseudo);
+
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Edition utilisateur");
+              alert.setHeaderText("Votre modification a bien été enregistrer");
+
+              secondaryStage.close();
+
+              alert.showAndWait(); }}
+
+          else {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Edition utilisateur");
+            alert.setHeaderText("Votre nouveau mot de passe de corespondent pas");
+            alert.showAndWait(); }}
+
+        else {
+
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("ERREUR");
+          alert.setHeaderText("Votre mot de passe n'est pas valide");
+          alert.showAndWait(); }}
+
+          catch (APIMySQLException ex) { ex.printStackTrace(); }}
 
     else {
 
-      Alert alert = new Alert(Alert.AlertType.WARNING);
-      alert.setTitle("Edition utilisateur");
-      alert.setHeaderText("Votre nouveau mot de passe de corespondent pas");
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("INFORMATION");
+      alert.setHeaderText("Vous avez annulé les changements");
       alert.showAndWait(); }}}

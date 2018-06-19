@@ -33,6 +33,8 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.showAndWait();
             }
+            this.mastermind.ajouteResultat();
+
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -43,7 +45,6 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
             alert.showAndWait();
         }
 //        System.out.println(plateauM.getListeEssais());
-        this.mastermind.ajouteResultat();
         this.mastermind.majAffichage();
     }
 }

@@ -14,8 +14,6 @@ import javafx.scene.text.FontWeight;
 import java.io.File;
 import java.util.*;
 
-import static module_puissance4.Puissance4.chem;
-
 /**
  *  Vue de la fenêtre pour choisir contre qui jouer
  */
@@ -26,6 +24,8 @@ public class ChoixJoueurP4 {
 
     /** "New Game" ou "Resume Game" */
     public String mode;
+
+    private static String chem = "../src/module_mastermind/pub/";
 
     public Set<String> listeAmis;
     public Set<String> listeAdvers; // Liste des joueurs avec qui une partie est en cours
@@ -131,8 +131,15 @@ public class ChoixJoueurP4 {
 
 
         int i = 0;
+
+        Button bAleatoire = new Button("Aléatoire");
+        bAleatoire.setPrefSize(200.,60.);
+        this.contacts.add(bAleatoire,i%3,i/3);
+
+        i++;
+
         for (String nom : this.listeCour){
-            ImageView img = new ImageView(new Image(new File(chem+"../pub/contact.png").toURI().toString()));
+            ImageView img = new ImageView(new Image(new File(chem+"contact.png").toURI().toString()));
             img.setPreserveRatio(true);
             img.setFitHeight(50.);
             Button b = new Button(nom,img);

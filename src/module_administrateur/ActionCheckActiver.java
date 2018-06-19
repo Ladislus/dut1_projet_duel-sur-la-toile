@@ -34,6 +34,5 @@ public class ActionCheckActiver implements EventHandler<ActionEvent> {
             this.gJoueur.getButtonSupprimer().setDisable(false);
             this.gJoueur.getButtonActiver().setDisable(false);
         }
-        System.out.println(this.a.getJoueurAactiver());
     }
 }

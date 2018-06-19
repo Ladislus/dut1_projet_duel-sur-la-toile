@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class MesParties extends BorderPane {
 
-    Stage primaryStage;
+    private Stage primaryStage;
 
     public MesParties(Stage primaryStage){
         this.primaryStage = primaryStage;
