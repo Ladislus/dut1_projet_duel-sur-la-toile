@@ -27,7 +27,7 @@ public class Administration {
     }
 
     public void retirerTousJoueurActiver(ArrayList<Joueur> liste) {
-        ArrayList<Joueur> newListe = new ArrayList<>();        
+        ArrayList<Joueur> newListe = new ArrayList<>();
         newListe.addAll(liste);
         for (Joueur j : liste) {
             newListe.remove(j);
@@ -41,10 +41,7 @@ public class Administration {
 
     public int cptJoueurActiver() {
         int cpt = 0;
-        try {
-          cpt = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
-        }
-        catch(SQLException e) {}
+        cpt = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
         return cpt;
     }
 

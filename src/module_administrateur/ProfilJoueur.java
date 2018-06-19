@@ -58,6 +58,14 @@ public class ProfilJoueur extends BorderPane {
         this.setTop(haut);
     }
 
+    public HBox creerId() {
+      HBox hId = new HBox();
+      Label id = new Label("ID : ");
+      TextField tid = new TextField(this.joueur.getId()+"");
+      hId.getChildren().addAll(id, tid);
+      return hId;
+    }
+
     public HBox creerPseudo() {
       HBox hPseudo = new HBox();
       Label pseudo = new Label("Pseudo : ");
@@ -66,28 +74,30 @@ public class ProfilJoueur extends BorderPane {
       return hPseudo;
     }
 
-    public HBox creerPrenom() {
-      HBox hPrenom = new HBox();
-      Label prenom = new Label("Prénom : ");
-      TextField tprenom = new TextField();
-      hPrenom.getChildren().addAll(prenom, tprenom);
-      return hPrenom;
-    }
-
-    public HBox creerNom() {
-      HBox hNom = new HBox();
-      Label nom = new Label("Nom : ");
-      TextField tnom = new TextField();
-      hNom.getChildren().addAll(nom, tnom);
-      return hNom;
-    }
-
     public HBox creerEmail() {
       HBox hEmail = new HBox();
-      Label email = new Label("Email : ");
+      Label email = new Label("Email : "+this.joueur.getEmail());
       TextField temail = new TextField();
       hEmail.getChildren().addAll(email, temail);
       return hEmail;
+    }
+
+    public HBox creerSexe() {
+      RadioButton sexeH = new RadioButton("H");
+      RadioButton sexeF = new RadioButton("F");
+      ToggleGroup grp = new ToggleGroup();
+      Label labelSexe = new Label("Sexe :");
+      sexeH.setToggleGroup(grp);
+      sexeF.setToggleGroup(grp);
+      HBox sexe = new HBox(20);
+      sexe.getChildren().addAll(labelSexe, sexeH, sexeF);
+      if (this.joueur.getSexe().equals("H")) {
+          sexeH.setSelected(true);
+      }
+      else {
+          sexeF.setSelected(true);
+      }
+      return sexe;
     }
 
     public HBox creerRole() {
@@ -102,28 +112,21 @@ public class ProfilJoueur extends BorderPane {
 
     public GridPane creerGridPaneInfos(){
       GridPane gpinfos = new GridPane();
-      gpinfos.add(creerPseudo(), 1, 1);
-      gpinfos.add(creerPrenom(), 1, 2);
-      gpinfos.add(creerNom(), 1, 3);
-      gpinfos.add(creerEmail(), 1, 4);
-      gpinfos.add(creerRole(), 1, 60);
+      gpinfos.add(creerId(), 1, 1);
+      gpinfos.add(creerPseudo(), 1, 2);
+      gpinfos.add(creerEmail(), 1, 3);
+      gpinfos.add(creerSexe(), 1, 4);
+      gpinfos.add(creerRole(), 1, 5);
       return gpinfos;
     }
 
-
-    public Label creerLabelActiver(){
-      Label active = new Label("Activer ?");
-      return active;
-    }
-
-
     public HBox creerRadioBoutonActiverJoueur(){
-      this.rbactiver = new RadioButton("Oui");
-      this.rbpasactiver = new RadioButton("Non");
+      this.rbactiver = new RadioButton("Activé");
+      this.rbpasactiver = new RadioButton("Désactivé");
       this.rbactiver.setToggleGroup(this.groupe);
       this.rbpasactiver.setToggleGroup(this.groupe);
       HBox hbactiverjoueur = new HBox(20);
-      hbactiverjoueur.getChildren().addAll(creerLabelActiver(), rbactiver, rbpasactiver);
+      hbactiverjoueur.getChildren().addAll(new Label("État du compte :"), rbactiver, rbpasactiver);
       if (Utilisateur.isActivated(this.joueur.getPseudo())) {
           this.rbactiver.setSelected(true);
       }
@@ -168,7 +171,6 @@ public class ProfilJoueur extends BorderPane {
       bplus.setOnAction(afc);
       return bplus;
     }
-
 
     public HBox creerHBoxFileChooser(){
       HBox hbfilechooser = new HBox(5);

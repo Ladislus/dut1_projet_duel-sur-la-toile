@@ -170,7 +170,7 @@ public class GererJeu extends BorderPane {
 
 
     public ComboBox<String> creerComboBoxJeux(){
-      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux());
+      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux().keySet());
       ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 
