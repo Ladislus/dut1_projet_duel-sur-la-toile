@@ -143,6 +143,11 @@ public class GererJeu extends BorderPane {
     }
 
 
+    public Button getBoutonGauche(){
+      return this.bplusgauche;
+    }
+
+
     public Button creerBoutonFileChooserDroite(){
       ActionFileChooser afc = new ActionFileChooser(this);
       this.bplusdroite.setOnAction(afc);
@@ -151,8 +156,8 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public Button getBoutonGauche(){
-      return this.bplusgauche;
+    public Button getBoutonDroite(){
+      return this.bplusdroite;
     }
 
 
@@ -165,7 +170,7 @@ public class GererJeu extends BorderPane {
 
 
     public ComboBox<String> creerComboBoxJeux(){
-      ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
+      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux());
       ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 

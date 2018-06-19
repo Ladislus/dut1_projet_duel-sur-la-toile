@@ -24,6 +24,12 @@ public class Administration {
         this.joueurAactiver.remove(joueur);
     }
 
+    public void retirerTousJoueurActiver(ArrayList<Joueur> liste) {
+        for (Joueur j : liste) {
+            this.joueurAactiver.remove(j);
+        }
+    }
+
     public ArrayList<Joueur> getJoueurAactiver() {
         return this.joueurAactiver;
     }
