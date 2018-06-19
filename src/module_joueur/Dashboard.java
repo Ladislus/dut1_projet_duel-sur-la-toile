@@ -175,7 +175,8 @@ class Dashboard extends BorderPane {
 
   public void majAffichage(){
 
-    ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
+      listeBoutton.clear();
+      ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
 
     if(!(btName == null)){
       for (String name : btName) {
@@ -195,7 +196,7 @@ class Dashboard extends BorderPane {
       vDroiteListeDamis.getChildren().clear();
       vDroiteListeDamis.getChildren().addAll(listeBoutton);
     }
-
+    hJeux.getChildren().clear();
     HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
