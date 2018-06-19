@@ -34,6 +34,8 @@ public class PartieM {
     private List<Circle> lCercle;
     private VBox listeComb;
 
+    private Chronometre chrono;
+
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
 
@@ -79,6 +81,8 @@ public class PartieM {
 
         this.p = new PlateauM(j1,j2);
 
+        this.chrono = new Chronometre();
+
         this.attributionCouleur = new HashMap<>();
         this.attributionCouleur.put(0,Color.DARKGREY);
         this.attributionCouleur.put(1,Color.YELLOW);
@@ -97,6 +101,10 @@ public class PartieM {
         this.j2 = new Joueur(j2);
 
         System.out.println(this.etatPartie());
+    }
+
+    public Chronometre getChrono() {
+        return chrono;
     }
 
     /**
@@ -209,9 +217,17 @@ public class PartieM {
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
 
-        Label timer = new Label("Time : 200");
+        HBox timerBox = new HBox();
+
+        Label timer = new Label("Time : ");
         timer.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         timer.setPadding(new Insets(75,0,0,0));
+        chrono = new Chronometre();
+        chrono.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        chrono.setPadding(new Insets(75,0,0,0));
+        chrono.start();
+
+        timerBox.getChildren().addAll(timer,chrono);
 
         Label couleurs = new Label("Couleurs :");
         couleurs.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -241,7 +257,7 @@ public class PartieM {
 
         tabCouleurs.setPadding(new Insets(0,0,50,30));
 
-        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs,aide);
+        res.getChildren().addAll(quitter,timerBox,couleurs,tabCouleurs,aide);
 
         res.setPadding(new Insets(0,0,0,20));
 
