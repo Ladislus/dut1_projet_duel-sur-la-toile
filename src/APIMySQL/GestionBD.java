@@ -1,8 +1,5 @@
 package APIMySQL;
 
-import com.mysql.jdbc.ResultSetMetaData;
-import com.mysql.jdbc.exceptions.MySQLDataException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;

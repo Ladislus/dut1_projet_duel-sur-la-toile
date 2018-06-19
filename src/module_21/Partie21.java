@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +114,9 @@ public class Partie21 {
         for (int i=0;i<3;i++){
             this.listeBatons.get(20-i).active();
         }
+
+        Tooltip conseil = new Tooltip("Cliquez sur les Bâtonnets activés (les plus grands)\npour les sélectionner ou désélectionner.\nPuis valider votre coup !");
+        res.setOnMouseEntered(event -> Tooltip.install(res,conseil));
 
         return res;
     }

@@ -89,7 +89,6 @@ public class PartieM {
             nouvEssai.getChildren().add(numEssai);
             Combinaison dernierEssai = this.p.getListeEssais().get(this.p.getListeEssais().size()-1);
             for (int c : dernierEssai){
-//                System.out.println(c);
                 nouvEssai.getChildren().add(new Circle(25,this.attributionCouleur.get(c)));
             }
             GridPane indices = new GridPane();
@@ -172,43 +171,6 @@ public class PartieM {
 
 
     public ScrollPane plateauSP(VBox plateau){
-
-//        HBox temp = new HBox(20);
-//        Label num = new Label(1+"");
-//        num.setFont(Font.font(40));
-//        temp.getChildren().add(num);
-//
-//        for(int k=0; k<4;k++){
-//            Circle cercleGris = new Circle(25);
-//            cercleGris.setFill(Color.DARKGREY);
-//            temp.getChildren().addAll(cercleGris);
-//        }
-//
-//        GridPane plateau = new GridPane();
-//
-//        Circle cercleIndice1 = new Circle(10);
-//        cercleIndice1.setFill(Color.BLACK);
-//
-//        Circle cercleIndice2 = new Circle(10);
-//        cercleIndice2.setFill(Color.BLACK);
-//
-//        Circle cercleIndice3 = new Circle(10);
-//        cercleIndice3.setFill(Color.BLACK);
-//
-//        Circle cercleIndice4 = new Circle(10);
-//        cercleIndice4.setFill(Color.BLACK);
-//
-//        plateau.add(cercleIndice1,1,0);
-//        plateau.add(cercleIndice2,2,0);
-//        plateau.add(cercleIndice3,1,1);
-//        plateau.add(cercleIndice4,2,1);
-//
-//        plateau.setHgap(5);
-//        plateau.setVgap(5);
-//
-//        temp.getChildren().addAll(plateau);
-//
-//        res.getChildren().addAll(temp);
 
         ScrollPane sp = new ScrollPane(plateau);
         sp.setHmin(200.);
