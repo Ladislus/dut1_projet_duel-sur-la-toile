@@ -34,7 +34,6 @@ class Dashboard extends BorderPane {
 
   private int nbJeux;
 
-  //TODO : attributs sans getter
   private FlowPane hJeux;
   private FlowPane hNouveaute;
 
@@ -143,7 +142,6 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-
     Label lbJeux = new Label("Jeux : ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
@@ -222,7 +220,8 @@ class Dashboard extends BorderPane {
 
       module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
 
-      File fileImage = new File("./img/pub/logo.png");//todo: recuperer le blob de la bd
+      //TODDO: recuperer le blob de la bd
+      File fileImage = new File("./img/pub/logo.png");
       ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
       ivJeux.setPreserveRatio(true);
       ivJeux.setFitWidth(50);

@@ -176,7 +176,7 @@ class EditionProfil extends BorderPane {
     Button btEnregistrer = new Button("Enregistrer");
     btEnregistrer.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
     btEnregistrer.setTextFill(Color.WHITE);
-    btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
+    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, joueur));
 
     BorderPane candidate = new BorderPane();
     candidate.setLeft(btRetour);
