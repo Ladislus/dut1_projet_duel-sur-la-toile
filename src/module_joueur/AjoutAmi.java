@@ -17,7 +17,7 @@ public class AjoutAmi extends VBox {
 
     private ArrayList<String> listeDamis;
 
-    
+
     public AjoutAmi(){
         //this.primaryStage = primaryStage;
         this.listeDamis = new ArrayList<>();

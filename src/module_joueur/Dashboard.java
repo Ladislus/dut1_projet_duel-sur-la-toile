@@ -1,17 +1,14 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
 import APIMySQL.Jeu;
 import APIMySQL.Utilisateur;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -22,7 +19,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 class Dashboard extends BorderPane {
 
@@ -95,13 +91,10 @@ class Dashboard extends BorderPane {
     btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
-    Button btParametre = new Button("Mes paramètres");
-    btParametre.setPrefWidth(150);
-
     Button btExit = new Button("", imageViewLogo);
     btExit.setOnAction(new ActionDeconnexion(primaryStage));
 
-    param.getChildren().addAll(btParametre, btExit);
+    param.getChildren().add(btExit);
     param.setSpacing(10);
     param.setAlignment(Pos.TOP_CENTER);
     param.setPadding(new Insets(250,0,0,0));

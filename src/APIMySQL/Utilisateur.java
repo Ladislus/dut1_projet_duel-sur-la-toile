@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import java.sql.Blob;
 import java.sql.SQLException;
 
 import java.util.*;
@@ -67,6 +68,7 @@ public class Utilisateur {
     public static void deactivateUser(String pseudo){
         setUserInfo("activeUt", 0, "pseudoUt", pseudo);
     }
+
     public static void deleteUser(String pseudo) throws SQLException {
         ArrayList<String> pseudoList = new ArrayList<>();
         pseudoList.add(pseudo);
@@ -87,7 +89,7 @@ public class Utilisateur {
 
     public static ArrayList<String> getListeDamis(String pseudo){
         ArrayList<String> listePseudo = new ArrayList<>();
-        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(pseudo)).get("idUt1");
+        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt2 FROM ETREAMI WHERE idUt1 = "+getIdByPseudo(pseudo)).get("idUt2");
         try{
             for(Object elem : listeId){
                 listePseudo.add(String.valueOf(getPseudoById((Integer) elem)));
@@ -100,11 +102,12 @@ public class Utilisateur {
         return listePseudo;
     }
 
-    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse){
+    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, Blob blob){
         int id = getIdByPseudo(ancientMotDePasse);
         String salt = getSalt();
         setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
         setUserInfo("emailUt", email, "idUt", String.valueOf(id));
+        setUserInfo("image", blob, "idUt", String.valueOf(id));
         if(!(motDePasse.length() == 0)){
             setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
             setUserInfo("salt", salt, "idUt", String.valueOf(id));

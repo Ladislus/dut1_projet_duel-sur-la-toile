@@ -2,11 +2,9 @@ package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,7 +20,7 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
+            co = DriverManager.getConnection("jdbc:mysql://192.168.1.133/serveurDeJeux", "root", "marlou06");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
