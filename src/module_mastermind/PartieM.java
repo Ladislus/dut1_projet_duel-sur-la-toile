@@ -36,6 +36,10 @@ public class PartieM {
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
 
+    /**
+     * Renvoie les différentes informations sur l'état de la partie sous forme d'une String, pour pouvoir mettre à jour la BD
+     * @return une String contenant les infos de la partie
+     */
     public String etatPartie(){
         return "" +
                 this.p.getCombiMystere() + "," +
@@ -46,6 +50,19 @@ public class PartieM {
                 this.getJ2();
     }
 
+    /**
+     * Met à jour la base de données: les infos sur la partie sont mises à jour dans la base de données.
+     */
+    public void majBD(){
+
+    }
+
+    /**
+     * Constructeur de la classe PartieM
+     * @param m un Mastermind
+     * @param j1 le nom du joueur 1
+     * @param j2 le nom du joueur 2
+     */
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
 
@@ -78,18 +95,33 @@ public class PartieM {
         System.out.println(this.etatPartie());
     }
 
+    /**
+     * Renvoie l'attribut de la classe p, de la classe PlateauM
+     * @return PlateauM p
+     */
     public PlateauM getPlateau(){
         return this.p;
     }
 
+    /**
+     * Renvoie l'attribut de classe j1, de la classe Joueur
+     * @return Joueur j1
+     */
     public Joueur getJ1() {
         return j1;
     }
 
+    /**
+     * Renvoie l'attribut de classe j2, de la classe Joueur
+     * @return Joueur j2
+     */
     public Joueur getJ2() {
         return j2;
     }
 
+    /**
+     * Met à jour l'affichage de la vue, sauf pour l'ajout des lignes dans le plateau
+     */
     public void majAffichage(){
 
         lCercle = new ArrayList<>();
@@ -104,6 +136,9 @@ public class PartieM {
         }
     }
 
+    /**
+     * Met à jour la vue pour ajouter les lignes dans le plateau
+     */
     public void ajouteResultat(){
         if ((this.p.getListeEssais().size() > 0 && this.p.getListeEssais() != null) && (this.p.getListeResultats().size() > 0 && this.p.getListeResultats() != null)){
             HBox nouvEssai = new HBox();
