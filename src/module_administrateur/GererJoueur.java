@@ -152,14 +152,17 @@ public class GererJoueur extends BorderPane {
     /** Création du centre de la page => liste de tous les joueurs à activer */
     public void centre() {
         VBox centre = new VBox();
-        Label l = new Label("Nombre de joueurs à activer : ");
-        HBox bouton = new HBox();
-        bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
-        bouton.setSpacing(10);
-        centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
-        centre.setSpacing(10);
-        centre.setPadding(new Insets(0,25,15,25));
-        this.setCenter(centre);
+        try {
+            Label l = new Label("Nombre de joueurs à activer : "+GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size());
+            HBox bouton = new HBox();
+            bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
+            bouton.setSpacing(10);
+            centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
+            centre.setSpacing(10);
+            centre.setPadding(new Insets(0,25,15,25));
+            this.setCenter(centre);
+        }
+        catch(SQLException e) {}
     }
 
     /** Création de la liste de tous les joueurs */
@@ -216,6 +219,11 @@ public class GererJoueur extends BorderPane {
         table.getColumns().add(profil);
         table.setPrefWidth(100);
         return table;
+    }
+
+    public void majAffichage() {
+        this.gauche();
+        this.centre();
     }
 
     /** Création de la gauche de la page => liste de tous les joueurs */

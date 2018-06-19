@@ -33,9 +33,9 @@ public class ActionActiverJoueur implements EventHandler<ActionEvent>{
         if (result.get() == btoui){
             for (Joueur j : this.pa.getAdmin().getJoueurAactiver()) {
                 Utilisateur.setUserInfo("activeUt", 1, "pseudoUt", j.getPseudo());
-                this.pa.getAdmin().retirerListeActiver(j);
             }
-            
+            this.pa.getAdmin().retirerTousJoueurActiver(this.pa.getAdmin().getJoueurAactiver());
+            this.gJoueur.majAffichage();
             alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Validation de l'activation");
             alert.setHeaderText(null);

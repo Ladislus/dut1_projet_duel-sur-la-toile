@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
+import APIMySQL.*;
 
 public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
 
@@ -31,9 +32,12 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == btoui){
           // GESTION DESACTIVATION JOUEUR
-        //  if (Utilisateur.isActivated(this.joueur) && this.pJoueur.getRbpasactiver()) {
-
-        //  }
+          if (Utilisateur.isActivated(this.joueur.getPseudo()) && this.pJoueur.getRbpasactiver().isSelected()) {
+              Utilisateur.setUserInfo("activeUt", 0, "pseudoUt", this.joueur.getPseudo());
+          }
+          else if (!(Utilisateur.isActivated(this.joueur.getPseudo())) && this.pJoueur.getRbactiver().isSelected()) {
+              Utilisateur.setUserInfo("activeUt", 1, "pseudoUt", this.joueur.getPseudo());
+          }
 
           // GESTION MODIFICATION INFO
 
