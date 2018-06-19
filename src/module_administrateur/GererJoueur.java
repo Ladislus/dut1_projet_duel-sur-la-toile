@@ -19,12 +19,19 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.cell.*;
 import javafx.geometry.Pos;
 import javafx.beans.property.SimpleStringProperty;
+import APIMySQL.*;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.List;
 
 public class GererJoueur extends BorderPane {
 
     private PageAccueil pa;
     private Button activer;
     private Button supprimer;
+    private ObservableList<Joueur> listeJoueur;
+    private ObservableList<Joueur> listeJoueurAactiver;
+    private TextField recherche;
 
     /** Constructeur de la page pour gérer les joueurs */
     public GererJoueur(PageAccueil pa) {
@@ -62,12 +69,11 @@ public class GererJoueur extends BorderPane {
     public Button creerBoutonActiver() {
         this.activer = new Button("Activer");
         this.activer.setDisable(true);
-        ActionActiverJoueur acj = new ActionActiverJoueur(this);
         this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
         this.activer.setTextFill(Color.web("white"));
         this.activer.setPrefWidth(200);
         this.activer.setPrefHeight(50);
-        this.activer.setOnAction(acj);
+        this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
         return this.activer;
     }
 
@@ -87,53 +93,54 @@ public class GererJoueur extends BorderPane {
     /** Création de la barre de recherche des joueurs avec le bouton rechercher */
     public HBox creerBarreRecherche() {
         HBox h = new HBox();
-        TextField recherche = new TextField("");
-        recherche.setPromptText("Rechercher un joueur");
+        this.recherche = new TextField("");
+        this.recherche.setPromptText("Rechercher un joueur");
         Button rechercher = new Button("Rechercher");
         recherche.setPrefWidth(190);
-        h.getChildren().addAll(recherche, rechercher);
+        h.getChildren().addAll(this.recherche, rechercher);
         return h;
     }
 
     /** Création du tableau contenant la liste de tous les joueurs à activer */
     public TableView<Joueur> creerTableListeJoueurAactiver() {
-        TableView<Joueur> table = new TableView<Joueur>();
-        TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
-        TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
-        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
+        TableView<Joueur> table = new TableView<>();
+        TableColumn<Joueur, String> pseudo = new TableColumn<>("Pseudo");
+        TableColumn<Joueur, Integer> id = new TableColumn<>("ID");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
         pseudo.setResizable(false);
         id.setResizable(false);
-        profil.setResizable(false);
         activer.setResizable(false);
         pseudo.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
         id.setMaxWidth(43);
-        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
         activer.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
         ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
         table.setItems(liste);
-        table.getColumns().addAll(pseudo, id, profil, activer);
+        table.getColumns().add(pseudo);
+        table.getColumns().add(id);
+        table.getColumns().add(activer);
         table.setPrefWidth(100);
         return table;
     }
 
     /** Création de la liste contenant les joueurs à activer */
     public ObservableList<Joueur> getListeJoueursTableViewAactiver() {
-        // EXEMPLE => METTRE REQUETTE ICI
-        Joueur j1 = new Joueur("Leo", 2, true);
-        Joueur j2 = new Joueur("ab", 5, true);
-        Joueur j3 = new Joueur("zf", 1, false);
-        Joueur j4 = new Joueur("b", 4, false);
-        Joueur j5 = new Joueur("za", 3, true);
-        ObservableList<Joueur> liste = FXCollections.observableArrayList(j1, j2, j3, j4, j5);
-        for (Joueur j : liste) {
-            j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
-        }
-        return liste;
+      this.listeJoueurAactiver = FXCollections.observableArrayList();
+      HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;");
+      if (dico.size() == 0) {
+          return this.listeJoueurAactiver;
+      }
+      else {
+          for (int i = 0; i < dico.get("idUt").size(); i++) {
+              Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)), (boolean) dico.get("activeUt").get(i));
+              this.listeJoueurAactiver.add(j);
+              j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+              j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
+          }
+      }
+      return this.listeJoueurAactiver;
     }
 
     /** Création du centre de la page => liste de tous les joueurs à activer */
@@ -151,17 +158,19 @@ public class GererJoueur extends BorderPane {
 
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
-        // EXEMPLE => METTRE REQUETTE ICI
-        Joueur j1 = new Joueur("Leo", 2, true);
-        Joueur j2 = new Joueur("ab", 5, true);
-        Joueur j3 = new Joueur("zf", 1, false);
-        Joueur j4 = new Joueur("b", 4, false);
-        Joueur j5 = new Joueur("za", 3, true);
-        ObservableList<Joueur> liste = FXCollections.observableArrayList(j1, j2, j3, j4, j5);
-        for (Joueur j : liste) {
-            j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+        this.listeJoueur = FXCollections.observableArrayList();
+        HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
+        if (dico.size() == 0) {
+            return this.listeJoueur;
         }
-        return liste;
+        else {
+            for (int i = 0; i < dico.get("idUt").size(); i++) {
+                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), i+1, (boolean) dico.get("activeUt").get(i));
+                j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+                this.listeJoueur.add(j);
+            }
+        }
+        return this.listeJoueur;
     }
 
     /** Création du tableau contenant la liste de tous les joueurs */
@@ -192,9 +201,18 @@ public class GererJoueur extends BorderPane {
         profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         ObservableList<Joueur> list = getListeJoueursTableView();
         table.setItems(list);
-        table.getColumns().addAll(pseudo, id, connecte, profil);
+        table.getColumns().add(pseudo);
+        table.getColumns().add(id);
+        table.getColumns().add(connecte);
+        table.getColumns().add(profil);
         table.setPrefWidth(100);
         return table;
+    }
+
+    /** Raffraichit la page de gérer joueur */
+    public void majAffichage() {
+        this.gauche();
+        this.centre();
     }
 
     /** Création de la gauche de la page => liste de tous les joueurs */

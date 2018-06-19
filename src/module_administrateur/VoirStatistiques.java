@@ -89,9 +89,9 @@ public class VoirStatistiques extends BorderPane {
     }
 
 
-    public ComboBox creerComboBoxOptions(){
+    public ComboBox<String> creerComboBoxOptions(){
       ObservableList<String> optionsJeux = FXCollections.observableArrayList("Puissance 4", "Mastermind");
-      ComboBox cbJeux = new ComboBox(optionsJeux);
+      ComboBox<String> cbJeux = new ComboBox<String>(optionsJeux);
       cbJeux.setPrefWidth(300);
 
       return cbJeux;

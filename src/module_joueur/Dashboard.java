@@ -32,6 +32,8 @@ class Dashboard extends BorderPane {
 
   private Joueur joueur;
 
+  private VBox vDroiteListeDamis;
+
   private int nbJeux;
 
   private FlowPane hJeux;
@@ -44,6 +46,8 @@ class Dashboard extends BorderPane {
     super();
 
     this.title = "Dashboard";
+
+    this.vDroiteListeDamis = new VBox();
 
     this.hJeux = new FlowPane();
 
@@ -121,11 +125,10 @@ class Dashboard extends BorderPane {
     Button btMessage = new Button("4 messages non lu");
     btMessage.setPrefWidth(150);
 
-    Button btListeDamis = new Button("Mes amis");
+    Button btListeDamis = new Button("Invitation");
+    btListeDamis.setOnAction(new ActionToInvitation(joueur, this));
     btListeDamis.setPrefWidth(150);
 
-    VBox vDroiteListeDamis = new VBox();
-    vDroiteListeDamis.getChildren().addAll(listeBoutton);
     vDroiteListeDamis.setSpacing(5);
     vDroiteListeDamis.setPrefHeight(375);
 
@@ -142,7 +145,7 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-    Label lbJeux = new Label("Ma bibliothèque ");
+    Label lbJeux = new Label("Jeux : ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
     scrollPaneJeux.setContent(hJeux);
@@ -174,27 +177,7 @@ class Dashboard extends BorderPane {
 
     ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
 
-    if(btName == null){
-
-      btName = new ArrayList<>();
-      btName.add("Ajouter un amis");
-
-      for (String name : btName) {
-
-        ImageView imageContact = new ImageView();
-        imageContact.setImage(VariablesJoueur.CONTACT);
-        imageContact.setPreserveRatio(true);
-        imageContact.setFitWidth(20);
-
-        Button btContact = new Button(name, imageContact);
-        btContact.setOnAction(new ActionToAjouterAmi());
-        btContact.setPrefWidth(150);
-        btContact.setAlignment(Pos.CENTER_LEFT);
-
-        listeBoutton.add(btContact); }}
-
-    else {
-
+    if(!(btName == null)){
       for (String name : btName) {
 
         ImageView imageContact = new ImageView();
@@ -206,13 +189,17 @@ class Dashboard extends BorderPane {
         btContact.setPrefWidth(150);
         btContact.setAlignment(Pos.CENTER_LEFT);
 
-        listeBoutton.add(btContact); }}
+        listeBoutton.add(btContact);
+
+      }
+      vDroiteListeDamis.getChildren().clear();
+      vDroiteListeDamis.getChildren().addAll(listeBoutton);
+    }
 
     HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
-    System.out.println(listeTitleJeux);
-    if(listeTitleJeux.size() > 1){
+    if(listeJeux.size() > 0){
         for(Object title : listeJeux.get("nomJeu")){
             String titleString = title.toString();
             listeTitleJeux.add(titleString); }

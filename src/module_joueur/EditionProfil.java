@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,24 +11,26 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-
+import java.sql.Blob;
 
 class EditionProfil extends BorderPane {
 
-    String title;
+  private String title;
 
-    Stage primaryStage;
+  private ImageView ivImageUser;
 
-    Joueur joueur;
+  private Stage primaryStage;
+  private Stage secondaryStage;
 
-    TextField tfPseudo;
-    TextField tfEmail;
+  private Joueur joueur;
 
-    PasswordField pfMotDePasse;
-    PasswordField pfConfirmMotDePasse;
+  private TextField tfPseudo;
+  private TextField tfEmail;
 
-  public EditionProfil(Stage primaryStage, Joueur joueur) {
+  private PasswordField pfMotDePasse;
+  private PasswordField pfConfirmMotDePasse;
+
+  public EditionProfil(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     super();
 
@@ -35,6 +38,7 @@ class EditionProfil extends BorderPane {
     this.joueur = joueur;
 
     this.primaryStage = primaryStage;
+    this.secondaryStage = secondaryStage;
 
     this.setLeft(creerGauche());
     this.setRight(creerDroite());
@@ -47,11 +51,18 @@ class EditionProfil extends BorderPane {
 
     //TODO : si blob non-null, mettre l'image du joueur
 
-  
-    ImageView ivImageUser = new ImageView();
-    ivImageUser.setImage(VariablesJoueur.USER);
+    this.ivImageUser = new ImageView();
+
+    if (GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0) != null)
+      ivImageUser.setImage(GestionBD.blobToImage((Blob) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0)));
+
+    else
+      ivImageUser.setImage(VariablesJoueur.USER);
+
     ivImageUser.setPreserveRatio(true);
     ivImageUser.setFitWidth(50);
+
+    //fin
 
     Button btModifier = new Button("Modifier");
     btModifier.setOnAction(actionEvent -> {
@@ -183,12 +194,12 @@ class EditionProfil extends BorderPane {
     Button btSuppressionCompte = new Button("Supprimer mon compte");
     btSuppressionCompte.setBackground(new Background(new BackgroundFill(Color.DARKRED, null, null)));
     btSuppressionCompte.setTextFill(Color.WHITE);
-    btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, joueur));
+    btSuppressionCompte.setOnAction(new ActionSuppressionCompte(primaryStage, this.secondaryStage, joueur));
 
     Button btEnregistrer = new Button("Enregistrer");
     btEnregistrer.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
     btEnregistrer.setTextFill(Color.WHITE);
-    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, joueur));
+    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, this.secondaryStage, joueur));
 
     BorderPane candidate = new BorderPane();
     candidate.setLeft(btRetour);
@@ -206,4 +217,6 @@ class EditionProfil extends BorderPane {
 
   public PasswordField getPfMotDePasse() { return this.pfMotDePasse; }
 
-  public PasswordField getPfConfirmMotDePasse() { return this.pfConfirmMotDePasse; }}
+  public PasswordField getPfConfirmMotDePasse() { return this.pfConfirmMotDePasse; }
+
+  public ImageView getImageView() { return this.ivImageUser; }}

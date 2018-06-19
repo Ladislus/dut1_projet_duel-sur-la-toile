@@ -2,16 +2,15 @@ package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "@MXM7zvb7v");
+            co = DriverManager.getConnection("jdbc:mysql://192.168.1.133/serveurDeJeux", "root", "marlou06");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -102,6 +101,7 @@ public class GestionBD {
     }
 
     public static Image blobToImage(Blob blob){
+        //TODO : renvoie toujours null
         try {
             return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
         } catch (SQLException e) {
@@ -112,5 +112,18 @@ public class GestionBD {
 
     public static Image bytesToImage(byte[] bytes){
         return new Image(new ByteArrayInputStream(bytes));
+    }
+
+    public static byte[] getBlob(String requete){
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        try {
+            ps = co.prepareStatement(requete);
+            rs = ps.executeQuery();
+            rs.next();
+            Blob blob = rs.getBlob(Arrays.asList(requete.split(" ")).get(1));
+            return blob.getBytes(1,(int)blob.length());
+        } catch (SQLException e){}
+        return null;
     }
 }

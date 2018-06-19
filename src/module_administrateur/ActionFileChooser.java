@@ -19,14 +19,16 @@ public class ActionFileChooser implements EventHandler<ActionEvent> {
 
     private GererJeu gJeu;
     private ProfilJoueur pJoueur;
-    private ListView listview;
+    private ListView<String> listview;
 
     public ActionFileChooser(GererJeu gJeu){
       this.gJeu = gJeu;
+      this.listview = new ListView<>();
     }
 
     public ActionFileChooser(ProfilJoueur pJoueur){
       this.pJoueur = pJoueur;
+      this.listview = new ListView<>();
     }
 
     @Override
@@ -42,6 +44,17 @@ public class ActionFileChooser implements EventHandler<ActionEvent> {
       if (fichierSelectionne != null){
         if (fichierSelectionne.getName().contains(".png") || fichierSelectionne.getName().contains(".jpg")){
           listview.getItems().add(fichierSelectionne.getName());
+          if (b == gJeu.getBoutonGauche()){
+            gJeu.getTextFieldFileChooserGauche().setText(fichierSelectionne.getAbsolutePath());
+          }
+          else{
+            if (b == gJeu.getBoutonDroite())
+              gJeu.getTextFieldFileChooserDroite().setText(fichierSelectionne.getAbsolutePath());
+            else{
+              pJoueur.getTextFieldFileChooser().setText(fichierSelectionne.getAbsolutePath());
+            }
+          }
+
         }
         else{
           Alert reponse = new Alert(Alert.AlertType.INFORMATION);
