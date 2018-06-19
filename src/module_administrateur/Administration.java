@@ -1,6 +1,8 @@
 package module_administrateur;
 
+import APIMySQL.*;
 import java.util.ArrayList;
+import java.sql.*;
 
 public class Administration {
 
@@ -24,8 +26,26 @@ public class Administration {
         this.joueurAactiver.remove(joueur);
     }
 
+    public void retirerTousJoueurActiver(ArrayList<Joueur> liste) {
+        ArrayList<Joueur> newListe = new ArrayList<>();        
+        newListe.addAll(liste);
+        for (Joueur j : liste) {
+            newListe.remove(j);
+        }
+        this.joueurAactiver = newListe;
+    }
+
     public ArrayList<Joueur> getJoueurAactiver() {
         return this.joueurAactiver;
+    }
+
+    public int cptJoueurActiver() {
+        int cpt = 0;
+        try {
+          cpt = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
+        }
+        catch(SQLException e) {}
+        return cpt;
     }
 
     //GERER RAPPORT
