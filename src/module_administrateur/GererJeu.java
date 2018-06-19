@@ -216,12 +216,12 @@ public class GererJeu extends BorderPane {
 
     public int getType(){
       if (((String)(this.cbmodes.getValue())).equals("Tour par tour"))
-        return 0;
+        return 1;
       else{
         if (((String)(this.cbmodes.getValue())).equals("Score le plus élevé par manche"))
-          return 1;
-        else{
           return 2;
+        else{
+          return 3;
         }
       }
     }

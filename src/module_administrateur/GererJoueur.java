@@ -142,7 +142,7 @@ public class GererJoueur extends BorderPane {
             }
         }
       }
-      catch(SQLException e) {}
+      catch(SQLException e) {
       return this.listeJoueurAactiver;
     }
 
@@ -175,7 +175,7 @@ public class GererJoueur extends BorderPane {
               }
           }
         }
-        catch(SQLException e) {}
+        catch(SQLException e) {
         return this.listeJoueur;
     }
 
