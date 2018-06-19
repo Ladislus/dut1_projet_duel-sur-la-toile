@@ -24,11 +24,6 @@ public class Jeu {
     }
 
     public static HashMap<String, List<Object>> recupListeJeux(){
-        try {
-            return GestionBD.selectPreparedStatement("select * from JEU");
-        } catch (SQLException e) {
-            System.out.println("[Error] Probleme avec la recuperation de la liste des jeux");
-        }
-        return null;
+        return GestionBD.selectPreparedStatement("select * from JEU");
     }
 }
