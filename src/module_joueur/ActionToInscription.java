@@ -9,12 +9,7 @@ class ActionToInscription implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  
-
-  public ActionToInscription(Stage primaryStage) {
-
-    this.primaryStage = primaryStage;
-    }
+  public ActionToInscription(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(ActionEvent actionEvent) {
 
