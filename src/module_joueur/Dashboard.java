@@ -2,7 +2,10 @@ package module_joueur;
 
 import APIMySQL.Jeu;
 import APIMySQL.Utilisateur;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2a0ceec3838b170a54efb69b8a4c0b7aa69f111f
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;

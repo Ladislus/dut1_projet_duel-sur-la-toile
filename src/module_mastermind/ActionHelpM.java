@@ -17,9 +17,9 @@ public class ActionHelpM implements EventHandler<ActionEvent> {
                 "Le bouton Supprimer permet d'enlever le dernier pion de la combianiason en cours.\n" +
                 "Le bouton Valider permet de tester la combinaison choisie et la comparer avec celle que le joueur doit trouver.\n" +
                 "Les 4 petits pions formant un carré à droite de la combinaison sont les indices: \n" +
-                "   - un point bleu acier correspond à un pion de la bonne couleur mais mal placé.\n" +
-                "   - un point noir correspond à un pion de la bonne couleur et bien placé.\n" +
-                "   - sinon un rond gris clair apparait.\n" +
+                "   - un point blanc correspond à un pion de la bonne couleur mais mal placé.\n" +
+                "   - un point rouge correspond à un pion de la bonne couleur et bien placé.\n" +
+                "   - sinon un rond gris apparait.\n" +
                 "   \n" +
                 "Bon jeu !");
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
