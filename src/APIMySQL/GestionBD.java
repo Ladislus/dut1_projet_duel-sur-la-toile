@@ -32,21 +32,20 @@ public class GestionBD {
         List<HashMap<String,List<Object>>> list = new ArrayList<>();
 
         while (rs.next()) {
-            //On boucle sur les collonne
+            //On boucle sur les colonnes
             HashMap<String,List<Object>> row = new HashMap<>(columns);
             for(int i=1; i<=columns; ++i) {
                 ArrayList<Object> liste = new ArrayList<>();
                 liste.add(rs.getObject(i));
                 row.put(md.getColumnName(i), liste);
             }
-            //System.out.println(row);
             list.add(row);
         }
 
         HashMap<String, List<Object>> res = new HashMap<>();
         for (HashMap<String, List<Object>> e : list){
             for(String key : e.keySet()){
-                //Si la cle n'existe pas
+                //Si la clé n'existe pas
                 if(!res.containsKey(key)){
                     res.put(key, e.get(key));
                 }
@@ -67,14 +66,13 @@ public class GestionBD {
                 nbPointDinterrogation += 1;
             }
         }
-        //
         PreparedStatement ps = co.prepareStatement(requete);
         for(int i =0; i<nbPointDinterrogation; i++){
             Object o = listeDonnee.get(i);
             if (o.getClass().getName().equals("com.mysql.jdbc.Blob")){
                 ps.setBlob(i+1,(Blob)o);
             }
-            else if (o.getClass().getName().equals("java.util.Date")){
+            else if (o.getClass().getName().equals("java.sql.Timestamp")){
                 ps.setTimestamp(i+1,(Timestamp) o);
             }
             else ps.setObject(i+1, o.toString());

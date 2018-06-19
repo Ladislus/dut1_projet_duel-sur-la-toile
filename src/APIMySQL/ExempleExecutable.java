@@ -27,5 +27,7 @@ public class ExempleExecutable {
         } catch (APIMySQLException e){e.printStackTrace();}
 
         Partie.creerPartie(1,1,2);
+
+        Message.creerMessage("Coucou ^^",1,2);
     }
 }
