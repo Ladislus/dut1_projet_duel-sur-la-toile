@@ -16,6 +16,7 @@ public class ActionHelpM implements EventHandler<ActionEvent> {
                 "Une combinaison est composée de 4 pions de couleurs.\n" +
                 "Le bouton Supprimer permet d'enlever le dernier pion de la combianiason en cours.\n" +
                 "Le bouton Valider permet de tester la combinaison choisie et la comparer avec celle que le joueur doit trouver.\n" +
+                "Le score est déterminé par la formule suivant : (temps restant / nombre d'essais) *10.\n" +
                 "Les 4 petits pions formant un carré à droite de la combinaison sont les indices: \n" +
                 "   - un point blanc correspond à un pion de la bonne couleur mais mal placé.\n" +
                 "   - un point rouge correspond à un pion de la bonne couleur et bien placé.\n" +

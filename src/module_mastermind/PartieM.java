@@ -103,8 +103,12 @@ public class PartieM {
         System.out.println(this.etatPartie());
     }
 
+    /**
+     * Renvoie l'attribut chrono, qui set un Chronometre
+     * @return un Chronometre
+     */
     public Chronometre getChrono() {
-        return chrono;
+        return this.chrono;
     }
 
     /**
@@ -213,8 +217,15 @@ public class PartieM {
     public VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
+        HBox quitterRejouer = new HBox(10);
+
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
+
+        Button rejouer = new Button("Rejouer");
+        rejouer.setOnAction(new ActionRejouer(m));
+
+        quitterRejouer.getChildren().addAll(quitter,rejouer);
 
         HBox timerBox = new HBox();
 
@@ -256,7 +267,7 @@ public class PartieM {
 
         tabCouleurs.setPadding(new Insets(0,0,50,30));
 
-        res.getChildren().addAll(quitter,timerBox,couleurs,tabCouleurs,aide);
+        res.getChildren().addAll(quitterRejouer,timerBox,couleurs,tabCouleurs,aide);
 
         res.setPadding(new Insets(0,0,0,20));
 
