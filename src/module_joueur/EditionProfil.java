@@ -3,10 +3,14 @@ package module_joueur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 class EditionProfil extends BorderPane {
@@ -42,13 +46,21 @@ class EditionProfil extends BorderPane {
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     //TODO : si blob non-null, mettre l'image du joueur
+
+  
     ImageView ivImageUser = new ImageView();
     ivImageUser.setImage(VariablesJoueur.USER);
     ivImageUser.setPreserveRatio(true);
     ivImageUser.setFitWidth(50);
 
-    //TODO : FileChooser
     Button btModifier = new Button("Modifier");
+    btModifier.setOnAction(actionEvent -> {
+
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setTitle("Open Resource File");
+      fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+      Image selectedFile = new Image(fileChooser.showOpenDialog(primaryStage).toURI().toString());
+      if (selectedFile != null) { ivImageUser.setImage(selectedFile); }});
 
     ImageView ivImageEditPseudo = new ImageView();
     ivImageEditPseudo.setImage(VariablesJoueur.EDIT);
@@ -176,7 +188,7 @@ class EditionProfil extends BorderPane {
     Button btEnregistrer = new Button("Enregistrer");
     btEnregistrer.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
     btEnregistrer.setTextFill(Color.WHITE);
-    btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
+    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, joueur));
 
     BorderPane candidate = new BorderPane();
     candidate.setLeft(btRetour);

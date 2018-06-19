@@ -1,5 +1,6 @@
 package module_administrateur;
 
+import APIMySQL.Jeu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -20,11 +21,20 @@ import javafx.scene.layout.*;
 public class GererJeu extends BorderPane {
 
     private PageAccueil pa;
-    private ToggleGroup groupe = new ToggleGroup();
+    private ToggleGroup groupe;
+    private TextField tfilechoosergauche;
+    private TextField tfilechooserdroite;
+    private Button bplusdroite;
+    private Button bplusgauche;
 
     public GererJeu(PageAccueil pa) {
       super();
       this.pa = pa;
+      this.groupe = new ToggleGroup();
+      this.tfilechoosergauche = new TextField();
+      this.tfilechooserdroite = new TextField();
+      this.bplusdroite = new Button("+");
+      this.bplusgauche = new Button("+");
       this.haut();
       this.gauche();
       this.centre();
@@ -101,35 +111,67 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public TextField creerTextFieldFileChooser(){
-      TextField tfilechooser = new TextField();
-      tfilechooser.setPromptText("Choisissez une image");
-      tfilechooser.setDisable(true);
+    public TextField creerTextFieldFileChooserGauche(){
+      this.tfilechoosergauche.setPromptText("Choisissez une image");
 
-      return tfilechooser;
+      return this.tfilechoosergauche;
     }
 
 
-    public Button creerBoutonFileChooser(){
-      Button bplus = new Button("+");
+    public TextField getTextFieldFileChooserGauche(){
+      return this.tfilechoosergauche;
+    }
+
+
+    public TextField creerTextFieldFileChooserDroite(){
+      this.tfilechooserdroite.setPromptText("Choisissez une image");
+
+      return this.tfilechooserdroite;
+    }
+
+
+    public TextField getTextFieldFileChooserDroite(){
+      return this.tfilechooserdroite;
+    }
+
+
+    public Button creerBoutonFileChooserGauche(){
       ActionFileChooser afc = new ActionFileChooser(this);
-      bplus.setOnAction(afc);
+      bplusgauche.setOnAction(afc);
 
-      return bplus;
+      return this.bplusgauche;
     }
 
 
-    public HBox creerHBoxFileChooser(){
+    public Button getBoutonGauche(){
+      return this.bplusgauche;
+    }
+
+
+    public Button creerBoutonFileChooserDroite(){
+      ActionFileChooser afc = new ActionFileChooser(this);
+      this.bplusdroite.setOnAction(afc);
+
+      return this.bplusdroite;
+    }
+
+
+    public Button getBoutonDroite(){
+      return this.bplusdroite;
+    }
+
+
+    public HBox creerHBoxFileChooserGauche(){
       HBox hbfilechooser = new HBox(5);
-      hbfilechooser.getChildren().addAll(creerTextFieldFileChooser(), creerBoutonFileChooser());
+      hbfilechooser.getChildren().addAll(creerTextFieldFileChooserGauche(), creerBoutonFileChooserGauche());
 
       return hbfilechooser;
     }
 
 
-    public ComboBox creerComboBoxJeux(){
-      ObservableList<String> optionsjeu = FXCollections.observableArrayList("Puissance 4", "Mastermind");
-      ComboBox cbjeux = new ComboBox(optionsjeu);
+    public ComboBox<String> creerComboBoxJeux(){
+      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux());
+      ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 
       return cbjeux;
@@ -154,20 +196,33 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public ComboBox creerComboBoxModes(){
+    public ComboBox<String> creerComboBoxModes(){
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
-      ComboBox cbmodes = new ComboBox(optionsmode);
+      ComboBox<String> cbmodes = new ComboBox<String>(optionsmode);
       cbmodes.setPrefWidth(297);
 
       return cbmodes;
     }
 
 
+    /*public int getType(){
+      if (cbmodes.getText() == "Tour par tour")
+        return 0;
+      else{
+        if (cbmodes.getText() == "Score le plus élevé par manche")
+          return 1;
+        else{
+          return 2;
+        }
+      }
+    }*/
+
+
     public VBox creerVBoxDescriptionJeu(){
       VBox vbjeu = new VBox();
       vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldEtatJeu(),
-        creerTextAreaRegleJeu(), creerComboBoxModes(), creerHBoxFileChooser(),
+        creerTextAreaRegleJeu(), creerComboBoxModes(), creerHBoxFileChooserGauche(),
           creerHBoxSauvegarder());
       vbjeu.setPadding(new Insets(10,15,10,15));
       vbjeu.setStyle("-fx-border-color: black;");
@@ -205,6 +260,11 @@ public class GererJeu extends BorderPane {
     }
 
 
+    /*public String getNom(){
+      return tnom.getText();
+    }*/
+
+
     public TextArea creerTextAreaDescriptionJeu(){
       TextArea tdescription = new TextArea();
       tdescription.setPrefWidth(80);
@@ -213,6 +273,11 @@ public class GererJeu extends BorderPane {
 
       return tdescription;
     }
+
+
+    /*public String getRegles(){
+      return tdescription.getText();
+    }*/
 
 
     public Label creerLabelActiverJeu(){
@@ -266,10 +331,18 @@ public class GererJeu extends BorderPane {
     }
 
 
+    public HBox creerHBoxFileChooserDroite(){
+      HBox hbfilechooser = new HBox(5);
+      hbfilechooser.getChildren().addAll(creerTextFieldFileChooserDroite(), creerBoutonFileChooserDroite());
+
+      return hbfilechooser;
+    }
+
+
     public VBox creerVBoxAjouterJeu(){
       VBox vbaddjeu = new VBox(15);
       vbaddjeu.getChildren().addAll(creerLabelAjouterJeu(), creerTextFieldNomJeu(),
-        creerTextAreaDescriptionJeu(), creerComboBoxModes(), creerHBoxFileChooser(),
+        creerTextAreaDescriptionJeu(), creerComboBoxModes(), creerHBoxFileChooserDroite(),
           creerHBoxRadioBoutonsActivationJeu(), creerHBoxBoutonAjouterJeu());
       vbaddjeu.setPadding(new Insets(5,10,5,10));
       vbaddjeu.setStyle("-fx-border-color: black;");

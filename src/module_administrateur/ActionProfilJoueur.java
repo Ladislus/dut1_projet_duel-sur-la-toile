@@ -3,6 +3,7 @@ package module_administrateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import APIMySQL.*;
 
 public class ActionProfilJoueur implements EventHandler<ActionEvent> {
 
