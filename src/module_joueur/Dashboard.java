@@ -187,6 +187,7 @@ class Dashboard extends BorderPane {
         imageContact.setFitWidth(20);
 
         Button btContact = new Button(name, imageContact);
+        btContact.setOnAction(new ActionToAjouterAmi());
         btContact.setPrefWidth(150);
         btContact.setAlignment(Pos.CENTER_LEFT);
 
