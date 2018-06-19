@@ -128,21 +128,18 @@ public class GererJoueur extends BorderPane {
     /** Création de la liste contenant les joueurs à activer */
     public ObservableList<Joueur> getListeJoueursTableViewAactiver() {
       this.listeJoueurAactiver = FXCollections.observableArrayList();
-      try {
-        HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;");
-        if (dico.size() == 0) {
-            return this.listeJoueurAactiver;
-        }
-        else {
-            for (int i = 0; i < dico.get("idUt").size(); i++) {
-                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)), (boolean) dico.get("activeUt").get(i));
-                this.listeJoueurAactiver.add(j);
-                j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
-                j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
-            }
-        }
+      HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;");
+      if (dico.size() == 0) {
+          return this.listeJoueurAactiver;
       }
-      catch(SQLException e) {}
+      else {
+          for (int i = 0; i < dico.get("idUt").size(); i++) {
+              Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)), (boolean) dico.get("activeUt").get(i));
+              this.listeJoueurAactiver.add(j);
+              j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+              j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
+          }
+      }
       return this.listeJoueurAactiver;
     }
 
@@ -162,20 +159,17 @@ public class GererJoueur extends BorderPane {
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
         this.listeJoueur = FXCollections.observableArrayList();
-        try {
-          HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
-          if (dico.size() == 0) {
-              return this.listeJoueur;
-          }
-          else {
-              for (int i = 0; i < dico.get("idUt").size(); i++) {
-                  Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), i+1, (boolean) dico.get("activeUt").get(i));
-                  j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
-                  this.listeJoueur.add(j);
-              }
-          }
+        HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
+        if (dico.size() == 0) {
+            return this.listeJoueur;
         }
-        catch(SQLException e) {}
+        else {
+            for (int i = 0; i < dico.get("idUt").size(); i++) {
+                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), i+1, (boolean) dico.get("activeUt").get(i));
+                j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
+                this.listeJoueur.add(j);
+            }
+        }
         return this.listeJoueur;
     }
 

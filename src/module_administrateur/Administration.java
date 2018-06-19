@@ -40,12 +40,7 @@ public class Administration {
     }
 
     public int cptJoueurActiver() {
-        int cpt = 0;
-        try {
-          cpt = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
-        }
-        catch(SQLException e) {}
-        return cpt;
+        return GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
     }
 
     //GERER RAPPORT
