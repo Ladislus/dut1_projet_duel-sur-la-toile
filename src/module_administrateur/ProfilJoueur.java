@@ -58,82 +58,55 @@ public class ProfilJoueur extends BorderPane {
         this.setTop(haut);
     }
 
-
-    public Label creerLabelPseudo(){
+    public HBox creerPseudo() {
+      HBox hPseudo = new HBox();
       Label pseudo = new Label("Pseudo : ");
-      return pseudo;
+      TextField tpseudo = new TextField(this.joueur.getPseudo());
+      hPseudo.getChildren().addAll(pseudo, tpseudo);
+      return hPseudo;
     }
 
-
-    public Label creerLabelPrenom(){
+    public HBox creerPrenom() {
+      HBox hPrenom = new HBox();
       Label prenom = new Label("Prénom : ");
-      return prenom;
-    }
-
-
-    public Label creerLabelNom(){
-      Label nom = new Label("Nom : ");
-      return nom;
-    }
-
-
-    public Label creerLabelEmail(){
-      Label email = new Label("Email : ");
-      return email;
-    }
-
-
-    public Label creerLabelRole(){
-      Label role = new Label("Rôle : ");
-      return role;
-    }
-
-
-    public TextField creerTextFieldPseudo(){
-      TextField tpseudo = new TextField();
-      return tpseudo;
-    }
-
-
-    public TextField creerTextFieldPrenom(){
       TextField tprenom = new TextField();
-      return tprenom;
+      hPrenom.getChildren().addAll(prenom, tprenom);
+      return hPrenom;
     }
 
-
-    public TextField creerTextFieldNom(){
+    public HBox creerNom() {
+      HBox hNom = new HBox();
+      Label nom = new Label("Nom : ");
       TextField tnom = new TextField();
-      return tnom;
+      hNom.getChildren().addAll(nom, tnom);
+      return hNom;
     }
 
-
-    public TextField creerTextFieldEmail(){
+    public HBox creerEmail() {
+      HBox hEmail = new HBox();
+      Label email = new Label("Email : ");
       TextField temail = new TextField();
-      return temail;
+      hEmail.getChildren().addAll(email, temail);
+      return hEmail;
     }
 
-
-    public ComboBox<String> creerComboBoxRoles(){
+    public HBox creerRole() {
+      HBox hRole = new HBox();
+      Label role = new Label("Rôle : ");
       ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
       ComboBox<String> cbrole = new ComboBox<String>(optionsRoles);
       cbrole.setPrefWidth(175);
-      return cbrole;
+      hRole.getChildren().addAll(role, cbrole);
+      return hRole;
     }
-
 
     public GridPane creerGridPaneInfos(){
       GridPane gpinfos = new GridPane();
-      gpinfos.add(creerLabelPseudo(), 1, 40);
-      gpinfos.add(creerLabelPrenom(), 1, 45);
-      gpinfos.add(creerLabelNom(), 1, 50);
-      gpinfos.add(creerLabelEmail(), 1, 55);
-      gpinfos.add(creerLabelRole(), 1, 60);
-      gpinfos.add(creerTextFieldPseudo(), 2, 40);
-      gpinfos.add(creerTextFieldPrenom(), 2, 45);
-      gpinfos.add(creerTextFieldNom(), 2, 50);
-      gpinfos.add(creerTextFieldEmail(), 2, 55);
-      gpinfos.add(creerComboBoxRoles(), 2, 60);
-      gpinfos.setVgap(1);
+      gpinfos.add(creerPseudo(), 1, 1);
+      gpinfos.add(creerPrenom(), 1, 2);
+      gpinfos.add(creerNom(), 1, 3);
+      gpinfos.add(creerEmail(), 1, 4);
+      gpinfos.add(creerRole(), 1, 60);
       return gpinfos;
     }
 
@@ -174,12 +147,10 @@ public class ProfilJoueur extends BorderPane {
       return hbsave;
     }
 
-
     public Label creerLabelImageProfil(){
       Label limageprofil = new Label("Image de profil");
       return limageprofil;
     }
-
 
     public TextField creerTextFieldFileChooser(){
       this.tfilechooser.setPromptText("Choisissez une image");
@@ -190,7 +161,6 @@ public class ProfilJoueur extends BorderPane {
     public TextField getTextFieldFileChooser(){
       return this.tfilechooser;
     }
-
 
     public Button creerBoutonFileChooser(){
       Button bplus = new Button("+");

@@ -71,23 +71,10 @@ public class GererJoueur extends BorderPane {
         this.activer.setDisable(true);
         this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
         this.activer.setTextFill(Color.web("white"));
-        this.activer.setPrefWidth(200);
+        this.activer.setPrefWidth(500);
         this.activer.setPrefHeight(50);
         this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
         return this.activer;
-    }
-
-    /** Création du bouton pour supprimer les joueurs cochés */
-    public Button creerBoutonSupprimer() {
-        this.supprimer = new Button("Supprimer");
-        this.supprimer.setDisable(true);
-        ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
-        this.supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
-        this.supprimer.setTextFill(Color.web("white"));
-        this.supprimer.setPrefWidth(200);
-        this.supprimer.setPrefHeight(50);
-        this.supprimer.setOnAction(asj);
-        return this.supprimer;
     }
 
     /** Création de la barre de recherche des joueurs avec le bouton rechercher */
@@ -106,22 +93,29 @@ public class GererJoueur extends BorderPane {
         TableView<Joueur> table = new TableView<>();
         TableColumn<Joueur, String> pseudo = new TableColumn<>("Pseudo");
         TableColumn<Joueur, Integer> id = new TableColumn<>("ID");
+        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
         pseudo.setResizable(false);
         id.setResizable(false);
+        profil.setResizable(false);
         activer.setResizable(false);
-        pseudo.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
-        id.setMaxWidth(43);
-        activer.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
+        pseudo.setPrefWidth(100);
+        id.setPrefWidth(50);
+        profil.setPrefWidth(75);
+        activer.setPrefWidth(65);
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
+        activer.setStyle( "-fx-alignment: CENTER;");
+        profil.setStyle( "-fx-alignment: CENTER;");
+        id.setStyle( "-fx-alignment: CENTER;");
         ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
         table.setItems(liste);
         table.getColumns().add(pseudo);
         table.getColumns().add(id);
+        table.getColumns().add(profil);
         table.getColumns().add(activer);
-        table.setPrefWidth(100);
         return table;
     }
 
@@ -135,7 +129,7 @@ public class GererJoueur extends BorderPane {
         }
         else {
             for (int i = 0; i < dico.get("idUt").size(); i++) {
-                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)), (boolean) dico.get("activeUt").get(i));
+                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)));
                 this.listeJoueurAactiver.add(j);
                 j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
                 j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
@@ -149,11 +143,12 @@ public class GererJoueur extends BorderPane {
     /** Création du centre de la page => liste de tous les joueurs à activer */
     public void centre() {
         VBox centre = new VBox();
-        Label l = new Label("Nombre de joueurs à activer : ");
+        Label l = new Label("Liste des joueurs désactivé");
+        l.setFont(Font.font (15));
         HBox bouton = new HBox();
-        bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
+        bouton.getChildren().addAll(creerBoutonActiver());
         bouton.setSpacing(10);
-        centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
+        centre.getChildren().addAll(l, bouton, creerTableListeJoueurAactiver());
         centre.setSpacing(10);
         centre.setPadding(new Insets(0,25,15,25));
         this.setCenter(centre);
@@ -169,7 +164,7 @@ public class GererJoueur extends BorderPane {
           }
           else {
               for (int i = 0; i < dico.get("idUt").size(); i++) {
-                  Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), i+1, (boolean) dico.get("activeUt").get(i));
+                  Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)));
                   j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
                   this.listeJoueur.add(j);
               }
@@ -184,34 +179,23 @@ public class GererJoueur extends BorderPane {
         TableView<Joueur> table = new TableView<Joueur>();
         TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
         TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
-        TableColumn<Joueur, String> connecte = new TableColumn<Joueur, String>("Statut");
         TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
         pseudo.setResizable(false);
         id.setResizable(false);
-        connecte.setResizable(false);
         profil.setResizable(false);
-        pseudo.setMaxWidth(1f * Integer.MAX_VALUE * 75 );
-        id.setMaxWidth(41);
-        connecte.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
-        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
+        pseudo.setPrefWidth(100);
+        id.setPrefWidth(50);
+        profil.setPrefWidth(75);
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        connecte.setCellValueFactory(cellData -> {
-          if (cellData.getValue().getConnecte()) {
-            return new SimpleStringProperty("connecte");
-          }
-          else {
-            return new SimpleStringProperty("deconnecte");
-          }
-        });
         profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
+        profil.setStyle( "-fx-alignment: CENTER;");
+        id.setStyle( "-fx-alignment: CENTER;");
         ObservableList<Joueur> list = getListeJoueursTableView();
         table.setItems(list);
         table.getColumns().add(pseudo);
         table.getColumns().add(id);
-        table.getColumns().add(connecte);
         table.getColumns().add(profil);
-        table.setPrefWidth(100);
         return table;
     }
 

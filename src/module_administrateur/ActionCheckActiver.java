@@ -27,11 +27,9 @@ public class ActionCheckActiver implements EventHandler<ActionEvent> {
             this.a.retirerListeActiver(this.joueur);
         }
         if (this.a.getJoueurAactiver().size() == 0) {
-            this.gJoueur.getButtonSupprimer().setDisable(true);
             this.gJoueur.getButtonActiver().setDisable(true);
         }
         else {
-            this.gJoueur.getButtonSupprimer().setDisable(false);
             this.gJoueur.getButtonActiver().setDisable(false);
         }
     }
