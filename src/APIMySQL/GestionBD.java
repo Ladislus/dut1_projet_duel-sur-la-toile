@@ -24,41 +24,41 @@ public class GestionBD {
 
     private GestionBD(){}
 
-    public static HashMap<String, List<Object>> selectPreparedStatement(String requete) throws SQLException {
-        Statement st=co.createStatement();
-        ResultSet rs=st.executeQuery(requete);
-        ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
-        int columns = md.getColumnCount();
-        List<HashMap<String,List<Object>>> list = new ArrayList<>();
-
-        while (rs.next()) {
-            //On boucle sur les colonnes
-            HashMap<String,List<Object>> row = new HashMap<>(columns);
-            for(int i=1; i<=columns; ++i) {
-                ArrayList<Object> liste = new ArrayList<>();
-                liste.add(rs.getObject(i));
-                row.put(md.getColumnName(i), liste);
-            }
-            list.add(row);
-        }
-
-        HashMap<String, List<Object>> res = new HashMap<>();
-        for (HashMap<String, List<Object>> e : list){
-            for(String key : e.keySet()){
-                //Si la clé n'existe pas
-                if(!res.containsKey(key)){
-                    res.put(key, e.get(key));
+    public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
+        try {
+            Statement st = co.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
+            int columns = md.getColumnCount();
+            List<HashMap<String, List<Object>>> list = new ArrayList<>();
+            while (rs.next()) {
+                //On boucle sur les colonnes
+                HashMap<String, List<Object>> row = new HashMap<>(columns);
+                for (int i = 1; i <= columns; ++i) {
+                    ArrayList<Object> liste = new ArrayList<>();
+                    liste.add(rs.getObject(i));
+                    row.put(md.getColumnName(i), liste);
                 }
-                else{
-                    res.get(key).add(e.get(key).get(0));
+                list.add(row);
+            }
+            HashMap<String, List<Object>> res = new HashMap<>();
+            for (HashMap<String, List<Object>> e : list){
+                for(String key : e.keySet()){
+                    //Si la clé n'existe pas
+                    if(!res.containsKey(key))
+                        res.put(key, e.get(key));
+                    else
+                        res.get(key).add(e.get(key).get(0));
                 }
             }
-            //Faire la nouvelle liste, list<hasmap(row)>
+            return res;
+        } catch (SQLException e){
+            e.printStackTrace();
         }
-        return res;
+        return null;
     }
 
-    public static void updatePreparedStatement(String requete, List<Object> listeDonnee) throws SQLException {
+    public static void updatePreparedStatement(String requete, List<Object> listeDonnee) throws SQLException{
         //todo : make an exception
         int nbPointDinterrogation = 0;
         for(int i =0; i<requete.length(); i++){
@@ -80,9 +80,13 @@ public class GestionBD {
         ps.executeUpdate();
     }
 
-    public static void updateStatement(String requete) throws SQLException{
-        Statement s = co.createStatement();
-        s.executeUpdate(requete);
+    public static void updateStatement(String requete){
+        try {
+            Statement s = co.createStatement();
+            s.executeUpdate(requete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Blob createBlob(String url) throws IOException, SQLException {
