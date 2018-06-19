@@ -157,6 +157,11 @@ public class ProfilJoueur extends BorderPane {
       return this.tfilechooser;
     }
 
+
+    public TextField getTextFieldFileChooser(){
+      return this.tfilechooser;
+    }
+
     public Button creerBoutonFileChooser(){
       Button bplus = new Button("+");
       ActionFileChooser afc = new ActionFileChooser(this);

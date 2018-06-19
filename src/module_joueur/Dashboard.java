@@ -1,16 +1,23 @@
 package module_joueur;
 
+import APIMySQL.Jeu;
 import APIMySQL.Utilisateur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 class Dashboard extends BorderPane {
 
@@ -20,6 +27,11 @@ class Dashboard extends BorderPane {
 
   private Joueur joueur;
 
+  private int nbJeux;
+
+  private FlowPane hJeux;
+  private FlowPane hNouveaute;
+
   private ArrayList<Button> listeBoutton;
 
   public Dashboard(Stage primaryStage, Joueur joueur) {
@@ -28,11 +40,16 @@ class Dashboard extends BorderPane {
 
     this.title = "Dashboard";
 
+    this.hJeux = new FlowPane();
+
+    this.hNouveaute = new FlowPane();
+
     this.primaryStage = primaryStage;
 
     this.joueur = joueur;
 
     this.listeBoutton = new ArrayList<>();
+
 
     majAffichage();
 
@@ -43,7 +60,7 @@ class Dashboard extends BorderPane {
 
   public HBox creerHaut() {
 
-    Label lTitre = new Label("Bienvenue "+joueur.getPseudo());
+    Label lTitre = new Label("Bienvenue " + joueur.getPseudo());
     lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     HBox candidate = new HBox();
@@ -92,13 +109,8 @@ class Dashboard extends BorderPane {
 
   public VBox creerDroite() {
 
-    VBox candidate = new VBox();
-    VBox hDroiteListeDamis = new VBox();
-
-    ScrollPane sDroiteListeDamis = new ScrollPane();
-
     Label lbTotalContact = new Label("Total : "+listeBoutton.size()+" contact(s)");
-    Label lListeDamis = new Label("Ma liste d'amis");
+    Label lListeDamis = new Label("Ma liste d'ami");
     lListeDamis.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     Button btMessage = new Button("4 messages non lu");
@@ -107,13 +119,16 @@ class Dashboard extends BorderPane {
     Button btListeDamis = new Button("Mes amis");
     btListeDamis.setPrefWidth(150);
 
-    hDroiteListeDamis.getChildren().addAll(listeBoutton);
-    hDroiteListeDamis.setSpacing(5);
-    hDroiteListeDamis.setPrefHeight(375);
+    VBox vDroiteListeDamis = new VBox();
+    vDroiteListeDamis.getChildren().addAll(listeBoutton);
+    vDroiteListeDamis.setSpacing(5);
+    vDroiteListeDamis.setPrefHeight(375);
 
-    sDroiteListeDamis.setContent(hDroiteListeDamis);
+    ScrollPane sDroiteListeDamis = new ScrollPane();
+    sDroiteListeDamis.setContent(vDroiteListeDamis);
     sDroiteListeDamis.setFitToWidth(true);
 
+    VBox candidate = new VBox();
     candidate.setPadding(new Insets(5));
     candidate.setSpacing(15);
     candidate.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
@@ -122,29 +137,28 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-    //TODO: make that
-    VBox candidate = new VBox();
-    VBox vJeux = new VBox();
-    VBox vNouveaute = new VBox();
-
-    Label lbJeux = new Label("Jeux : ");
-    Label lbNouveaute = new Label("Nouveautés : ");
+    Label lbJeux = new Label("Ma bibliothèque ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
+    scrollPaneJeux.setContent(hJeux);
+    scrollPaneJeux.setFitToWidth(true);
     scrollPaneJeux.setPrefHeight(310);
-    scrollPaneJeux.setContent(vJeux);
+    scrollPaneJeux.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-focus-color: transparent;");
+    scrollPaneJeux.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    hJeux.setPadding(new Insets(15,8,0,15));
+    hJeux.setPrefWidth(scrollPaneJeux.getWidth());
 
     ScrollPane scrollPaneNouveaute = new ScrollPane();
-    scrollPaneNouveaute.setContent(vNouveaute);
+    scrollPaneNouveaute.setContent(hNouveaute);
+    scrollPaneNouveaute.setFitToWidth(true);
+    scrollPaneNouveaute.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);-fx-focus-color: transparent;");
     scrollPaneNouveaute.setPrefHeight(310);
+    scrollPaneNouveaute.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-    //TODO remove that and place image
+    Label lbNouveaute = new Label("Nouveautés : ");
+    hNouveaute.setPrefWidth(scrollPaneJeux.getWidth());
 
-    for(int i = 0; i < 150; i++) {
-
-      vJeux.getChildren().add(new Label("test"));
-      vNouveaute.getChildren().add(new Label("test")); }
-
+    VBox candidate = new VBox();
     candidate.getChildren().addAll(lbJeux, scrollPaneJeux, lbNouveaute, scrollPaneNouveaute);
     candidate.setSpacing(10);
     candidate.setPadding(new Insets(0,15,9,15));
@@ -155,7 +169,7 @@ class Dashboard extends BorderPane {
 
     ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
 
-    if(btName == null) {
+    if(btName == null){
 
       btName = new ArrayList<>();
       btName.add("Ajouter un amis");
@@ -168,22 +182,56 @@ class Dashboard extends BorderPane {
         imageContact.setFitWidth(20);
 
         Button btContact = new Button(name, imageContact);
+        btContact.setOnAction(new ActionToAjouterAmi());
         btContact.setPrefWidth(150);
         btContact.setAlignment(Pos.CENTER_LEFT);
+
         listeBoutton.add(btContact); }}
 
-      else {
+    else {
 
-        for (String name : btName) {
+      for (String name : btName) {
 
-          ImageView imageContact = new ImageView();
-          imageContact.setImage(VariablesJoueur.CONTACT);
-          imageContact.setPreserveRatio(true);
-          imageContact.setFitWidth(20);
+        ImageView imageContact = new ImageView();
+        imageContact.setImage(VariablesJoueur.CONTACT);
+        imageContact.setPreserveRatio(true);
+        imageContact.setFitWidth(20);
 
-          Button btContact = new Button(name, imageContact);
-          btContact.setPrefWidth(150);
-          btContact.setAlignment(Pos.CENTER_LEFT);
-          listeBoutton.add(btContact); }}}
+        Button btContact = new Button(name, imageContact);
+        btContact.setPrefWidth(150);
+        btContact.setAlignment(Pos.CENTER_LEFT);
+
+        listeBoutton.add(btContact); }}
+
+    HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
+
+    ArrayList<String> listeTitleJeux = new ArrayList<>();
+    System.out.println(listeTitleJeux);
+    if(listeTitleJeux.size() > 1){
+        for(Object title : listeJeux.get("nomJeu")){
+            String titleString = title.toString();
+            listeTitleJeux.add(titleString); }
+
+        for(int i = 0; i < listeTitleJeux.size(); i++) {
+
+            module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
+
+            //TODDO: recuperer le blob de la bd
+            File fileImage = new File("./img/pub/logo.png");
+            ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
+            ivJeux.setPreserveRatio(true);
+            ivJeux.setFitWidth(50);
+
+            VBox vBoxJeux = new VBox();
+            vBoxJeux.getChildren().addAll(ivJeux, new Label(jeu.getTitle()));
+            vBoxJeux.setAlignment(Pos.TOP_CENTER);
+            vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
+            vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
+            vBoxJeux.setPadding(new Insets(9,15,0,15));
+            vBoxJeux.setOnMouseClicked(new ActionToMainJeux(this.primaryStage, jeu));
+
+            hJeux.getChildren().add(vBoxJeux); }}
+    }
+
 
   public String getTitle() { return this.title; }}

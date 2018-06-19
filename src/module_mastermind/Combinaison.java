@@ -13,6 +13,13 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
         }
     }
 
+    public Combinaison(Combinaison c){
+        super();
+        for(Integer i:c){
+            this.add(i);
+        }
+    }
+
     /**
      * Ajoute le pion dans la combianaison
      * @param num

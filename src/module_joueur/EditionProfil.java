@@ -3,27 +3,31 @@ package module_joueur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
+
 
 class EditionProfil extends BorderPane {
 
-  String title;
+    String title;
 
-  Stage primaryStage;
+    Stage primaryStage;
 
-  Joueur joueur;
+    Joueur joueur;
 
-  TextField tfPseudo;
-  TextField tfEmail;
+    TextField tfPseudo;
+    TextField tfEmail;
 
-  PasswordField pfMotDePasse;
-  PasswordField pfConfirmMotDePasse;
+    PasswordField pfMotDePasse;
+    PasswordField pfConfirmMotDePasse;
 
-  public EditionProfil(Stage primaryStage, Joueur joueur){
+  public EditionProfil(Stage primaryStage, Joueur joueur) {
 
     super();
 
@@ -36,18 +40,27 @@ class EditionProfil extends BorderPane {
     this.setRight(creerDroite());
     this.setBottom(creerBas()); }
 
-  public VBox creerGauche(){
-
+  public VBox creerGauche() {
 
     Label lImage = new Label("Mon image");
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
+    //TODO : si blob non-null, mettre l'image du joueur
+
+  
     ImageView ivImageUser = new ImageView();
     ivImageUser.setImage(VariablesJoueur.USER);
     ivImageUser.setPreserveRatio(true);
     ivImageUser.setFitWidth(50);
 
     Button btModifier = new Button("Modifier");
+    btModifier.setOnAction(actionEvent -> {
+
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setTitle("Open Resource File");
+      fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+      Image selectedFile = new Image(fileChooser.showOpenDialog(primaryStage).toURI().toString());
+      if (selectedFile != null) { ivImageUser.setImage(selectedFile); }});
 
     ImageView ivImageEditPseudo = new ImageView();
     ivImageEditPseudo.setImage(VariablesJoueur.EDIT);
@@ -79,7 +92,7 @@ class EditionProfil extends BorderPane {
     vPseudo.getChildren().addAll(lPseudo, hPseudoWithEditionButton);
 
     VBox candidate = new VBox();
-    candidate.setPadding(new Insets(15, 0, 0, 15));
+    candidate.setPadding(new Insets(15,0,0,15));
     candidate.setSpacing(25);
     candidate.setPrefWidth(230);
     candidate.getChildren().addAll(vImage, vPseudo);
@@ -100,7 +113,7 @@ class EditionProfil extends BorderPane {
     tfEmail.setText(joueur.getEmail());
     tfEmail.setDisable(true);
 
-    Button btEditionEmail = new Button("", ivImageEdit);
+    Button btEditionEmail = new Button("",ivImageEdit);
     btEditionEmail.setOnAction(actionEvent -> tfEmail.setDisable(false));
 
     HBox hEmail = new HBox();
@@ -137,6 +150,7 @@ class EditionProfil extends BorderPane {
     vMotDePasse.setAlignment(Pos.TOP_CENTER);
     vMotDePasse.setSpacing(12);
 
+
     Label lConfirmMotDePasse = new Label("Confirmation :");
     lConfirmMotDePasse.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
@@ -167,16 +181,20 @@ class EditionProfil extends BorderPane {
     btRetour.setOnAction(new ActionRetourToDashboard());
 
     Button btSuppressionCompte = new Button("Supprimer mon compte");
+    btSuppressionCompte.setBackground(new Background(new BackgroundFill(Color.DARKRED, null, null)));
+    btSuppressionCompte.setTextFill(Color.WHITE);
     btSuppressionCompte.setOnAction(new ActionSupressionCompte(primaryStage, joueur));
 
     Button btEnregistrer = new Button("Enregistrer");
-    btEnregistrer.setOnAction(new ActionEnregistrer(this, joueur));
+    btEnregistrer.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+    btEnregistrer.setTextFill(Color.WHITE);
+    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, joueur));
 
     BorderPane candidate = new BorderPane();
     candidate.setLeft(btRetour);
     candidate.setCenter(btSuppressionCompte);
     candidate.setRight(btEnregistrer);
-    candidate.setPadding(new Insets(0,10,10,10));
+    candidate.setPadding(new Insets(0, 10, 10, 10));
 
     return candidate; }
 
