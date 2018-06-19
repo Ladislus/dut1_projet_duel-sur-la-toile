@@ -17,15 +17,16 @@ public class ExempleExecutable {
             System.out.println(Utilisateur.isActivated("test"));
         } catch (SQLException e) {/*e.printMessage();*/}
 
-        try {
-            GestionBD.updateStatement("INSERT INTO TYPEJEU (nomTy) VALUES ('MMORPG')");
-        } catch (SQLException e){e.printStackTrace();}
+        GestionBD.updateStatement("INSERT INTO TYPEJEU (nomTy) VALUES ('MMORPG')");
 
         try {
-            String path = "/run/media/lucas/Data/Downloads/DM Facturation - Lucas Mirloup.jpg";
+            String path = "/home/lucas/Downloads/JetBrains.png";
             Jeu.creerJeu("WoW","",path,1,path);
+            Message.creerMessage("Coucou ^^",1,2);
         } catch (APIMySQLException e){e.printStackTrace();}
 
         Partie.creerPartie(1,1,2);
+
+        System.out.println(GestionBD.selectPreparedStatement("SELECT * FROM MESSAGE WHERE idUt1='1'"));
     }
 }
