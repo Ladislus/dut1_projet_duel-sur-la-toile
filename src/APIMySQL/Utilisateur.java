@@ -30,20 +30,11 @@ public class Utilisateur {
     }
 
     public static String getUserInfo(String columnInfoName, String columnName, String columnValue){
-        try {
-            return GestionBD.selectPreparedStatement("SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "";
-        }
+        return GestionBD.selectPreparedStatement("SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
     }
 
     public static void setUserInfo(String columnInfoName, Object columInfoValue, String columnName, String columnValue){
-        try {
-            GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "='" + columInfoValue + "' WHERE " + columnName + "='" + columnValue + "'");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "='" + columInfoValue + "' WHERE " + columnName + "='" + columnValue + "'");
     }
 
     public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, String mdp, String nomRole) throws APIMySQLException {
@@ -95,19 +86,18 @@ public class Utilisateur {
     }
 
     public static ArrayList<String> getListeDamis(String pseudo){
-        try {
-            ArrayList<String> listePseudo = new ArrayList<>();
-            List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(pseudo)).get("idUt1");
+        ArrayList<String> listePseudo = new ArrayList<>();
+        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(pseudo)).get("idUt1");
+        try{
             for(Object elem : listeId){
                 listePseudo.add(String.valueOf(getPseudoById((Integer) elem)));
             }
-            return listePseudo;
-        } catch (SQLException e) {
-            return null;
         }
         catch (NullPointerException e){
             return null;
         }
+
+        return listePseudo;
     }
 
     public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse){

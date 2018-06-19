@@ -36,6 +36,7 @@ public class ActionActiverJoueur implements EventHandler<ActionEvent>{
             }
             this.pa.getAdmin().retirerTousJoueurActiver(this.pa.getAdmin().getJoueurAactiver());
             this.gJoueur.majAffichage();
+
             alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Validation de l'activation");
             alert.setHeaderText(null);

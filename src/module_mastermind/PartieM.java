@@ -36,13 +36,42 @@ public class PartieM {
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
 
+    /**
+     * Renvoie les différentes informations sur l'état de la partie sous forme d'une String, pour pouvoir mettre à jour la BD
+     * @return une String contenant les infos de la partie
+     */
+    public String etatPartie(){
+        return "" +
+                this.p.getCombiMystere() + "," +
+                this.p.getListeEssais() + "," +
+                this.p.getListeResultats() + "," +
+                this.p.getCombiCour() + "," +
+                this.getJ1() + "," +
+                this.getJ2();
+    }
+
+    /**
+     * Met à jour la base de données: les infos sur la partie sont mises à jour dans la base de données.
+     */
+    public void majBD(){
+
+    }
+
+    /**
+     * Constructeur de la classe PartieM
+     * @param m un Mastermind
+     * @param j1 le nom du joueur 1
+     * @param j2 le nom du joueur 2
+     */
     public PartieM(Mastermind m,String j1,String j2){
         this.mastermind = m;
 
         this.listeComb = new VBox(10);
-        this.listeComb.setAlignment(Pos.CENTER_RIGHT);
         this.listeComb.setSpacing(20.);
-        this.listeComb.setPrefWidth(160.);
+        this.listeComb.setPrefWidth(450.);
+        this.listeComb.setPrefHeight(600.);
+        this.listeComb.setStyle("-fx-background-color: #DCDCDC");
+
 
         this.p = new PlateauM(j1,j2);
 
@@ -56,16 +85,43 @@ public class PartieM {
         this.attributionCouleur.put(6,Color.CYAN);
 
         this.attributionIndices = new HashMap<>();
-        this.attributionIndices.put(0,Color.LIGHTGRAY);
-        this.attributionIndices.put(1,Color.BLACK);
-        this.attributionIndices.put(2,Color.STEELBLUE);
+        this.attributionIndices.put(0,Color.valueOf("#979797"));
+        this.attributionIndices.put(1,Color.RED);
+        this.attributionIndices.put(2,Color.WHITE);
+
+        this.j1 = new Joueur(j1);
+        this.j2 = new Joueur(j2);
+
+        System.out.println(this.etatPartie());
     }
 
+    /**
+     * Renvoie l'attribut de la classe p, de la classe PlateauM
+     * @return PlateauM p
+     */
     public PlateauM getPlateau(){
         return this.p;
     }
 
+    /**
+     * Renvoie l'attribut de classe j1, de la classe Joueur
+     * @return Joueur j1
+     */
+    public Joueur getJ1() {
+        return j1;
+    }
 
+    /**
+     * Renvoie l'attribut de classe j2, de la classe Joueur
+     * @return Joueur j2
+     */
+    public Joueur getJ2() {
+        return j2;
+    }
+
+    /**
+     * Met à jour l'affichage de la vue, sauf pour l'ajout des lignes dans le plateau
+     */
     public void majAffichage(){
 
         lCercle = new ArrayList<>();
@@ -80,16 +136,18 @@ public class PartieM {
         }
     }
 
+    /**
+     * Met à jour la vue pour ajouter les lignes dans le plateau
+     */
     public void ajouteResultat(){
         if ((this.p.getListeEssais().size() > 0 && this.p.getListeEssais() != null) && (this.p.getListeResultats().size() > 0 && this.p.getListeResultats() != null)){
             HBox nouvEssai = new HBox();
-            nouvEssai.setSpacing(10.);
+            nouvEssai.setSpacing(20);
             Label numEssai = new Label(this.p.getListeEssais().size()+"");
-            numEssai.setFont(Font.font(40));
+            numEssai.setFont(Font.font(30));
             nouvEssai.getChildren().add(numEssai);
             Combinaison dernierEssai = this.p.getListeEssais().get(this.p.getListeEssais().size()-1);
             for (int c : dernierEssai){
-//                System.out.println(c);
                 nouvEssai.getChildren().add(new Circle(25,this.attributionCouleur.get(c)));
             }
             GridPane indices = new GridPane();
@@ -100,6 +158,9 @@ public class PartieM {
             indices.setVgap(5);
             indices.setHgap(5);
             nouvEssai.getChildren().add(indices);
+            nouvEssai.setMinWidth(425);
+            nouvEssai.setAlignment(Pos.CENTER_RIGHT);
+            nouvEssai.setPadding(new Insets(0,30,0,0));
             this.listeComb.getChildren().addAll(nouvEssai);
         }
     }
@@ -113,8 +174,9 @@ public class PartieM {
         res.setTop(haut());
         res.setRight(plateauSP(this.listeComb));
         res.setBottom(bas());
+        res.setPadding(new Insets(0,50,0,0));
 
-        return new Scene(res, 700, 650);
+        return new Scene(res, 850, 650);
     }
 
     public static HBox haut(){
@@ -134,9 +196,11 @@ public class PartieM {
         quitter.setOnAction(new ActionQuitterM(m));
 
         Label timer = new Label("Time : 200");
+        timer.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         timer.setPadding(new Insets(75,0,0,0));
 
         Label couleurs = new Label("Couleurs :");
+        couleurs.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         couleurs.setPadding(new Insets(50,0,0,0));
 
         GridPane tabCouleurs = new GridPane();
@@ -158,14 +222,14 @@ public class PartieM {
         aide.setOnAction(new ActionHelpM());
 
 
-        tabCouleurs.setHgap(5);
-        tabCouleurs.setVgap(5);
+        tabCouleurs.setHgap(20);
+        tabCouleurs.setVgap(20);
 
-        tabCouleurs.setPadding(new Insets(0,0,90,15));
+        tabCouleurs.setPadding(new Insets(0,0,50,30));
 
         res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs,aide);
 
-        res.setPadding(new Insets(0,0,0,10));
+        res.setPadding(new Insets(0,0,0,20));
 
         return res;
     }
@@ -173,50 +237,16 @@ public class PartieM {
 
     public ScrollPane plateauSP(VBox plateau){
 
-//        HBox temp = new HBox(20);
-//        Label num = new Label(1+"");
-//        num.setFont(Font.font(40));
-//        temp.getChildren().add(num);
-//
-//        for(int k=0; k<4;k++){
-//            Circle cercleGris = new Circle(25);
-//            cercleGris.setFill(Color.DARKGREY);
-//            temp.getChildren().addAll(cercleGris);
-//        }
-//
-//        GridPane plateau = new GridPane();
-//
-//        Circle cercleIndice1 = new Circle(10);
-//        cercleIndice1.setFill(Color.BLACK);
-//
-//        Circle cercleIndice2 = new Circle(10);
-//        cercleIndice2.setFill(Color.BLACK);
-//
-//        Circle cercleIndice3 = new Circle(10);
-//        cercleIndice3.setFill(Color.BLACK);
-//
-//        Circle cercleIndice4 = new Circle(10);
-//        cercleIndice4.setFill(Color.BLACK);
-//
-//        plateau.add(cercleIndice1,1,0);
-//        plateau.add(cercleIndice2,2,0);
-//        plateau.add(cercleIndice3,1,1);
-//        plateau.add(cercleIndice4,2,1);
-//
-//        plateau.setHgap(5);
-//        plateau.setVgap(5);
-//
-//        temp.getChildren().addAll(plateau);
-//
-//        res.getChildren().addAll(temp);
-
         ScrollPane sp = new ScrollPane(plateau);
         sp.setHmin(200.);
-        sp.setPadding(new Insets(0,0,0,0));
+        sp.setPadding(new Insets(15,0,0,0));
+        sp.setStyle("-fx-background-color: #DCDCDC;" +
+                "-fx-border-color: black;");
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        sp.setPrefViewportWidth(412);
+        sp.setPrefViewportWidth(425);
+        sp.setPrefHeight(800.);
 
         return sp;
     }
@@ -227,11 +257,33 @@ public class PartieM {
         res.setSpacing(20.);
         res.setPrefHeight(100.);
 
+        String supprNormal = "-fx-background-color: linear-gradient(#FFA500,#F40000);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+        String supprHover = "-fx-background-color: linear-gradient(#ff8d80, #ff8d80);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+
         Button suppr = new Button("Supprimer");
         suppr.setOnAction(new ActionSupprimerTout(this));
 
+        suppr.setStyle(supprNormal);
+        suppr.setOnMouseEntered(e -> suppr.setStyle(supprHover));
+        suppr.setOnMouseExited(e -> suppr.setStyle(supprNormal));
+
+        String valNormal = "-fx-background-color: linear-gradient(#78EA21,#4FB601);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+        String valHover = "-fx-background-color: linear-gradient(#00FF80, #00FF80);"+
+                "-fx-background-radius: 5;"+
+                "-fx-font-size: 15;";
+
         Button valider = new Button("Valider");
         valider.setOnAction(new ActionTestComb(this));
+
+        valider.setStyle(valNormal);
+        valider.setOnMouseEntered(e -> valider.setStyle(valHover));
+        valider.setOnMouseExited(e -> valider.setStyle(valNormal));
 
         HBox adders = new HBox();
 
@@ -260,7 +312,7 @@ public class PartieM {
 
         res.getChildren().addAll(suppr,c1,c2,c3,c4,valider);
 
-        res.setPadding(new Insets(-50,0,0,75));
+        res.setPadding(new Insets(-50,0,0,240));
         return res;
     }
 

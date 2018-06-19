@@ -5,7 +5,6 @@ import APIMySQL.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 class ActionConnection implements EventHandler<ActionEvent> {
