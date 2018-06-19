@@ -17,6 +17,9 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.geometry.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import java.util.HashMap;
+import java.util.List;
+import java.lang.Iterable;
 
 public class GererJeu extends BorderPane {
 
@@ -26,6 +29,9 @@ public class GererJeu extends BorderPane {
     private TextField tfilechooserdroite;
     private Button bplusdroite;
     private Button bplusgauche;
+    private TextField tnom;
+    private TextArea tdescription;
+    private ComboBox<String> cbmodes;
 
     public GererJeu(PageAccueil pa) {
       super();
@@ -35,6 +41,8 @@ public class GererJeu extends BorderPane {
       this.tfilechooserdroite = new TextField();
       this.bplusdroite = new Button("+");
       this.bplusgauche = new Button("+");
+      this.tnom = new TextField();
+      this.tdescription = new TextArea();
       this.haut();
       this.gauche();
       this.centre();
@@ -170,7 +178,7 @@ public class GererJeu extends BorderPane {
 
 
     public ComboBox<String> creerComboBoxJeux(){
-      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux());
+      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux().keySet());
       ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 
@@ -199,24 +207,24 @@ public class GererJeu extends BorderPane {
     public ComboBox<String> creerComboBoxModes(){
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
-      ComboBox<String> cbmodes = new ComboBox<String>(optionsmode);
-      cbmodes.setPrefWidth(297);
+      this.cbmodes = new ComboBox<String>(optionsmode);
+      this.cbmodes.setPrefWidth(297);
 
-      return cbmodes;
+      return this.cbmodes;
     }
 
 
-    /*public int getType(){
-      if (cbmodes.getText() == "Tour par tour")
+    public int getType(){
+      if (((String)(this.cbmodes.getValue())).equals("Tour par tour"))
         return 0;
       else{
-        if (cbmodes.getText() == "Score le plus élevé par manche")
+        if (((String)(this.cbmodes.getValue())).equals("Score le plus élevé par manche"))
           return 1;
         else{
           return 2;
         }
       }
-    }*/
+    }
 
 
     public VBox creerVBoxDescriptionJeu(){
@@ -253,31 +261,29 @@ public class GererJeu extends BorderPane {
 
 
     public TextField creerTextFieldNomJeu(){
-      TextField tnom = new TextField();
-      tnom.setPromptText("Entrez le nom du jeu");
+      this.tnom.setPromptText("Entrez le nom du jeu");
 
-      return tnom;
+      return this.tnom;
     }
 
 
-    /*public String getNom(){
-      return tnom.getText();
-    }*/
+    public String getNom(){
+      return this.tnom.getText();
+    }
 
 
     public TextArea creerTextAreaDescriptionJeu(){
-      TextArea tdescription = new TextArea();
-      tdescription.setPrefWidth(80);
-      tdescription.setWrapText(true);
-      tdescription.setPromptText("Entrez la description du jeu");
+      this.tdescription.setPrefWidth(80);
+      this.tdescription.setWrapText(true);
+      this.tdescription.setPromptText("Entrez la description du jeu");
 
-      return tdescription;
+      return this.tdescription;
     }
 
 
-    /*public String getRegles(){
-      return tdescription.getText();
-    }*/
+    public String getRegles(){
+      return this.tdescription.getText();
+    }
 
 
     public Label creerLabelActiverJeu(){

@@ -10,6 +10,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class ActionSupressionCompte implements EventHandler<ActionEvent> {
 
   Stage primaryStage;
@@ -36,7 +38,11 @@ public class ActionSupressionCompte implements EventHandler<ActionEvent> {
     alert.getButtonTypes().setAll(okButton, noButton);
     alert.showAndWait().ifPresent(type -> {
       if (type.getButtonData().toString().equals("YES")) {
-        Utilisateur.deactivateUser(joueur.getPseudo());
+        try {
+          Utilisateur.deleteUser(joueur.getPseudo());
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
         stageEditionProfile.close();
         this.primaryStage.setTitle(connexion.getTitle());
         this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }}); }}
