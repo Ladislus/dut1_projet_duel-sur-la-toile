@@ -20,7 +20,7 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
+            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -101,7 +101,9 @@ public class GestionBD {
 
     public static Image blobToImage(Blob blob){
         try {
-            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            blob.free();
+            return res;
         } catch (SQLException e) {
             e.printStackTrace();
         }

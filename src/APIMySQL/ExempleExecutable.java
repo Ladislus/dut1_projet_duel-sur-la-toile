@@ -1,5 +1,12 @@
 package APIMySQL;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 
 public class ExempleExecutable {
@@ -20,12 +27,19 @@ public class ExempleExecutable {
         GestionBD.updateStatement("INSERT INTO TYPEJEU (nomTy) VALUES ('MMORPG')");
 
         try {
-            String path = "/home/lucas/Downloads/JetBrains.png";
+            String path = "/run/media/lucas/Data/Downloads/DM Facturation - Lucas Mirloup.jpg";
             Jeu.creerJeu("WoW","",path,1,path);
             Message.creerMessage("Coucou ^^",1,2);
         } catch (APIMySQLException e){e.printStackTrace();}
 
         Partie.creerPartie(1,1,2);
+
+        try {
+            Blob blob = GestionBD.createBlob("/run/media/lucas/Data/Downloads/DM Facturation - Lucas Mirloup.jpg");
+            Image image = GestionBD.blobToImage(blob);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(GestionBD.selectPreparedStatement("SELECT * FROM MESSAGE WHERE idUt1='1'"));
     }
