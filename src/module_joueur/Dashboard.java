@@ -199,7 +199,7 @@ class Dashboard extends BorderPane {
     HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
-    if(listeTitleJeux.size() > 1){
+    if(listeJeux.size() > 0){
         for(Object title : listeJeux.get("nomJeu")){
             String titleString = title.toString();
             listeTitleJeux.add(titleString); }

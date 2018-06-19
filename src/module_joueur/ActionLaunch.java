@@ -16,7 +16,7 @@ public class ActionLaunch implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
 
         Process proc = null;
-        try { proc = Runtime.getRuntime().exec("java -jar " + jeu + ".jar"); }
+        try { proc = Runtime.getRuntime().exec("java -jar jar/" + jeu + ".jar"); }
         catch (IOException e) { e.printStackTrace(); }
 
         InputStream in = proc.getInputStream();
