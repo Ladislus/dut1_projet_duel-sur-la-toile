@@ -23,6 +23,7 @@ import APIMySQL.*;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
+
 public class GererJoueur extends BorderPane {
 
     private PageAccueil pa;
@@ -30,6 +31,7 @@ public class GererJoueur extends BorderPane {
     private Button supprimer;
     private ObservableList<Joueur> listeJoueur;
     private ObservableList<Joueur> listeJoueurAactiver;
+    private TextField recherche;
 
     /** Constructeur de la page pour gérer les joueurs */
     public GererJoueur(PageAccueil pa) {
@@ -91,11 +93,11 @@ public class GererJoueur extends BorderPane {
     /** Création de la barre de recherche des joueurs avec le bouton rechercher */
     public HBox creerBarreRecherche() {
         HBox h = new HBox();
-        TextField recherche = new TextField("");
-        recherche.setPromptText("Rechercher un joueur");
+        this.recherche = new TextField("");
+        this.recherche.setPromptText("Rechercher un joueur");
         Button rechercher = new Button("Rechercher");
         recherche.setPrefWidth(190);
-        h.getChildren().addAll(recherche, rechercher);
+        h.getChildren().addAll(this.recherche, rechercher);
         return h;
     }
 
@@ -104,25 +106,20 @@ public class GererJoueur extends BorderPane {
         TableView<Joueur> table = new TableView<>();
         TableColumn<Joueur, String> pseudo = new TableColumn<>("Pseudo");
         TableColumn<Joueur, Integer> id = new TableColumn<>("ID");
-        TableColumn<Joueur, Hyperlink> profil = new TableColumn<>("Profil");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
         pseudo.setResizable(false);
         id.setResizable(false);
-        profil.setResizable(false);
         activer.setResizable(false);
         pseudo.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
         id.setMaxWidth(43);
-        profil.setMaxWidth(1f * Integer.MAX_VALUE * 20 );
         activer.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
         ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
         table.setItems(liste);
         table.getColumns().add(pseudo);
         table.getColumns().add(id);
-        table.getColumns().add(profil);
         table.getColumns().add(activer);
         table.setPrefWidth(100);
         return table;
@@ -152,17 +149,14 @@ public class GererJoueur extends BorderPane {
     /** Création du centre de la page => liste de tous les joueurs à activer */
     public void centre() {
         VBox centre = new VBox();
-        try {
-            Label l = new Label("Nombre de joueurs à activer : "+GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size());
-            HBox bouton = new HBox();
-            bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
-            bouton.setSpacing(10);
-            centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
-            centre.setSpacing(10);
-            centre.setPadding(new Insets(0,25,15,25));
-            this.setCenter(centre);
-        }
-        catch(SQLException e) {}
+        Label l = new Label("Nombre de joueurs à activer : ");
+        HBox bouton = new HBox();
+        bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
+        bouton.setSpacing(10);
+        centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
+        centre.setSpacing(10);
+        centre.setPadding(new Insets(0,25,15,25));
+        this.setCenter(centre);
     }
 
     /** Création de la liste de tous les joueurs */
@@ -221,6 +215,7 @@ public class GererJoueur extends BorderPane {
         return table;
     }
 
+    /** Raffraichit la page de gérer joueur */
     public void majAffichage() {
         this.gauche();
         this.centre();
