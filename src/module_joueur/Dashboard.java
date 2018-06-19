@@ -142,7 +142,7 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-    Label lbJeux = new Label("Jeux : ");
+    Label lbJeux = new Label("Ma bibliothèque ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
     scrollPaneJeux.setContent(hJeux);
