@@ -39,6 +39,10 @@ public class Joueur extends Label{
             this.setFont(Font.font("Verdana",FontWeight.NORMAL,15));
             this.setTextFill(Paint.valueOf("grey"));
         }
+    }
 
+    @Override
+    public String toString(){
+        return "" + this.nom + " " + this.jCourant;
     }
 }
