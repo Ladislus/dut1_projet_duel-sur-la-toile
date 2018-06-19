@@ -38,11 +38,11 @@ public class PartieM {
 
     public String etatPartie(){
         return "" +
-                this.p.getCombiMystere() + "\n" +
-                this.p.getListeEssais() + "\n" +
-                this.p.getListeResultats() + "\n" +
-                this.p.getCombiCour() + "\n" +
-                this.getJ1() + "\n" +
+                this.p.getCombiMystere() + "," +
+                this.p.getListeEssais() + "," +
+                this.p.getListeResultats() + "," +
+                this.p.getCombiCour() + "," +
+                this.getJ1() + "," +
                 this.getJ2();
     }
 
