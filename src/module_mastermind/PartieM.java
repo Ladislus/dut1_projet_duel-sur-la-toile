@@ -55,8 +55,10 @@ public class PartieM {
      * Met à jour la base de données: les infos sur la partie sont mises à jour dans la base de données.
      */
     public void majBD(){
-        HashMap<String, List<Object>> res = GestionBD.selectPreparedStatement("Select idUt, score2 from PARTIE where score1 = 60");
-        //{idUt : [4,5,8], score2:[52,45,78]}
+//        Exemple utilisation BD
+//
+//        HashMap<String, List<Object>> res = GestionBD.selectPreparedStatement("Select idUt, score2 from PARTIE where score1 = 60");
+//        {idUt : [4,5,8], score2:[52,45,78]}
     }
 
     /**
