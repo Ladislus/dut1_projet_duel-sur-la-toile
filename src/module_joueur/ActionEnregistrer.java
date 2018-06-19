@@ -63,6 +63,8 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);
 
+              //TODO : récupérer l'image et la modifier
+
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Edition utilisateur");
               alert.setHeaderText("Votre modification a bien été enregistrer");
