@@ -87,7 +87,7 @@ public class Utilisateur {
 
     public static ArrayList<String> getListeDamis(String pseudo){
         ArrayList<String> listePseudo = new ArrayList<>();
-        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(pseudo)).get("idUt1");
+        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt2 FROM ETREAMI WHERE idUt1 = "+getIdByPseudo(pseudo)).get("idUt2");
         try{
             for(Object elem : listeId){
                 listePseudo.add(String.valueOf(getPseudoById((Integer) elem)));
