@@ -1,5 +1,6 @@
 package module_administrateur;
 
+import APIMySQL.Jeu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -29,6 +30,7 @@ public class ActionAjouterJeu implements EventHandler<ActionEvent>{
       alert.getButtonTypes().setAll(btoui, btnon);
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == btoui){
+        //Jeu.creerJeu(gJeu.getNom(), gJeu.getRegles(), byte[] jarJeu, gJeu.getType(), byte[] image);
         alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Validation de l'ajout du jeu");
         alert.setHeaderText(null);

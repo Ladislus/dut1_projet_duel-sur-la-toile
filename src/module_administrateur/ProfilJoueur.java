@@ -24,6 +24,7 @@ public class ProfilJoueur extends BorderPane {
     private Joueur joueur;
     private RadioButton rbactiver;
     private RadioButton rbpasactiver;
+    private TextField tfilechooser;
 
     public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
         super();
@@ -31,6 +32,7 @@ public class ProfilJoueur extends BorderPane {
         this.joueur = joueur;
         this.pa = pa;
         this.groupe = new ToggleGroup();
+        this.tfilechooser = new TextField();
         this.haut();
         this.gauche();
         this.centre();
@@ -180,10 +182,13 @@ public class ProfilJoueur extends BorderPane {
 
 
     public TextField creerTextFieldFileChooser(){
-      TextField tfilechooser = new TextField();
-      tfilechooser.setPromptText("Choisissez une image");
-      tfilechooser.setDisable(true);
-      return tfilechooser;
+      this.tfilechooser.setPromptText("Choisissez une image");
+      return this.tfilechooser;
+    }
+
+
+    public TextField getTextFieldFileChooser(){
+      return this.tfilechooser;
     }
 
 
