@@ -44,6 +44,17 @@ public class ActionFileChooser implements EventHandler<ActionEvent> {
       if (fichierSelectionne != null){
         if (fichierSelectionne.getName().contains(".png") || fichierSelectionne.getName().contains(".jpg")){
           listview.getItems().add(fichierSelectionne.getName());
+          if (b == gJeu.getBoutonGauche()){
+            gJeu.getTextFieldFileChooserGauche().setText(fichierSelectionne.getAbsolutePath());
+          }
+          else{
+            if (b == gJeu.getBoutonDroite())
+              gJeu.getTextFieldFileChooserDroite().setText(fichierSelectionne.getAbsolutePath());
+            else{
+              pJoueur.getTextFieldFileChooser().setText(fichierSelectionne.getAbsolutePath());
+            }
+          }
+
         }
         else{
           Alert reponse = new Alert(Alert.AlertType.INFORMATION);

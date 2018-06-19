@@ -22,11 +22,19 @@ public class GererJeu extends BorderPane {
 
     private PageAccueil pa;
     private ToggleGroup groupe;
+    private TextField tfilechoosergauche;
+    private TextField tfilechooserdroite;
+    private Button bplusdroite;
+    private Button bplusgauche;
 
     public GererJeu(PageAccueil pa) {
       super();
       this.pa = pa;
       this.groupe = new ToggleGroup();
+      this.tfilechoosergauche = new TextField();
+      this.tfilechooserdroite = new TextField();
+      this.bplusdroite = new Button("+");
+      this.bplusgauche = new Button("+");
       this.haut();
       this.gauche();
       this.centre();
@@ -103,27 +111,54 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public TextField creerTextFieldFileChooser(){
-      TextField tfilechooser = new TextField();
-      tfilechooser.setPromptText("Choisissez une image");
-      tfilechooser.setDisable(true);
+    public TextField creerTextFieldFileChooserGauche(){
+      this.tfilechoosergauche.setPromptText("Choisissez une image");
 
-      return tfilechooser;
+      return this.tfilechoosergauche;
     }
 
 
-    public Button creerBoutonFileChooser(){
-      Button bplus = new Button("+");
+    public TextField getTextFieldFileChooserGauche(){
+      return this.tfilechoosergauche;
+    }
+
+
+    public TextField creerTextFieldFileChooserDroite(){
+      this.tfilechooserdroite.setPromptText("Choisissez une image");
+
+      return this.tfilechooserdroite;
+    }
+
+
+    public TextField getTextFieldFileChooserDroite(){
+      return this.tfilechooserdroite;
+    }
+
+
+    public Button creerBoutonFileChooserGauche(){
       ActionFileChooser afc = new ActionFileChooser(this);
-      bplus.setOnAction(afc);
+      bplusgauche.setOnAction(afc);
 
-      return bplus;
+      return this.bplusgauche;
     }
 
 
-    public HBox creerHBoxFileChooser(){
+    public Button creerBoutonFileChooserDroite(){
+      ActionFileChooser afc = new ActionFileChooser(this);
+      this.bplusdroite.setOnAction(afc);
+
+      return this.bplusdroite;
+    }
+
+
+    public Button getBoutonGauche(){
+      return this.bplusgauche;
+    }
+
+
+    public HBox creerHBoxFileChooserGauche(){
       HBox hbfilechooser = new HBox(5);
-      hbfilechooser.getChildren().addAll(creerTextFieldFileChooser(), creerBoutonFileChooser());
+      hbfilechooser.getChildren().addAll(creerTextFieldFileChooserGauche(), creerBoutonFileChooserGauche());
 
       return hbfilechooser;
     }
@@ -182,7 +217,7 @@ public class GererJeu extends BorderPane {
     public VBox creerVBoxDescriptionJeu(){
       VBox vbjeu = new VBox();
       vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldEtatJeu(),
-        creerTextAreaRegleJeu(), creerComboBoxModes(), creerHBoxFileChooser(),
+        creerTextAreaRegleJeu(), creerComboBoxModes(), creerHBoxFileChooserGauche(),
           creerHBoxSauvegarder());
       vbjeu.setPadding(new Insets(10,15,10,15));
       vbjeu.setStyle("-fx-border-color: black;");
@@ -220,9 +255,9 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public String getNom(){
+    /*public String getNom(){
       return tnom.getText();
-    }
+    }*/
 
 
     public TextArea creerTextAreaDescriptionJeu(){
@@ -235,9 +270,9 @@ public class GererJeu extends BorderPane {
     }
 
 
-    public String getRegles(){
+    /*public String getRegles(){
       return tdescription.getText();
-    }
+    }*/
 
 
     public Label creerLabelActiverJeu(){
@@ -291,10 +326,18 @@ public class GererJeu extends BorderPane {
     }
 
 
+    public HBox creerHBoxFileChooserDroite(){
+      HBox hbfilechooser = new HBox(5);
+      hbfilechooser.getChildren().addAll(creerTextFieldFileChooserDroite(), creerBoutonFileChooserDroite());
+
+      return hbfilechooser;
+    }
+
+
     public VBox creerVBoxAjouterJeu(){
       VBox vbaddjeu = new VBox(15);
       vbaddjeu.getChildren().addAll(creerLabelAjouterJeu(), creerTextFieldNomJeu(),
-        creerTextAreaDescriptionJeu(), creerComboBoxModes(), creerHBoxFileChooser(),
+        creerTextAreaDescriptionJeu(), creerComboBoxModes(), creerHBoxFileChooserDroite(),
           creerHBoxRadioBoutonsActivationJeu(), creerHBoxBoutonAjouterJeu());
       vbaddjeu.setPadding(new Insets(5,10,5,10));
       vbaddjeu.setStyle("-fx-border-color: black;");
