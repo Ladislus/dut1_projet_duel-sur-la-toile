@@ -34,7 +34,6 @@ class Dashboard extends BorderPane {
 
   private int nbJeux;
 
-  //TODO : attributs sans getter
   private FlowPane hJeux;
   private FlowPane hNouveaute;
 
@@ -143,7 +142,6 @@ class Dashboard extends BorderPane {
 
   public VBox creerCentre() {
 
-
     Label lbJeux = new Label("Jeux : ");
 
     ScrollPane scrollPaneJeux = new ScrollPane();
@@ -212,29 +210,32 @@ class Dashboard extends BorderPane {
     HashMap<String, List<Object>> listeJeux = Jeu.recupListeJeux();
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
+    System.out.println(listeTitleJeux);
+    if(listeTitleJeux.size() > 1){
+        for(Object title : listeJeux.get("nomJeu")){
+            String titleString = title.toString();
+            listeTitleJeux.add(titleString); }
 
-    for(Object title : listeJeux.get("nomJeu")){
+        for(int i = 0; i < listeTitleJeux.size(); i++) {
 
-      String titleString = title.toString();
-      listeTitleJeux.add(titleString); }
+            module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
 
-    for(int i = 0; i < listeTitleJeux.size(); i++) {
+            //TODDO: recuperer le blob de la bd
+            File fileImage = new File("./img/pub/logo.png");
+            ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
+            ivJeux.setPreserveRatio(true);
+            ivJeux.setFitWidth(50);
 
-      module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
+            VBox vBoxJeux = new VBox();
+            vBoxJeux.getChildren().addAll(ivJeux, new Label(jeu.getTitle()));
+            vBoxJeux.setAlignment(Pos.TOP_CENTER);
+            vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
+            vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
+            vBoxJeux.setPadding(new Insets(9,15,0,15));
+            vBoxJeux.setOnMouseClicked(new ActionToMainJeux(this.primaryStage, jeu));
 
-      File fileImage = new File("./img/pub/logo.png");//todo: recuperer le blob de la bd
-      ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
-      ivJeux.setPreserveRatio(true);
-      ivJeux.setFitWidth(50);
+            hJeux.getChildren().add(vBoxJeux); }}
+    }
 
-      VBox vBoxJeux = new VBox();
-      vBoxJeux.getChildren().addAll(ivJeux, new Label(jeu.getTitle()));
-      vBoxJeux.setAlignment(Pos.TOP_CENTER);
-      vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
-      vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
-      vBoxJeux.setPadding(new Insets(9,15,0,15));
-      vBoxJeux.setOnMouseClicked(new ActionToMainJeux(this.primaryStage, jeu));
-
-      hJeux.getChildren().add(vBoxJeux); }}
 
   public String getTitle() { return this.title; }}
