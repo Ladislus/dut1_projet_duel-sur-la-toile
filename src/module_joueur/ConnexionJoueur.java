@@ -74,12 +74,14 @@ class ConnexionJoueur extends BorderPane {
     title.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     Label lLogin = new Label("Pseudonyme : ");
-    tfLogin = new TextField();
+    this.tfLogin = new TextField();
     tfLogin.setPromptText("Entrez votre pseudonyme ici");
+    tfLogin.setOnKeyPressed(new ActionEntrer(this.primaryStage));
 
     Label lPassword = new Label("Votre mot de passe : ");
-    tfPassword = new PasswordField();
+    this.tfPassword = new PasswordField();
     tfPassword.setPromptText("Entrez votre mot de passe ici");
+    tfPassword.setOnKeyPressed(new ActionEntrer(this.primaryStage));
 
     Button btConnection = new Button("Vers l'aventure !");
     btConnection.setOnAction(new ActionConnection(this.primaryStage));
