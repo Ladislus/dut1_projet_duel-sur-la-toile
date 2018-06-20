@@ -24,7 +24,7 @@ import java.lang.Iterable;
 public class GererJeu extends BorderPane {
 
     /** Attributs de GererJeu */
-    private PageAccueil pa;
+    private Stage primaryStage;
     private ToggleGroup groupe;
     private TextField tfilechoosergauche;
     private TextField tfilechooserdroite;
@@ -36,9 +36,9 @@ public class GererJeu extends BorderPane {
 
 
     /** Constructeur de la page pour gérer les jeux */
-    public GererJeu(PageAccueil pa) {
+    public GererJeu(Stage primaryStage) {
       super();
-      this.pa = pa;
+      this.primaryStage = primaryStage;
       this.groupe = new ToggleGroup();
       this.tfilechoosergauche = new TextField();
       this.tfilechooserdroite = new TextField();
@@ -56,7 +56,7 @@ public class GererJeu extends BorderPane {
         Button bRetour = new Button("< Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa));
+        bRetour.setOnAction(new ActionRetour(this.primaryStage));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
 

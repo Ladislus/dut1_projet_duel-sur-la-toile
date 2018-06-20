@@ -15,12 +15,12 @@ import javafx.collections.*;
 public class VoirStatistiques extends BorderPane {
 
     /** Attribut de VoirStatistiques */
-    private PageAccueil pa;
+    private Stage primaryStage;
 
     /** Constructeur de la page pour voir les statistiques */
-    public VoirStatistiques(PageAccueil pa) {
+    public VoirStatistiques(Stage primaryStage) {
         super();
-        this.pa = pa;
+        this.primaryStage = primaryStage;
         this.haut();
         this.gauche();
         this.droite();
@@ -32,7 +32,7 @@ public class VoirStatistiques extends BorderPane {
         BorderPane haut = new BorderPane();
         Label l = new Label("Statistiques");
         Button bRetour = new Button("< Retour");
-        bRetour.setOnAction(new ActionRetour(this.pa));
+        bRetour.setOnAction(new ActionRetour(this.primaryStage));
         haut.setLeft(l);
         haut.setRight(bRetour);
         l.setFont(Font.font ("Arial", 25));

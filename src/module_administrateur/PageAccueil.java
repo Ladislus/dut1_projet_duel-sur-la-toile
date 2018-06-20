@@ -53,7 +53,7 @@ public class PageAccueil extends BorderPane {
       bStat.setContentDisplay(ContentDisplay.TOP);
 
 
-      bStat.setOnAction(new ActionStatistiques(this));
+      bStat.setOnAction(new ActionStatistiques(this.primaryStage));
       bStat.setPrefWidth(630);
       bStat.setPrefHeight(130);
       bas.getChildren().add(bStat);
@@ -71,7 +71,7 @@ public class PageAccueil extends BorderPane {
       //Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
       Button bJeu = new Button("Gérer les jeux");
       bJeu.setContentDisplay(ContentDisplay.TOP);
-      bJeu.setOnAction(new ActionJeu(this));
+      bJeu.setOnAction(new ActionJeu(this.primaryStage));
       bJeu.setPrefWidth(350);
       bJeu.setPrefHeight(220);
 
@@ -82,7 +82,7 @@ public class PageAccueil extends BorderPane {
       bJoueur.setContentDisplay(ContentDisplay.TOP);
       bJoueur.setPrefWidth(350);
       bJoueur.setPrefHeight(220);
-      bJoueur.setOnAction(new ActionUtilisateurs(this));
+      bJoueur.setOnAction(new ActionUtilisateurs(this.primaryStage));
 
 
       centre.getChildren().addAll(bJeu, bJoueur);

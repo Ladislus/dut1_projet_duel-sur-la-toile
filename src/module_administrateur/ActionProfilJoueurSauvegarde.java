@@ -37,10 +37,10 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
         if (result.get() == btoui) {
             // GESTION DESACTIVATION JOUEUR
             if (Utilisateur.isActivated(this.joueur.getPseudo()) && this.pJoueur.getRbpasactiver().isSelected()) {
-                this.pJoueur.getPa().getAdmin().desactiverJoueur(this.joueur);
+                ((PageAccueil)this.pJoueur.getPa().getScene().getRoot()).getAdmin().desactiverJoueur(this.joueur);
             }
             if (!(Utilisateur.isActivated(this.joueur.getPseudo())) && this.pJoueur.getRbactiver().isSelected()) {
-                this.pJoueur.getPa().getAdmin().activerJoueur(this.joueur);
+                ((PageAccueil)this.pJoueur.getPa().getScene().getRoot()).getAdmin().activerJoueur(this.joueur);
             }
 
             // GESTION MODIF PSEUDO
