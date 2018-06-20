@@ -159,4 +159,6 @@ public class Utilisateur {
     public static String getEmailByPseudo(String pseudoUt){
         return getUserInfo("emailUt", "pseudoUt", pseudoUt);
     }
+
+
 }
