@@ -12,6 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -24,7 +25,7 @@ class EditionProfil extends BorderPane {
   private Stage primaryStage;
   private Stage secondaryStage;
 
-  Path imagePath;
+  private Path imagePath;
 
   private Joueur joueur;
 
@@ -50,7 +51,7 @@ class EditionProfil extends BorderPane {
 
   public VBox creerGauche() {
 
-    Label lImage = new Label("Mon imagePath");
+    Label lImage = new Label("Mon image");
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
     this.ivImageUser = new ImageView();
@@ -126,7 +127,7 @@ class EditionProfil extends BorderPane {
     tfEmail.setText(joueur.getEmail());
     tfEmail.setDisable(true);
 
-    Button btEditionEmail = new Button("",ivImageEdit);
+    Button btEditionEmail = new Button("", ivImageEdit);
     btEditionEmail.setOnAction(actionEvent -> tfEmail.setDisable(false));
 
     HBox hEmail = new HBox();
@@ -151,6 +152,7 @@ class EditionProfil extends BorderPane {
 
     Button btEditionMotPasse = new Button("", ivImageEditMdp);
     btEditionMotPasse.setOnAction(actionEvent -> {
+
       pfMotDePasse.setDisable(false);
       pfConfirmMotDePasse.setDisable(false); });
 
@@ -220,7 +222,5 @@ class EditionProfil extends BorderPane {
   public PasswordField getPfMotDePasse() { return this.pfMotDePasse; }
 
   public PasswordField getPfConfirmMotDePasse() { return this.pfConfirmMotDePasse; }
-
-  public ImageView getImageView() { return this.ivImageUser; }
 
   public Path getImagePath() { return this.imagePath; }}

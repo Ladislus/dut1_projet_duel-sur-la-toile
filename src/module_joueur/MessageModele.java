@@ -2,19 +2,19 @@ package module_joueur;
 
 public class MessageModele {
 
-    private String nomExp,nomDest;
-
     private long dateEnvoi;
 
+    private String nomExp;
+    private String nomDest;
     private String contenu;
 
-
     public MessageModele(String nomExp, String nomDest, long dateEnvoi, String contenu) {
+
+        this.dateEnvoi = dateEnvoi;
+
         this.nomExp = nomExp;
         this.nomDest = nomDest;
-        this.dateEnvoi = dateEnvoi;
-        this.contenu = contenu;
-    }
+        this.contenu = contenu; }
 
     public String getNomExp() {
         return nomExp;
@@ -30,6 +30,4 @@ public class MessageModele {
 
     public String getContenu() {
         return contenu;
-    }
-
-}
+    }}

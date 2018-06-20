@@ -4,10 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-
-/**
- * Controleur du changement de contact dans la messagerie
- */
 public class ActionChangeContact implements EventHandler<ActionEvent> {
 
     private final Messagerie messagerie;
@@ -18,12 +14,13 @@ public class ActionChangeContact implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
+
         Button source = (Button) actionEvent.getSource();
+
         String nouvContact = source.getText();
-        if (nouvContact == "ACCUEIL"){
+
+        if (nouvContact == "ACCUEIL")
             nouvContact = "ACC";
-        }
+
         this.messagerie.setNomContactCour(nouvContact);
-        this.messagerie.majMessages();
-    }
-}
+        this.messagerie.majMessages(); }}

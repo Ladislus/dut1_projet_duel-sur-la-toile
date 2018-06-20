@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class ExecMessage extends Application {
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setScene(new Scene(new Messagerie(),850,650));
         primaryStage.show();
     }

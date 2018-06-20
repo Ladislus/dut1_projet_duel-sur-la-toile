@@ -36,13 +36,9 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
     String confirmMotDePasse = page.getPfConfirmMotDePasse().getText();
     String ancientPseudo = joueur.getPseudo();
 
-    //TODO : récupérer l'imagePath' de l'ivImageUser en la transformer en blob
     byte[] bytes = new byte[0];
-    try {
-      bytes = Files.readAllBytes(((EditionProfil)secondaryStage.getScene().getRoot()).getImagePath());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    try { bytes = Files.readAllBytes(((EditionProfil)secondaryStage.getScene().getRoot()).getImagePath()); }
+    catch (IOException e) { e.printStackTrace(); }
 
     PasswordDialog confirm = new PasswordDialog();
 
@@ -77,7 +73,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Edition utilisateur");
-              alert.setHeaderText("Votre modification a bien été enregistrée");
+              alert.setHeaderText("Vos modifications ont bien été enregistrées");
 
               secondaryStage.close();
 
@@ -87,14 +83,14 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Edition utilisateur");
-            alert.setHeaderText("Votre nouveau mot de passe ne correspond pas");
+            alert.setHeaderText("Votre mot de passe ne correspond pas");
             alert.showAndWait(); }}
 
         else {
 
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("ERREUR");
-          alert.setHeaderText("Votre mot de passe n'est pas valide");
+          alert.setHeaderText("Votre nouveau mot de passe n'est pas valide");
           alert.showAndWait(); }}
 
           catch (APIMySQLException ex) { ex.printStackTrace(); }}

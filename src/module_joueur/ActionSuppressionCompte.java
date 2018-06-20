@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -19,7 +18,7 @@ public class ActionSuppressionCompte implements EventHandler<ActionEvent> {
 
   private Joueur joueur;
 
-  public ActionSuppressionCompte(Stage primaryStage, Stage secondaryStage, Joueur joueur){
+  public ActionSuppressionCompte(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     this.primaryStage = primaryStage;
     this.secondaryStage = secondaryStage;
@@ -33,15 +32,18 @@ public class ActionSuppressionCompte implements EventHandler<ActionEvent> {
 
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("ATTENTION");
-    alert.setHeaderText("Etes vous sure de vouloir supprimer votre compte ?");
+    alert.setHeaderText("Êtes vous sûr de vouloir supprimer votre compte ?");
 
     ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
     ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
 
     alert.getButtonTypes().setAll(okButton, noButton);
     alert.showAndWait().ifPresent(type -> {
+
       if (type.getButtonData().toString().equals("YES")) {
+
         try {
+
           Utilisateur.deleteUser(joueur.getPseudo());
 
           ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
@@ -49,6 +51,5 @@ public class ActionSuppressionCompte implements EventHandler<ActionEvent> {
           page.close();
 
           this.primaryStage.setTitle(connexion.getTitle());
-          this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT));
-        } catch (SQLException e) {
-          e.printStackTrace(); }}});}}
+          this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }
+          catch (SQLException e) { e.printStackTrace(); }}});}}

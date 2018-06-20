@@ -12,40 +12,36 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Vue de la Messagerie
- */
 public class Messagerie extends SplitPane {
 
-    private List<Joueur> lesContacts;
     private static String chem = "./img/pub/";
 
     private String nomUser;
+
     private Label nomContactCour;
+
     private TextField barre;
+
     private VBox lesMessages;
 
-    public Messagerie(){
+    public Messagerie() {
+
         super();
 
+        //TODO : Recuperer le nom de l'utilisateur
         this.nomUser = "Mathieu";
         this.nomContactCour = new Label("");
 
         this.getItems().addAll(this.menuContact(),this.pageMessages());
-        this.setDividerPositions(62/850f);
-
-
-
-
-    }
+        this.setDividerPositions(62/850f); }
 
     private ScrollPane menuContact() {
-
 
         VBox contacts = new VBox();
         Button out = new Button("Sortir",new ImageView(new Image(new File(chem+"log_out.png").toURI().toString(),50.,50.,true,true)));
