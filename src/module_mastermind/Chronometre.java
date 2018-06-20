@@ -50,10 +50,6 @@ public class Chronometre extends Label {
         return this.getText();
     }
 
-    public String getTime(){
-        return this.getText();
-    }
-
     public void start(){
         this.timeline.play();
     }

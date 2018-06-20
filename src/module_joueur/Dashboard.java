@@ -99,13 +99,10 @@ class Dashboard extends BorderPane {
     btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
-    Button btParametre = new Button("Mes paramètres");
-    btParametre.setPrefWidth(150);
-
     Button btExit = new Button("", imageViewLogo);
     btExit.setOnAction(new ActionDeconnexion(primaryStage));
 
-    param.getChildren().addAll(btParametre, btExit);
+    param.getChildren().add(btExit);
     param.setSpacing(10);
     param.setAlignment(Pos.TOP_CENTER);
     param.setPadding(new Insets(250,0,0,0));

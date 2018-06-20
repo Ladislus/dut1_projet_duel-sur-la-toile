@@ -27,10 +27,7 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
             System.out.println(this.mastermind.getPlateau().getListeEssais().size());
             if (plateauM.aTrouveCombi()){
                 this.mastermind.getChrono().stop();
-<<<<<<< HEAD
-=======
                 valider.setDisable(true);
->>>>>>> b6ecb6fdb30e489c0723ceeda621a7e39e2b51c9
                 Double temps = Double.parseDouble(this.mastermind.getChrono().getTime());
                 int nbEssais = this.mastermind.getPlateau().getListeEssais().size();
 
