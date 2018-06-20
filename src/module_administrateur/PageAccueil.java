@@ -14,9 +14,11 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.ContentDisplay;
+import java.io.InputStream;
 
 public class PageAccueil extends Application {
 
+    /** Attributs de la classe PageAccueil */
     BorderPane bp;
     Administration a;
 
@@ -32,13 +34,12 @@ public class PageAccueil extends Application {
       return this.a;
     }
 
+    /** Création du VBox qui affiche le bouton "Voir les statistiques" ainsi que l'image */
     public VBox bas() {
       VBox bas = new VBox();
-      ImageView stat = new ImageView();
-      //stat.setImage(new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png".toURI().toString()));
+      //Image stat = new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png"));
       //Button bStat = new Button("Voir les statistiques", new ImageView(stat));
-      Button bStat = new Button("Voir les statistiques", stat);
-      //bStat.setGraphic(new ImageView(stat));
+      Button bStat = new Button("Voir les statistiques");
       bStat.setContentDisplay(ContentDisplay.TOP);
 
 
@@ -52,6 +53,8 @@ public class PageAccueil extends Application {
       return bas;
     }
 
+    /** Création du HBox qui affiche les boutons ainsi que les images pour "Gérer les jeux" et
+    "Gérer les utilisateurs" */
     public HBox centre() {
       HBox centre = new HBox();
       //Image jeu = new Image(getClass().getResourceAsStream("./img/module_administrateur/jeu.png"));
@@ -79,6 +82,7 @@ public class PageAccueil extends Application {
       return centre;
     }
 
+    /** Création de l'entête de la page */
     public BorderPane haut() {
       BorderPane haut = new BorderPane();
       Label l = new Label("Administration");
@@ -90,6 +94,7 @@ public class PageAccueil extends Application {
       return haut;
     }
 
+    /** Création de la scène de la page */
     public Scene scene() {
       this.bp = new BorderPane();
       this.bp.setCenter(this.constructB());
@@ -97,6 +102,7 @@ public class PageAccueil extends Application {
       return new Scene(this.bp, 650, 450);
     }
 
+    /** Création du BorderPane contenant toute la page */
     public BorderPane constructB() {
       BorderPane b = new BorderPane();
       b.setTop(haut());
@@ -105,6 +111,7 @@ public class PageAccueil extends Application {
       return b;
     }
 
+    /** Lancement de la vue */
     @Override
     public void start(Stage primaryStage) {
       primaryStage.setTitle("Duel sur la toile - Administration");

@@ -19,6 +19,7 @@ import APIMySQL.*;
 /** Vue de la page pour voir et modifier le profil d'un joueur */
 public class ProfilJoueur extends BorderPane {
 
+    /** Attributs de ProfilJoueur */
     private GererJoueur gJoueur;
     private PageAccueil pa;
     private Joueur joueur;

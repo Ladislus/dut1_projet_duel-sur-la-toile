@@ -46,9 +46,21 @@ public class GererJoueur extends BorderPane {
         return this.activer;
     }
 
-    /** Retourne la liste de tous les joueurs */
-    public ObservableList<Joueur> getListeJoueurTB() {
-        return this.listeJoueur;
+    /** Retourne le bouton désactiver les joueurs cochés */
+    public Button getButtonDesactiver() {
+        return this.desactiver;
+    }
+
+    /** Création du bouton pour activer les joueurs cochés */
+    public Button creerBoutonActiver() {
+        this.activer = new Button("Activer");
+        this.activer.setDisable(true);
+        this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
+        this.activer.setTextFill(Color.web("white"));
+        this.activer.setPrefWidth(200);
+        this.activer.setPrefHeight(50);
+        this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
+        return this.activer;
     }
 
     /** Remplace la liste de joueurs actuelle par la nouvelle en paramètre */
@@ -75,8 +87,8 @@ public class GererJoueur extends BorderPane {
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
         this.listeJoueur = FXCollections.observableArrayList();
-        HashMap<String, List<Object>> dico = this.pa.getAdmin().requetteListeJoueur();
-        if (dico.size() == 0 || dico == null) {
+        HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
+        if (dico.size() == 0) {
             return this.listeJoueur;
         }
         else {
