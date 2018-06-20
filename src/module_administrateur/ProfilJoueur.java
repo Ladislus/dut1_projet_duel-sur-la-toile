@@ -222,7 +222,9 @@ public class ProfilJoueur extends BorderPane {
         this.rbactiver.setToggleGroup(this.groupe);
         this.rbpasactiver.setToggleGroup(this.groupe);
         HBox hbactiverjoueur = new HBox();
-        hbactiverjoueur.getChildren().addAll(new Label("État du compte :"), this.rbactiver, this.rbpasactiver);
+        hbactiverjoueur.getChildren().addAll(new Label("Statut :"), this.rbactiver, this.rbpasactiver);
+        hbactiverjoueur.setSpacing(10);
+        hbactiverjoueur.setPadding(new Insets(0,0,0,25));
         if (Utilisateur.isActivated(this.joueur.getPseudo())) {
             this.rbactiver.setSelected(true);
         }
@@ -238,16 +240,17 @@ public class ProfilJoueur extends BorderPane {
         return bsave;
     }
 
-
     public HBox creerHBoxSauvegarderModifs(){
         HBox hbsave = new HBox();
         hbsave.getChildren().add(creerBoutonSauvegarderModifs());
+        hbsave.setPadding(new Insets(10,0,0,0));
         hbsave.setAlignment(Pos.CENTER);
         return hbsave;
     }
 
     public Label creerLabelImageProfil(){
         Label limageprofil = new Label("Image de profil :");
+        limageprofil.setPadding(new Insets(0,0,0,25));
         return limageprofil;
     }
 
@@ -270,6 +273,7 @@ public class ProfilJoueur extends BorderPane {
     public HBox creerHBoxFileChooser(){
         HBox hbfilechooser = new HBox();
         hbfilechooser.getChildren().addAll(creerTextFieldFileChooser(), creerBoutonFileChooser());
+        hbfilechooser.setPadding(new Insets(0,0,0,25));
         return hbfilechooser;
     }
 
@@ -295,13 +299,6 @@ public class ProfilJoueur extends BorderPane {
         return jeuplusjoue;
     }
 
-
-    public Label creerLabelTempsPlateforme(){
-        Label tempsplateforme = new Label("Temps passé sur la plateforme : ");
-        return tempsplateforme;
-    }
-
-
     public Label creerLabelNbPartiesJouees(){
         Label nbpartiesjouees = new Label("Nombre de parties jouées : ");
         return nbpartiesjouees;
@@ -313,17 +310,15 @@ public class ProfilJoueur extends BorderPane {
         return nbamis;
     }
 
-
     public VBox creerVBoxStats(){
         VBox vbstats = new VBox(15);
         vbstats.getChildren().addAll(creerLabelStats(), creerLabelJeuPlusJoue(),
-                          creerLabelTempsPlateforme(), creerLabelNbPartiesJouees(), creerLabelNbAmis());
+                            creerLabelNbPartiesJouees(), creerLabelNbAmis());
         vbstats.setPadding(new Insets(5,10,5,10));
         vbstats.setStyle("-fx-border-color: black;");
         vbstats.setPrefHeight(200);
         return vbstats;
     }
-
 
     public PieChart creerPieChart(){
         ObservableList<PieChart.Data> donneesdiagramme = FXCollections.observableArrayList(
@@ -336,11 +331,10 @@ public class ProfilJoueur extends BorderPane {
         return diagramme;
     }
 
-
     public void centre() {
         VBox vbcentre = new VBox(15);
         vbcentre.getChildren().addAll(creerVBoxStats(), creerPieChart());
-        vbcentre.setPadding(new Insets(20,25,20,25));
+        vbcentre.setPadding(new Insets(10,25,20,25));
         this.setCenter(vbcentre);
     }
 

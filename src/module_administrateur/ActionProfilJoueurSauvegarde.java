@@ -45,7 +45,6 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
 
             // GESTION MODIF PSEUDO
             if (!(joueur.getPseudo().equals(this.pJoueur.getTFpseudo()))) {
-              System.out.println(this.pJoueur.getTFpseudo());
                 Utilisateur.setUserInfo("pseudoUt", this.pJoueur.getTFpseudo(), "pseudoUt", this.joueur.getPseudo());
             }
 

@@ -46,9 +46,30 @@ public class GererJoueur extends BorderPane {
         return this.activer;
     }
 
+    /** Retourne la liste de tous les joueurs */
+    public ObservableList<Joueur> getListeJoueurTB() {
+        return this.listeJoueur;
+    }
+
+    /** Remplace la liste de joueurs actuelle par la nouvelle en paramètre */
+    public void setListeJoueurTB(ObservableList<Joueur> liste) {
+        this.listeJoueur = liste;
+    }
+
+    /** Retourne la barre de recherche de joueur */
+    public TextField getRecherche() {
+        return this.recherche;
+    }
+
     /** Retourne le bouton désactiver les joueurs cochés */
     public Button getButtonDesactiver() {
         return this.desactiver;
+    }
+
+    /** Rafraichit la liste de tous les joueurs */
+    public void majTableView() {
+      System.out.println(this.listeJoueur);
+        this.setCenter(creerCentre());
     }
 
     /** Création de la liste de tous les joueurs */
@@ -188,6 +209,7 @@ public class GererJoueur extends BorderPane {
         this.recherche.setPromptText("Rechercher un joueur");
         this.recherche.setPrefWidth(280);
         this.recherche.setPrefHeight(35);
+        //this.recherche.setOnKeyReleased(new ActionRechercherJoueur(this));
         return this.recherche;
     }
 
