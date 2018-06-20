@@ -129,4 +129,3 @@ public class Mastermind extends Application {
         return new Scene(res,850,650);
     }
 }
-

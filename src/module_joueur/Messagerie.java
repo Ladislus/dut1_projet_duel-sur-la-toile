@@ -31,7 +31,7 @@ public class Messagerie extends SplitPane {
 
     private VBox lesMessages;
 
-    Stage secondaryStage;
+    private Stage secondaryStage;
 
     //TODO : Reduire la taille global des textes / Boutons
 
@@ -106,7 +106,7 @@ public class Messagerie extends SplitPane {
         jeu.setPreserveRatio(true);
         jeu.setFitHeight(35);
 
-        this.nomContactCour = new Label("Accceuil");
+        this.nomContactCour = new Label("Accueil");
         this.nomContactCour.setFont(Font.font(30));
 
         Button inviteJeu = new Button("Inviter à jouer", jeu);
@@ -198,6 +198,6 @@ public class Messagerie extends SplitPane {
 
         //TODO : Recuperer les bons amis
 
-        List<String> res = new ArrayList<>(Arrays.asList("Bernard","Maffiou","Bordercraft","LuK","Benjam1","Valent1","Benjam2","LéOchocOLa","CoucousEat","Mattew","Antonio","LeProGamer45","BossDuGame","TonAmiWoody","MarioLeVrai","AlainSoralOfficiel"));
+        List<String> res = new ArrayList<>(Arrays.asList("40'000°","Maffiou","Bordercraft","LuK","Benjam1","Valent1","Benjam2","LéOchocOLa","CoucousEat","Mattew","Antonio","LeProGamer45","BossDuGame","TonAmiWoody","MarioLeVrai","AlainSoralOfficiel"));
 
         return res; }}

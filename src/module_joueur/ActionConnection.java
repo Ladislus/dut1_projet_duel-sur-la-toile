@@ -36,7 +36,9 @@ class ActionConnection implements EventHandler<ActionEvent> {
 
       else {
 
-        Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(login), login, Utilisateur.getEmailByPseudo(login)));
+        Boolean isAdmin = GestionBD.selectPreparedStatement("select nomRole from UTILISATEUR where idUt = " + Utilisateur.getIdByPseudo(login) + ";").get("nomRole").get(0).equals("ADMIN");
+
+        Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(login), login, Utilisateur.getEmailByPseudo(login)), isAdmin);
 
         this.primaryStage.setTitle(dashboard.getTitle());
         this.primaryStage.setScene(new Scene(dashboard, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT)); }}

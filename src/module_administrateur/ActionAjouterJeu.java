@@ -1,6 +1,9 @@
 package module_administrateur;
 
 import APIMySQL.Jeu;
+import APIMySQL.APIMySQLException;
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -17,7 +20,7 @@ public class ActionAjouterJeu implements EventHandler<ActionEvent>{
   }
 
   @Override
-  public void handle(ActionEvent actionEvent){
+  public void handle(ActionEvent actionEvent) {
 
     Button b = (Button) actionEvent.getSource();
     if((b.getText()) == "Ajouter"){
@@ -30,12 +33,22 @@ public class ActionAjouterJeu implements EventHandler<ActionEvent>{
       alert.getButtonTypes().setAll(btoui, btnon);
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == btoui){
-        //Jeu.creerJeu(gJeu.getNom(), gJeu.getRegles(), byte[] jarJeu, gJeu.getType(), byte[] image);
-        alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Validation de l'ajout du jeu");
-        alert.setHeaderText(null);
-        alert.setContentText("Le jeu a bien été ajouté.");
-        alert.showAndWait();
+        try{
+          Jeu.creerJeu(gJeu.getNom(), gJeu.getRegles(), "/home/nmartins/Téléchargements/n.png", gJeu.getType(), "/home/nmartins/Téléchargements/n.png");
+          alert = new Alert(AlertType.INFORMATION);
+          alert.setTitle("Validation de l'ajout du jeu");
+          alert.setHeaderText(null);
+          alert.setContentText("Le jeu a bien été ajouté.");
+          alert.showAndWait();
+        }
+        catch (SQLException e) {
+          alert = new Alert(AlertType.INFORMATION);
+          alert.setTitle("Ajout du jeu impossible");
+          alert.setHeaderText(null);
+          alert.setContentText("Le jeu n'a pas été ajouté.");
+          alert.showAndWait();
+          e.printStackTrace();
+        }
       }
     }
   }

@@ -58,7 +58,7 @@ class ActionInscription implements EventHandler<ActionEvent> {
 
         Utilisateur.creerUtilisateur(pseudo, mail, sex, prenom, name, password, "USER");
 
-        Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(pseudo), pseudo, Utilisateur.getEmailByPseudo(pseudo)));
+        Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(pseudo), pseudo, Utilisateur.getEmailByPseudo(pseudo)), false);
 
         this.primaryStage.setTitle(dashboard.getTitle());
         this.primaryStage.setScene(new Scene(dashboard, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT));
