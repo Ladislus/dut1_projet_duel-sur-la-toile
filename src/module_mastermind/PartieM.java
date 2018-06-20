@@ -1,5 +1,6 @@
 package module_mastermind;
 
+import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,6 +34,8 @@ public class PartieM {
     private List<Circle> lCercle;
     private VBox listeComb;
 
+    private Chronometre chrono;
+
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
 
@@ -54,7 +57,10 @@ public class PartieM {
      * Met à jour la base de données: les infos sur la partie sont mises à jour dans la base de données.
      */
     public void majBD(){
-
+//        Exemple utilisation BD
+//
+//        HashMap<String, List<Object>> res = GestionBD.selectPreparedStatement("Select idUt, score2 from PARTIE where score1 = 60");
+//        {idUt : [4,5,8], score2:[52,45,78]}
     }
 
     /**
@@ -74,6 +80,8 @@ public class PartieM {
 
 
         this.p = new PlateauM(j1,j2);
+
+        this.chrono = new Chronometre();
 
         this.attributionCouleur = new HashMap<>();
         this.attributionCouleur.put(0,Color.DARKGREY);
@@ -96,6 +104,14 @@ public class PartieM {
     }
 
     /**
+     * Renvoie l'attribut chrono, qui set un Chronometre
+     * @return un Chronometre
+     */
+    public Chronometre getChrono() {
+        return this.chrono;
+    }
+
+    /**
      * Renvoie l'attribut de la classe p, de la classe PlateauM
      * @return PlateauM p
      */
@@ -113,7 +129,7 @@ public class PartieM {
 
     /**
      * Renvoie l'attribut de classe j2, de la classe Joueur
-     * @return Joueur j2
+     * @return un Joueur j2
      */
     public Joueur getJ2() {
         return j2;
@@ -179,6 +195,10 @@ public class PartieM {
         return new Scene(res, 850, 650);
     }
 
+    /**
+     * Crée la partie haute de la vue, contenant le titre de la fenêtre
+     * @return la VBox
+     */
     public static HBox haut(){
         HBox res = new HBox(5);
         Label titre = new Label("Mastermind");
@@ -189,15 +209,35 @@ public class PartieM {
         return res;
     }
 
+    /**
+     * Crée la partie de la vue contenant le Timer, le bouton "Quitter", le bouton "Aide" ainsi que les boutons de contrôle des couleurs
+     * @param m un Mastermind
+     * @return une VBox
+     */
     public VBox menu(Mastermind m){
         VBox res = new VBox(25);
+
+        HBox quitterRejouer = new HBox(10);
 
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
 
-        Label timer = new Label("Time : 200");
+        Button rejouer = new Button("Rejouer");
+        rejouer.setOnAction(new ActionRejouer(this));
+
+        quitterRejouer.getChildren().addAll(quitter,rejouer);
+
+        HBox timerBox = new HBox();
+
+        Label timer = new Label("Time : ");
         timer.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         timer.setPadding(new Insets(75,0,0,0));
+        chrono = new Chronometre();
+        chrono.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        chrono.setPadding(new Insets(75,0,0,0));
+        chrono.start();
+
+        timerBox.getChildren().addAll(timer,chrono);
 
         Label couleurs = new Label("Couleurs :");
         couleurs.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -227,14 +267,18 @@ public class PartieM {
 
         tabCouleurs.setPadding(new Insets(0,0,50,30));
 
-        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs,aide);
+        res.getChildren().addAll(quitterRejouer,timerBox,couleurs,tabCouleurs,aide);
 
         res.setPadding(new Insets(0,0,0,20));
 
         return res;
     }
 
-
+    /**
+     * Crée le plateau contenant les essais de combinaisons et les indices
+     * @param plateau un Plateau
+     * @return un ScrollPane
+     */
     public ScrollPane plateauSP(VBox plateau){
 
         ScrollPane sp = new ScrollPane(plateau);
@@ -251,6 +295,10 @@ public class PartieM {
         return sp;
     }
 
+    /**
+     * Crée la partie basse de la vue, contenant la combinaison et les boutons "Valider" et "Supprimer"
+     * @return une HBox
+     */
     public HBox bas(){
         HBox res = new HBox();
         res.setAlignment(Pos.CENTER);

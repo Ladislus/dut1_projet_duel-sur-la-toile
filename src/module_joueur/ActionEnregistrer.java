@@ -1,36 +1,43 @@
 package module_joueur;
 
 import APIMySQL.APIMySQLException;
+import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
+import java.sql.Blob;
 import java.util.Optional;
 
 public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
-  Stage primaryStage;
+  private Stage primaryStage;
+  private Stage secondaryStage;
 
-  Joueur joueur;
+  private Joueur joueur;
 
-  public ActionEnregistrer(Stage primaryStage, Joueur joueur) {
+  public ActionEnregistrer(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     this.primaryStage = primaryStage;
+    this.secondaryStage = secondaryStage;
+
     this.joueur = joueur; }
 
   @Override
   public void handle(ActionEvent actionEvent) {
 
-    EditionProfil page = (EditionProfil) this.primaryStage.getScene().getRoot();
+    EditionProfil page = (EditionProfil) this.secondaryStage.getScene().getRoot();
 
     String email = page.getTfEmail().getText();
     String pseudo = page.getTfPseudo().getText();
     String motdepasse = page.getPfMotDePasse().getText();
     String confirmMotDePasse = page.getPfConfirmMotDePasse().getText();
     String ancientPseudo = joueur.getPseudo();
+
+    //TODO : récupérer l'image' de l'ivImageUser en la transformer en blob
+    Blob blob = (Blob) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + this.joueur.getId()).get("image").get(0);
 
     PasswordDialog confirm = new PasswordDialog();
 
@@ -58,18 +65,16 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             else {
 
-              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo);
+              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, blob);
 
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);
-
-              //TODO : récupérer l'image et la modifier
 
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Edition utilisateur");
               alert.setHeaderText("Votre modification a bien été enregistrer");
 
-              primaryStage.close();
+              secondaryStage.close();
 
               alert.showAndWait(); }}
 

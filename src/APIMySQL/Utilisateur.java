@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import java.sql.Blob;
 import java.sql.SQLException;
 
 import java.util.*;
@@ -49,6 +50,18 @@ public class Utilisateur {
         }
     }
 
+    public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, int active, String mdp, String nomRole, Blob image) throws APIMySQLException {
+        String salt = getSalt();
+        ArrayList<Object> donnees = new ArrayList<>();
+
+        try {
+            Collections.addAll(donnees,pseudo,email,sexe,prenom,nom,active,nomRole,getHash((mdp + salt).getBytes()),salt,image);
+            GestionBD.updatePreparedStatement("INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,prenom,nom,activeUt,nomRole,hash,salt,image) VALUES (?,?,?,?,?,?,?,?,?,?)", donnees);
+        } catch (SQLException e) {
+            throw new APIMySQLException("pseudoTaken");
+        }
+    }
+
     public static boolean isMdpValide(String pseudoUt, String mdp) throws APIMySQLException {
         try {
             String hash = getUserInfo("hash","pseudoUt",pseudoUt);
@@ -67,6 +80,7 @@ public class Utilisateur {
     public static void deactivateUser(String pseudo){
         setUserInfo("activeUt", 0, "pseudoUt", pseudo);
     }
+
     public static void deleteUser(String pseudo) throws SQLException {
         ArrayList<String> pseudoList = new ArrayList<>();
         pseudoList.add(pseudo);
@@ -87,7 +101,7 @@ public class Utilisateur {
 
     public static ArrayList<String> getListeDamis(String pseudo){
         ArrayList<String> listePseudo = new ArrayList<>();
-        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt1 FROM ETREAMI WHERE idUt = "+getIdByPseudo(pseudo)).get("idUt1");
+        List<Object> listeId = GestionBD.selectPreparedStatement("SELECT idUt2 FROM ETREAMI WHERE idUt1 = "+getIdByPseudo(pseudo)).get("idUt2");
         try{
             for(Object elem : listeId){
                 listePseudo.add(String.valueOf(getPseudoById((Integer) elem)));
@@ -100,11 +114,12 @@ public class Utilisateur {
         return listePseudo;
     }
 
-    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse){
+    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, Blob blob){
         int id = getIdByPseudo(ancientMotDePasse);
         String salt = getSalt();
         setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
         setUserInfo("emailUt", email, "idUt", String.valueOf(id));
+        setUserInfo("image", blob, "idUt", String.valueOf(id));
         if(!(motDePasse.length() == 0)){
             setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
             setUserInfo("salt", salt, "idUt", String.valueOf(id));

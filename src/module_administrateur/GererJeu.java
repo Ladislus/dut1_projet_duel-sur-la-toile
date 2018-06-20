@@ -190,7 +190,8 @@ public class GererJeu extends BorderPane {
       ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 
-      return cbjeux;
+      return cbjeux;*/
+      return null;
     }
 
     /** Création du textfield où l'on doit écrire le nom du jeu */

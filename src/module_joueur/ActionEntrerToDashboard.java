@@ -7,11 +7,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class ActionEntrer implements EventHandler<KeyEvent> {
+public class ActionEntrerToDashboard implements EventHandler<KeyEvent> {
 
   private Stage primaryStage;
 
-  public ActionEntrer(Stage primaryStage) { this.primaryStage = primaryStage; }
+  public ActionEntrerToDashboard(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(KeyEvent keyEvent) {
 
