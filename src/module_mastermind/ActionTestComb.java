@@ -3,6 +3,7 @@ package module_mastermind;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 
 public class ActionTestComb implements EventHandler<ActionEvent> {
@@ -20,11 +21,16 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
      */
     public void handle(ActionEvent actionEvent){
         PlateauM plateauM = this.mastermind.getPlateau();
+        Button valider = (Button) actionEvent.getSource();
         if (plateauM.getCombiCour().isFull()){
             plateauM.jouerUnCoup();
             System.out.println(this.mastermind.getPlateau().getListeEssais().size());
             if (plateauM.aTrouveCombi()){
                 this.mastermind.getChrono().stop();
+<<<<<<< HEAD
+=======
+                valider.setDisable(true);
+>>>>>>> b6ecb6fdb30e489c0723ceeda621a7e39e2b51c9
                 Double temps = Double.parseDouble(this.mastermind.getChrono().getTime());
                 int nbEssais = this.mastermind.getPlateau().getListeEssais().size();
 
