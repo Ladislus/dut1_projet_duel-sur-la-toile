@@ -177,7 +177,6 @@ class Dashboard extends BorderPane {
 
       listeBoutton.clear();
       ArrayList<String> btName = Utilisateur.getListeDamis(joueur.getPseudo());
-
     if(!(btName == null)){
       for (String name : btName) {
 
