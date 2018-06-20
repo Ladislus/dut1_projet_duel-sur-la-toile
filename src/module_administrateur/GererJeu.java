@@ -170,12 +170,13 @@ public class GererJeu extends BorderPane {
       return this.bplusdroite;
     }
 
-
+    /** Retourne le bouton à droite de la vue */
     public Button getBoutonDroite(){
       return this.bplusdroite;
     }
 
-
+    /** Création du HBox qui contient le textfield et le bouton à gauche de la vue pour gérer les
+    images*/
     public HBox creerHBoxFileChooserGauche(){
       HBox hbfilechooser = new HBox(5);
       hbfilechooser.getChildren().addAll(creerTextFieldFileChooserGauche(), creerBoutonFileChooserGauche());
@@ -183,7 +184,7 @@ public class GererJeu extends BorderPane {
       return hbfilechooser;
     }
 
-
+    /** Création du ComboBox qui contient le nom des jeux */
     public ComboBox<String> creerComboBoxJeux(){
       ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux().keySet());
       ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
@@ -192,15 +193,15 @@ public class GererJeu extends BorderPane {
       return cbjeux;
     }
 
-
+    /** Création du textfield où l'on doit écrire le nom du jeu */
     public TextField creerTextFieldEtatJeu(){
       TextField tetatjeu = new TextField();
-      tetatjeu.setPromptText("Entrez le nom du jeu");
+      tetatjeu.setPromptText("Entrez l'état du jeu");
 
       return tetatjeu;
     }
 
-
+    /** Création du textarea où l'on doit écrire les règles du jeu */
     public TextArea creerTextAreaRegleJeu(){
       TextArea treglejeu = new TextArea();
       treglejeu.setPromptText("Entrez les règles du jeu");
@@ -210,7 +211,7 @@ public class GererJeu extends BorderPane {
       return treglejeu;
     }
 
-
+    /** Création du ComboBox qui contient les différents modes de jeu */
     public ComboBox<String> creerComboBoxModes(){
       ObservableList<String> optionsmode = FXCollections.observableArrayList("Tour par tour",
         "Score le plus élevé par manche", "Le plus rapide par manche");
@@ -220,7 +221,7 @@ public class GererJeu extends BorderPane {
       return this.cbmodes;
     }
 
-
+    /** Retourne le chiffre correspondant au mode de jeu */
     public int getType(){
       if (((String)(this.cbmodes.getValue())).equals("Tour par tour"))
         return 1;
@@ -233,7 +234,7 @@ public class GererJeu extends BorderPane {
       }
     }
 
-
+    /** Création du VBox contenant toute la partie gauche de la vue (les infos pour modifier un jeu) */
     public VBox creerVBoxDescriptionJeu(){
       VBox vbjeu = new VBox();
       vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldEtatJeu(),
@@ -247,7 +248,7 @@ public class GererJeu extends BorderPane {
       return vbjeu;
     }
 
-
+    /** VBox permettant de créer la partie gauche de la vue */
     public void gauche(){
       VBox gauche = new VBox();
 
@@ -258,7 +259,7 @@ public class GererJeu extends BorderPane {
       this.setLeft(gauche);
     }
 
-
+    /** Création du Label qui affiche "Ajouter un jeu" */
     public Label creerLabelAjouterJeu(){
       Label laddjeu = new Label("Ajouter un jeu");
       laddjeu.setFont(Font.font ("Arial", 18));
@@ -266,19 +267,19 @@ public class GererJeu extends BorderPane {
       return laddjeu;
     }
 
-
+    /** Création du textfield où l'on doit écrire le nom du jeu */
     public TextField creerTextFieldNomJeu(){
       this.tnom.setPromptText("Entrez le nom du jeu");
 
       return this.tnom;
     }
 
-
+    /** Retourne le nom contenu dans le textfield du dessus */
     public String getNom(){
       return this.tnom.getText();
     }
 
-
+    /** Création du textarea où l'on doit écrire la description du jeu */
     public TextArea creerTextAreaDescriptionJeu(){
       this.tdescription.setPrefWidth(80);
       this.tdescription.setWrapText(true);
@@ -287,19 +288,19 @@ public class GererJeu extends BorderPane {
       return this.tdescription;
     }
 
-
+    /** Retourne la description du jeu contenu dans le textarea du dessus */
     public String getRegles(){
       return this.tdescription.getText();
     }
 
-
+    /** Création du Label qui "Activer maintenant ?" */
     public Label creerLabelActiverJeu(){
       Label lactiver = new Label("Activer maintenant ?");
 
       return lactiver;
     }
 
-
+    /** Création du RadioButton qui permet d'activer un jeu */
     public RadioButton creerRadioBoutonActiverJeu(){
       RadioButton rbactiver = new RadioButton("Oui");
       rbactiver.setSelected(true);
@@ -308,7 +309,7 @@ public class GererJeu extends BorderPane {
       return rbactiver;
     }
 
-
+    /** Création du RadioButton qui permet de désactiver un jeu */
     public RadioButton creerRadioBoutonPasActiverJeu(){
       RadioButton rbpasactiver = new RadioButton("Non");
       rbpasactiver.setToggleGroup(this.groupe);
@@ -316,7 +317,7 @@ public class GererJeu extends BorderPane {
       return rbpasactiver;
     }
 
-
+    /** Création du HBox contenant le label d'activer un jeu et les 2 RadioButton juste au dessus */
     public HBox creerHBoxRadioBoutonsActivationJeu(){
       HBox hbactiverjeu = new HBox(18);
       hbactiverjeu.getChildren().addAll(creerLabelActiverJeu(), creerRadioBoutonActiverJeu(),
@@ -325,7 +326,7 @@ public class GererJeu extends BorderPane {
       return hbactiverjeu;
     }
 
-
+    /** Création du Button qui permet d'ajouter un jeu */
     public Button creerBoutonAjouterJeu(){
       ActionAjouterJeu aaj = new ActionAjouterJeu(this);
       Button bajouter = new Button("Ajouter");
@@ -334,7 +335,7 @@ public class GererJeu extends BorderPane {
       return bajouter;
     }
 
-
+    /** Création du HBox contenant le bouton pour ajouter un jeu */
     public HBox creerHBoxBoutonAjouterJeu(){
       HBox hbajouterjeu = new HBox();
       hbajouterjeu.getChildren().add(creerBoutonAjouterJeu());
@@ -343,7 +344,8 @@ public class GererJeu extends BorderPane {
       return hbajouterjeu;
     }
 
-
+    /** Création du HBox contenant le textfield du chemin de l'image choisie dans les fichiers
+    et le bouton qui permet de choisir l'image dans les fichiers pour la partie droite de la vue */
     public HBox creerHBoxFileChooserDroite(){
       HBox hbfilechooser = new HBox(5);
       hbfilechooser.getChildren().addAll(creerTextFieldFileChooserDroite(), creerBoutonFileChooserDroite());
@@ -351,7 +353,7 @@ public class GererJeu extends BorderPane {
       return hbfilechooser;
     }
 
-
+    /** Création du VBox contenant toute la partie droite de la vue (les infos pour ajouter un jeu) */
     public VBox creerVBoxAjouterJeu(){
       VBox vbaddjeu = new VBox(15);
       vbaddjeu.getChildren().addAll(creerLabelAjouterJeu(), creerTextFieldNomJeu(),
@@ -366,7 +368,7 @@ public class GererJeu extends BorderPane {
     }
 
 
-
+    /** VBox permettant d'afficher toute la partie centre/droite de la vue */
     public void centre(){
       VBox centre = new VBox();
       centre.getChildren().add(creerVBoxAjouterJeu());
