@@ -23,6 +23,7 @@ import java.lang.Iterable;
 
 public class GererJeu extends BorderPane {
 
+    /** Attributs de GererJeu */
     private PageAccueil pa;
     private ToggleGroup groupe;
     private TextField tfilechoosergauche;
@@ -33,6 +34,8 @@ public class GererJeu extends BorderPane {
     private TextArea tdescription;
     private ComboBox<String> cbmodes;
 
+
+    /** Constructeur de la page pour gérer les jeux */
     public GererJeu(PageAccueil pa) {
       super();
       this.pa = pa;
@@ -48,6 +51,7 @@ public class GererJeu extends BorderPane {
       this.centre();
     }
 
+    /** Création de l'entête de la page */
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des jeux");
@@ -61,13 +65,14 @@ public class GererJeu extends BorderPane {
     }
 
 
+    /** Création du label qui affiche "Etat du jeu" */
     public Label creerLabelEtatJeu(){
       Label letatjeu = new Label("Etat du jeu : ");
 
       return letatjeu;
     }
 
-
+    /** Création du bouton pour activer un jeu */
     public Button creerBoutonActiverJeu(){
       ActionGererJeuActiver agja = new ActionGererJeuActiver(this);
       Button bactiverjeu = new Button("Activer");
@@ -78,7 +83,7 @@ public class GererJeu extends BorderPane {
       return bactiverjeu;
     }
 
-
+    /** Création du bouton pour désactiver un jeu */
     public Button creerBoutonDesactiverJeu(){
       ActionGererJeuDesactiver agjd = new ActionGererJeuDesactiver(this);
       Button bdesactiverjeu = new Button("Désactiver");
@@ -89,7 +94,8 @@ public class GererJeu extends BorderPane {
       return bdesactiverjeu;
     }
 
-
+    /** Création du HBox qui contient le label "Etat du jeu" et les boutons qui activent
+    et désactivent un jeu */
     public HBox creerHBoxEtatJeu(){
       HBox hbetatjeu = new HBox(30);
       hbetatjeu.getChildren().addAll(creerLabelEtatJeu(), creerBoutonActiverJeu(),
@@ -99,7 +105,7 @@ public class GererJeu extends BorderPane {
     }
 
 
-
+    /** Création du bouton qui permet de sauvegarder les modifications */
     public Button creerBoutonSauvegarderModifs(){
       Button bsave = new Button("Sauvegarder");
       ActionSauvegardeModifsJeu asmj = new ActionSauvegardeModifsJeu(this);
@@ -109,6 +115,7 @@ public class GererJeu extends BorderPane {
       return bsave;
     }
 
+    /** Création du HBox qui contient le bouton pour sauvegarder les modifications */
     public HBox creerHBoxSauvegarder(){
       HBox hbsave = new HBox();
 
@@ -118,31 +125,31 @@ public class GererJeu extends BorderPane {
       return hbsave;
     }
 
-
+    /** Création du textfield qui affiche le lien de l'image choisie à gauche de la vue */
     public TextField creerTextFieldFileChooserGauche(){
       this.tfilechoosergauche.setPromptText("Choisissez une image");
 
       return this.tfilechoosergauche;
     }
 
-
+    /** Retourne le textfield à gauche de la vue */
     public TextField getTextFieldFileChooserGauche(){
       return this.tfilechoosergauche;
     }
 
-
+    /** Création du textfield qui affiche le lien de l'image choisie à droite de la vue */
     public TextField creerTextFieldFileChooserDroite(){
       this.tfilechooserdroite.setPromptText("Choisissez une image");
 
       return this.tfilechooserdroite;
     }
 
-
+    /** Retourne le textfield à droite de la vue */
     public TextField getTextFieldFileChooserDroite(){
       return this.tfilechooserdroite;
     }
 
-
+    /** Retourne le bouton qui permet de choisir une image dans les fichiers à gauche de la vue */
     public Button creerBoutonFileChooserGauche(){
       ActionFileChooser afc = new ActionFileChooser(this);
       bplusgauche.setOnAction(afc);
@@ -150,12 +157,12 @@ public class GererJeu extends BorderPane {
       return this.bplusgauche;
     }
 
-
+    /** Retourne le bouton à gauche de la vue */
     public Button getBoutonGauche(){
       return this.bplusgauche;
     }
 
-
+    /** Création du bouton qui permet de choisir une image dans les fichiers à droite de la vue */
     public Button creerBoutonFileChooserDroite(){
       ActionFileChooser afc = new ActionFileChooser(this);
       this.bplusdroite.setOnAction(afc);

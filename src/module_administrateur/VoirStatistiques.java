@@ -14,8 +14,10 @@ import javafx.collections.*;
 
 public class VoirStatistiques extends BorderPane {
 
+    /** Attribut de VoirStatistiques */
     private PageAccueil pa;
 
+    /** Constructeur de la page pour voir les statistiques */
     public VoirStatistiques(PageAccueil pa) {
         super();
         this.pa = pa;
@@ -24,6 +26,8 @@ public class VoirStatistiques extends BorderPane {
         this.droite();
     }
 
+
+    /** Création de l'entête de la page */
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Statistiques");

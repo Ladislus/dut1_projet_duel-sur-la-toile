@@ -18,6 +18,7 @@ import APIMySQL.*;
 
 public class ProfilJoueur extends BorderPane {
 
+    /** Attributs de ProfilJoueur */
     private GererJoueur gJoueur;
     private PageAccueil pa;
     private ToggleGroup groupe;
@@ -29,6 +30,7 @@ public class ProfilJoueur extends BorderPane {
     private TextField tpseudo;
     private TextField temail;
 
+    /** Constructeur de la page pour gérer les jeux */
     public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
         super();
         this.gJoueur = gJoueur;
@@ -57,6 +59,7 @@ public class ProfilJoueur extends BorderPane {
       return this.temail;
     }
 
+    /** Création de l'entête de la page */
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Profil de "+this.joueur.getPseudo());

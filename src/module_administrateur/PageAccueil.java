@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.ContentDisplay;
+import java.io.InputStream;
 
 public class PageAccueil extends Application {
 
@@ -35,7 +36,7 @@ public class PageAccueil extends Application {
     public VBox bas() {
       VBox bas = new VBox();
       ImageView stat = new ImageView();
-      //stat.setImage(new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png".toURI().toString()));
+      stat.setImage(new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png").toURI().toString()));
       //Button bStat = new Button("Voir les statistiques", new ImageView(stat));
       Button bStat = new Button("Voir les statistiques", stat);
       //bStat.setGraphic(new ImageView(stat));
