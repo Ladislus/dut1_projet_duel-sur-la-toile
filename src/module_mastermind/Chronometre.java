@@ -31,6 +31,10 @@ public class Chronometre extends Label {
         this.setText(""+(200-tpsSec));
     }
 
+    public String getTime(){
+        return this.getText();
+    }
+
     public void start(){
         this.timeline.play();
     }
