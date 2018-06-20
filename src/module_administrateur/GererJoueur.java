@@ -23,6 +23,7 @@ import APIMySQL.*;
 import java.util.HashMap;
 import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
+import java.util.Comparator;
 
 /** Vue de la page pour gérer les joueurs */
 public class GererJoueur extends BorderPane {
@@ -112,6 +113,15 @@ public class GererJoueur extends BorderPane {
             }
         });
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
+
+        estActif.setComparator(new Comparator<Label>() {
+            @Override
+            public int compare(Label l1, Label l2) {
+                if (l1.getText().equals("Activé") && l2.getText().equals("Désactivé"))
+                    return -1;
+                return 1;
+            }
+        });
 
         pseudo.setResizable(false);
         id.setResizable(false);

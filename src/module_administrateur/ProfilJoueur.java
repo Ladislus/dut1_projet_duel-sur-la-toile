@@ -160,8 +160,8 @@ public class ProfilJoueur extends BorderPane {
     }
 
     public HBox creerTGsexe() {
-        this.sexeH = new RadioButton("H");
-        this.sexeF = new RadioButton("F");
+        this.sexeH = new RadioButton("Homme");
+        this.sexeF = new RadioButton("Femme");
         ToggleGroup grp = new ToggleGroup();
         this.sexeH.setToggleGroup(grp);
         this.sexeF.setToggleGroup(grp);

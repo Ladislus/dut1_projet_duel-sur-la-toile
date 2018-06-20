@@ -67,12 +67,12 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
             }
 
             // GESTION MODIF ROLE
-        /**    if (joueur.getRole().equals("USER") && this.pJoueur.getCbrole().getSelectedItem().equals("ADMIN")) {
+            if (joueur.getRole().equals("USER") && this.pJoueur.getCbrole().getValue().equals("Administrateur")) {
                 Utilisateur.setUserInfo("nomRole", "ADMIN", "pseudoUt", this.joueur.getPseudo());
             }
-            else if (joueur.getRole().equals("ADMIN") && this.pJoueur.getCbrole().getSelectedItem().equals("USER")) {
+            else if (joueur.getRole().equals("ADMIN") && this.pJoueur.getCbrole().getValue().equals("Utilisateur")) {
                 Utilisateur.setUserInfo("nomRole", "USER", "pseudoUt", this.joueur.getPseudo());
-            }*/
+            }
 
             // GESTION MODIF EMAIL
             if (!(joueur.getEmail().equals(this.pJoueur.getTFemail()))) {
