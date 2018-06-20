@@ -178,9 +178,10 @@ class Dashboard extends BorderPane {
         ImageView imageContact = new ImageView();
         if (GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt = " + Utilisateur.getIdByPseudo(name) + ";").get("image").get(0) != null)
             imageContact.setImage(GestionBD.bytesToImage((byte[]) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + Utilisateur.getIdByPseudo(name)).get("image").get(0)));
-        else{
+
+        else
             imageContact.setImage(VariablesJoueur.CONTACT);
-        }
+
         imageContact.setPreserveRatio(true);
         imageContact.setFitWidth(35);
 
