@@ -186,9 +186,9 @@ public class Messagerie extends SplitPane {
 
         //recup liste de message entre joueur courant et contact courant
 
-        ArrayList<Object> listeIdMessage = (ArrayList<Object>) GestionBD.selectPreparedStatement("select idMsg from MESSAGE where idUt1 = "+user.getId()+" and idUt2="+Utilisateur.getIdByPseudo(contactCour)).get("idMsg");
+        ArrayList<Object> listeIdMessage1 = (ArrayList<Object>) GestionBD.selectPreparedStatement("select idMsg from MESSAGE where idUt1 = "+user.getId()+" and idUt2="+Utilisateur.getIdByPseudo(contactCour)+" or idUt1 = "+Utilisateur.getIdByPseudo(contactCour)+" and idUt2="+user.getId()).get("idMsg");
 
-        for(Object idMsg : listeIdMessage){
+        for(Object idMsg : listeIdMessage1){
             String nomExp = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt1 from MESSAGE where idMsg = "+idMsg.toString()).get("idUt1").get(0));
             String nomDest = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt2 from MESSAGE where idMsg = "+idMsg.toString()).get("idUt2").get(0));
             Long dateEnvoi = Long.valueOf(0);
