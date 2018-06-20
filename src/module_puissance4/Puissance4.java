@@ -28,7 +28,7 @@ public class Puissance4 extends Application {
     }
 
     /** chemin relatif pour retrouver les images du puissance 4 */
-    public static String chem = "../src/module_puissance4/img/";
+    public static String chem = "./img/module_puissance4/";
 
     /** Le stage principal */
     private Stage primaryStage;
@@ -102,5 +102,9 @@ public class Puissance4 extends Application {
         res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
+    }
+
+    public String getRegle() {
+        return "Connect 4 is a two-player dual game in which the players take turns dropping one colored disc from the top into a seven-column, six-row vertically suspended grid. The pieces fall straight down, occupying the next available space within the column.\n\nThe objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs.";
     }
 }
