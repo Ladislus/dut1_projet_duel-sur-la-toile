@@ -28,6 +28,10 @@ public class GestionBD {
 
     private GestionBD(){}
 
+    public static Connection getCo() {
+        return co;
+    }
+
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
             Statement st = co.createStatement();
@@ -58,6 +62,7 @@ public class GestionBD {
             return res;
         } catch (SQLException e){
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -132,4 +137,6 @@ public class GestionBD {
         } catch (SQLException e){}
         return null;
     }
+
+
 }
