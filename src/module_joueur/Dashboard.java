@@ -199,6 +199,10 @@ class Dashboard extends BorderPane {
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
 
+    ArrayList<Object> listeImage = new ArrayList<>();
+
+    ArrayList<Object> listeRegleJeux = new ArrayList<>();
+
     if(listeJeux.size() > 0) {
 
         for(Object title : listeJeux.get("nomJeu")) {
@@ -208,7 +212,7 @@ class Dashboard extends BorderPane {
 
         for(int i = 0; i < listeTitleJeux.size(); i++) {
 
-          module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
+          //module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i), Jeu.getImageJeu(listeTitleJeux.get(i)), listeRegleJeux.get(i).toString());
 
           //TODO : Recuperer le blob de la BD
           File fileImage = new File("./img/pub/logo.png");
@@ -218,12 +222,12 @@ class Dashboard extends BorderPane {
           ivJeux.setFitWidth(50);
 
           VBox vBoxJeux = new VBox();
-          vBoxJeux.getChildren().addAll(ivJeux, new Label(jeu.getTitle()));
+          vBoxJeux.getChildren().addAll(ivJeux, new Label("jeu"));
           vBoxJeux.setAlignment(Pos.TOP_CENTER);
           vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
           vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
           vBoxJeux.setPadding(new Insets(9,15,0,15));
-          vBoxJeux.setOnMouseClicked(new ActionToMainJeux(jeu));
+          //vBoxJeux.setOnMouseClicked(new ActionToMainJeux(jeu));
 
           hJeux.getChildren().add(vBoxJeux); }}}
 

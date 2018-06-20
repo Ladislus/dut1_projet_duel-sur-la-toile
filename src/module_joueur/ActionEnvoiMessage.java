@@ -20,19 +20,19 @@ public class ActionEnvoiMessage implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             String newMsg = this.messagerie.getBarreText();
-            this.messagerie.getBarre().clear();
+            if (newMsg.length()>0) {
+                this.messagerie.getBarre().clear();
+                this.messagerie.ajouteMessage(newMsg);
 
-            try {
-                Message.creerMessage(newMsg,this.messagerie.getUser().getId(),Utilisateur.getIdByPseudo(this.messagerie.getContactCour()));
-            }
-            catch (APIMySQLException e) {
-                e.printStackTrace();
-            }
-            catch (NullPointerException e){
-                e.printStackTrace();
-            }
+                try {
+                    Message.creerMessage(newMsg, this.messagerie.getUser().getId(), Utilisateur.getIdByPseudo(this.messagerie.getContactCour()));
+                } catch (APIMySQLException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
 
-            this.messagerie.majMessages();
+            }
         }
     }
 }
