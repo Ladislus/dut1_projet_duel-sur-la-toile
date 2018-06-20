@@ -1,5 +1,9 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
+import APIMySQL.Utilisateur;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -35,7 +39,7 @@ public class Messagerie extends SplitPane {
     public Messagerie(Joueur joueur){
         super();
 
-        this.lesContacts = new ArrayList<>();
+        this.lesContacts = Utilisateur.getListeDamis(joueur.getPseudo());
         // ÉCRIRE FONCTION JDBC POUR OBTENIR LISTE DES CONTACTS
 
         this.user = joueur;
@@ -136,10 +140,11 @@ public class Messagerie extends SplitPane {
 
         this.sp = new ScrollPane(lesMessages);
         this.sp.setMinHeight(550.);
-
+        sp.setVvalue(1D);
         this.barre = new TextField();
         this.barre.setPromptText("Écrire un message...");
         this.barre.setOnKeyReleased(new ActionEnvoiMessage(this));
+        this.setOnMouseMoved(mouseEvent -> this.majMessages());
 
         this.majMessages();
 
@@ -148,21 +153,24 @@ public class Messagerie extends SplitPane {
     }
 
     public void majMessages() {
+        System.out.println("zzz");
+
         this.lesMessages.getChildren().clear();
         for (MessageModele msg : this.getMessages(this.nomContactCour)){
             MessageVue newMsg = new MessageVue(msg);
             newMsg.setIsFromUser(msg.getNomExp().equals(this.user.getPseudo()));
             this.lesMessages.getChildren().add(newMsg);
         }
+        lesMessages.heightProperty().addListener(observable -> sp.setVvalue(1D));
         this.sp.setContent(this.lesMessages);
     }
 
     private List<MessageModele> getMessagesACC() {
         List<MessageModele> res = new ArrayList<>();
 
-        res.add(new MessageModele("ACCUEIL","Mathieu",0,"Bonjour "+this.user.getPseudo()+" !"));
-        res.add(new MessageModele("Mathieu","ACCUEIL",0,"Euh... Bonjour !"));
-        res.add(new MessageModele("ACCUEIL","Mathieu",0,"Bienvenue sur la Messagerie de \n  >> Duel sur la Toile <<\nCet accueil me permet de vous guider.\nÀ gauche, vous avez la fenêtre des contacts, que vous pouvez agrandir, mais aussi rétrécir quand vous utilisez la partie à gauche, où se trouvent toute la conversation avec le contact sélectionné !\nEn bas, vous trouverez la barre de message, utile pour... envoyer un message.\nEssayez !"));
+        res.add(new MessageModele("ACCUEIL",this.user.getPseudo(),0,"Bonjour "+this.user.getPseudo()+" !"));
+        res.add(new MessageModele(this.user.getPseudo(),"ACCUEIL",0,"Euh... Bonjour !"));
+        res.add(new MessageModele("ACCUEIL",this.user.getPseudo(),0,"Bienvenue sur la Messagerie de \n  >> Duel sur la Toile <<\nCet accueil me permet de vous guider.\nÀ gauche, vous avez la fenêtre des contacts, que vous pouvez agrandir, mais aussi rétrécir quand vous utilisez la partie à gauche, où se trouvent toute la conversation avec le contact sélectionné !\nEn bas, vous trouverez la barre de message, utile pour... envoyer un message.\nEssayez !"));
         return res;
     }
 
@@ -176,8 +184,18 @@ public class Messagerie extends SplitPane {
 
         List<MessageModele> res = new ArrayList<>();
 
+        //recup liste de message entre joueur courant et contact courant
 
+        ArrayList<Object> listeIdMessage = (ArrayList<Object>) GestionBD.selectPreparedStatement("select idMsg from MESSAGE where idUt1 = "+user.getId()+" and idUt2="+Utilisateur.getIdByPseudo(contactCour)).get("idMsg");
 
+        for(Object idMsg : listeIdMessage){
+            String nomExp = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt1 from MESSAGE where idMsg = "+idMsg.toString()).get("idUt1").get(0));
+            String nomDest = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt2 from MESSAGE where idMsg = "+idMsg.toString()).get("idUt2").get(0));
+            Long dateEnvoi = Long.valueOf(0);
+            String contenue =(String) GestionBD.selectPreparedStatement("select contenuMsg from MESSAGE where idMsg = "+idMsg.toString()).get("contenuMsg").get(0);
+            MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi, contenue);
+            res.add(messageModele);
+        }
         return res;
     }
 
@@ -208,9 +226,11 @@ public class Messagerie extends SplitPane {
     }
 
     private List<String> onglets() {
-        List<String> res = new ArrayList<>(Arrays.asList("Bernard","Maffiou","Bordercraft","LuK","Benjam1","Valent1","Benjam2","LéOchocOLa","CoucousEat","Mattew","Antonio","LeProGamer45","BossDuGame","TonAmiWoody","MarioLeVrai","AlainSoralOfficiel"));
-
+        List<String> res = lesContacts;
         return res;
     }
 
+    public TextField getBarre() {
+        return barre;
+    }
 }
