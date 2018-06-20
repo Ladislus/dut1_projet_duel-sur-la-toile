@@ -99,6 +99,12 @@ public class GestionBD {
         return res;
     }
 
+    public static Blob createBlob(byte[] bytes) throws SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,bytes);
+        return res;
+    }
+
     public static Image blobToImage(Blob blob){
         try {
             Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
