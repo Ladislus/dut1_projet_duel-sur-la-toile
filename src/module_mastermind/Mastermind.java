@@ -1,5 +1,8 @@
 package module_mastermind;
 
+import APIMySQL.APIMySQLException;
+import APIMySQL.GestionBD;
+import APIMySQL.Jeu;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -21,7 +24,7 @@ import java.util.HashMap;
 public class Mastermind extends Application {
 
     private Stage primaryStage;
-    private static String chem = "../src/module_mastermind/img/";
+    private static String chem = "src/module_mastermind/img/";
     private HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
@@ -41,6 +44,10 @@ public class Mastermind extends Application {
         this.attribution.put("Accueil",this.pageAccueil());
         this.attribution.put("Nouvelle Partie",new ChoixJoueurM(this).getScene("Nouvelle Partie"));
         this.attribution.put("Reprendre Partie",new ChoixJoueurM(this).getScene("Reprendre Partie"));
+        try{
+            Jeu.creerJeu("Mastermind","règles mastermind","jar/Mastermind.jar",1,"jar/Mastermind.jar");
+        }
+        catch (APIMySQLException a){}
 
         this.primaryStage = primaryStage;
 
