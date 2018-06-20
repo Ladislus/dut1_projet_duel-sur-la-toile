@@ -111,8 +111,9 @@ class Dashboard extends BorderPane {
     Label lListeDamis = new Label("Ma liste d'ami");
     lListeDamis.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
-    //TODO
-    Button btMessage = new Button("4 messages non lu");
+    //TODO : Mettre si des messages sont non lus
+    Button btMessage = new Button("Messagerie");
+    btMessage.setOnAction(new ActionToMessagerie());
     btMessage.setPrefWidth(150);
 
     Button btListeDamis = new Button("Invitation");
