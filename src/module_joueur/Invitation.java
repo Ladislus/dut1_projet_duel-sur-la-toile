@@ -62,7 +62,7 @@ public class Invitation extends BorderPane {
         lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
         tfSearch.setPromptText("Rechercher un joueur ...");
-        tfSearch.setOnKeyReleased(new ActionRechercherJoueur(this));
+        tfSearch.setOnKeyReleased(new ActionRechercherJoueur(this, this.joueur));
 
         VBox vRechercherJoueurTf = new VBox();
         vRechercherJoueurTf.setPadding(new Insets(15,9,16,9));

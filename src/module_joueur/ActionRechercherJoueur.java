@@ -2,6 +2,7 @@ package module_joueur;
 
 import APIMySQL.GestionBD;
 
+import APIMySQL.Utilisateur;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
@@ -12,11 +13,15 @@ public class ActionRechercherJoueur implements EventHandler<KeyEvent> {
 
     private Invitation invitation;
 
+    private Joueur joueur;
+
     private List<Object> listeDeJoueur;
 
-    public ActionRechercherJoueur(Invitation invitation) {
+    public ActionRechercherJoueur(Invitation invitation, Joueur joueur) {
 
         this.invitation = invitation;
+
+        this.joueur = joueur;
 
         this.listeDeJoueur = new ArrayList<>(); }
 
@@ -34,4 +39,16 @@ public class ActionRechercherJoueur implements EventHandler<KeyEvent> {
         else {
 
             listeDeJoueur = GestionBD.selectPreparedStatement("select pseudoUt from UTILISATEUR where pseudoUt like '" + invitation.getTfSearch().getText() + "%'").get("pseudoUt");
+
+
+
+            for (Object amiJoueur : listeDeJoueur){
+
+                List<Object> listeBon = new ArrayList<>();
+
+                if (!Utilisateur.getListeDamis(this.joueur.getPseudo()).contains(amiJoueur.toString()))
+                    listeBon.add(amiJoueur);
+
+                this.listeDeJoueur = listeBon; }
+
             invitation.majAffichageListeJoueur(listeDeJoueur); }}}
