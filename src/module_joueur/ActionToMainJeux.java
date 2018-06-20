@@ -7,21 +7,15 @@ import javafx.stage.Stage;
 
 public class ActionToMainJeux implements EventHandler<MouseEvent>{
 
-    private Stage primaryStage;
-
     private Jeu jeu;
 
-    public ActionToMainJeux(Stage primaryStage, Jeu jeu) {
-
-        this.primaryStage = primaryStage;
-        this.jeu = jeu; }
+    public ActionToMainJeux(Jeu jeu) { this.jeu = jeu; }
 
     @Override
     public void handle(MouseEvent mouseEvent) {
+
         Stage stageMainJeux = new Stage();
         stageMainJeux.setTitle(jeu.getTitle());
         stageMainJeux.setResizable(false);
-        stageMainJeux.setScene(new Scene(new MainJeux(primaryStage, jeu), 600, 400));
-        stageMainJeux.show();
-    }
-}
+        stageMainJeux.setScene(new Scene(new MainJeux(stageMainJeux, jeu), 600, 400));
+        stageMainJeux.show(); }}

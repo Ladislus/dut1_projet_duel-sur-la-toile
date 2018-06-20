@@ -258,7 +258,7 @@ public class PartieM {
         Button aide = new Button("?");
         aide.setFont(Font.font("Verdana", FontWeight.BOLD,25));
         aide.setTextFill(Color.WHITE);
-        aide.setStyle("-fx-background-color: #202020");
+        aide.setStyle("-fx-background-color: #202020;");
         aide.setOnAction(new ActionHelpM());
 
 

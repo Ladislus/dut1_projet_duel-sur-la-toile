@@ -11,7 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.sql.Blob;
+import java.io.File;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 class EditionProfil extends BorderPane {
 
@@ -21,6 +24,8 @@ class EditionProfil extends BorderPane {
 
   private Stage primaryStage;
   private Stage secondaryStage;
+
+  private Path imagePath;
 
   private Joueur joueur;
 
@@ -49,12 +54,10 @@ class EditionProfil extends BorderPane {
     Label lImage = new Label("Mon image");
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
-    //TODO : si blob non-null, mettre l'image du joueur
-
     this.ivImageUser = new ImageView();
 
-    if (GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0) != null)
-      ivImageUser.setImage(GestionBD.blobToImage((Blob) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0)));
+    if (GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0) != null)
+      ivImageUser.setImage(GestionBD.bytesToImage((byte[]) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + this.joueur.getId()).get("image").get(0)));
 
     else
       ivImageUser.setImage(VariablesJoueur.USER);
@@ -62,16 +65,16 @@ class EditionProfil extends BorderPane {
     ivImageUser.setPreserveRatio(true);
     ivImageUser.setFitWidth(50);
 
-    //fin
-
     Button btModifier = new Button("Modifier");
     btModifier.setOnAction(actionEvent -> {
 
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Open Resource File");
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-      Image selectedFile = new Image(fileChooser.showOpenDialog(primaryStage).toURI().toString());
-      if (selectedFile != null) { ivImageUser.setImage(selectedFile); }});
+      File selectedFile = fileChooser.showOpenDialog(primaryStage);
+      if (selectedFile != null) {
+        this.imagePath = Paths.get(selectedFile.getAbsolutePath());
+        ivImageUser.setImage(new Image(selectedFile.toURI().toString())); }});
 
     ImageView ivImageEditPseudo = new ImageView();
     ivImageEditPseudo.setImage(VariablesJoueur.EDIT);
@@ -124,7 +127,7 @@ class EditionProfil extends BorderPane {
     tfEmail.setText(joueur.getEmail());
     tfEmail.setDisable(true);
 
-    Button btEditionEmail = new Button("",ivImageEdit);
+    Button btEditionEmail = new Button("", ivImageEdit);
     btEditionEmail.setOnAction(actionEvent -> tfEmail.setDisable(false));
 
     HBox hEmail = new HBox();
@@ -149,6 +152,7 @@ class EditionProfil extends BorderPane {
 
     Button btEditionMotPasse = new Button("", ivImageEditMdp);
     btEditionMotPasse.setOnAction(actionEvent -> {
+
       pfMotDePasse.setDisable(false);
       pfConfirmMotDePasse.setDisable(false); });
 
@@ -219,4 +223,4 @@ class EditionProfil extends BorderPane {
 
   public PasswordField getPfConfirmMotDePasse() { return this.pfConfirmMotDePasse; }
 
-  public ImageView getImageView() { return this.ivImageUser; }}
+  public Path getImagePath() { return this.imagePath; }}

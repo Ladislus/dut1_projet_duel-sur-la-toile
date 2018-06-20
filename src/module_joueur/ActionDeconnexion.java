@@ -21,11 +21,15 @@ public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("INFORMATION");
-    alert.setHeaderText("Voulez-vous vraiment vous deconnecter ?");
+    alert.setHeaderText("Voulez-vous vraiment vous déconnecter ?");
+
     ButtonType okButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
     ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
+
     alert.getButtonTypes().setAll(okButton, noButton);
+
     alert.showAndWait().ifPresent(type -> {
+
       if (type.getButtonData().toString().equals("YES")) {
         this.primaryStage.setTitle(connexion.getTitle());
         this.primaryStage.setScene(new Scene(connexion, VariablesJoueur.DEFAULT_CONNECTION_WIDTH, VariablesJoueur.DEFAULT_CONNECTION_HEIGHT)); }}); }}

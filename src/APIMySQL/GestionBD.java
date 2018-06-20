@@ -20,13 +20,17 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "");
+            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     private GestionBD(){}
+
+    public static Connection getCo() {
+        return co;
+    }
 
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
@@ -58,6 +62,7 @@ public class GestionBD {
             return res;
         } catch (SQLException e){
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -132,4 +137,6 @@ public class GestionBD {
         } catch (SQLException e){}
         return null;
     }
+
+
 }
