@@ -40,6 +40,5 @@ public class ActionCheckActiver implements EventHandler<ActionEvent> {
             this.gJoueur.getButtonActiver().setDisable(false);
             this.gJoueur.getButtonDesactiver().setDisable(false);
         }
-        System.out.println(this.a.getListeModif());
     }
 }

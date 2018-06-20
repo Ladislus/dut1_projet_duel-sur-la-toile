@@ -25,6 +25,9 @@ public class ProfilJoueur extends BorderPane {
 
     private RadioButton rbactiver;
     private RadioButton rbpasactiver;
+    private RadioButton sexeH;
+    private RadioButton sexeF;
+    private ComboBox<String> cbrole;
 
     private ToggleGroup groupe;
     private TextField tfilechooser;
@@ -51,24 +54,40 @@ public class ProfilJoueur extends BorderPane {
         return this.rbactiver;
     }
 
+    public ComboBox<String> getCbrole() {
+        return this.cbrole;
+    }
+
     public RadioButton getRbpasactiver() {
         return this.rbpasactiver;
     }
 
-    public TextField getTFpseudo() {
-        return this.tpseudo;
+    public String getTFpseudo() {
+        return this.tpseudo.getText();
     }
 
-    public TextField getTFprenom() {
-        return this.temail;
+    public RadioButton getSexeH() {
+        return this.sexeH;
     }
 
-    public TextField getTFnom() {
-        return this.temail;
+    public RadioButton getSexeF() {
+        return this.sexeF;
     }
 
-    public TextField getTFemail() {
-        return this.temail;
+    public PageAccueil getPa() {
+        return this.pa;
+    }
+
+    public String getTFprenom() {
+        return this.tprenom.getText();
+    }
+
+    public String getTFnom() {
+        return this.tnom.getText();
+    }
+
+    public String getTFemail() {
+        return this.temail.getText();
     }
 
     /** Création du haut de la page avec le titre et le bouton retour */
@@ -141,19 +160,19 @@ public class ProfilJoueur extends BorderPane {
     }
 
     public HBox creerTGsexe() {
-        RadioButton sexeH = new RadioButton("H");
-        RadioButton sexeF = new RadioButton("F");
+        this.sexeH = new RadioButton("H");
+        this.sexeF = new RadioButton("F");
         ToggleGroup grp = new ToggleGroup();
-        sexeH.setToggleGroup(grp);
-        sexeF.setToggleGroup(grp);
+        this.sexeH.setToggleGroup(grp);
+        this.sexeF.setToggleGroup(grp);
         HBox h = new HBox();
-        h.getChildren().addAll(sexeH, sexeF);
+        h.getChildren().addAll(this.sexeH, this.sexeF);
         h.setSpacing(10);
-        if (this.joueur.getSexe().equals("H")) {
-            sexeH.setSelected(true);
+        if (this.joueur.getSexe().equals("M")) {
+            this.sexeH.setSelected(true);
         }
         else {
-            sexeF.setSelected(true);
+            this.sexeF.setSelected(true);
         }
         return h;
     }
@@ -165,15 +184,15 @@ public class ProfilJoueur extends BorderPane {
 
     public ComboBox creerCBrole() {
         ObservableList<String> optionsRoles = FXCollections.observableArrayList("Utilisateur", "Administrateur");
-        ComboBox<String> cbrole = new ComboBox<String>(optionsRoles);
+        this.cbrole = new ComboBox<String>(optionsRoles);
         cbrole.setPrefWidth(175);
         if (this.joueur.getRole().equals("USER")) {
-            cbrole.setValue("Utilisateur");
+            this.cbrole.setValue("Utilisateur");
         }
         else {
-            cbrole.setValue("Administrateur");
+            this.cbrole.setValue("Administrateur");
         }
-        return cbrole;
+        return this.cbrole;
     }
 
     public GridPane creerVBoxInfos(){
@@ -192,8 +211,8 @@ public class ProfilJoueur extends BorderPane {
         gp.add(creerTGsexe(), 2, 6);
         gp.add(creerLabelRole(), 1, 7);
         gp.add(creerCBrole(), 2, 7);
-        gp.setHgap(20);
-        gp.setVgap(5);
+        gp.setHgap(25);
+        gp.setVgap(7);
         return gp;
     }
 
@@ -202,8 +221,8 @@ public class ProfilJoueur extends BorderPane {
         this.rbpasactiver = new RadioButton("Désactivé");
         this.rbactiver.setToggleGroup(this.groupe);
         this.rbpasactiver.setToggleGroup(this.groupe);
-        HBox hbactiverjoueur = new HBox(20);
-        hbactiverjoueur.getChildren().addAll(new Label("État du compte :"), rbactiver, rbpasactiver);
+        HBox hbactiverjoueur = new HBox();
+        hbactiverjoueur.getChildren().addAll(new Label("État du compte :"), this.rbactiver, this.rbpasactiver);
         if (Utilisateur.isActivated(this.joueur.getPseudo())) {
             this.rbactiver.setSelected(true);
         }
@@ -228,7 +247,7 @@ public class ProfilJoueur extends BorderPane {
     }
 
     public Label creerLabelImageProfil(){
-        Label limageprofil = new Label("Image de profil");
+        Label limageprofil = new Label("Image de profil :");
         return limageprofil;
     }
 
@@ -236,7 +255,6 @@ public class ProfilJoueur extends BorderPane {
         this.tfilechooser.setPromptText("Choisissez une image");
         return this.tfilechooser;
     }
-
 
     public TextField getTextFieldFileChooser(){
         return this.tfilechooser;
@@ -250,14 +268,14 @@ public class ProfilJoueur extends BorderPane {
     }
 
     public HBox creerHBoxFileChooser(){
-        HBox hbfilechooser = new HBox(5);
+        HBox hbfilechooser = new HBox();
         hbfilechooser.getChildren().addAll(creerTextFieldFileChooser(), creerBoutonFileChooser());
         return hbfilechooser;
     }
 
 
     public void gauche() {
-        VBox vbgauche = new VBox(18);
+        VBox vbgauche = new VBox(10);
         vbgauche.getChildren().addAll(creerVBoxInfos(), creerLabelImageProfil(),
                   creerHBoxFileChooser(), creerRadioBoutonActiverJoueur(), creerHBoxSauvegarderModifs());
         vbgauche.setPadding(new Insets(0,0,0,25));
@@ -322,7 +340,7 @@ public class ProfilJoueur extends BorderPane {
     public void centre() {
         VBox vbcentre = new VBox(15);
         vbcentre.getChildren().addAll(creerVBoxStats(), creerPieChart());
-        vbcentre.setPadding(new Insets(40,25,20,25));
+        vbcentre.setPadding(new Insets(20,25,20,25));
         this.setCenter(vbcentre);
     }
 

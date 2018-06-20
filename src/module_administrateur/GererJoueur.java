@@ -22,6 +22,7 @@ import javafx.beans.property.SimpleStringProperty;
 import APIMySQL.*;
 import java.util.HashMap;
 import java.util.List;
+import javafx.beans.property.SimpleObjectProperty;
 
 /** Vue de la page pour gérer les joueurs */
 public class GererJoueur extends BorderPane {
@@ -84,9 +85,9 @@ public class GererJoueur extends BorderPane {
         TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
         TableColumn<Joueur, String> role = new TableColumn<Joueur, String>("Rôle");
         TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
-        TableColumn<Joueur, String> estActif = new TableColumn<Joueur, String>("Statut");
+        TableColumn<Joueur, Label> estActif = new TableColumn<Joueur, Label>("Statut");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<Joueur, CheckBox>("✓");
-        
+
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         role.setCellValueFactory(celldata -> {
@@ -100,10 +101,14 @@ public class GererJoueur extends BorderPane {
         profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         estActif.setCellValueFactory(celldata -> {
             if (celldata.getValue().getEstActif()) {
-                return new SimpleStringProperty("Activé");
+                Label l = new Label("Activé");
+                l.setTextFill(Color.web("#009e0f"));
+                return new SimpleObjectProperty<>(l);
             }
             else {
-                return new SimpleStringProperty("Désactivé");
+                Label l = new Label("Désactivé");
+                l.setTextFill(Color.web("#cf2a27"));
+                return new SimpleObjectProperty<>(l);
             }
         });
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
@@ -123,11 +128,11 @@ public class GererJoueur extends BorderPane {
         activer.setPrefWidth(53);
 
         pseudo.setStyle( "-fx-alignment: CENTER;");
-        id.setStyle( "-fx-alignment: CENTER;");   
-        role.setStyle( "-fx-alignment: CENTER;");   
-        profil.setStyle( "-fx-alignment: CENTER;");   
-        estActif.setStyle( "-fx-alignment: CENTER;");   
-        activer.setStyle( "-fx-alignment: CENTER;");   
+        id.setStyle( "-fx-alignment: CENTER;");
+        role.setStyle( "-fx-alignment: CENTER;");
+        profil.setStyle( "-fx-alignment: CENTER;");
+        estActif.setStyle( "-fx-alignment: CENTER;");
+        activer.setStyle( "-fx-alignment: CENTER;");
 
         ObservableList<Joueur> liste = getListeJoueursTableView();
         table.setItems(liste);
@@ -203,6 +208,7 @@ public class GererJoueur extends BorderPane {
         VBox entete = new VBox();
         Label l = new Label("Liste de tous les joueurs");
         l.setPadding(new Insets(0,0,5,20));
+        entete.setPadding(new Insets(0,0,0,3));
         entete.getChildren().addAll(l, creerBouton());
         return entete;
     }

@@ -30,7 +30,7 @@ public class ActionDesactiverJoueur implements EventHandler<ActionEvent> {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation de la désactivation");
         alert.setHeaderText("Confirmation de désactivation de joueur");
-        alert.setContentText("Voulez-vous vraiment désactiver le(s) joueur(s) coché(s) ?");
+        alert.setContentText("Voulez-vous vraiment désactiver le(s)\njoueur(s) coché(s) ?");
         alert.getButtonTypes().setAll(btoui, btnon);
         Optional<ButtonType> result = alert.showAndWait();
 
