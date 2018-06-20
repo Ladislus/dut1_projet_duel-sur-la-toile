@@ -223,7 +223,7 @@ public class PartieM {
         quitter.setOnAction(new ActionQuitterM(m));
 
         Button rejouer = new Button("Rejouer");
-        rejouer.setOnAction(new ActionRejouer(m));
+        rejouer.setOnAction(new ActionRejouer(this));
 
         quitterRejouer.getChildren().addAll(quitter,rejouer);
 
