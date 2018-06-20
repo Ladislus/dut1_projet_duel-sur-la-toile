@@ -23,10 +23,6 @@ import java.util.jar.JarEntry;
 
 public class PartieM {
 
-    public static String chem = "img/module_mastermind/";
-
-    public List<Button> listeCouleurs;
-
     private PlateauM p;
 
     private Joueur j1,j2;
