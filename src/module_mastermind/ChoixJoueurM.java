@@ -15,10 +15,10 @@ import javafx.scene.text.FontWeight;
 import java.io.File;
 import java.util.*;
 
-import static module_puissance4.Puissance4.chem;
-
 public class ChoixJoueurM {
     // Vue de la fenêtre pour choisir contre qui jouer
+
+    private static String chem = "../src/module_mastermind/pub/";
 
     private Mastermind mastermind;
 
@@ -128,8 +128,15 @@ public class ChoixJoueurM {
 
 
         int i = 0;
+
+        Button bAleatoire = new Button("Aléatoire");
+        bAleatoire.setPrefSize(200.,60.);
+        this.contacts.add(bAleatoire,i%3,i/3);
+
+        i++;
+
         for (String nom : this.listeCour){
-            ImageView img = new ImageView(new Image(new File(chem+"../pub/contact.png").toURI().toString()));
+            ImageView img = new ImageView(new Image(new File(chem+"contact.png").toURI().toString()));
             img.setPreserveRatio(true);
             img.setFitHeight(50.);
             Button b = new Button(nom,img);
@@ -137,10 +144,9 @@ public class ChoixJoueurM {
             b.setContentDisplay(ContentDisplay.LEFT);
             b.setPrefSize(200.,50.);
             b.setFont(Font.font("Verdana",FontWeight.NORMAL,15));
-            b.setOnAction(event -> this.mastermind.newGame("Naruto","Sasque"));
+            b.setOnAction(event -> this.mastermind.newGame("Naruto",b.getText()));
             this.contacts.add(b,i%3,i/3);
             i++;
         }
-
     }
 }

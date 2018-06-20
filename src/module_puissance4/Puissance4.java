@@ -28,7 +28,7 @@ public class Puissance4 extends Application {
     }
 
     /** chemin relatif pour retrouver les images du puissance 4 */
-    public static String chem = "./img/module_puissance4/";
+    public static String chem = "../src/module_puissance4/img/";
 
     /** Le stage principal */
     private Stage primaryStage;
