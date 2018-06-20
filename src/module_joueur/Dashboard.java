@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import APIMySQL.Jeu;
 import APIMySQL.Utilisateur;
 
@@ -175,9 +176,13 @@ class Dashboard extends BorderPane {
       for (String name : btName) {
 
         ImageView imageContact = new ImageView();
-        imageContact.setImage(VariablesJoueur.CONTACT);
+        if (GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt = " + Utilisateur.getIdByPseudo(name) + ";").get("image").get(0) != null)
+            imageContact.setImage(GestionBD.bytesToImage((byte[]) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + Utilisateur.getIdByPseudo(name)).get("image").get(0)));
+        else{
+            imageContact.setImage(VariablesJoueur.CONTACT);
+        }
         imageContact.setPreserveRatio(true);
-        imageContact.setFitWidth(20);
+        imageContact.setFitWidth(35);
 
         Button btContact = new Button(name, imageContact);
         btContact.setPrefWidth(150);
