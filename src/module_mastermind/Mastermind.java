@@ -1,7 +1,6 @@
 package module_mastermind;
 
 import APIMySQL.APIMySQLException;
-import APIMySQL.GestionBD;
 import APIMySQL.Jeu;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,13 +17,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 public class Mastermind extends Application {
 
     private Stage primaryStage;
-    private static String chem = "src/module_mastermind/img/";
+    public static final String chem = "/img/module_mastermind/";
     private HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
@@ -85,10 +84,9 @@ public class Mastermind extends Application {
     private HBox boutonsAccueil() {
         HBox res = new HBox();
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
-
-        File imageami = new File(chem+"jouerAmi.png");
         ImageView ami = new ImageView();
-        ami.setImage(new Image(imageami.toURI().toString()));
+        try {
+            ami.setImage(new Image(getClass().getResource(chem+"jouerAmi.png").toURI().toString()));
 
         Button b1 = new Button("Nouveau duel",ami);
         b1.setFont(bouton);
@@ -97,9 +95,8 @@ public class Mastermind extends Application {
         b1.setOnAction(event -> this.setScene("Nouvelle Partie"));
         res.getChildren().add(b1);
 
-        File continu = new File(chem+"continuerPartie.png");
         ImageView continuerPartie = new ImageView();
-        continuerPartie.setImage(new Image(continu.toURI().toString()));
+        continuerPartie.setImage(new Image(getClass().getResource(chem+"continuerPartie.png").toURI().toString()));
 
         Button b2 = new Button("Reprendre partie", continuerPartie);
         b2.setFont(bouton);
@@ -112,6 +109,10 @@ public class Mastermind extends Application {
         res.setSpacing(25);
         res.setPadding(new Insets(0,0,40,0));
         return res;
+        } catch (URISyntaxException e) {
+        e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -119,12 +120,13 @@ public class Mastermind extends Application {
      */
     private Scene pageAccueil(){
         BorderPane res = new BorderPane();
-
-        res.setCenter(new ImageView(new Image(new File(chem+"mastermind_logo1.png").toURI().toString())));
+        try {
+            res.setCenter(new ImageView(new Image(getClass().getResource(chem+"mastermind_logo1.png").toURI().toString())));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
-
-
 }
 
