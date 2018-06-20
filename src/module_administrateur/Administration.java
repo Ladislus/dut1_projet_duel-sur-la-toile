@@ -29,14 +29,9 @@ public class Administration {
         this.listeJmodifStatut.add(joueur);
     }
 
-<<<<<<< HEAD
-    public int cptJoueurActiver() {
-        return GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
-=======
     /** Retire de la liste les joueurs à changer de statut (activé/désactivé) */
     public void retirerListeModif(Joueur joueur) {
         this.listeJmodifStatut.remove(joueur);
->>>>>>> 35328a1bd01b801eeda223d3d456a209961ef8ba
     }
 
     /** Retourne la liste des joueurs à changer de statut (activé/désactivé) */
@@ -62,5 +57,4 @@ public class Administration {
     public void activerJoueur(Joueur j) {
         Utilisateur.setUserInfo("activeUt", 1, "pseudoUt", j.getPseudo());
     }
-
 }

@@ -70,6 +70,7 @@ public class Joueur {
     return this.activer;
   }
 
+  /** Pour afficher le pseudo du joueur */
   public String toString() {
     return this.pseudo;
   }

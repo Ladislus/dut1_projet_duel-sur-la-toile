@@ -1,27 +1,23 @@
 package module_administrateur;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.cell.*;
-import javafx.geometry.Pos;
 import javafx.beans.property.SimpleStringProperty;
 import APIMySQL.*;
 import java.util.HashMap;
 import java.util.List;
+import javafx.beans.property.SimpleObjectProperty;
+import java.util.Comparator;
 
 /** Vue de la page pour gérer les joueurs */
 public class GererJoueur extends BorderPane {
@@ -49,96 +45,21 @@ public class GererJoueur extends BorderPane {
         return this.desactiver;
     }
 
-<<<<<<< HEAD
-    /** Création du bouton pour activer les joueurs cochés */
-    public Button creerBoutonActiver() {
-        this.activer = new Button("Activer");
-        this.activer.setDisable(true);
-        this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
-        this.activer.setTextFill(Color.web("white"));
-        this.activer.setPrefWidth(200);
-        this.activer.setPrefHeight(50);
-        this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
-        return this.activer;
+    /** Remplace la liste de joueurs actuelle par la nouvelle en paramètre */
+    public void setListeJoueurTB(ObservableList<Joueur> liste) {
+        this.listeJoueur = liste;
     }
 
-    /** Création du bouton pour supprimer les joueurs cochés */
-    public Button creerBoutonSupprimer() {
-        this.supprimer = new Button("Supprimer");
-        this.supprimer.setDisable(true);
-        ActionSupprimerJoueur asj = new ActionSupprimerJoueur(this);
-        this.supprimer.setStyle("-fx-background-color: #cf2a27;-fx-border-color: black");
-        this.supprimer.setTextFill(Color.web("white"));
-        this.supprimer.setPrefWidth(200);
-        this.supprimer.setPrefHeight(50);
-        this.supprimer.setOnAction(asj);
-        return this.supprimer;
+    /** Retourne la barre de recherche de joueur */
+    public TextField getRecherche() {
+        return this.recherche;
     }
 
-    /** Création de la barre de recherche des joueurs avec le bouton rechercher */
-    public HBox creerBarreRecherche() {
-        HBox h = new HBox();
-        this.recherche = new TextField("");
-        this.recherche.setPromptText("Rechercher un joueur");
-        Button rechercher = new Button("Rechercher");
-        recherche.setPrefWidth(190);
-        h.getChildren().addAll(this.recherche, rechercher);
-        return h;
-    }
 
-    /** Création du tableau contenant la liste de tous les joueurs à activer */
-    public TableView<Joueur> creerTableListeJoueurAactiver() {
-        TableView<Joueur> table = new TableView<>();
-        TableColumn<Joueur, String> pseudo = new TableColumn<>("Pseudo");
-        TableColumn<Joueur, Integer> id = new TableColumn<>("ID");
-        TableColumn<Joueur, CheckBox> activer = new TableColumn<>("Activer");
-        pseudo.setResizable(false);
-        id.setResizable(false);
-        activer.setResizable(false);
-        pseudo.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
-        id.setMaxWidth(43);
-        activer.setMaxWidth( 1f * Integer.MAX_VALUE * 50 );
-        pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
-        ObservableList<Joueur> liste = getListeJoueursTableViewAactiver();
-        table.setItems(liste);
-        table.getColumns().add(pseudo);
-        table.getColumns().add(id);
-        table.getColumns().add(activer);
-        table.setPrefWidth(100);
-        return table;
-    }
-
-    /** Création de la liste contenant les joueurs à activer */
-    public ObservableList<Joueur> getListeJoueursTableViewAactiver() {
-      this.listeJoueurAactiver = FXCollections.observableArrayList();
-      HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;");
-      if (dico.size() == 0) {
-          return this.listeJoueurAactiver;
-      }
-      else {
-          for (int i = 0; i < dico.get("idUt").size(); i++) {
-              Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i)), (boolean) dico.get("activeUt").get(i));
-              this.listeJoueurAactiver.add(j);
-              j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
-              j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
-          }
-      }
-      return this.listeJoueurAactiver;
-    }
-
-    /** Création du centre de la page => liste de tous les joueurs à activer */
-    public void centre() {
-        VBox centre = new VBox();
-        Label l = new Label("Nombre de joueurs à activer : ");
-        HBox bouton = new HBox();
-        bouton.getChildren().addAll(creerBoutonActiver(), creerBoutonSupprimer());
-        bouton.setSpacing(10);
-        centre.getChildren().addAll(l, bouton, creerBarreRecherche(), creerTableListeJoueurAactiver());
-        centre.setSpacing(10);
-        centre.setPadding(new Insets(0,25,15,25));
-        this.setCenter(centre);
+    /** Rafraichit la liste de tous les joueurs */
+    public void majTableView() {
+      System.out.println(this.listeJoueur);
+        this.setCenter(creerCentre());
     }
 
     /** Création de la liste de tous les joueurs */
@@ -146,21 +67,10 @@ public class GererJoueur extends BorderPane {
         this.listeJoueur = FXCollections.observableArrayList();
         HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
         if (dico.size() == 0) {
-=======
-    /** Création de la liste de tous les joueurs */
-    public ObservableList<Joueur> getListeJoueursTableView() {
-        this.listeJoueur = FXCollections.observableArrayList();
-        HashMap<String, List<Object>> dico = this.pa.getAdmin().requetteListeJoueur();
-        if (dico.size() == 0 || dico == null) {
->>>>>>> 35328a1bd01b801eeda223d3d456a209961ef8ba
             return this.listeJoueur;
         }
         else {
             for (int i = 0; i < dico.get("idUt").size(); i++) {
-<<<<<<< HEAD
-                Joueur j = new Joueur((String) dico.get("pseudoUt").get(i), i+1, (boolean) dico.get("activeUt").get(i));
-                j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
-=======
                 int id = Utilisateur.getIdByPseudo((String) dico.get("pseudoUt").get(i));
                 String pseudo = (String) dico.get("pseudoUt").get(i);
                 String prenom = Utilisateur.getUserInfo("prenom", "pseudoUt", pseudo);
@@ -173,7 +83,6 @@ public class GererJoueur extends BorderPane {
                 Joueur j = new Joueur(id, pseudo, prenom, nom, email, sexe, role, estActif);
                 j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
                 j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
->>>>>>> 35328a1bd01b801eeda223d3d456a209961ef8ba
                 this.listeJoueur.add(j);
             }
         }
@@ -188,9 +97,9 @@ public class GererJoueur extends BorderPane {
         TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
         TableColumn<Joueur, String> role = new TableColumn<Joueur, String>("Rôle");
         TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
-        TableColumn<Joueur, String> estActif = new TableColumn<Joueur, String>("Statut");
+        TableColumn<Joueur, Label> estActif = new TableColumn<Joueur, Label>("Statut");
         TableColumn<Joueur, CheckBox> activer = new TableColumn<Joueur, CheckBox>("✓");
-        
+
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         role.setCellValueFactory(celldata -> {
@@ -204,13 +113,26 @@ public class GererJoueur extends BorderPane {
         profil.setCellValueFactory(new PropertyValueFactory<>("profil"));
         estActif.setCellValueFactory(celldata -> {
             if (celldata.getValue().getEstActif()) {
-                return new SimpleStringProperty("Activé");
+                Label l = new Label("Activé");
+                l.setTextFill(Color.web("#009e0f"));
+                return new SimpleObjectProperty<>(l);
             }
             else {
-                return new SimpleStringProperty("Désactivé");
+                Label l = new Label("Désactivé");
+                l.setTextFill(Color.web("#cf2a27"));
+                return new SimpleObjectProperty<>(l);
             }
         });
         activer.setCellValueFactory(new PropertyValueFactory<>("activer"));
+
+        estActif.setComparator(new Comparator<Label>() {
+            @Override
+            public int compare(Label l1, Label l2) {
+                if (l1.getText().equals("Activé") && l2.getText().equals("Désactivé"))
+                    return -1;
+                return 1;
+            }
+        });
 
         pseudo.setResizable(false);
         id.setResizable(false);
@@ -227,11 +149,11 @@ public class GererJoueur extends BorderPane {
         activer.setPrefWidth(53);
 
         pseudo.setStyle( "-fx-alignment: CENTER;");
-        id.setStyle( "-fx-alignment: CENTER;");   
-        role.setStyle( "-fx-alignment: CENTER;");   
-        profil.setStyle( "-fx-alignment: CENTER;");   
-        estActif.setStyle( "-fx-alignment: CENTER;");   
-        activer.setStyle( "-fx-alignment: CENTER;");   
+        id.setStyle( "-fx-alignment: CENTER;");
+        role.setStyle( "-fx-alignment: CENTER;");
+        profil.setStyle( "-fx-alignment: CENTER;");
+        estActif.setStyle( "-fx-alignment: CENTER;");
+        activer.setStyle( "-fx-alignment: CENTER;");
 
         ObservableList<Joueur> liste = getListeJoueursTableView();
         table.setItems(liste);
@@ -277,6 +199,7 @@ public class GererJoueur extends BorderPane {
         this.recherche.setPromptText("Rechercher un joueur");
         this.recherche.setPrefWidth(280);
         this.recherche.setPrefHeight(35);
+        //this.recherche.setOnKeyReleased(new ActionRechercherJoueur(this));
         return this.recherche;
     }
 
@@ -307,6 +230,7 @@ public class GererJoueur extends BorderPane {
         VBox entete = new VBox();
         Label l = new Label("Liste de tous les joueurs");
         l.setPadding(new Insets(0,0,5,20));
+        entete.setPadding(new Insets(0,0,0,3));
         entete.getChildren().addAll(l, creerBouton());
         return entete;
     }

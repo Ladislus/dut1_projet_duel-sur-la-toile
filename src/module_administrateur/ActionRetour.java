@@ -2,7 +2,6 @@ package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
 
 /** Contrôleur du bouton retour */
 public class ActionRetour implements EventHandler<ActionEvent> {

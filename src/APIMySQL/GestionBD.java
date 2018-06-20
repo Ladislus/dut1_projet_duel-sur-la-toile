@@ -20,13 +20,17 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "@MXM7zvb7v");
+            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     private GestionBD(){}
+
+    public static Connection getCo() {
+        return co;
+    }
 
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
@@ -58,6 +62,7 @@ public class GestionBD {
             return res;
         } catch (SQLException e){
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -99,30 +104,22 @@ public class GestionBD {
         return res;
     }
 
-    public static Image blobToImage(Blob blob){
-        //TODO : renvoie toujours null
+    public static Blob createBlob(byte[] bytes) throws SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,bytes);
+        return res;
+    }
+
+    public static Image blobToImage(Blob blob) {
         try {
-            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            blob.free();
+            return res;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
+        return null; }
 
     public static Image bytesToImage(byte[] bytes){
         return new Image(new ByteArrayInputStream(bytes));
-    }
-
-    public static byte[] getBlob(String requete){
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        try {
-            ps = co.prepareStatement(requete);
-            rs = ps.executeQuery();
-            rs.next();
-            Blob blob = rs.getBlob(Arrays.asList(requete.split(" ")).get(1));
-            return blob.getBytes(1,(int)blob.length());
-        } catch (SQLException e){}
-        return null;
-    }
-}
+    }}
