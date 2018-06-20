@@ -23,6 +23,8 @@ import java.util.List;
 
 class Dashboard extends BorderPane {
 
+  Boolean isAdmin;
+
   private String title;
 
   private Stage primaryStage;
@@ -36,9 +38,11 @@ class Dashboard extends BorderPane {
 
   private ArrayList<Button> listeBoutton;
 
-  public Dashboard(Stage primaryStage, Joueur joueur) {
+  public Dashboard(Stage primaryStage, Joueur joueur, Boolean isAdmin) {
 
     super();
+
+    this.isAdmin = isAdmin;
 
     this.title = "Dashboard";
 
@@ -95,7 +99,15 @@ class Dashboard extends BorderPane {
     Button btExit = new Button("", imageViewLogo);
     btExit.setOnAction(new ActionDeconnexion(primaryStage));
 
-    param.getChildren().add(btExit);
+    if (isAdmin) {
+
+      Button btAdmin = new Button("Admin");
+      btAdmin.setOnAction(new ActionToAdmin(this.primaryStage));
+
+      param.getChildren().addAll(btAdmin, btExit); }
+
+    else { param.getChildren().add(btExit); }
+
     param.setSpacing(10);
     param.setAlignment(Pos.TOP_CENTER);
     param.setPadding(new Insets(250,0,0,0));

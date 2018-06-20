@@ -1,23 +1,17 @@
 package module_administrateur;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.cell.*;
-import javafx.geometry.Pos;
 import javafx.beans.property.SimpleStringProperty;
 import APIMySQL.*;
 import java.util.HashMap;
@@ -51,18 +45,6 @@ public class GererJoueur extends BorderPane {
         return this.desactiver;
     }
 
-    /** Création du bouton pour activer les joueurs cochés */
-    public Button creerBoutonActiver() {
-        this.activer = new Button("Activer");
-        this.activer.setDisable(true);
-        this.activer.setStyle("-fx-background-color: #009e0f;-fx-border-color: black");
-        this.activer.setTextFill(Color.web("white"));
-        this.activer.setPrefWidth(200);
-        this.activer.setPrefHeight(50);
-        this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
-        return this.activer;
-    }
-
     /** Remplace la liste de joueurs actuelle par la nouvelle en paramètre */
     public void setListeJoueurTB(ObservableList<Joueur> liste) {
         this.listeJoueur = liste;
@@ -73,10 +55,6 @@ public class GererJoueur extends BorderPane {
         return this.recherche;
     }
 
-    /** Retourne le bouton désactiver les joueurs cochés */
-    public Button getButtonDesactiver() {
-        return this.desactiver;
-    }
 
     /** Rafraichit la liste de tous les joueurs */
     public void majTableView() {
