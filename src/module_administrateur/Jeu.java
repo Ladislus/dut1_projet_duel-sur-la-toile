@@ -8,21 +8,22 @@ public class Jeu {
   private int idJeu;
   private String nom;
   private String regles;
-  private String sexe;
+  private String jarJeuPath;
   private char active;
   private int idType;
-  private CheckBox activer;
+  private String imagePath;
 
   /** Constructeur du joueur */
-  public Joueur(int idJeu, String nom, String regles, String sexe, char active, int idType) {
+  public Jeu(int idJeu, String nom, String regles, String jarJeuPath, char active, int idType, String imagePath) {
     this.idJeu = idJeu;
     this.nom = nom;
     this.regles = regles;
-    this.sexe = sexe;
+    this.jarJeuPath = jarJeuPath;
     this.active = active;
-    this.estActif = estActif;
-    this.activer = new CheckBox();
+    this.imagePath = imagePath;
   }
+
+  public Jeu(){}
 
   public int getIdJeu() {
     return this.idJeu;
@@ -36,20 +37,20 @@ public class Jeu {
     return this.regles;
   }
 
-  public String getEmail() {
-    return this.email;
+  public String getJarJeuPath(){
+    return this.jarJeuPath;
   }
 
-  public boolean getActive() {
+  public char getActive() {
     return this.active;
   }
 
-  public Hyperlink getIdType() {
+  public int getIdType() {
     return this.idType;
   }
 
-  public CheckBox getActiver() {
-    return this.activer;
+  public String getImagePath() {
+    return this.imagePath;
   }
 
 }

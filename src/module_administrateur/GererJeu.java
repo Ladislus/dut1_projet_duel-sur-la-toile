@@ -46,13 +46,11 @@ public class GererJeu extends BorderPane {
       this.bplusgauche = new Button("+");
       this.tnom = new TextField();
       this.tdescription = new TextArea();
-      this.haut();
-      this.gauche();
-      this.centre();
+      this.creerGererJeu();
     }
 
     /** Création de l'entête de la page */
-    public void haut() {
+    public BorderPane haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des jeux");
         Button bRetour = new Button("< Retour");
@@ -61,7 +59,8 @@ public class GererJeu extends BorderPane {
         bRetour.setOnAction(new ActionRetour(this.pa));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
-        this.setTop(haut);
+
+        return haut;
     }
 
 
@@ -190,8 +189,7 @@ public class GererJeu extends BorderPane {
       ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
       cbjeux.setPrefWidth(297);
 
-      return cbjeux;*/
-      return null;
+      return cbjeux;
     }
 
     /** Création du textfield où l'on doit écrire le nom du jeu */
@@ -250,14 +248,14 @@ public class GererJeu extends BorderPane {
     }
 
     /** VBox permettant de créer la partie gauche de la vue */
-    public void gauche(){
+    public VBox gauche(){
       VBox gauche = new VBox();
 
       gauche.getChildren().add(creerVBoxDescriptionJeu());
       gauche.setSpacing(10);
       gauche.setPadding(new Insets(5,5,5,10));
 
-      this.setLeft(gauche);
+      return gauche;
     }
 
     /** Création du Label qui affiche "Ajouter un jeu" */
@@ -370,13 +368,24 @@ public class GererJeu extends BorderPane {
 
 
     /** VBox permettant d'afficher toute la partie centre/droite de la vue */
-    public void centre(){
+    public VBox centre(){
       VBox centre = new VBox();
       centre.getChildren().add(creerVBoxAjouterJeu());
       centre.setSpacing(10);
       centre.setPadding(new Insets(5,10,5,5));
 
-      this.setCenter(centre);
+      return centre;
+    }
+
+    public void creerGererJeu(){
+      this.setTop(haut());
+      this.setCenter(centre());
+      this.setLeft(gauche());
+    }
+
+    /** Rafraichit la page de gérer jeu */
+    public void majAffichage() {
+        this.creerGererJeu();
     }
 
 }
