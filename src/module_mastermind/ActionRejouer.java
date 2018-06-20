@@ -39,6 +39,7 @@ public class ActionRejouer implements EventHandler<ActionEvent> {
             this.mastermind.getChrono().resetTime();
             this.mastermind.resetAffichage();
             this.mastermind.getChrono().start();
+            this.mastermind.getValider().setDisable(false);
         }
 
     }

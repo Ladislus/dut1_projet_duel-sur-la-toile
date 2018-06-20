@@ -1,6 +1,8 @@
 package module_mastermind;
 
 import APIMySQL.GestionBD;
+import APIMySQL.Jeu;
+import APIMySQL.Partie;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,12 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.JarEntry;
 
 public class PartieM {
-
-    public static String chem = "./img/module_mastermind/";
-
-    public List<Button> listeCouleurs;
 
     private PlateauM p;
 
@@ -38,6 +37,8 @@ public class PartieM {
 
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
+
+    private Button valider;
 
     /**
      * Renvoie les différentes informations sur l'état de la partie sous forme d'une String, pour pouvoir mettre à jour la BD
@@ -100,7 +101,21 @@ public class PartieM {
         this.j1 = new Joueur(j1);
         this.j2 = new Joueur(j2);
 
+        HashMap<String, List<Object>> idJeu = Jeu.recupListeJeux();
+        System.out.println(idJeu);
+
+
+//        Partie.creerPartie();
+
         System.out.println(this.etatPartie());
+    }
+
+    /**
+     * Renvoie le bouton "Valider"
+     * @return Button "Valider"
+     */
+    public Button getValider() {
+        return valider;
     }
 
     /**
@@ -342,7 +357,7 @@ public class PartieM {
                 "-fx-background-radius: 5;"+
                 "-fx-font-size: 15;";
 
-        Button valider = new Button("Valider");
+        valider = new Button("Valider");
         valider.setOnAction(new ActionTestComb(this));
 
         valider.setStyle(valNormal);
