@@ -87,7 +87,7 @@ class Dashboard extends BorderPane {
     Button btParti = new Button("Mes parties");
     btParti.setPrefWidth(150);
 
-    Button btEditerProfile = new Button("Éditez mon profil");
+    Button btEditerProfile = new Button("Éditer mon profil");
     btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
@@ -130,7 +130,7 @@ class Dashboard extends BorderPane {
     VBox candidate = new VBox();
     candidate.setPadding(new Insets(5));
     candidate.setSpacing(15);
-    candidate.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
+    candidate.getChildren().addAll(lListeDamis, sDroiteListeDamis, lbTotalContact, btListeDamis, btMessage);
 
     return candidate; }
 

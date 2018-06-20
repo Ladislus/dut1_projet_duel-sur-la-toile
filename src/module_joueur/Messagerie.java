@@ -106,7 +106,7 @@ public class Messagerie extends SplitPane {
         jeu.setPreserveRatio(true);
         jeu.setFitHeight(35);
 
-        this.nomContactCour = new Label("Accceuil");
+        this.nomContactCour = new Label("Accueil");
         this.nomContactCour.setFont(Font.font(30));
 
         Button inviteJeu = new Button("Inviter à jouer", jeu);

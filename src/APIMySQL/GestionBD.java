@@ -110,7 +110,7 @@ public class GestionBD {
         return res;
     }
 
-    public static Image blobToImage(Blob blob){
+    public static Image blobToImage(Blob blob) {
         try {
             Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
             blob.free();
@@ -118,25 +118,8 @@ public class GestionBD {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
+        return null; }
 
     public static Image bytesToImage(byte[] bytes){
         return new Image(new ByteArrayInputStream(bytes));
-    }
-
-    public static byte[] getBlob(String requete){
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        try {
-            ps = co.prepareStatement(requete);
-            rs = ps.executeQuery();
-            rs.next();
-            Blob blob = rs.getBlob(Arrays.asList(requete.split(" ")).get(1));
-            return blob.getBytes(1,(int)blob.length());
-        } catch (SQLException e){}
-        return null;
-    }
-
-
-}
+    }}
