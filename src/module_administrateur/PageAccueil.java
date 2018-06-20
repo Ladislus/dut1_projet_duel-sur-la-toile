@@ -37,11 +37,9 @@ public class PageAccueil extends Application {
     /** Création du VBox qui affiche le bouton "Voir les statistiques" ainsi que l'image */
     public VBox bas() {
       VBox bas = new VBox();
-      ImageView stat = new ImageView();
-      stat.setImage(new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png").toURI().toString()));
+      //Image stat = new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png"));
       //Button bStat = new Button("Voir les statistiques", new ImageView(stat));
-      Button bStat = new Button("Voir les statistiques", stat);
-      //bStat.setGraphic(new ImageView(stat));
+      Button bStat = new Button("Voir les statistiques");
       bStat.setContentDisplay(ContentDisplay.TOP);
 
 
