@@ -10,6 +10,7 @@ public class Joueur {
     public Joueur(int id, String pseudo, String email) {
 
         this.id = id;
+
         this.pseudo = pseudo;
         this.email = email; }
 
@@ -20,7 +21,5 @@ public class Joueur {
     public String getEmail() { return this.email; }
 
     public void setEmail(String email) { this.email = email; }
-
-    public void setId(int id) { this.id = id; }
 
     public void setPseudo(String pseudo) { this.pseudo = pseudo; }}
