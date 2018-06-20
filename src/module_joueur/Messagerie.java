@@ -152,9 +152,15 @@ public class Messagerie extends SplitPane {
         return res;
     }
 
-    public void majMessages() {
-        System.out.println("zzz");
+    public void ajouteMessage(String newMsg) {
+        MessageModele newModele = new MessageModele(this.user.getPseudo(), this.contactCour,System.currentTimeMillis(),newMsg);
+        MessageVue newVue = new MessageVue(newModele);
+        newVue.setIsFromUser(newModele.getNomExp().equals(this.user.getPseudo()));
+        this.lesMessages.getChildren().add(newVue);
+        this.sp.setContent(this.lesMessages);
+    }
 
+    public void majMessages() {
         this.lesMessages.getChildren().clear();
         for (MessageModele msg : this.getMessages(this.nomContactCour)){
             MessageVue newMsg = new MessageVue(msg);
@@ -185,16 +191,19 @@ public class Messagerie extends SplitPane {
         List<MessageModele> res = new ArrayList<>();
 
         //recup liste de message entre joueur courant et contact courant
+        try {
+            ArrayList<Object> listeIdMessage1 = (ArrayList<Object>) GestionBD.selectPreparedStatement("select idMsg from MESSAGE where idUt1 = " + user.getId() + " and idUt2=" + Utilisateur.getIdByPseudo(contactCour) + " or idUt1 = " + Utilisateur.getIdByPseudo(contactCour) + " and idUt2=" + user.getId()).get("idMsg");
 
-        ArrayList<Object> listeIdMessage1 = (ArrayList<Object>) GestionBD.selectPreparedStatement("select idMsg from MESSAGE where idUt1 = "+user.getId()+" and idUt2="+Utilisateur.getIdByPseudo(contactCour)+" or idUt1 = "+Utilisateur.getIdByPseudo(contactCour)+" and idUt2="+user.getId()).get("idMsg");
-
-        for(Object idMsg : listeIdMessage1){
-            String nomExp = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt1 from MESSAGE where idMsg = "+idMsg.toString()).get("idUt1").get(0));
-            String nomDest = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt2 from MESSAGE where idMsg = "+idMsg.toString()).get("idUt2").get(0));
-            Long dateEnvoi = Long.valueOf(0);
-            String contenue =(String) GestionBD.selectPreparedStatement("select contenuMsg from MESSAGE where idMsg = "+idMsg.toString()).get("contenuMsg").get(0);
-            MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi, contenue);
-            res.add(messageModele);
+            for (Object idMsg : listeIdMessage1) {
+                String nomExp = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt1 from MESSAGE where idMsg = " + idMsg.toString()).get("idUt1").get(0));
+                String nomDest = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt2 from MESSAGE where idMsg = " + idMsg.toString()).get("idUt2").get(0));
+                Long dateEnvoi = Long.valueOf(0);
+                String contenue = (String) GestionBD.selectPreparedStatement("select contenuMsg from MESSAGE where idMsg = " + idMsg.toString()).get("contenuMsg").get(0);
+                MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi, contenue);
+                res.add(messageModele);
+            }
+        }catch (NullPointerException e){
+            return new ArrayList<>();
         }
         return res;
     }
@@ -233,4 +242,6 @@ public class Messagerie extends SplitPane {
     public TextField getBarre() {
         return barre;
     }
+
+
 }

@@ -4,8 +4,30 @@ public class Jeu {
 
     private String title;
 
-    public Jeu(String title){
+    byte[] image;
+
+    String regle;
+
+    public Jeu(String title, byte[] image, String regle){
         this.title = title;
+        this.image = image;
+        this.regle = regle;
+    }
+
+    public byte[] getImage(){
+        return this.image;
+    }
+
+    public String getRegle() {
+        return regle;
+    }
+
+    public void setRegle(String regle) {
+        this.regle = regle;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getTitle() {
