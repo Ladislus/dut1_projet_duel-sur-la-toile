@@ -10,6 +10,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 
 public class ExempleExecutable {
+
     public static void main(String[] args) {
         try {
             Utilisateur.creerUtilisateur("test","test@gmail.com","M","Mr","Test","couscous","ADMIN");
