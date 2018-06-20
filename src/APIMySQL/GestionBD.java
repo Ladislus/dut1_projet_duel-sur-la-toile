@@ -21,6 +21,10 @@ public class GestionBD {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
+<<<<<<< HEAD
+=======
+//            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "@MXM7zvb7v");
+>>>>>>> 733496d959415ffc7e21f81c47fc93941ceb24b0
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
