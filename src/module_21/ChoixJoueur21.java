@@ -1,5 +1,4 @@
-package module_puissance4;
-
+package module_21;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,24 +6,28 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import module_21.ActionRechercherJoueur21;
 
 import java.io.File;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-import static module_puissance4.Puissance4.chem;
+import static module_21.Jeu21Batonnets.chem;
 
 /**
  *  Vue de la fenêtre pour choisir contre qui jouer
  */
-public class ChoixJoueurP4 {
+public class ChoixJoueur21 {
+
 
     /** Le Stage principal, qui étend Application */
-    private Puissance4 puissance4;
+    private Jeu21Batonnets jeu21;
 
     /** "New Game" ou "Resume Game" */
     public String mode;
@@ -37,8 +40,9 @@ public class ChoixJoueurP4 {
     private BorderPane scene;
     private ScrollPane sp;
 
-    public ChoixJoueurP4(Puissance4 p){
-        this.puissance4 = p;
+
+    public ChoixJoueur21(Jeu21Batonnets jeu){
+        this.jeu21 = jeu;
         this.listeAmis = new HashSet<>();
 
         // TEST
@@ -69,19 +73,19 @@ public class ChoixJoueurP4 {
         res.setSpacing(50.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-        Image im = new Image(new File(chem+"connect4logo.png").toURI().toString());
+        Image im = new Image(new File(chem+"logo21.png").toURI().toString());
         ImageView iv = new ImageView(im);
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
 
         Button retour = new Button("Home");
         retour.setPrefSize(100.,30.);
-        retour.setOnAction(event -> this.puissance4.setScene("Home"));
+        retour.setOnAction(event -> this.jeu21.setScene("Home"));
         Button changeMode;
         if (mode == "New Game"){changeMode = new Button("Resume Game");}
         else {changeMode = new Button("New Game");}
         changeMode.setPrefSize(150.,30.);
-        changeMode.setOnAction(event -> this.puissance4.setScene(changeMode.getText()));
+        changeMode.setOnAction(event -> this.jeu21.setScene(changeMode.getText()));
 
         res.getChildren().addAll(iv,retour,changeMode,new Label("Welcome "+"Bernard"+" !"));
 
@@ -114,7 +118,7 @@ public class ChoixJoueurP4 {
         barre = new TextField();
         barre.setPromptText("Search");
         barre.setMaxWidth(250.);
-        barre.setOnKeyReleased(new ActionRechercherJoueur(this));
+        barre.setOnKeyReleased(new ActionRechercherJoueur21(this));
 
 
         // LISTE DES CONTACTS
@@ -144,7 +148,7 @@ public class ChoixJoueurP4 {
         Label titre2 = new Label("Règle du jeu :",img);
         titre2.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,35.));
 
-        Label infos = new Label(this.puissance4.getRegle());
+        Label infos = new Label(this.jeu21.getRegle());
         infos.setWrapText(true);
         infos.setMaxWidth(270.);
         infos.setPadding(new Insets(10,0,0,2));
@@ -173,9 +177,11 @@ public class ChoixJoueurP4 {
             b.setContentDisplay(ContentDisplay.LEFT);
             b.setPrefSize(200.,50.);
             b.setFont(Font.font("Verdana",FontWeight.NORMAL,15));
-            b.setOnAction(event -> this.puissance4.newGame(this.puissance4,"Bernard",b.getText()));
+            b.setOnAction(event -> this.jeu21.newGame(this.jeu21,"Bernard",b.getText()));
             this.contacts.getChildren().add(b);
         }
+
+        this.sp.setContent(this.contacts);
 
     }
 }
