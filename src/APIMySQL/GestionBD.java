@@ -4,7 +4,6 @@ import com.mysql.jdbc.ResultSetMetaData;
 import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +20,11 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
+<<<<<<< HEAD
             co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
+=======
+            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "");
+>>>>>>> 24a4a0615717ad211f61f5c5f81c130debbe6e80
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -100,10 +103,17 @@ public class GestionBD {
         return res;
     }
 
+    public static Blob createBlob(byte[] bytes) throws SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,bytes);
+        return res;
+    }
+
     public static Image blobToImage(Blob blob){
-        //TODO : renvoie toujours null
         try {
-            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            blob.free();
+            return res;
         } catch (SQLException e) {
             e.printStackTrace();
         }
