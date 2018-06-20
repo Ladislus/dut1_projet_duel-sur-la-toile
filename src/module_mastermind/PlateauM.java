@@ -26,6 +26,12 @@ public class PlateauM { // Modèle du plateau du Mastermind
         combiCour = new Combinaison();
     }
 
+    public void setCombiMystere(){
+        for (int i=0;i<4;i++){
+            combiMystere.set(i,(int) (Math.random()*6)+1);
+        }
+    }
+
     public Combinaison getCombiMystere() {
         return combiMystere;
     }
