@@ -54,14 +54,11 @@ public class Messagerie extends SplitPane {
         out.setAlignment(Pos.CENTER_LEFT);
 
         Label titre = new Label("Mes contacts",new ImageView(new Image(new File(chem+"messaging.png").toURI().toString(),50.,50.,true,true)));
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
         titre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
         titre.setPadding(new Insets(4));
         contacts.getChildren().add(titre);
-=======
->>>>>>> ff479d1c2b9636317743b7b97ded0227a0978d12
+
         titre.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,35));
         titre.setPadding(new Insets(5,0,6,4));
 
@@ -70,11 +67,6 @@ public class Messagerie extends SplitPane {
         accueil.setPrefWidth(300.);
         accueil.setAlignment(Pos.CENTER_LEFT);
         accueil.setFont(Font.font(25.));
-
-<<<<<<< HEAD
-=======
->>>>>>> 0d04176009a3b6baad00fa3becfbb54ccc787f3f
->>>>>>> ff479d1c2b9636317743b7b97ded0227a0978d12
 
         contacts.getChildren().addAll(out,titre,accueil);
 

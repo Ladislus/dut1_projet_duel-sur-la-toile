@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class ActionEnregistrer implements EventHandler<ActionEvent> {
@@ -37,11 +38,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
     String ancientPseudo = joueur.getPseudo();
 
     //TODO : récupérer l'image' de l'ivImageUser en la transformer en blob
-<<<<<<< HEAD
     byte[] bytes = (byte[]) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
-=======
-    Blob blob = (Blob) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + this.joueur.getId()).get("image").get(0);
->>>>>>> 24a4a0615717ad211f61f5c5f81c130debbe6e80
 
     PasswordDialog confirm = new PasswordDialog();
 
@@ -69,7 +66,11 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             else {
 
-              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, GestionBD.);
+              try {
+                Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, GestionBD.createBlob(bytes));
+              } catch (SQLException e) {
+                e.printStackTrace();
+              }
 
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);

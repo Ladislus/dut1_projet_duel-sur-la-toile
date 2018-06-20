@@ -117,6 +117,9 @@ public class Utilisateur {
     public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, Blob blob){
         int id = getIdByPseudo(ancientMotDePasse);
         String salt = getSalt();
+
+        // FIXME : Recoder en PreparedStatement ici même
+
         setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
         setUserInfo("emailUt", email, "idUt", String.valueOf(id));
         setUserInfo("image", blob, "idUt", String.valueOf(id));

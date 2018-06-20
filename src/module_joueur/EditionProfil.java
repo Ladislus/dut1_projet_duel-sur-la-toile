@@ -53,15 +53,11 @@ class EditionProfil extends BorderPane {
 
     this.ivImageUser = new ImageView();
 
-    if (GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0) != null) {
-      System.out.println("Image depuis BD");
-      byte[] bytes = (byte[]) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
-      ivImageUser.setImage(GestionBD.bytesToImage(bytes));
-    }
-    else {
-      System.out.println("Image par défaut");
+    if (GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0) != null)
+      ivImageUser.setImage(GestionBD.bytesToImage((byte[]) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + this.joueur.getId()).get("image").get(0)));
+
+    else
       ivImageUser.setImage(VariablesJoueur.USER);
-    }
 
     ivImageUser.setPreserveRatio(true);
     ivImageUser.setFitWidth(50);
