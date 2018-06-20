@@ -37,7 +37,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
     String ancientPseudo = joueur.getPseudo();
 
     //TODO : récupérer l'image' de l'ivImageUser en la transformer en blob
-    Blob blob = (Blob) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
+    byte[] bytes = (byte[]) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
 
     PasswordDialog confirm = new PasswordDialog();
 
@@ -65,7 +65,7 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             else {
 
-              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, blob);
+              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, GestionBD.);
 
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);
