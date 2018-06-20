@@ -17,7 +17,6 @@ import module_joueur.ActionToAdmin;
 public class PageAccueil extends BorderPane {
 
     /** Attributs de la classe PageAccueil */
-    BorderPane bp;
     Administration a;
 
     private String title;
@@ -36,8 +35,8 @@ public class PageAccueil extends BorderPane {
         this.setCenter(centre());
         this.setBottom(bas()); }
 
-    public BorderPane getBp() {
-      return this.bp;
+    public PageAccueil getBp() {
+      return (PageAccueil) this.primaryStage.getScene().getRoot();
     }
 
     public Administration getAdmin() {
