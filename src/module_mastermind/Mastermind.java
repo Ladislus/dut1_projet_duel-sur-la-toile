@@ -23,11 +23,7 @@ import java.util.HashMap;
 public class Mastermind extends Application {
 
     private Stage primaryStage;
-<<<<<<< HEAD
-    private static String chem = "/img/";
-=======
     public static final String chem = "/img/module_mastermind/";
->>>>>>> 733496d959415ffc7e21f81c47fc93941ceb24b0
     private HashMap<String,Scene> attribution; // On attribue un titre aux Scènes, pour les appeler
 
     public static void main(String[] args) {
