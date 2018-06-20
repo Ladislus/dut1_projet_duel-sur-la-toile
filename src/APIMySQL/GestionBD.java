@@ -20,21 +20,13 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
-<<<<<<< HEAD
-=======
-//            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "@MXM7zvb7v");
->>>>>>> b067b9232cf03e0cd7de7086c1941ab80602dde2
+            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "@MXM7zvb7v");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     private GestionBD(){}
-
-    public static Connection getCo() {
-        return co;
-    }
 
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
@@ -66,7 +58,6 @@ public class GestionBD {
             return res;
         } catch (SQLException e){
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -108,17 +99,10 @@ public class GestionBD {
         return res;
     }
 
-    public static Blob createBlob(byte[] bytes) throws SQLException {
-        Blob res = co.createBlob();
-        res.setBytes(1,bytes);
-        return res;
-    }
-
     public static Image blobToImage(Blob blob){
+        //TODO : renvoie toujours null
         try {
-            Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
-            blob.free();
-            return res;
+            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,6 +125,4 @@ public class GestionBD {
         } catch (SQLException e){}
         return null;
     }
-
-
 }
