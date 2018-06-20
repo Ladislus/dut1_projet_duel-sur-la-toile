@@ -50,8 +50,8 @@ public class MessageVue extends VBox {
         this.setPadding(new Insets(0,0,0,250));
         this.contenu.setTextAlignment(TextAlignment.RIGHT);
         this.contenu.setStyle("-fx-background-color: lightgray;" +
-                "-fx-background-radius: 20 10 0 10;" +
-                "-fx-border-radius: 10 10 0 10;");
+                "-fx-background-radius: 25 20 0 20;" +
+                "-fx-border-radius: 25 20 0 20;");
 
     }
 
@@ -60,7 +60,7 @@ public class MessageVue extends VBox {
         this.setAlignment(Pos.TOP_LEFT);
         this.setPadding(new Insets(0,250,0,0));
         this.contenu.setStyle("-fx-background-color: lightblue;" +
-                "-fx-background-radius: 10 20 10 0;" +
-                "-fx-border-radius: 10 20 10 0;");
+                "-fx-background-radius: 20 25 20 0;" +
+                "-fx-border-radius: 20 25 20 0;");
     }
 }

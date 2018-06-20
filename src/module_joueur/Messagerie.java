@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,16 +26,20 @@ public class Messagerie extends SplitPane {
     private List<Joueur> lesContacts;
     private static String chem = "./img/pub/";
 
-    private String nomUser;
+    private Joueur user;
+    private Joueur contactCour;
     private Label nomContactCour;
     private TextField barre;
     private VBox lesMessages;
+    private ScrollPane sp;
 
     public Messagerie(){
         super();
 
-        this.nomUser = "Mathieu";
-        this.nomContactCour = new Label("");
+        this.lesContacts = new ArrayList<>();
+        // ÉCRIRE FONCTION JDBC POUR OBTENIR LISTE DES CONTACTS
+
+        this.user = new Joueur(1234,"Mathieu","maffiou@test.fr");
 
         this.getItems().addAll(this.menuContact(),this.pageMessages());
         this.setDividerPositions(62/850f);
@@ -62,6 +67,8 @@ public class Messagerie extends SplitPane {
         accueil.setPrefWidth(300.);
         accueil.setAlignment(Pos.CENTER_LEFT);
         accueil.setFont(Font.font(25.));
+        accueil.setUserData("ACC");
+        accueil.setOnAction(new ActionChangeContact(this));
 
 
         contacts.getChildren().addAll(out,titre,accueil);
@@ -81,7 +88,7 @@ public class Messagerie extends SplitPane {
             b.setPadding(new Insets(2));
             b.setStyle("-fx-border-radius: 0;" +
                     "-fx-background-radius: 0;");
-
+            b.setUserData(nom);
             b.setOnAction(new ActionChangeContact(this));
 
             contacts.getChildren().add(b);
@@ -102,70 +109,70 @@ public class Messagerie extends SplitPane {
         VBox res = new VBox();
         res.setPrefWidth(700.);
 
-
-        HBox haut = new HBox();
-        haut.setPadding(new Insets(10,10,10,40));
-        haut.setStyle("-fx-border-color: #505050;" +
-                "-fx-border-width: 0 0 1 0;");
-
         ImageView jeu = new ImageView(new Image(new File(chem+"logoWithoutText.png").toURI().toString()));
         jeu.setPreserveRatio(true);
         jeu.setFitHeight(35);
 
-        this.nomContactCour = new Label("ACCUEIL");
+        ImageView img = new ImageView(new Image(new File(chem+"contact.png").toURI().toString()));
+        img.setPreserveRatio(true);
+        img.setFitHeight(35);
+
+        this.nomContactCour = new Label("ACCUEIL",img);
+        this.nomContactCour.setUserData("ACC");
         this.nomContactCour.setFont(Font.font(30));
-
-        Button inviteJeu = new Button("Inviter à jouer",jeu);
-        inviteJeu.setFont(Font.font(15));
-
-        HBox invite = new HBox(inviteJeu);
-        invite.setAlignment(Pos.CENTER_RIGHT);
-        invite.setPrefWidth(250.);
 
         HBox title = new HBox(this.nomContactCour);
         title.setAlignment(Pos.CENTER_LEFT);
+        title.setStyle("-fx-border-color: #505050;" +
+                "-fx-border-width: 0 0 1 0;");
+        title.setPadding(new Insets(10,10,10,40));
 
-        haut.getChildren().addAll(title,invite);
 
         this.lesMessages = new VBox();
         lesMessages.setPadding(new Insets(15));
         lesMessages.setSpacing(20.);
         lesMessages.setPrefWidth(750.);
 
-        this.majMessages();
-
-        ScrollPane sp = new ScrollPane(lesMessages);
-        sp.setMinHeight(550.);
+        this.sp = new ScrollPane(lesMessages);
+        this.sp.setMinHeight(550.);
 
         this.barre = new TextField();
         this.barre.setPromptText("Écrire un message...");
+        this.barre.setOnKeyReleased(new ActionEnvoiMessage(this));
 
-        res.getChildren().addAll(haut,sp,barre);
+        this.majMessages();
+
+        res.getChildren().addAll(title,sp,barre);
         return res;
     }
 
     public void majMessages() {
         this.lesMessages.getChildren().clear();
-        for (MessageModele msg : this.getMessages(this.nomUser,this.nomContactCour)){
+        for (MessageModele msg : this.getMessages(this.nomContactCour)){
             MessageVue newMsg = new MessageVue(msg);
-            newMsg.setIsFromUser(msg.getNomExp().equals(this.nomUser));
+            newMsg.setIsFromUser(msg.getNomExp().equals(this.user.getPseudo()));
             this.lesMessages.getChildren().add(newMsg);
         }
+        this.sp.setContent(this.lesMessages);
     }
 
-    private List<MessageModele> getMessagesACCIN(String nomUser) {
+    private List<MessageModele> getMessagesACC() {
         List<MessageModele> res = new ArrayList<>();
 
-        res.add(new MessageModele("ACC","Mathieu",0,"Bonjour "+this.nomUser+" !\nComment allez-vous ?"));
-        res.add(new MessageModele("Mathieu","ACC",0,"Euh... Bonjour !\nÇa va bien."));
-        res.add(new MessageModele("ACC","Mathieu",0,"Moi aussi !\nBienvenue sur la Messagerie de Duel sur la Toile !\nÀ gauche, vous avez la fenêtre des contacts, que vous pouvez agrandir, mais aussi rétrécir quand vous utilisez la partie à gauche,\n\nICI →\n\noù se trouvent toute la conversation avec le contact sélectionné !\nEn bas, vous trouverez la barre de message, utile pour... envoyer un message.\nEssayez !"));
-        res.add(new MessageModele("Mathieu","ACC",0,"Excellent ! Ça fonctionne !"));
-        res.add(new MessageModele("ACC","Mathieu",0,"Et c'est pas fini !\nVous pouvez inviter le contact avec qui vous parlez à démarrer une partie de n'importe quel jeu de la plateforme !\nPour cela, cliquez sur le bouton en haut ↑ !\nEssayez !"));
-
+        res.add(new MessageModele("ACCUEIL","Mathieu",0,"Bonjour "+this.user.getPseudo()+" !"));
+        res.add(new MessageModele("Mathieu","ACCUEIL",0,"Euh... Bonjour !"));
+        res.add(new MessageModele("ACCUEIL","Mathieu",0,"Bienvenue sur la Messagerie de \n  >> Duel sur la Toile <<\nCet accueil me permet de vous guider.\nÀ gauche, vous avez la fenêtre des contacts, que vous pouvez agrandir, mais aussi rétrécir quand vous utilisez la partie à gauche, où se trouvent toute la conversation avec le contact sélectionné !\nEn bas, vous trouverez la barre de message, utile pour... envoyer un message.\nEssayez !"));
         return res;
     }
 
-    private List<MessageModele> getMessages(String nomUser, Label nomContactCour) {
+    private List<MessageModele> getMessages(Label nomContactCour) {
+
+        if (nomContactCour.getUserData().equals("ACC")){
+            this.barre.setDisable(true);
+            return this.getMessagesACC();
+        }
+        this.barre.setDisable(false);
+
         List<MessageModele> res = new ArrayList<>();
 
         res.add(new MessageModele("Mathieu","Bernard",123456,"Salut !\nComment vas-tu ?"));
@@ -186,7 +193,24 @@ public class Messagerie extends SplitPane {
     }
 
     public void setNomContactCour(String nouv){
-        this.nomContactCour.setText(nouv);
+        if (nouv.equals("ACC"))
+            this.nomContactCour.setText("ACCUEIL");
+        else
+            this.nomContactCour.setText(nouv);
+        this.nomContactCour.setUserData(nouv);
+
+    }
+
+    public String getBarreText() {
+        return barre.getText();
+    }
+
+    public Joueur getUser() {
+        return user;
+    }
+
+    public Joueur getContactCour() {
+        return contactCour;
     }
 
     private List<String> onglets() {
