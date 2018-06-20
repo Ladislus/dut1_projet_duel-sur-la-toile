@@ -307,7 +307,7 @@ public class ProfilJoueur extends BorderPane {
         return nbpartiesjouees;
     }
 
-
+    /** Retourne le label contenant le nombre d'ami du joueur */
     public Label creerLabelNbAmis(){
         Label nbamis = new Label("Nombre d'amis : ");
         return nbamis;

@@ -39,12 +39,13 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
             if (Utilisateur.isActivated(this.joueur.getPseudo()) && this.pJoueur.getRbpasactiver().isSelected()) {
                 this.pJoueur.getPa().getAdmin().desactiverJoueur(this.joueur);
             }
-            else if (!(Utilisateur.isActivated(this.joueur.getPseudo())) && this.pJoueur.getRbactiver().isSelected()) {
+            if (!(Utilisateur.isActivated(this.joueur.getPseudo())) && this.pJoueur.getRbactiver().isSelected()) {
                 this.pJoueur.getPa().getAdmin().activerJoueur(this.joueur);
             }
 
             // GESTION MODIF PSEUDO
             if (!(joueur.getPseudo().equals(this.pJoueur.getTFpseudo()))) {
+              System.out.println(this.pJoueur.getTFpseudo());
                 Utilisateur.setUserInfo("pseudoUt", this.pJoueur.getTFpseudo(), "pseudoUt", this.joueur.getPseudo());
             }
 
@@ -62,7 +63,7 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
             if (joueur.getSexe().equals("M") && this.pJoueur.getSexeF().isSelected()) {
                 Utilisateur.setUserInfo("sexe", "F", "pseudoUt", this.joueur.getPseudo());
             }
-            else if (joueur.getSexe().equals("F") && this.pJoueur.getSexeH().isSelected()) {
+            if (joueur.getSexe().equals("F") && this.pJoueur.getSexeH().isSelected()) {
                 Utilisateur.setUserInfo("sexe", "M", "pseudoUt", this.joueur.getPseudo());
             }
 
@@ -70,7 +71,7 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
             if (joueur.getRole().equals("USER") && this.pJoueur.getCbrole().getValue().equals("Administrateur")) {
                 Utilisateur.setUserInfo("nomRole", "ADMIN", "pseudoUt", this.joueur.getPseudo());
             }
-            else if (joueur.getRole().equals("ADMIN") && this.pJoueur.getCbrole().getValue().equals("Utilisateur")) {
+            if (joueur.getRole().equals("ADMIN") && this.pJoueur.getCbrole().getValue().equals("Utilisateur")) {
                 Utilisateur.setUserInfo("nomRole", "USER", "pseudoUt", this.joueur.getPseudo());
             }
 
