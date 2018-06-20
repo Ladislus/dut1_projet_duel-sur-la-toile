@@ -11,6 +11,7 @@ public class ActionRetourToDashboard implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
 
         Button btRetour = (Button) actionEvent.getSource();
+
         Stage EditionProfile = (Stage) btRetour.getScene().getWindow();
         
         EditionProfile.close(); }}

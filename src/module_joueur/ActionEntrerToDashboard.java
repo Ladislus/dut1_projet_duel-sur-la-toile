@@ -7,11 +7,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class ActionEntrer implements EventHandler<KeyEvent> {
+public class ActionEntrerToDashboard implements EventHandler<KeyEvent> {
 
   private Stage primaryStage;
 
-  public ActionEntrer(Stage primaryStage) { this.primaryStage = primaryStage; }
+  public ActionEntrerToDashboard(Stage primaryStage) { this.primaryStage = primaryStage; }
 
   public void handle(KeyEvent keyEvent) {
 
@@ -38,7 +38,9 @@ public class ActionEntrer implements EventHandler<KeyEvent> {
 
           else {
 
-            Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(login), login, Utilisateur.getEmailByPseudo(login)));
+            Boolean isAdmin = GestionBD.selectPreparedStatement("select nomRole from UTILISATEUR where idUt = " + Utilisateur.getIdByPseudo(login) + ";").get("nomRole").get(0).equals("ADMIN");
+
+            Dashboard dashboard = new Dashboard(this.primaryStage, new Joueur(Utilisateur.getIdByPseudo(login), login, Utilisateur.getEmailByPseudo(login)), isAdmin);
 
             this.primaryStage.setTitle(dashboard.getTitle());
             this.primaryStage.setScene(new Scene(dashboard, VariablesJoueur.DEFAULT_APPLICATION_WIDTH, VariablesJoueur.DEFAULT_APPLICATION_HEIGHT)); }}

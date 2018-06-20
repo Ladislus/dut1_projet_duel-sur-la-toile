@@ -19,6 +19,7 @@ public class ActionSauvegardeModifsJeu implements EventHandler<ActionEvent>{
   public void handle(ActionEvent actionEvent){
 
     Button b = (Button) actionEvent.getSource();
+    
     if((b.getText()) == "Sauvegarder"){
       ButtonType btoui = new ButtonType("Oui");
       ButtonType btnon = new ButtonType("Non", ButtonData.CANCEL_CLOSE);
@@ -28,6 +29,7 @@ public class ActionSauvegardeModifsJeu implements EventHandler<ActionEvent>{
       alert.setContentText("Voulez-vous vraiment sauvegarder les\ninformations modifiées ?");
       alert.getButtonTypes().setAll(btoui, btnon);
       Optional<ButtonType> result = alert.showAndWait();
+
       if (result.get() == btoui){
         alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Validation de la sauvegarde");

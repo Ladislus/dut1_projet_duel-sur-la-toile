@@ -3,73 +3,63 @@ package module_administrateur;
 import APIMySQL.*;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.*;
 
+/** Modèle de l'administration */
 public class Administration {
 
-    private ArrayList<Joueur> joueurAactiver;
+    private ArrayList<Joueur> listeJmodifStatut;
 
-    private ArrayList<Rapport> listeRapport;
-    private ArrayList<Rapport> listeRapportLu;
-
+    /** Constructeur de l'administration avec les initialisations */
     public Administration() {
-        this.joueurAactiver = new ArrayList<>();
-        this.listeRapport = new ArrayList<>();
-        this.listeRapportLu = new ArrayList<>();
+        this.listeJmodifStatut = new ArrayList<>();
     }
 
-    //GERER JOUEUR
-    public void ajouterListeActiver(Joueur joueur) {
-        this.joueurAactiver.add(joueur);
+    /** Réinitialise tous les éléments à vide */
+    public void majAdmin() {
+        this.listeJmodifStatut = new ArrayList<>();
     }
 
-    public void retirerListeActiver(Joueur joueur) {
-        this.joueurAactiver.remove(joueur);
+    ////////////////////
+    // GERER JOUEUR //
+    /////////////////
+
+    /** Ajoute à la liste les joueurs à changer de statut (activé/désactivé) */
+    public void ajouterListeModif(Joueur joueur) {
+        this.listeJmodifStatut.add(joueur);
     }
 
-    public void retirerTousJoueurActiver(ArrayList<Joueur> liste) {
-        ArrayList<Joueur> newListe = new ArrayList<>();        
-        newListe.addAll(liste);
-        for (Joueur j : liste) {
-            newListe.remove(j);
-        }
-        this.joueurAactiver = newListe;
+    /** Retire de la liste les joueurs à changer de statut (activé/désactivé) */
+    public void retirerListeModif(Joueur joueur) {
+        this.listeJmodifStatut.remove(joueur);
     }
 
-    public ArrayList<Joueur> getJoueurAactiver() {
-        return this.joueurAactiver;
+    /** Retourne la liste des joueurs à changer de statut (activé/désactivé) */
+    public ArrayList<Joueur> getListeModif() {
+        return this.listeJmodifStatut;
     }
 
-    public int cptJoueurActiver() {
-        int cpt = 0;
-        try {
-          cpt = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS NOT TRUE;").get("pseudoUt").size();
-        }
-        catch(SQLException e) {}
-        return cpt;
+    ///////////////////
+    // REQUETTE SQL //
+    /////////////////
+
+    /** Retourne sous la forme d'un dictionnaire avec leur informations tous les utilisateurs */
+    public HashMap<String, List<Object>> requetteListeJoueur() {
+        return GestionBD.selectPreparedStatement("select * from UTILISATEUR;");
     }
 
-    //GERER RAPPORT
-    public void ajouterRapport(Rapport r) {
-        this.listeRapport.add(r);
+    /** Permet de désactiver un joueur donné en paramètre */
+    public void desactiverJoueur(Joueur j) {
+        Utilisateur.setUserInfo("activeUt", 0, "pseudoUt", j.getPseudo());
     }
 
-    public ArrayList<Rapport> getRapport() {
-        return this.listeRapport;
+    /** Permet d'activer un joueur donné en paramètre */
+    public void activerJoueur(Joueur j) {
+        Utilisateur.setUserInfo("activeUt", 1, "pseudoUt", j.getPseudo());
     }
 
-    public void ajouterRapportLu(Rapport r) {
-        this.listeRapportLu.add(r);
+    public HashMap<String, List<Object>> requetteListeJeux() {
+        return GestionBD.selectPreparedStatement("select * from JEU;");
     }
 
-    public void retirerRapportLu(Rapport r) {
-        this.listeRapportLu.remove(r);
-    }
-
-    public ArrayList<Rapport> getRapportLu() {
-        return this.listeRapportLu;
-    }
-
-    public void supprimerRapportLu(Rapport r) {
-        this.listeRapport.remove(r);
-    }
 }

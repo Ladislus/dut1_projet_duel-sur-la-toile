@@ -2,16 +2,14 @@ package APIMySQL;
 
 import com.mysql.jdbc.ResultSetMetaData;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +27,10 @@ public class GestionBD {
     }
 
     private GestionBD(){}
+
+    public static Connection getCo() {
+        return co;
+    }
 
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
@@ -60,6 +62,7 @@ public class GestionBD {
             return res;
         } catch (SQLException e){
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -101,16 +104,22 @@ public class GestionBD {
         return res;
     }
 
-    public static Image blobToImage(Blob blob){
+    public static Blob createBlob(byte[] bytes) throws SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,bytes);
+        return res;
+    }
+
+    public static Image blobToImage(Blob blob) {
         try {
-            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            blob.free();
+            return res;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
+        return null; }
 
     public static Image bytesToImage(byte[] bytes){
         return new Image(new ByteArrayInputStream(bytes));
-    }
-}
+    }}

@@ -18,7 +18,7 @@ public class PasswordDialog extends Dialog<String> {
     setTitle("CONFIRMATION");
     setHeaderText("Nous voulons vérifier que c'est bien vous \nVeuillez entrer votre mot de passe");
 
-    ButtonType passwordButtonType = new ButtonType("Decrypt", ButtonData.OK_DONE);
+    ButtonType passwordButtonType = new ButtonType("OK", ButtonData.OK_DONE);
     getDialogPane().getButtonTypes().addAll(passwordButtonType, ButtonType.CANCEL);
 
     this.passwordField = new PasswordField();
@@ -38,6 +38,4 @@ public class PasswordDialog extends Dialog<String> {
 
       if (dialogButton == passwordButtonType)
         return passwordField.getText();
-      return null; }); }
-
-  public String getPasswordField() { return this.passwordField.getText(); }}
+      return null; }); }}

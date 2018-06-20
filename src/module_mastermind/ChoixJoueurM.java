@@ -13,9 +13,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.*;
-
-import static module_puissance4.Puissance4.chem;
 
 public class ChoixJoueurM {
     // Vue de la fenêtre pour choisir contre qui jouer
@@ -63,7 +62,12 @@ public class ChoixJoueurM {
         res.setSpacing(50.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-        Image im = new Image(new File(chem+"mastermind_logo1.png").toURI().toString());
+        Image im = null;
+        try {
+            im = new Image(getClass().getResource(Mastermind.chem + "mastermind_logo1.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         ImageView iv = new ImageView(im);
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
@@ -136,7 +140,12 @@ public class ChoixJoueurM {
         i++;
 
         for (String nom : this.listeCour){
-            ImageView img = new ImageView(new Image(new File(chem+"../pub/contact.png").toURI().toString()));
+            ImageView img = null;
+            try {
+                img = new ImageView(new Image(getClass().getResource("/img/pub/contact.png").toURI().toString()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             img.setPreserveRatio(true);
             img.setFitHeight(50.);
             Button b = new Button(nom,img);

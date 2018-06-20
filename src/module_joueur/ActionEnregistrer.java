@@ -5,32 +5,40 @@ import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Optional;
 
 public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
-  Stage primaryStage;
+  private Stage primaryStage;
+  private Stage secondaryStage;
 
-  Joueur joueur;
+  private Joueur joueur;
 
-  public ActionEnregistrer(Stage primaryStage, Joueur joueur) {
+  public ActionEnregistrer(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     this.primaryStage = primaryStage;
+    this.secondaryStage = secondaryStage;
+
     this.joueur = joueur; }
 
   @Override
   public void handle(ActionEvent actionEvent) {
 
-    EditionProfil page = (EditionProfil) this.primaryStage.getScene().getRoot();
+    EditionProfil page = (EditionProfil) this.secondaryStage.getScene().getRoot();
 
     String email = page.getTfEmail().getText();
     String pseudo = page.getTfPseudo().getText();
     String motdepasse = page.getPfMotDePasse().getText();
     String confirmMotDePasse = page.getPfConfirmMotDePasse().getText();
     String ancientPseudo = joueur.getPseudo();
+
+    byte[] bytes = new byte[0];
+    try { bytes = Files.readAllBytes(((EditionProfil)secondaryStage.getScene().getRoot()).getImagePath()); }
+    catch (IOException e) { e.printStackTrace(); }
 
     PasswordDialog confirm = new PasswordDialog();
 
@@ -58,18 +66,16 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             else {
 
-              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo);
+              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, bytes);
 
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);
 
-              //TODO : récupérer l'image et la modifier
-
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Edition utilisateur");
-              alert.setHeaderText("Votre modification a bien été enregistrer");
+              alert.setHeaderText("Vos modifications ont bien été enregistrées");
 
-              primaryStage.close();
+              secondaryStage.close();
 
               alert.showAndWait(); }}
 
@@ -77,14 +83,14 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Edition utilisateur");
-            alert.setHeaderText("Votre nouveau mot de passe de corespondent pas");
+            alert.setHeaderText("Votre mot de passe ne correspond pas");
             alert.showAndWait(); }}
 
         else {
 
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("ERREUR");
-          alert.setHeaderText("Votre mot de passe n'est pas valide");
+          alert.setHeaderText("Votre nouveau mot de passe n'est pas valide");
           alert.showAndWait(); }}
 
           catch (APIMySQLException ex) { ex.printStackTrace(); }}

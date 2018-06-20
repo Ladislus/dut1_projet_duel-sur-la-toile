@@ -103,4 +103,8 @@ public class Puissance4 extends Application {
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
+
+    public String getRegle() {
+        return "Connect 4 is a two-player dual game in which the players take turns dropping one colored disc from the top into a seven-column, six-row vertically suspended grid. The pieces fall straight down, occupying the next available space within the column.\n\nThe objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs.";
+    }
 }
