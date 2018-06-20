@@ -23,7 +23,7 @@ public class ActionRechercherJoueur implements EventHandler<KeyEvent> {
         if(invitation.getTfSearch().getText().contains(" ")|| invitation.getTfSearch().getText().length() == 0){
             try{
                 listeDeJoueur.clear();
-                invitation.majAffichage(listeDeJoueur);
+                invitation.majAffichageListeJoueur(listeDeJoueur);
             }
             catch (NullPointerException e){
 
@@ -32,7 +32,7 @@ public class ActionRechercherJoueur implements EventHandler<KeyEvent> {
         }
         else{
             listeDeJoueur = GestionBD.selectPreparedStatement("select pseudoUt from UTILISATEUR where pseudoUt like '"+ invitation.getTfSearch().getText()+"%'").get("pseudoUt");
-            invitation.majAffichage(listeDeJoueur);
+            invitation.majAffichageListeJoueur(listeDeJoueur);
         }
 
     }
