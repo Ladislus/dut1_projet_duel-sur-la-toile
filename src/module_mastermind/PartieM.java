@@ -112,6 +112,14 @@ public class PartieM {
     }
 
     /**
+     * Renvoie le Mastermind utilisé dans PartieM
+     * @return un Mastermind
+     */
+    public Mastermind getMastermind() {
+        return mastermind;
+    }
+
+    /**
      * Renvoie l'attribut de la classe p, de la classe PlateauM
      * @return PlateauM p
      */
@@ -133,6 +141,14 @@ public class PartieM {
      */
     public Joueur getJ2() {
         return j2;
+    }
+
+    /**
+     * Redéfinit le plateau
+     * @param p un PlateauM
+     */
+    public void setP(PlateauM p) {
+        this.p = p;
     }
 
     /**
@@ -364,4 +380,7 @@ public class PartieM {
         return res;
     }
 
+    public void resetAffichage(){
+        this.listeComb.getChildren().removeAll(listeComb.getChildren());
+    }
 }
