@@ -4,7 +4,6 @@ import com.mysql.jdbc.ResultSetMetaData;
 import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,6 +27,10 @@ public class GestionBD {
     }
 
     private GestionBD(){}
+
+    public static Connection getCo() {
+        return co;
+    }
 
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
@@ -59,6 +62,7 @@ public class GestionBD {
             return res;
         } catch (SQLException e){
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -100,10 +104,17 @@ public class GestionBD {
         return res;
     }
 
+    public static Blob createBlob(byte[] bytes) throws SQLException {
+        Blob res = co.createBlob();
+        res.setBytes(1,bytes);
+        return res;
+    }
+
     public static Image blobToImage(Blob blob){
-        //TODO : renvoie toujours null
         try {
-            return new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
+            blob.free();
+            return res;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,4 +137,6 @@ public class GestionBD {
         } catch (SQLException e){}
         return null;
     }
+
+
 }

@@ -1,14 +1,14 @@
 package module_joueur;
 
 import APIMySQL.APIMySQLException;
-import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.sql.Blob;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Optional;
 
 public class ActionEnregistrer implements EventHandler<ActionEvent> {
@@ -36,8 +36,9 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
     String confirmMotDePasse = page.getPfConfirmMotDePasse().getText();
     String ancientPseudo = joueur.getPseudo();
 
-    //TODO : récupérer l'image' de l'ivImageUser en la transformer en blob
-    Blob blob = (Blob) GestionBD.selectPreparedStatement("Select image from UTILISATEUR where idUt = " + this.joueur.getId() + ";").get("image").get(0);
+    byte[] bytes = new byte[0];
+    try { bytes = Files.readAllBytes(((EditionProfil)secondaryStage.getScene().getRoot()).getImagePath()); }
+    catch (IOException e) { e.printStackTrace(); }
 
     PasswordDialog confirm = new PasswordDialog();
 
@@ -65,14 +66,14 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             else {
 
-              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, blob);
+              Utilisateur.updateUtilisateur(pseudo, email, motdepasse, ancientPseudo, bytes);
 
               joueur.setEmail(email);
               joueur.setPseudo(pseudo);
 
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Edition utilisateur");
-              alert.setHeaderText("Votre modification a bien été enregistrer");
+              alert.setHeaderText("Vos modifications ont bien été enregistrées");
 
               secondaryStage.close();
 
@@ -82,14 +83,14 @@ public class ActionEnregistrer implements EventHandler<ActionEvent> {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Edition utilisateur");
-            alert.setHeaderText("Votre nouveau mot de passe de corespondent pas");
+            alert.setHeaderText("Votre mot de passe ne correspond pas");
             alert.showAndWait(); }}
 
         else {
 
           Alert alert = new Alert(Alert.AlertType.ERROR);
           alert.setTitle("ERREUR");
-          alert.setHeaderText("Votre mot de passe n'est pas valide");
+          alert.setHeaderText("Votre nouveau mot de passe n'est pas valide");
           alert.showAndWait(); }}
 
           catch (APIMySQLException ex) { ex.printStackTrace(); }}

@@ -14,6 +14,4 @@ public class Jeu {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-}
+    }}

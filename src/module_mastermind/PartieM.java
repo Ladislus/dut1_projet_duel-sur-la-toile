@@ -1,5 +1,6 @@
 package module_mastermind;
 
+import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,6 +34,8 @@ public class PartieM {
     private List<Circle> lCercle;
     private VBox listeComb;
 
+    private Chronometre chrono;
+
     private Map<Integer,Color> attributionCouleur;
     private Map<Integer,Color> attributionIndices;
 
@@ -54,7 +57,10 @@ public class PartieM {
      * Met à jour la base de données: les infos sur la partie sont mises à jour dans la base de données.
      */
     public void majBD(){
-
+//        Exemple utilisation BD
+//
+//        HashMap<String, List<Object>> res = GestionBD.selectPreparedStatement("Select idUt, score2 from PARTIE where score1 = 60");
+//        {idUt : [4,5,8], score2:[52,45,78]}
     }
 
     /**
@@ -75,6 +81,8 @@ public class PartieM {
 
         this.p = new PlateauM(j1,j2);
 
+        this.chrono = new Chronometre();
+
         this.attributionCouleur = new HashMap<>();
         this.attributionCouleur.put(0,Color.DARKGREY);
         this.attributionCouleur.put(1,Color.YELLOW);
@@ -93,6 +101,14 @@ public class PartieM {
         this.j2 = new Joueur(j2);
 
         System.out.println(this.etatPartie());
+    }
+
+    /**
+     * Renvoie l'attribut chrono, qui set un Chronometre
+     * @return un Chronometre
+     */
+    public Chronometre getChrono() {
+        return this.chrono;
     }
 
     /**
@@ -201,12 +217,27 @@ public class PartieM {
     public VBox menu(Mastermind m){
         VBox res = new VBox(25);
 
+        HBox quitterRejouer = new HBox(10);
+
         Button quitter = new Button("Quitter");
         quitter.setOnAction(new ActionQuitterM(m));
 
-        Label timer = new Label("Time : 200");
+        Button rejouer = new Button("Rejouer");
+        rejouer.setOnAction(new ActionRejouer(this));
+
+        quitterRejouer.getChildren().addAll(quitter,rejouer);
+
+        HBox timerBox = new HBox();
+
+        Label timer = new Label("Time : ");
         timer.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         timer.setPadding(new Insets(75,0,0,0));
+        chrono = new Chronometre();
+        chrono.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        chrono.setPadding(new Insets(75,0,0,0));
+        chrono.start();
+
+        timerBox.getChildren().addAll(timer,chrono);
 
         Label couleurs = new Label("Couleurs :");
         couleurs.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
@@ -227,7 +258,7 @@ public class PartieM {
         Button aide = new Button("?");
         aide.setFont(Font.font("Verdana", FontWeight.BOLD,25));
         aide.setTextFill(Color.WHITE);
-        aide.setStyle("-fx-background-color: #202020");
+        aide.setStyle("-fx-background-color: #202020;");
         aide.setOnAction(new ActionHelpM());
 
 
@@ -236,7 +267,7 @@ public class PartieM {
 
         tabCouleurs.setPadding(new Insets(0,0,50,30));
 
-        res.getChildren().addAll(quitter,timer,couleurs,tabCouleurs,aide);
+        res.getChildren().addAll(quitterRejouer,timerBox,couleurs,tabCouleurs,aide);
 
         res.setPadding(new Insets(0,0,0,20));
 

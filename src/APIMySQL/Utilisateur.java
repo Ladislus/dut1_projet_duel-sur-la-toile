@@ -1,12 +1,15 @@
 package APIMySQL;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import java.sql.Statement;
 import java.util.*;
 
 public class Utilisateur {
@@ -45,6 +48,18 @@ public class Utilisateur {
         try {
             Collections.addAll(donnees,pseudo,email,sexe,prenom,nom,1,nomRole,getHash((mdp + salt).getBytes()),salt);
             GestionBD.updatePreparedStatement("INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,prenom,nom,activeUt,nomRole,hash,salt) VALUES (?,?,?,?,?,?,?,?,?)", donnees);
+        } catch (SQLException e) {
+            throw new APIMySQLException("pseudoTaken");
+        }
+    }
+
+    public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, int active, String mdp, String nomRole, Blob image) throws APIMySQLException {
+        String salt = getSalt();
+        ArrayList<Object> donnees = new ArrayList<>();
+
+        try {
+            Collections.addAll(donnees,pseudo,email,sexe,prenom,nom,active,nomRole,getHash((mdp + salt).getBytes()),salt,image);
+            GestionBD.updatePreparedStatement("INSERT INTO UTILISATEUR (pseudoUt,emailUt,sexe,prenom,nom,activeUt,nomRole,hash,salt,image) VALUES (?,?,?,?,?,?,?,?,?,?)", donnees);
         } catch (SQLException e) {
             throw new APIMySQLException("pseudoTaken");
         }
@@ -116,12 +131,25 @@ public class Utilisateur {
         return listePseudo;
     }
 
-    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, Blob blob){
+    public static void updateImage(String pseudo, byte[] image){
+        try {
+            PreparedStatement s = GestionBD.getCo().prepareStatement("UPDATE UTILISATEUR SET image=? WHERE pseudoUt='"+pseudo+"'");
+            s.setBlob(1,GestionBD.createBlob(image));
+            s.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, byte[] image){
         int id = getIdByPseudo(ancientMotDePasse);
         String salt = getSalt();
+
         setUserInfo("pseudoUt", pseudo, "idUt", String.valueOf(id)); //eror
         setUserInfo("emailUt", email, "idUt", String.valueOf(id));
-        setUserInfo("image", blob, "idUt", String.valueOf(id));
+        //setUserInfo("image", blob, "idUt", String.valueOf(id));
+        updateImage(pseudo,image);
+
         if(!(motDePasse.length() == 0)){
             setUserInfo("hash", getHash((motDePasse + salt).getBytes()), "idUt", String.valueOf(id));
             setUserInfo("salt", salt, "idUt", String.valueOf(id));
