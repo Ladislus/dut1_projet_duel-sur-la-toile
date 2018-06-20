@@ -39,15 +39,15 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent>{
               Utilisateur.setUserInfo("activeUt", 1, "pseudoUt", this.joueur.getPseudo());
           }
 
-          // GESTION MODIFICATION INFO
+          // GESTION MODIF PSEUDO
+          if (!(joueur.getPseudo().equals(this.pJoueur.getTFpseudo()))) {
+              Utilisateur.setUserInfo("pseudoUt", this.pJoueur.getTFpseudo(), "pseudoUt", this.joueur.getPseudo());
+          }
 
-        /**
-        si joueur dans bdd est activé et état radiobutton sur oui = rien faire
-        si joueur dans bdd desactivé et etat radiobutton non = rien faire
-        si joueur dans bdd est activé et etat radiobutton non = le desactivé
-
-
-        */
+          //GESTION MODIF EMAIL
+          if (!(joueur.getEmail().equals(this.pJoueur.getTFemail()))) {
+              Utilisateur.setUserInfo("emailUt", this.pJoueur.getTFemail(), "pseudoUt", this.joueur.getPseudo());
+          }
 
 
 

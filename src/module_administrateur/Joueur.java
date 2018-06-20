@@ -2,24 +2,64 @@ package module_administrateur;
 
 import javafx.scene.control.*;
 
+/** Modèle du joueur */
 public class Joueur {
 
-  private String pseudo;
   private int id;
-  private boolean connecte;
+  private String pseudo;
+  private String prenom;
+  private String nom;
+  private String email;
+  private String sexe;
+  private String role;
+  private boolean estActif;
   private CheckBox activer;
   private Hyperlink profil;
 
-  public Joueur(String pseudo, int id, boolean connecte) {
-    this.pseudo = pseudo;
+  /** Constructeur du joueur */
+  public Joueur(int id, String pseudo, String prenom, String nom, String email, String sexe, String role, boolean estActif) {
     this.id = id;
-    this.connecte = connecte;
+    this.pseudo = pseudo;
+    this.prenom = prenom;
+    this.nom = nom;
+    this.email = email;
+    this.sexe = sexe;
+    this.role = role;
+    this.estActif = estActif;
     this.activer = new CheckBox();
     this.profil = new Hyperlink("Profil");
   }
 
+  public int getId() {
+    return this.id;
+  }
+
   public String getPseudo() {
   	return this.pseudo;
+  }
+
+  public String getPrenom() {
+    return this.prenom;
+  }
+
+  public String getNom() {
+    return this.nom;
+  }
+
+  public String getSexe() {
+  	return this.sexe;
+  }
+
+  public String getRole() {
+    return this.role;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+
+  public boolean getEstActif() {
+    return this.estActif;
   }
 
   public Hyperlink getProfil() {
@@ -28,14 +68,6 @@ public class Joueur {
 
   public CheckBox getActiver() {
     return this.activer;
-  }
-
-  public int getId() {
-  	return this.id;
-  }
-
-  public boolean getConnecte() {
-  	return this.connecte;
   }
 
   public String toString() {
