@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 public class Jeu {
 
   private int idJeu;
-  private String nom;
+  private String nomJeu;
   private String regles;
   private String jarJeuPath;
   private char active;
@@ -14,9 +14,9 @@ public class Jeu {
   private String imagePath;
 
   /** Constructeur du joueur */
-  public Jeu(int idJeu, String nom, String regles, String jarJeuPath, char active, int idType, String imagePath) {
+  public Jeu(int idJeu, String nomJeu, String regles, String jarJeuPath, char active, int idType, String imagePath) {
     this.idJeu = idJeu;
-    this.nom = nom;
+    this.nomJeu = nomJeu;
     this.regles = regles;
     this.jarJeuPath = jarJeuPath;
     this.active = active;
@@ -29,8 +29,8 @@ public class Jeu {
     return this.idJeu;
   }
 
-  public String getNom() {
-    return this.nom;
+  public String getNomJeu() {
+    return this.nomJeu;
   }
 
   public String getRegles() {
