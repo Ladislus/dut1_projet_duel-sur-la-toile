@@ -126,7 +126,7 @@ class Dashboard extends BorderPane {
 
     //TODO : Mettre si des messages sont non lus
     Button btMessage = new Button("Messagerie");
-    btMessage.setOnAction(new ActionToMessagerie());
+    btMessage.setOnAction(new ActionToMessagerie(joueur));
     btMessage.setPrefWidth(150);
 
     Button btListeDamis = new Button("Invitation");
