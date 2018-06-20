@@ -17,7 +17,7 @@ public class ActionChangeContact implements EventHandler<ActionEvent> {
     }
 
     @Override
-    public void handle(ActionEvent actionEvent) {dev.bordecraft
+    public void handle(ActionEvent actionEvent) {
         Button source = (Button) actionEvent.getSource();
         String nouvContact = (String) source.getUserData();
         this.messagerie.setNomContactCour(nouvContact);
