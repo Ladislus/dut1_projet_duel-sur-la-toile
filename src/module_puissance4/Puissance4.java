@@ -28,7 +28,7 @@ public class Puissance4 extends Application {
     }
 
     /** chemin relatif pour retrouver les images du puissance 4 */
-    public static String chem = "../src/module_puissance4/img/";
+    public static String chem = "./img/module_puissance4/";
 
     /** Le stage principal */
     private Stage primaryStage;
@@ -105,6 +105,6 @@ public class Puissance4 extends Application {
     }
 
     public String getRegle() {
-        return "Le but du jeu est d'aligner une suite de 4 pions de même couleur sur une grille comptant 6 rangées et 7 colonnes.\n\nChaque joueur dispose de 21 pions d'une couleur. Tour à tour les deux joueurs placent un pion dans la colonne de leur choix, le pion coulisse alors jusqu'à la position la plus basse possible dans la dite colonne à la suite de quoi c'est à l'adversaire de jouer.\n\nLe vainqueur est le joueur qui réalise le premier un alignement (horizontal, vertical ou diagonal) consécutif d'au moins quatre pions de sa couleur. Si, alors que toutes les cases de la grille de jeu sont remplies, aucun des deux joueurs n'a réalisé un tel alignement, la partie est déclarée nulle.";
+        return "Connect 4 is a two-player dual game in which the players take turns dropping one colored disc from the top into a seven-column, six-row vertically suspended grid. The pieces fall straight down, occupying the next available space within the column.\n\nThe objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs.";
     }
 }

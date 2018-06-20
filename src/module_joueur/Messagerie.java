@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -23,23 +22,23 @@ import java.util.List;
  */
 public class Messagerie extends SplitPane {
 
-    private List<Joueur> lesContacts;
+    private List<String> lesContacts;
     private static String chem = "./img/pub/";
 
     private Joueur user;
-    private Joueur contactCour;
+    private String contactCour;
     private Label nomContactCour;
     private TextField barre;
     private VBox lesMessages;
     private ScrollPane sp;
 
-    public Messagerie(){
+    public Messagerie(Joueur joueur){
         super();
 
         this.lesContacts = new ArrayList<>();
         // ÉCRIRE FONCTION JDBC POUR OBTENIR LISTE DES CONTACTS
 
-        this.user = new Joueur(1234,"Mathieu","maffiou@test.fr");
+        this.user = joueur;
 
         this.getItems().addAll(this.menuContact(),this.pageMessages());
         this.setDividerPositions(62/850f);
@@ -68,11 +67,10 @@ public class Messagerie extends SplitPane {
         accueil.setPadding(new Insets(3));
         accueil.setPrefWidth(300.);
         accueil.setAlignment(Pos.CENTER_LEFT);
-        accueil.setFont(Font.font(25.));
+        accueil.setFont(Font.font(15.));
         accueil.setUserData("ACC");
         accueil.setOnAction(new ActionChangeContact(this));
 
-        contacts.getChildren().add(titre);
 
         contacts.getChildren().addAll(out,titre,accueil);
 
@@ -86,7 +84,7 @@ public class Messagerie extends SplitPane {
 
             Button b = new Button(nom,img);
             b.setAlignment(Pos.CENTER_LEFT);
-            b.setFont(VariablesJoueur.DEFAULT_TEXT_FONT);
+            b.setFont(Font.font(15.));
             b.setPrefWidth(300.);
             b.setPadding(new Insets(2));
             b.setStyle("-fx-border-radius: 0;" +
@@ -178,15 +176,7 @@ public class Messagerie extends SplitPane {
 
         List<MessageModele> res = new ArrayList<>();
 
-        res.add(new MessageModele("Mathieu","Bernard",123456,"Salut !\nComment vas-tu ?"));
-        res.add(new MessageModele("Bernard","Mathieu",123567,"ça va et toi ?"));
-        res.add(new MessageModele("Mathieu","Bernard",123789,"Your son's trombone probably has a lacquer finish on it that prevents the silver polish from doing its thing. You'll have to strip the lacquer off before you will be able to polish the silver. If it has the manufacturer's original finish, it is probably an epoxy coating that has been baked on. Stripping this type of coating involves nasty caustic strippers, so you might be better off handing this over to a professional musical instrument repair technician."));
-        res.add(new MessageModele("Bernard","Mathieu",123789,"Ok ! Nice !"));
 
-        String[] liste = {"a","b","c","d","e","f","g"};
-        for (String s : liste){
-            res.add(new MessageModele("Bernard","Mathieu",123789,s));
-        }
 
         return res;
     }
@@ -196,6 +186,7 @@ public class Messagerie extends SplitPane {
     }
 
     public void setNomContactCour(String nouv){
+        this.contactCour = nouv;
         if (nouv.equals("ACC"))
             this.nomContactCour.setText("ACCUEIL");
         else
@@ -212,7 +203,7 @@ public class Messagerie extends SplitPane {
         return user;
     }
 
-    public Joueur getContactCour() {
+    public String getContactCour() {
         return contactCour;
     }
 
