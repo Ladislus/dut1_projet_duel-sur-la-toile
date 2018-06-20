@@ -20,6 +20,7 @@ public class ActionEnvoiMessage implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             String newMsg = this.messagerie.getBarreText();
+            this.messagerie.getBarre().clear();
 
             try {
                 Message.creerMessage(newMsg,this.messagerie.getUser().getId(),Utilisateur.getIdByPseudo(this.messagerie.getContactCour()));

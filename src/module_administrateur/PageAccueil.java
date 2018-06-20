@@ -11,30 +11,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.ContentDisplay;
-import module_joueur.ActionToAdmin;
+import java.io.InputStream;
 
-public class PageAccueil extends BorderPane {
+public class PageAccueil extends Application {
 
     /** Attributs de la classe PageAccueil */
     BorderPane bp;
     Administration a;
 
-    private String title;
-
-    private Stage primaryStage;
-
-    public PageAccueil(Stage primaryStage) {
-
-        super();
-
-        this.title = "Admin";
-
-        this.primaryStage = primaryStage;
-
-        this.setTop(haut());
-        this.setCenter(centre());
-        this.setBottom(bas()); }
+    public static void main(String[] args) {
+      launch(args);
+    }
 
     public BorderPane getBp() {
       return this.bp;
@@ -101,4 +91,32 @@ public class PageAccueil extends BorderPane {
       haut.setRight(b);
       l.setFont(Font.font ("Arial", 25));
       haut.setPadding(new Insets(20,25,20,25));
-      return haut; }}
+      return haut;
+    }
+
+    /** Création de la scène de la page */
+    public Scene scene() {
+      this.bp = new BorderPane();
+      this.bp.setCenter(this.constructB());
+      this.a = new Administration();
+      return new Scene(this.bp, 650, 450);
+    }
+
+    /** Création du BorderPane contenant toute la page */
+    public BorderPane constructB() {
+      BorderPane b = new BorderPane();
+      b.setTop(haut());
+      b.setCenter(centre());
+      b.setBottom(bas());
+      return b;
+    }
+
+    /** Lancement de la vue */
+    @Override
+    public void start(Stage primaryStage) {
+      primaryStage.setTitle("Duel sur la toile - Administration");
+      primaryStage.setResizable(false);
+      primaryStage.setScene(this.scene());
+      primaryStage.show();
+    }
+}

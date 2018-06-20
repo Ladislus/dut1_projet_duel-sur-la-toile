@@ -1,6 +1,5 @@
 package module_administrateur;
 
-import APIMySQL.Jeu;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,8 +17,10 @@ import javafx.geometry.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Iterable;
+import APIMySQL.Jeu;
 
 public class GererJeu extends BorderPane {
 
@@ -33,6 +34,8 @@ public class GererJeu extends BorderPane {
     private TextField tnom;
     private TextArea tdescription;
     private ComboBox<String> cbmodes;
+    private HashMap<String, List<Object>> dico;
+    private ComboBox<String> cbjeux;
 
 
     /** Constructeur de la page pour gérer les jeux */
@@ -46,11 +49,14 @@ public class GererJeu extends BorderPane {
       this.bplusgauche = new Button("+");
       this.tnom = new TextField();
       this.tdescription = new TextArea();
+      this.dico = Jeu.recupListeJeux();
+      this.haut();
+      this.centre();
       this.creerGererJeu();
     }
 
     /** Création de l'entête de la page */
-    public BorderPane haut() {
+    public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des jeux");
         Button bRetour = new Button("< Retour");
@@ -60,7 +66,7 @@ public class GererJeu extends BorderPane {
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
 
-        return haut;
+        this.setTop(haut);
     }
 
 
@@ -185,19 +191,17 @@ public class GererJeu extends BorderPane {
 
     /** Création du ComboBox qui contient le nom des jeux */
     public ComboBox<String> creerComboBoxJeux(){
-      ObservableList<String> optionsjeu = FXCollections.observableArrayList(Jeu.recupListeJeux().keySet());
-      ComboBox<String> cbjeux = new ComboBox<String>(optionsjeu);
-      cbjeux.setPrefWidth(297);
+      ArrayList<String> listeJeux = new ArrayList<>();
+      for (int i = 0; i < this.dico.get("idJeu").size(); i++) {
+          String nom = (String) this.dico.get("nomJeu").get(i);
+          listeJeux.add(nom);
+      }
+      ObservableList<String> optionsjeu = FXCollections.observableArrayList(listeJeux);
+      this.cbjeux = new ComboBox<String>(optionsjeu);
+      this.cbjeux.getSelectionModel().selectFirst();
+      this.cbjeux.setPrefWidth(297);
 
       return cbjeux;
-    }
-
-    /** Création du textfield où l'on doit écrire le nom du jeu */
-    public TextField creerTextFieldEtatJeu(){
-      TextField tetatjeu = new TextField();
-      tetatjeu.setPromptText("Entrez l'état du jeu");
-
-      return tetatjeu;
     }
 
     /** Création du textarea où l'on doit écrire les règles du jeu */
@@ -236,7 +240,7 @@ public class GererJeu extends BorderPane {
     /** Création du VBox contenant toute la partie gauche de la vue (les infos pour modifier un jeu) */
     public VBox creerVBoxDescriptionJeu(){
       VBox vbjeu = new VBox();
-      vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldEtatJeu(),
+      vbjeu.getChildren().addAll(creerComboBoxJeux(), creerHBoxEtatJeu(), creerTextFieldNomJeu(),
         creerTextAreaRegleJeu(), creerComboBoxModes(), creerHBoxFileChooserGauche(),
           creerHBoxSauvegarder());
       vbjeu.setPadding(new Insets(10,15,10,15));
@@ -268,7 +272,8 @@ public class GererJeu extends BorderPane {
 
     /** Création du textfield où l'on doit écrire le nom du jeu */
     public TextField creerTextFieldNomJeu(){
-      this.tnom.setPromptText("Entrez le nom du jeu");
+      //this.tnom.setPromptText("Entrez le nom du jeu");
+      this.tnom.setText((String)this.dico.get("nomJeu").get(0));
 
       return this.tnom;
     }
@@ -368,18 +373,16 @@ public class GererJeu extends BorderPane {
 
 
     /** VBox permettant d'afficher toute la partie centre/droite de la vue */
-    public VBox centre(){
+    public void centre(){
       VBox centre = new VBox();
       centre.getChildren().add(creerVBoxAjouterJeu());
       centre.setSpacing(10);
       centre.setPadding(new Insets(5,10,5,5));
 
-      return centre;
+      this.setCenter(centre);
     }
 
     public void creerGererJeu(){
-      this.setTop(haut());
-      this.setCenter(centre());
       this.setLeft(gauche());
     }
 
