@@ -18,6 +18,10 @@ public class Chronometre extends Label {
 
     private ActionTemps actionTemps; // contrôleur associé au chronomètre
 
+    /**
+     * Constructeur du Chronometre étendant Label, qui est un Label qui se décrémente avec le temps
+     * (ici fixé à 200 secondes au départ)
+     */
     public Chronometre(){
         super("200");
         this.actionTemps= new ActionTemps(this);
@@ -26,7 +30,10 @@ public class Chronometre extends Label {
         this.timeline.setCycleCount(Animation.INDEFINITE);
     }
 
-
+    /**
+     * Méthode permettant de mettre à jour le Label en fonction du temps restant
+     * @param tempsMillisec le temps restant un long
+     */
     public void setTime(long tempsMillisec){
         long tpsSec = (tempsMillisec / 1000) % 60;
 
@@ -46,18 +53,31 @@ public class Chronometre extends Label {
         }
     }
 
+    /**
+     * Renvoie une String du Label du Chronometre
+     * @return une String
+     */
     public String getTime(){
         return this.getText();
     }
 
+    /**
+     * Permet de démarrer le Chronometre
+     */
     public void start(){
         this.timeline.play();
     }
 
+    /**
+     * Permet d'arrêter le Chronometre
+     */
     public void stop(){
         this.timeline.stop();
     }
 
+    /**
+     * Remet le Chronometre à sa position initiale (200)
+     */
     public void resetTime(){
         this.actionTemps.reset();
     }

@@ -31,11 +31,9 @@ public class Mastermind extends Application {
     }
 
     /**
-     *
+     *Peut modifier la fenetre où l'on se trouve
+     * Initialisé a Accueil
      * @param primaryStage
-     *
-     * Peut modifier la fenetre où l'on se trouve
-     * Initialiser a Accueil
      */
     @Override
     public void start(Stage primaryStage) {
@@ -61,7 +59,9 @@ public class Mastermind extends Application {
      * @param j1
      * @param j2
      */
-    public void newGame(String j1, String j2){primaryStage.setScene(new PartieM(this,j1,j2).getScene(this));}
+    public void newGame(String j1, String j2){
+        primaryStage.setScene(new PartieM(this,j1,j2).getScene(this));
+    }
 
     /**
      * Change la scene en fonction du titre placer en parametre
@@ -80,6 +80,7 @@ public class Mastermind extends Application {
 
     /**
      * Créer la vue des Bouttons de l'accueil
+     * @return une HBox
      */
     private HBox boutonsAccueil() {
         HBox res = new HBox();
@@ -117,6 +118,7 @@ public class Mastermind extends Application {
 
     /**
      * Créer la scene de la page d'accueil complete
+     * @return une Scene
      */
     private Scene pageAccueil(){
         BorderPane res = new BorderPane();

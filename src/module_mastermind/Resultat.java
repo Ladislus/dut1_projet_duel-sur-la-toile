@@ -6,10 +6,11 @@ import java.util.List;
 
 public class Resultat { // Modèle des résultats du mastermind
 
-     /**Un résultat est une combinaison spéciale. Pour chacun des 4 éléments:
-     *         0 signifie "Mauvais pion"
-     *         1 signifie "Pion présent et bien placé"
-     *         2 signifie "Pion présent mais mal placé"
+    /**
+     * Méthode qui permet de comparer la Combinaison courante avec la Combinaison mystère, et la Combinaison renvoyé est la liste des indices
+     * @param rep une Combinaison (celle à trouver)
+     * @param essai une Combinaison (la Combinaison courante)
+     * @return une Combinaison (liste des indices)
      */
     public static Combinaison compare(Combinaison rep,Combinaison essai){
         Combinaison courant = essai;
