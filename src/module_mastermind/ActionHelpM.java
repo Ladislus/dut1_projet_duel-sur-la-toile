@@ -7,6 +7,10 @@ import javafx.scene.layout.Region;
 
 public class ActionHelpM implements EventHandler<ActionEvent> {
 
+    /**
+     * Méthode appelée lors de l'utilisation du controlleur, permet d'afficher la bulle d'aide en cliquant dur l'icone lié
+     * @param actionEvent un ActionEvent
+     */
     @Override
     public void handle(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -10,10 +10,19 @@ public class ActionMettreCouleur implements EventHandler<Event> {
 
     private PartieM mastermind;
 
+    /**
+     * Constructeur du controlleur
+     * @param mastermind une PartieM
+     */
     public ActionMettreCouleur(PartieM mastermind){
         this.mastermind = mastermind;
     }
 
+    /**
+     * Méthode appelée lors de l'utilisation du controlleur, permet de mettre une couleur dans la combinaison courante,
+     * à la position libre la plus à gauche possible
+     * @param event un Event
+     */
     @Override
     public void handle(Event event){
         Circle cercle = (Circle)event.getSource();

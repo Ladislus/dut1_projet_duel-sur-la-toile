@@ -14,8 +14,8 @@ import module_joueur.Dashboard;
 /** Contrôleur du bouton sauvegarder les modifications d'un joueur */
 public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
 
-    ProfilJoueur pJoueur;
-    Joueur joueur;
+    private ProfilJoueur pJoueur;
+    private Joueur joueur;
 
     private Stage primaryStage;
 
@@ -42,10 +42,10 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
         if (result.get() == btoui) {
             // GESTION DESACTIVATION JOUEUR
             if (Utilisateur.isActivated(this.joueur.getPseudo()) && this.pJoueur.getRbpasactiver().isSelected()) {
-                ((PageAccueil)this.pJoueur.getPa().getScene().getRoot()).getAdmin().desactiverJoueur(this.joueur);
+                ((ProfilJoueur)this.primaryStage.getScene().getRoot()).getAdmin().desactiverJoueur(this.joueur);
             }
             if (!(Utilisateur.isActivated(this.joueur.getPseudo())) && this.pJoueur.getRbactiver().isSelected()) {
-                ((PageAccueil)this.pJoueur.getPa().getScene().getRoot()).getAdmin().activerJoueur(this.joueur);
+                ((ProfilJoueur)this.primaryStage.getScene().getRoot()).getAdmin().activerJoueur(this.joueur);
             }
 
             // GESTION MODIF PSEUDO
