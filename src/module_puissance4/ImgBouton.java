@@ -3,9 +3,8 @@ package module_puissance4;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashMap;
-
-import static module_puissance4.Puissance4.chem;
 
 /**
  * Vue des boutons au-dessus des colonnes
@@ -20,10 +19,13 @@ public class ImgBouton extends ImageView {
         super();
 
         dicoImage = new HashMap<>();
-        dicoImage.put("desactive",new File(chem+"boutColDesactive.png"));
-        dicoImage.put("1",new File(chem+"boutColRed.png"));
-        dicoImage.put("2",new File(chem+"boutColYellow.png"));
-
+        try {
+            dicoImage.put("desactive",new File(getClass().getResource(Puissance4.chem+"boutColDesactive.png").toURI()));
+            dicoImage.put("1",new File(getClass().getResource(Puissance4.chem+"boutColRed.png").toURI()));
+            dicoImage.put("2",new File(getClass().getResource(Puissance4.chem+"boutColYellow.png").toURI()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         this.setImage(new Image(dicoImage.get(type).toURI().toString()));
         this.setPreserveRatio(true);
         this.setFitWidth(25.);

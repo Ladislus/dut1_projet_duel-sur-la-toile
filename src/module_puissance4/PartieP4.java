@@ -17,10 +17,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static module_puissance4.Puissance4.chem;
 
 /**
  * Vue de la plateforme de jeu Puissance 4
@@ -124,7 +123,13 @@ public class PartieP4 {
         Text info = new Text("TIPS !\nYou can play with the mouse or the keyboard !\n\nClick on the arrows on the columns\nOR\nTo move among the columns, press keys \nQ (left) and D (right).\n\nTo put a token,\n press key M.\n\nGood luck !");
         info.setWrappingWidth(140.);
 
-        ImageView touches = new ImageView(new Image(new File(chem+"touchesP4.png").toURI().toString()));
+        ImageView touches = null;
+        try {
+
+            touches = new ImageView(new Image(getClass().getResource(Puissance4.chem+"touchesP4.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         touches.setPreserveRatio(true);
         touches.setFitWidth(140.);
 
@@ -136,10 +141,12 @@ public class PartieP4 {
         HBox res = new HBox();
         res.setPrefHeight(100.);
         res.setAlignment(Pos.CENTER_LEFT);
-
-        File file = new File(chem+"connect4logo.png");
-        Image im = new Image(file.toURI().toString());
-        ImageView iv = new ImageView(im);
+        ImageView iv = null;
+        try {
+            iv = new ImageView(new Image(getClass().getResource(Puissance4.chem+"connect4logo.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
         res.getChildren().addAll(iv);
