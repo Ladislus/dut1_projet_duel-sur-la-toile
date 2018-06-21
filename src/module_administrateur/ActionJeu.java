@@ -6,14 +6,12 @@ import javafx.stage.Stage;
 
 public class ActionJeu implements EventHandler<ActionEvent> {
 
-    PageAccueil pa;
+    private Stage primaryStage;
 
-    public ActionJeu(PageAccueil pa) {
-        this.pa = pa;
+    public ActionJeu(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.pa.getBp().setCenter(new GererJeu(this.pa));
-    }
-}
+        ((PageAccueil) this.primaryStage.getScene().getRoot()).getBp().setCenter(new GererJeu(this.primaryStage)); }}

@@ -242,6 +242,4 @@ public class Messagerie extends SplitPane {
     public TextField getBarre() {
         return barre;
     }
-
-
 }

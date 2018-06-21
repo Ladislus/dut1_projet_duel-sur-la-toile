@@ -21,7 +21,7 @@ public class ProfilJoueur extends BorderPane {
 
     /** Attributs de ProfilJoueur */
     private GererJoueur gJoueur;
-    private PageAccueil pa;
+    private Stage primaryStage;
     private Joueur joueur;
 
     private RadioButton rbactiver;
@@ -39,11 +39,11 @@ public class ProfilJoueur extends BorderPane {
     private TextField temail;
 
     /** Constructeur de cette vue */
-    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
+    public ProfilJoueur(Stage primaryStage, GererJoueur gJoueur, Joueur joueur) {
         super();
         this.gJoueur = gJoueur;
         this.joueur = joueur;
-        this.pa = pa;
+        this.primaryStage = primaryStage;
         this.groupe = new ToggleGroup();
         this.tfilechooser = new TextField();
         this.haut();
@@ -75,8 +75,8 @@ public class ProfilJoueur extends BorderPane {
         return this.sexeF;
     }
 
-    public PageAccueil getPa() {
-        return this.pa;
+    public Stage getPa() {
+        return this.primaryStage;
     }
 
     public String getTFprenom() {
@@ -95,10 +95,10 @@ public class ProfilJoueur extends BorderPane {
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Profil de "+this.joueur.getPseudo());
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
+        bRetour.setOnAction(new ActionRetour(this.primaryStage, this.gJoueur));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);

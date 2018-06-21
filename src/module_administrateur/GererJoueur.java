@@ -23,21 +23,23 @@ import APIMySQL.*;
 import java.util.HashMap;
 import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.stage.Stage;
+
 import java.util.Comparator;
 
 /** Vue de la page pour gérer les joueurs */
 public class GererJoueur extends BorderPane {
 
-    private PageAccueil pa;
+    private Stage primaryStage;
     private TextField recherche;
     private Button activer;
     private Button desactiver;
     private ObservableList<Joueur> listeJoueur;
 
     /** Constructeur de la page pour gérer les joueurs */
-    public GererJoueur(PageAccueil pa) {
+    public GererJoueur(Stage primaryStage) {
       super();
-      this.pa = pa;
+      this.primaryStage = primaryStage;
       this.creerGererJoueur();
     }
 
@@ -49,6 +51,23 @@ public class GererJoueur extends BorderPane {
     /** Retourne le bouton désactiver les joueurs cochés */
     public Button getButtonDesactiver() {
         return this.desactiver;
+    }
+
+    /** Remplace la liste de joueurs actuelle par la nouvelle en paramètre */
+    public void setListeJoueurTB(ObservableList<Joueur> liste) {
+        this.listeJoueur = liste;
+    }
+
+    /** Retourne la barre de recherche de joueur */
+    public TextField getRecherche() {
+        return this.recherche;
+    }
+
+
+    /** Rafraichit la liste de tous les joueurs */
+    public void majTableView() {
+      System.out.println(this.listeJoueur);
+        this.setCenter(new GererJoueur(this.primaryStage));
     }
 
     /** Création de la liste de tous les joueurs */
@@ -70,8 +89,8 @@ public class GererJoueur extends BorderPane {
                 String stringEstActif = Utilisateur.getUserInfo("activeUt", "pseudoUt", pseudo);
                 boolean estActif = Boolean.valueOf(stringEstActif);
                 Joueur j = new Joueur(id, pseudo, prenom, nom, email, sexe, role, estActif);
-                j.getProfil().setOnAction(new ActionProfilJoueur(this.pa, this, j));
-                j.getActiver().setOnAction(new ActionCheckActiver(this, this.pa.getAdmin(), j));
+                j.getProfil().setOnAction(new ActionProfilJoueur(this.primaryStage, this, j));
+                j.getActiver().setOnAction(new ActionCheckActiver(this, ((PageAccueil)this.primaryStage.getScene().getRoot()).getAdmin(), j));
                 this.listeJoueur.add(j);
             }
         }
@@ -166,7 +185,7 @@ public class GererJoueur extends BorderPane {
         this.desactiver.setTextFill(Color.web("white"));
         this.desactiver.setPrefWidth(150);
         this.desactiver.setPrefHeight(35);
-        this.desactiver.setOnAction(new ActionDesactiverJoueur(this, this.pa));
+        this.desactiver.setOnAction(new ActionDesactiverJoueur(this, this.primaryStage));
         return this.desactiver;
     }
 
@@ -178,7 +197,7 @@ public class GererJoueur extends BorderPane {
         this.activer.setTextFill(Color.web("white"));
         this.activer.setPrefWidth(150);
         this.activer.setPrefHeight(35);
-        this.activer.setOnAction(new ActionActiverJoueur(this, this.pa));
+        this.activer.setOnAction(new ActionActiverJoueur(this, this.primaryStage));
         return this.activer;
     }
 
@@ -204,10 +223,10 @@ public class GererJoueur extends BorderPane {
     public BorderPane haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des joueurs");
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa));
+        bRetour.setOnAction(new ActionRetour(this.primaryStage));
         l.setFont(Font.font("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
         return haut;

@@ -25,8 +25,4 @@ public class Jeu {
     public static HashMap<String, List<Object>> recupListeJeux(){
         return GestionBD.selectPreparedStatement("select * from JEU");
     }
-
-    public static byte[] getImageJeu(String jeu){
-        return GestionBD.getBlob("select image from JEU where nomJeu"+jeu);
-    }
 }

@@ -11,28 +11,39 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.ContentDisplay;
-import java.io.InputStream;
+import module_joueur.ActionToAdmin;
 
-public class PageAccueil extends Application {
+public class PageAccueil extends BorderPane {
 
     /** Attributs de la classe PageAccueil */
-    BorderPane bp;
-    Administration a;
 
-    public static void main(String[] args) {
-      launch(args);
-    }
+    private Administration admin;
 
-    public BorderPane getBp() {
-      return this.bp;
+    private String title;
+
+    private Stage primaryStage;
+
+    public PageAccueil(Stage primaryStage) {
+
+        super();
+
+        this.title = "Admin";
+
+        this.primaryStage = primaryStage;
+
+        this.admin = new Administration();
+
+        this.setTop(haut());
+        this.setCenter(centre());
+        this.setBottom(bas()); }
+
+    public PageAccueil getBp() {
+      return (PageAccueil) this.primaryStage.getScene().getRoot();
     }
 
     public Administration getAdmin() {
-      return this.a;
-    }
+      return this.admin; }
 
     /** Création du VBox qui affiche le bouton "Voir les statistiques" ainsi que l'image */
     public VBox bas() {
@@ -43,7 +54,7 @@ public class PageAccueil extends Application {
       bStat.setContentDisplay(ContentDisplay.TOP);
 
 
-      bStat.setOnAction(new ActionStatistiques(this));
+      bStat.setOnAction(new ActionStatistiques(this.primaryStage));
       bStat.setPrefWidth(630);
       bStat.setPrefHeight(130);
       bas.getChildren().add(bStat);
@@ -61,7 +72,7 @@ public class PageAccueil extends Application {
       //Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
       Button bJeu = new Button("Gérer les jeux");
       bJeu.setContentDisplay(ContentDisplay.TOP);
-      bJeu.setOnAction(new ActionJeu(this));
+      bJeu.setOnAction(new ActionJeu(this.primaryStage));
       bJeu.setPrefWidth(350);
       bJeu.setPrefHeight(220);
 
@@ -72,7 +83,7 @@ public class PageAccueil extends Application {
       bJoueur.setContentDisplay(ContentDisplay.TOP);
       bJoueur.setPrefWidth(350);
       bJoueur.setPrefHeight(220);
-      bJoueur.setOnAction(new ActionUtilisateurs(this));
+      bJoueur.setOnAction(new ActionUtilisateurs(this.primaryStage));
 
 
       centre.getChildren().addAll(bJeu, bJoueur);
@@ -86,37 +97,11 @@ public class PageAccueil extends Application {
     public BorderPane haut() {
       BorderPane haut = new BorderPane();
       Label l = new Label("Administration");
-      Button b = new Button("< Accueil");
+      Button b = new Button("Accueil");
       haut.setLeft(l);
       haut.setRight(b);
       l.setFont(Font.font ("Arial", 25));
       haut.setPadding(new Insets(20,25,20,25));
-      return haut;
-    }
+      return haut; }
 
-    /** Création de la scène de la page */
-    public Scene scene() {
-      this.bp = new BorderPane();
-      this.bp.setCenter(this.constructB());
-      this.a = new Administration();
-      return new Scene(this.bp, 650, 450);
-    }
-
-    /** Création du BorderPane contenant toute la page */
-    public BorderPane constructB() {
-      BorderPane b = new BorderPane();
-      b.setTop(haut());
-      b.setCenter(centre());
-      b.setBottom(bas());
-      return b;
-    }
-
-    /** Lancement de la vue */
-    @Override
-    public void start(Stage primaryStage) {
-      primaryStage.setTitle("Duel sur la toile - Administration");
-      primaryStage.setResizable(false);
-      primaryStage.setScene(this.scene());
-      primaryStage.show();
-    }
-}
+    public String getTitle() { return this.title; }}

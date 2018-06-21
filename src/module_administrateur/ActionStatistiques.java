@@ -6,14 +6,14 @@ import javafx.stage.Stage;
 
 public class ActionStatistiques implements EventHandler<ActionEvent> {
 
-    PageAccueil pa;
+    private Stage primaryStage;
 
-    public ActionStatistiques(PageAccueil pa) {
-        this.pa = pa;
+    public ActionStatistiques(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.pa.getBp().setCenter(new VoirStatistiques(this.pa));
+        ((PageAccueil)this.primaryStage.getScene().getRoot()).getBp().setCenter(new VoirStatistiques(this.primaryStage));
     }
 }

@@ -6,17 +6,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.stage.Stage;
 
 /** Contrôleur du bouton pour désactiver les joueurs cochés */
 public class ActionDesactiverJoueur implements EventHandler<ActionEvent> {
 
     GererJoueur gJoueur;
-    PageAccueil pa;
+    private Stage primaryStage;
 
     /** Constructeur de ce contrôleur */
-    public ActionDesactiverJoueur(GererJoueur gJoueur, PageAccueil pa) {
+    public ActionDesactiverJoueur(GererJoueur gJoueur, Stage primaryStage) {
         this.gJoueur = gJoueur;
-        this.pa = pa;
+        this.primaryStage = primaryStage;
     }
 
     /** Affiche une alerte de confirmation de désactivation des joueurs cochés
@@ -35,10 +36,13 @@ public class ActionDesactiverJoueur implements EventHandler<ActionEvent> {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == btoui) {
-            for (Joueur j : this.pa.getAdmin().getListeModif()) {
-                this.pa.getAdmin().desactiverJoueur(j);
+
+            PageAccueil page = (PageAccueil) this.primaryStage.getScene().getRoot();
+
+            for (Joueur j : page.getAdmin().getListeModif()) {
+                page.getAdmin().desactiverJoueur(j);
             }
-            this.pa.getAdmin().majAdmin();
+            page.getAdmin().majAdmin();
             this.gJoueur.majAffichage();
 
             alert = new Alert(AlertType.INFORMATION);
