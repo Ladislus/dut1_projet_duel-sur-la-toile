@@ -48,5 +48,5 @@ public class Colonne extends ArrayList<Integer> {
     public boolean isFull(){
         return this.get(5)!=0;
     }
-    //
+
 }

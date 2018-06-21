@@ -17,6 +17,10 @@ public class Joueur extends Label{
     private boolean jCourant;
 
 
+    /**
+     * Constructeur du Joueur,
+     * @param nom
+     */
     public Joueur(String nom){
         super(nom);
         this.nom = nom;
