@@ -40,7 +40,7 @@ public class ActionActiverJoueur implements EventHandler<ActionEvent> {
 
         if (result.get() == btoui) {
 
-            PageAccueil page = (PageAccueil) this.primaryStage.getScene().getRoot();
+            GererJoueur page = (GererJoueur) this.primaryStage.getScene().getRoot();
 
             for (Joueur j : page.getAdmin().getListeModif()) {
                 page.getAdmin().activerJoueur(j);
