@@ -16,10 +16,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Vue de la Messagerie
@@ -197,9 +194,10 @@ public class Messagerie extends SplitPane {
             for (Object idMsg : listeIdMessage1) {
                 String nomExp = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt1 from MESSAGE where idMsg = " + idMsg.toString()).get("idUt1").get(0));
                 String nomDest = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt2 from MESSAGE where idMsg = " + idMsg.toString()).get("idUt2").get(0));
-                Long dateEnvoi = Long.valueOf(0);
-                String contenue = (String) GestionBD.selectPreparedStatement("select contenuMsg from MESSAGE where idMsg = " + idMsg.toString()).get("contenuMsg").get(0);
-                MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi, contenue);
+                List<Object> resReq = GestionBD.selectPreparedStatement("select contenuMsg, dateEnvoi from MESSAGE where idMsg = " + idMsg.toString()).get("contenuMsg");
+                String contenu = (String) resReq.get(0);
+                long dateEnvoi = (long) resReq.get(1);
+                MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi, contenu);
                 res.add(messageModele);
             }
         }catch (NullPointerException e){
