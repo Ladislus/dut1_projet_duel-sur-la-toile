@@ -15,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 /**
@@ -68,9 +69,12 @@ public class Puissance4 extends Application {
         HBox res = new HBox();
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
-        File imageami = new File(chem+"jouerAmi.png");
-        ImageView ami = new ImageView();
-        ami.setImage(new Image(imageami.toURI().toString()));
+        ImageView ami = null;
+        try {
+            ami = new ImageView(getClass().getResource(chem+"jouerAmi.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         Button b1 = new Button("New Game with a friend",ami);
         b1.setFont(bouton);
@@ -79,9 +83,12 @@ public class Puissance4 extends Application {
         b1.setOnAction(event -> this.setScene("New Game"));
         res.getChildren().add(b1);
 
-        File continu = new File(chem+"continuerPartie.png");
-        ImageView continuPartie = new ImageView();
-        continuPartie.setImage(new Image(continu.toURI().toString()));
+        ImageView continuPartie = null;
+        try {
+            continuPartie = new ImageView(getClass().getResource(chem+"continuerPartie.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         Button b2 = new Button("Resume Game", continuPartie);
         b2.setFont(bouton);
@@ -99,7 +106,11 @@ public class Puissance4 extends Application {
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
 
-        res.setCenter(new ImageView(new Image(new File(chem+"connect4logo.png").toURI().toString())));
+        try {
+            res.setCenter(new ImageView(new Image(getClass().getResource(chem + "connect4logo.png").toURI().toString())));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }

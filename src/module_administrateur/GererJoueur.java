@@ -73,7 +73,7 @@ public class GererJoueur extends BorderPane {
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
         this.listeJoueur = FXCollections.observableArrayList();
-        HashMap<String, List<Object>> dico = this.pa.getAdmin().requetteListeJoueur();
+        HashMap<String, List<Object>> dico = ((PageAccueil)this.primaryStage.getScene().getRoot()).getAdmin().requetteListeJoueur();
         if (dico.size() == 0 || dico == null) {
             return this.listeJoueur;
         }

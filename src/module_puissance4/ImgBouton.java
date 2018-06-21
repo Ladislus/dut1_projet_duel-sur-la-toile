@@ -13,20 +13,16 @@ import java.util.HashMap;
 public class ImgBouton extends ImageView {
 
     /** dictionnaire reliant un titre String à son image File */
-    private static HashMap<String,File> dicoImage;
+    private static HashMap<String,Image> dicoImage;
 
     public ImgBouton(String type) {
         super();
 
         dicoImage = new HashMap<>();
-        try {
-            dicoImage.put("desactive",new File(getClass().getResource(Puissance4.chem+"boutColDesactive.png").toURI()));
-            dicoImage.put("1",new File(getClass().getResource(Puissance4.chem+"boutColRed.png").toURI()));
-            dicoImage.put("2",new File(getClass().getResource(Puissance4.chem+"boutColYellow.png").toURI()));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        this.setImage(new Image(dicoImage.get(type).toURI().toString()));
+        dicoImage.put("desactive",new Image(getClass().getResourceAsStream(Puissance4.chem+"boutColDesactive.png")));
+        dicoImage.put("1",new Image(getClass().getResourceAsStream(Puissance4.chem+"boutColRed.png")));
+        dicoImage.put("2",new Image(getClass().getResourceAsStream(Puissance4.chem+"boutColYellow.png")));
+        this.setImage(dicoImage.get(type));
         this.setPreserveRatio(true);
         this.setFitWidth(25.);
     }
