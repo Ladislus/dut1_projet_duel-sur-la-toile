@@ -141,6 +141,13 @@ public class Utilisateur {
         }
     }
 
+
+    public static byte[] getImage(String pseudo){
+        return GestionBD.getBlob("select image from UTILISATEUR where idUt = "+Utilisateur.getIdByPseudo(pseudo));
+    }
+
+
+
     public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, byte[] image){
         int id = getIdByPseudo(ancientMotDePasse);
         String salt = getSalt();
