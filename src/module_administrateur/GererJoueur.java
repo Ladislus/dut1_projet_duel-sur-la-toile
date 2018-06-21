@@ -98,7 +98,7 @@ public class GererJoueur extends BorderPane {
                 String stringEstActif = Utilisateur.getUserInfo("activeUt", "pseudoUt", pseudo);
                 boolean estActif = Boolean.valueOf(stringEstActif);
                 Joueur j = new Joueur(id, pseudo, prenom, nom, email, sexe, role, estActif);
-                j.getProfil().setOnAction(new ActionProfilJoueur(this.primaryStage, this, j));
+                j.getProfil().setOnAction(new ActionProfilJoueur(this.primaryStage, this, j, this.admin));
                 j.getActiver().setOnAction(new ActionCheckActiver(this, this.admin, j));
                 this.listeJoueur.add(j);
             }
