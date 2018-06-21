@@ -10,14 +10,19 @@ public class ActionTestComb implements EventHandler<ActionEvent> {
 
     private PartieM mastermind;
 
+    /**
+     * Constructeur du controlleur ActionTestComb
+     * @param mastermind une PartieM
+     */
     public ActionTestComb(PartieM mastermind) {
         this.mastermind = mastermind;
     }
 
     @Override
     /**
-     * Test si la combinaison est complete, si oui, le plateauM est actualisé, en cas de victoire, affiche une pop up
-     * si non, affiche une pop up d'erreur
+     * Méthode appelée lors de l'utilisation du controlleur, jouer un coup avec les affichages graphiques
+     * et une pop-up informative en cas de victoire
+     * @param actionEvent un ActionEvent
      */
     public void handle(ActionEvent actionEvent){
         PlateauM plateauM = this.mastermind.getPlateau();

@@ -13,7 +13,7 @@ public class ActionTemps implements EventHandler<ActionEvent> {
     private Chronometre chrono;
 
     /**
-     * Constructeur du controlleur
+     * Constructeur du controlleur ActionTemps
      * @param chrono un Chronometre
      */
     ActionTemps (Chronometre chrono){
