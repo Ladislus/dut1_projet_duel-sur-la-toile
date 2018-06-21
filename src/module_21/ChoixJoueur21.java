@@ -15,6 +15,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,8 +74,12 @@ public class ChoixJoueur21 {
         res.setSpacing(50.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-        Image im = new Image(new File(chem+"logo21.png").toURI().toString());
-        ImageView iv = new ImageView(im);
+        ImageView iv = null;
+        try {
+            iv = new ImageView(getClass().getResource(chem+"logo21.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
 
@@ -143,7 +148,12 @@ public class ChoixJoueur21 {
         regle.setAlignment(Pos.BOTTOM_RIGHT);
         regle.setPadding(new Insets(0,0,50,0));
 
-        ImageView img = new ImageView(new Image(new File(chem+"../pub/info.png").toURI().toString(),30,30,true,true));
+        ImageView img = null;
+        try {
+            img = new ImageView(new Image(getClass().getResource("/pub/info.png").toURI().toString(),30,30,true,true));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         Label titre2 = new Label("Règle du jeu :",img);
         titre2.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,35.));
@@ -169,7 +179,12 @@ public class ChoixJoueur21 {
         this.contacts.getChildren().clear();
 
         for (String nom : this.listeCour){
-            ImageView img = new ImageView(new Image(new File(chem+"../pub/contact.png").toURI().toString()));
+            ImageView img = null;
+            try {
+                img = new ImageView(getClass().getResource("/img/pub/contact.png").toURI().toString());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             img.setPreserveRatio(true);
             img.setFitHeight(50.);
             Button b = new Button(nom,img);
