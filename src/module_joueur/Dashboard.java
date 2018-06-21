@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Dashboard extends BorderPane {
+public class Dashboard extends BorderPane {
+
+  Boolean isAdmin;
 
   private String title;
 
@@ -36,9 +38,11 @@ class Dashboard extends BorderPane {
 
   private ArrayList<Button> listeBoutton;
 
-  public Dashboard(Stage primaryStage, Joueur joueur) {
+  public Dashboard(Stage primaryStage, Joueur joueur, Boolean isAdmin) {
 
     super();
+
+    this.isAdmin = isAdmin;
 
     this.title = "Dashboard";
 
@@ -88,14 +92,22 @@ class Dashboard extends BorderPane {
     Button btParti = new Button("Mes parties");
     btParti.setPrefWidth(150);
 
-    Button btEditerProfile = new Button("Éditez mon profil");
-    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
+    Button btEditerProfile = new Button("Éditer mon profil");
+    btEditerProfile.setOnAction(new ActionToEditerProfile(this.primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
     btExit.setOnAction(new ActionDeconnexion(primaryStage));
 
-    param.getChildren().add(btExit);
+    if (isAdmin) {
+
+      Button btAdmin = new Button("Admin");
+      btAdmin.setOnAction(new ActionToAdmin(this.primaryStage));
+
+      param.getChildren().addAll(btAdmin, btExit); }
+
+    else { param.getChildren().add(btExit); }
+
     param.setSpacing(10);
     param.setAlignment(Pos.TOP_CENTER);
     param.setPadding(new Insets(250,0,0,0));
@@ -131,7 +143,7 @@ class Dashboard extends BorderPane {
     VBox candidate = new VBox();
     candidate.setPadding(new Insets(5));
     candidate.setSpacing(15);
-    candidate.getChildren().addAll(lListeDamis, sDroiteListeDamis, btListeDamis, lbTotalContact, btMessage);
+    candidate.getChildren().addAll(lListeDamis, sDroiteListeDamis, lbTotalContact, btListeDamis, btMessage);
 
     return candidate; }
 
@@ -178,9 +190,10 @@ class Dashboard extends BorderPane {
         ImageView imageContact = new ImageView();
         if (GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt = " + Utilisateur.getIdByPseudo(name) + ";").get("image").get(0) != null)
             imageContact.setImage(GestionBD.bytesToImage((byte[]) GestionBD.selectPreparedStatement("SELECT image from UTILISATEUR where idUt=" + Utilisateur.getIdByPseudo(name)).get("image").get(0)));
-        else{
+
+        else
             imageContact.setImage(VariablesJoueur.CONTACT);
-        }
+
         imageContact.setPreserveRatio(true);
         imageContact.setFitWidth(35);
 

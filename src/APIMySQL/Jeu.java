@@ -16,7 +16,6 @@ public class Jeu {
             Collections.addAll(donnees,nomJeu,regleJeu,GestionBD.createBlob(jarJeuPath),1,idTy,GestionBD.createBlob(imagePath));
             GestionBD.updatePreparedStatement("INSERT INTO JEU (nomJeu,regleJeu,jarJeu,activeJeu,idTy,image) VALUES (?,?,?,?,?,?)",donnees);
         } catch (IOException e) {
-            System.out.println("Ce fichier n'existe pas.");
         } catch (SQLException e) {
             throw new APIMySQLException("gameNameTaken");
         }
@@ -24,9 +23,5 @@ public class Jeu {
 
     public static HashMap<String, List<Object>> recupListeJeux(){
         return GestionBD.selectPreparedStatement("select * from JEU");
-    }
-
-    public static byte[] getImageJeu(String jeu){
-        return GestionBD.getBlob("select image from JEU where nomJeu"+jeu);
     }
 }

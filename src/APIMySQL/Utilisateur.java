@@ -106,8 +106,6 @@ public class Utilisateur {
         ArrayList<String> listePseudo = new ArrayList<>();
         List<Object> listeId1 = GestionBD.selectPreparedStatement("SELECT idUt2 FROM ETREAMI WHERE idUt1 = "+getIdByPseudo(pseudo)).get("idUt2");
         List<Object> listeId2 = GestionBD.selectPreparedStatement("SELECT idUt1 FROM ETREAMI WHERE idUt2 = "+getIdByPseudo(pseudo)).get("idUt1");
-        System.out.println(listeId1);
-        System.out.println(listeId2);
         try{
             //listeId1.retainAll(listeId2);
             ArrayList<Object> listeUnion = new ArrayList<>();
@@ -118,7 +116,6 @@ public class Utilisateur {
                 listeUnion.addAll(listeId2);
             }
             for(Object elem : listeUnion){
-                System.out.println(elem);
                 if(!Utilisateur.getPseudoById(Integer.valueOf(elem.toString())).equals(pseudo)){
                     listePseudo.add(String.valueOf(getPseudoById((Integer) elem)));
                 }
@@ -140,12 +137,6 @@ public class Utilisateur {
             e.printStackTrace();
         }
     }
-
-    public static byte[] getImage(String pseudo){
-        return GestionBD.getBlob("select image from UTILISATEUR where idUt = "+Utilisateur.getIdByPseudo(pseudo));
-    }
-
-
 
     public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, byte[] image){
         int id = getIdByPseudo(ancientMotDePasse);
