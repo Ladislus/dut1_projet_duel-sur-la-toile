@@ -1,20 +1,18 @@
 package module_administrateur;
 
-import javafx.application.Application;
-import javafx.geometry.*;
-import javafx.scene.Scene;
+import APIMySQL.Utilisateur;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.collections.*;
-import java.io.File;
-import javafx.scene.chart.*;
-import APIMySQL.*;
 
 /** Vue de la page pour voir et modifier le profil d'un joueur */
 public class ProfilJoueur extends BorderPane {
@@ -43,7 +41,7 @@ public class ProfilJoueur extends BorderPane {
     private Administration admin;
 
     /** Constructeur de cette vue */
-    public ProfilJoueur(Stage primaryStage, GererJoueur gJoueur, Joueur joueur) {
+    public ProfilJoueur(Stage primaryStage, GererJoueur gJoueur, Joueur joueur, Administration admin) {
 
         super();
 
@@ -350,4 +348,6 @@ public class ProfilJoueur extends BorderPane {
     }
 
     public String getTitle() { return this.title; }
+
+    public Administration getAdmin() { return this.admin; }
 }

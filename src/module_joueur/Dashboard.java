@@ -17,6 +17,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -212,35 +215,33 @@ public class Dashboard extends BorderPane {
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
 
-    ArrayList<Object> listeImage = new ArrayList<>();
-
-    ArrayList<Object> listeRegleJeux = new ArrayList<>();
-
     if(listeJeux.size() > 0) {
 
-        for(Object title : listeJeux.get("nomJeu")) {
-
-            String titleString = title.toString();
-            listeTitleJeux.add(titleString); }
+        for(Object title : listeJeux.get("nomJeu")) { listeTitleJeux.add(title.toString()); }
 
         for(int i = 0; i < listeTitleJeux.size(); i++) {
 
-          //module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i), Jeu.getImageJeu(listeTitleJeux.get(i)), listeRegleJeux.get(i).toString());
+          String titre = listeTitleJeux.get(i);
 
-          //TODO : Recuperer le blob de la BD
-          File fileImage = new File("./img/pub/logo.png");
+          byte[] bytes = (byte[]) GestionBD.selectPreparedStatement("SELECT image from JEU where nomJeu = '" + titre + "';").get("image").get(0);
 
-          ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
+          String regles = (String) GestionBD.selectPreparedStatement("SELECT regleJeu from JEU where nomJeu = '" + titre + "';").get("regleJeu").get(0);
+
+
+          module_joueur.Jeu jeu = new module_joueur.Jeu(titre, bytes, regles);
+
+          ImageView ivJeux = new ImageView();
+          ivJeux.setImage(jeu.getImage());
           ivJeux.setPreserveRatio(true);
           ivJeux.setFitWidth(50);
 
           VBox vBoxJeux = new VBox();
-          vBoxJeux.getChildren().addAll(ivJeux, new Label("jeu"));
+          vBoxJeux.getChildren().addAll(ivJeux, new Label(jeu.getTitle()));
           vBoxJeux.setAlignment(Pos.TOP_CENTER);
           vBoxJeux.setOnMouseEntered(mouseEvent -> primaryStage.getScene().setCursor(Cursor.HAND));
           vBoxJeux.setOnMouseExited(mouseEvent -> primaryStage.getScene().setCursor(Cursor.DEFAULT));
           vBoxJeux.setPadding(new Insets(9,15,0,15));
-          //vBoxJeux.setOnMouseClicked(new ActionToMainJeux(jeu));
+          vBoxJeux.setOnMouseClicked(new ActionToMainJeux(jeu));
 
           hJeux.getChildren().add(vBoxJeux); }}}
 

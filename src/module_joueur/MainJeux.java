@@ -1,5 +1,6 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class MainJeux extends VBox {
 
@@ -35,11 +37,8 @@ public class MainJeux extends VBox {
 
     public HBox creerHeader() {
 
-        //TODO : Recuperer l'image du jeu
-        File fileImageJeux = new File("./img/pub/logo.png");
-
         ImageView ivImageJeux = new ImageView();
-        ivImageJeux.setImage(new Image(fileImageJeux.toURI().toString()));
+        ivImageJeux.setImage(jeu.getImage());
         ivImageJeux.setPreserveRatio(true);
         ivImageJeux.setFitWidth(70);
 
@@ -50,7 +49,7 @@ public class MainJeux extends VBox {
         vImageTitre.getChildren().addAll(ivImageJeux, lbJeux);
         vImageTitre.setSpacing(12);
 
-        Button btLauch = new Button("Lancer le jeux");
+        Button btLauch = new Button("Lancer le jeu");
         btLauch.setOnAction(new ActionLaunch(this.secondaryStage, jeu.getTitle()));
         btLauch.setPrefHeight(50);
 
@@ -69,16 +68,7 @@ public class MainJeux extends VBox {
         Label lbTitle = new Label("Description : ");
         lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
 
-        //TODO : Recuperer la description
-        Label lbDescription = new Label("Sudoribus sudoribus sudoribus quam urbium legiones excidium" +
-                " matris Seleuciae amplificatis amplificatis ardore matris comes et fames desperatio bellicis et " +
-                "fames matris comes et quam fames quam fames comes urbium viribus in concepta ardore et desperatio " +
-                "amplificatis saeviore saeviore urbium quam tuebatur ardore viribus bellicis quam incendebat sudo" +
-                "ribus Castricius Seleuciae Seleuciae tresque concepta comes et incendebat desperatio Castricius " +
-                "Seleuciae induratae legiones sudoribus rabie induratae tuebatur quam saeviore tresque comes tre" +
-                "sque excidium quam matris fames quam matris induratae viribus incohibili incendebat matris rabie" +
-                " efferebantur induratae ardore tresque quam saeviore Seleuciae legiones excidium efferebantur des" +
-                "peratio saeviore et saeviore et matris saeviore excidium ardore.");
+        Label lbDescription = new Label(jeu.getRegle());
         lbDescription.setWrapText(true);
 
 

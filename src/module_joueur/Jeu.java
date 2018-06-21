@@ -1,22 +1,24 @@
 package module_joueur;
 
+import APIMySQL.GestionBD;
+import javafx.scene.image.Image;
+
 public class Jeu {
 
     private String title;
 
-    byte[] image;
+    Image image;
 
-    String regle;
+    private String regle;
 
-    public Jeu(String title, byte[] image, String regle){
+    public Jeu(String title, byte[] image, String regle) {
         this.title = title;
-        this.image = image;
         this.regle = regle;
-    }
 
-    public byte[] getImage(){
-        return this.image;
-    }
+        if (image != null)
+            this.image = GestionBD.bytesToImage(image);
+        else
+            this.image = VariablesJoueur.LOGO; }
 
     public String getRegle() {
         return regle;
@@ -26,14 +28,15 @@ public class Jeu {
         this.regle = regle;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }}
+    }
+
+    public Image getImage() {
+        return image;
+    }
+}
