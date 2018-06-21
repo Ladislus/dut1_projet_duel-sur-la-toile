@@ -2,6 +2,7 @@ package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /** Contrôleur du bouton retour */
@@ -38,5 +39,6 @@ public class ActionRetour implements EventHandler<ActionEvent> {
             page.setCenter(new GererJoueur(this.primaryStage));
             page.getAdmin().majAdmin(); }
         else {
-            page.setCenter(new PageAccueil(this.primaryStage));
-            page.getAdmin().majAdmin(); }}}
+            this.primaryStage.setTitle(new PageAccueil(this.primaryStage).getTitle());
+            this.primaryStage.setScene(new Scene(new PageAccueil(this.primaryStage), 650, 450));
+            ((PageAccueil)this.primaryStage.getScene().getRoot()).getAdmin().majAdmin(); }}}

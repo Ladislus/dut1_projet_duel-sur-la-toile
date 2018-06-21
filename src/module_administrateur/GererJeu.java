@@ -53,7 +53,7 @@ public class GererJeu extends BorderPane {
     public BorderPane haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des jeux");
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
         bRetour.setOnAction(new ActionRetour(this.primaryStage));

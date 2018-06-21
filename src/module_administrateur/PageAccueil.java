@@ -17,7 +17,8 @@ import module_joueur.ActionToAdmin;
 public class PageAccueil extends BorderPane {
 
     /** Attributs de la classe PageAccueil */
-    Administration a;
+
+    private Administration admin;
 
     private String title;
 
@@ -31,6 +32,8 @@ public class PageAccueil extends BorderPane {
 
         this.primaryStage = primaryStage;
 
+        this.admin = new Administration();
+
         this.setTop(haut());
         this.setCenter(centre());
         this.setBottom(bas()); }
@@ -40,8 +43,7 @@ public class PageAccueil extends BorderPane {
     }
 
     public Administration getAdmin() {
-      return this.a;
-    }
+      return this.admin; }
 
     /** Création du VBox qui affiche le bouton "Voir les statistiques" ainsi que l'image */
     public VBox bas() {
@@ -95,9 +97,11 @@ public class PageAccueil extends BorderPane {
     public BorderPane haut() {
       BorderPane haut = new BorderPane();
       Label l = new Label("Administration");
-      Button b = new Button("< Accueil");
+      Button b = new Button("Accueil");
       haut.setLeft(l);
       haut.setRight(b);
       l.setFont(Font.font ("Arial", 25));
       haut.setPadding(new Insets(20,25,20,25));
-      return haut; }}
+      return haut; }
+
+    public String getTitle() { return this.title; }}

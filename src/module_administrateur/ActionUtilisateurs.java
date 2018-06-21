@@ -15,6 +15,6 @@ public class ActionUtilisateurs implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
         PageAccueil p = (PageAccueil) this.primaryStage.getScene().getRoot();
-        p.getBp().setCenter(new GererJoueur(this.primaryStage).getCenter());
+        p.getBp().setCenter(new GererJoueur(this.primaryStage));
     }
 }

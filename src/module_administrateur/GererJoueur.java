@@ -61,7 +61,7 @@ public class GererJoueur extends BorderPane {
     /** Rafraichit la liste de tous les joueurs */
     public void majTableView() {
       System.out.println(this.listeJoueur);
-        this.setCenter(creerCentre());
+        this.setCenter(new GererJoueur(this.primaryStage));
     }
 
     /** Création de la liste de tous les joueurs */
@@ -218,7 +218,7 @@ public class GererJoueur extends BorderPane {
     public BorderPane haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des joueurs");
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
         bRetour.setOnAction(new ActionRetour(this.primaryStage));

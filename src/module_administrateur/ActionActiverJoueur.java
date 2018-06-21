@@ -11,14 +11,16 @@ import javafx.stage.Stage;
 /** Contrôleur du bouton pour activer les joueurs cochés */
 public class ActionActiverJoueur implements EventHandler<ActionEvent> {
 
-    GererJoueur gJoueur;
+    private GererJoueur gJoueur;
+
     private Stage primaryStage;
 
     /** Constructeur de ce contrôleur */
     public ActionActiverJoueur(GererJoueur gJoueur, Stage primaryStage) {
+
         this.gJoueur = gJoueur;
-        this.primaryStage = primaryStage;
-    }
+
+        this.primaryStage = primaryStage; }
 
     /** Affiche une alerte de confirmation d'activation des joueurs cochés
         Si l'administrateur clique sur oui, chaque joueur dans la liste des joueurs à changer de statut sont activés
@@ -28,6 +30,7 @@ public class ActionActiverJoueur implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         ButtonType btoui = new ButtonType("Oui");
         ButtonType btnon = new ButtonType("Non", ButtonData.CANCEL_CLOSE);
+
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation de l'activation");
         alert.setHeaderText("Confirmation d'activation de joueur");

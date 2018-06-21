@@ -95,7 +95,7 @@ public class ProfilJoueur extends BorderPane {
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Profil de "+this.joueur.getPseudo());
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
         bRetour.setOnAction(new ActionRetour(this.primaryStage, this.gJoueur));
