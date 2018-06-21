@@ -6,6 +6,9 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
 
     // 0 signifie "case vide", une case remplie a une valeur entre 1 et 6, chaque nombre étant associé à une couleur
 
+    /**
+     * Constructeur sans paramètre d'une combinaison, permet de créer une Combinaison vide
+     */
     public Combinaison(){
         super();
         for (int i=0;i<4;i++){
@@ -13,6 +16,10 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
         }
     }
 
+    /**
+     * Constructeur d'une combinaison, permet de de dupliquer une Combinaison
+     * @param c
+     */
     public Combinaison(Combinaison c){
         super();
         for(Integer i:c){
@@ -21,8 +28,8 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
     }
 
     /**
-     * Ajoute le pion dans la combianaison
-     * @param num
+     * Ajoute le pion dans la combinaison au premier emplacement dans l'index (visuellement le plus à gauche)
+     * @param num un int (compris entre 0 et 6 : règle tacite, ne plante pas sinon)
      */
     public void addPion(int num){
 //        for (int i=0;i<4;i++){
@@ -41,8 +48,8 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
     }
 
     /**
-     * Renvoye false si la liste n'est pas pleine (que des nombre different de 0)
-     * renvoye true sinon
+     * Permet de savoir si la Combinaison est pleine ou non
+     * @return un boolean
      */
     public boolean isFull(){
         for (int i=0;i<4;i++){
@@ -52,9 +59,9 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
     }
 
     /**
-     * Met a 0 a la position
-     * @param pos
-     * @return
+     * Enlève le pion à la position rentrée en paramètre, c'est à dire lui donne la valeur 0
+     * @param pos un int
+     * @return un Integer
      */
     public Integer remove(int pos){
         int prec = this.get(pos);
@@ -63,8 +70,8 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
     }
 
     /**
-     * On supprime le premier pion égal à p dans la combi. Il est admis que celui-ci existe
-     * @param p
+     * On supprime le premier pion égal à p dans la Combinaison. Il est admis que celui-ci existe
+     * @param p un int (implicitement compris entre 1 et 6)
      */
     public void removePion(int p){
         int i = 0;
@@ -72,6 +79,9 @@ public class Combinaison extends ArrayList<Integer> { // Modèle de la combinais
         this.set(i,0);
     }
 
+    /**
+     * Enlève tous les pions de la Combinaison, c'est à dire leur donne tous la valeur 0
+     */
     public void clear(){
         for (int i=0;i<4;i++){
             this.set(i,0);

@@ -15,6 +15,12 @@ public class ActionToAdmin implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        this.primaryStage.setScene(new Scene(new PageAccueil(this.primaryStage), 650, 450));
+        Stage secondaryStage = new Stage();
+
+        PageAccueil pageAccueil = new PageAccueil(secondaryStage);
+
+        secondaryStage.setTitle(pageAccueil.getTitle());
+        secondaryStage.setScene(new Scene(pageAccueil, 650, 450));
+        secondaryStage.show();
     }}
 

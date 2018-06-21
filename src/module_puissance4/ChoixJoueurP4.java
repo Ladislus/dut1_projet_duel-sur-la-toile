@@ -14,6 +14,7 @@ import javafx.scene.text.FontWeight;
 import module_21.ActionRechercherJoueur21;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -139,7 +140,12 @@ public class ChoixJoueurP4 {
         regle.setAlignment(Pos.BOTTOM_RIGHT);
         regle.setPadding(new Insets(0,0,50,0));
 
-        ImageView img = new ImageView(new Image(new File(chem+"../pub/info.png").toURI().toString(),30,30,true,true));
+        ImageView img = null;
+        try {
+            img = new ImageView(new Image(getClass().getResource("/img/pub/info.png").toURI().toString(),30,30,true,true));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         Label titre2 = new Label("Règle du jeu :",img);
         titre2.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,35.));

@@ -11,10 +11,18 @@ public class ActionQuitterM implements EventHandler<ActionEvent> {
 
     private Mastermind mastermind;
 
+    /**
+     * Constructeur du controlleur
+     * @param mastermind un Mastermind
+     */
     public ActionQuitterM(Mastermind mastermind){
         this.mastermind=mastermind;
     }
 
+    /**
+     * Méthode appelée lors de l'utilisation du controlleur, permet de quitter le jeu, avec une pop-up de confirmation
+     * @param  actionEvent un ActionEvent
+     */
     @Override
     public void handle(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

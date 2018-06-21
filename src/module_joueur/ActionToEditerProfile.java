@@ -20,7 +20,6 @@ public class ActionToEditerProfile implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
 
         Stage stageEditionProfile = new Stage();
-        stageEditionProfile.setAlwaysOnTop(true);
         stageEditionProfile.setTitle("Edition de mon profile");
         stageEditionProfile.setResizable(false);
         stageEditionProfile.setScene(new Scene(new EditionProfil(primaryStage, stageEditionProfile, joueur), VariablesJoueur.DEFAULT_EDITERPROFILE_WIDTH, VariablesJoueur.DEFAULT_EDITERPROFILE_HEIGHT));

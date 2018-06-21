@@ -9,6 +9,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+import java.text.ParseException;
+
 public class MessageVue extends VBox {
 
     private Label titre;
@@ -19,8 +21,10 @@ public class MessageVue extends VBox {
         this.setSpacing(2.);
         if (msg.getDateEnvoi()==0)
             this.titre = new Label("Temps non défini");
-        else
-            this.titre = new Label(String.valueOf(msg.getDateEnvoi()));
+        else {
+
+            this.titre = new Label(msg.getDateEnvoiString());
+        }
         this.titre.setFont(Font.font("Verdana",FontWeight.NORMAL,FontPosture.ITALIC,10));
         this.titre.setStyle("-fx-background-color: transparent;");
         this.titre.setPadding(new Insets(0,5,0,5));

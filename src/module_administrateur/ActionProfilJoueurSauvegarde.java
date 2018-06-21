@@ -2,23 +2,28 @@ package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
 import APIMySQL.*;
+import javafx.stage.Stage;
+import module_joueur.Dashboard;
 
 /** Contrôleur du bouton sauvegarder les modifications d'un joueur */
 public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
 
-    ProfilJoueur pJoueur;
-    Joueur joueur;
+    private ProfilJoueur pJoueur;
+    private Joueur joueur;
+
+    private Stage primaryStage;
 
     /** Constructeur du contrôleur */
-    public ActionProfilJoueurSauvegarde(ProfilJoueur pJoueur, Joueur joueur) {
+    public ActionProfilJoueurSauvegarde(Stage primaryStage, ProfilJoueur pJoueur, Joueur joueur) {
         this.pJoueur = pJoueur;
         this.joueur = joueur;
-    }
+        this.primaryStage = primaryStage; }
 
     /** Affiche une alerte de confirmation de sauvegarde des informations modifiées du joueur
         Si l'administrateur clique sur oui, cherche quelles informations ont été modifiées
@@ -37,10 +42,10 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
         if (result.get() == btoui) {
             // GESTION DESACTIVATION JOUEUR
             if (Utilisateur.isActivated(this.joueur.getPseudo()) && this.pJoueur.getRbpasactiver().isSelected()) {
-                this.pJoueur.getPa().getAdmin().desactiverJoueur(this.joueur);
+                ((ProfilJoueur)this.primaryStage.getScene().getRoot()).getAdmin().desactiverJoueur(this.joueur);
             }
             if (!(Utilisateur.isActivated(this.joueur.getPseudo())) && this.pJoueur.getRbactiver().isSelected()) {
-                this.pJoueur.getPa().getAdmin().activerJoueur(this.joueur);
+                ((ProfilJoueur)this.primaryStage.getScene().getRoot()).getAdmin().activerJoueur(this.joueur);
             }
 
             // GESTION MODIF PSEUDO
@@ -80,7 +85,6 @@ public class ActionProfilJoueurSauvegarde implements EventHandler<ActionEvent> {
             }
 
             // GESTION MODIF IMAGE PROFIL
-
 
             alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Validation de la sauvegarde");

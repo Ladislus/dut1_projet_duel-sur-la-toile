@@ -2,18 +2,23 @@ package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ActionStatistiques implements EventHandler<ActionEvent> {
 
-    PageAccueil pa;
+    private Stage primaryStage;
 
-    public ActionStatistiques(PageAccueil pa) {
-        this.pa = pa;
+    public ActionStatistiques(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.pa.getBp().setCenter(new VoirStatistiques(this.pa));
+
+        VoirStatistiques stat = new VoirStatistiques(this.primaryStage);
+
+        this.primaryStage.setTitle(stat.getTitle());
+        this.primaryStage.setScene(new Scene(stat, 650, 450));
     }
 }

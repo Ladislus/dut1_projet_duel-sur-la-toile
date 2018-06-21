@@ -21,11 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.Iterable;
 import APIMySQL.Jeu;
+import java.lang.String;
 
 public class GererJeu extends BorderPane {
 
     /** Attributs de GererJeu */
-    private PageAccueil pa;
+    private Stage primaryStage;
     private ToggleGroup groupe;
     private TextField tfilechoosergauche;
     private TextField tfilechooserdroite;
@@ -34,14 +35,17 @@ public class GererJeu extends BorderPane {
     private TextField tnom;
     private TextArea tdescription;
     private ComboBox<String> cbmodes;
+    private String title;
     private HashMap<String, List<Object>> dico;
     private ComboBox<String> cbjeux;
 
 
     /** Constructeur de la page pour gérer les jeux */
-    public GererJeu(PageAccueil pa) {
+    public GererJeu(Stage primaryStage) {
       super();
-      this.pa = pa;
+
+      this.title = "Gestion des jeux";
+      this.primaryStage = primaryStage;
       this.groupe = new ToggleGroup();
       this.tfilechoosergauche = new TextField();
       this.tfilechooserdroite = new TextField();
@@ -50,6 +54,8 @@ public class GererJeu extends BorderPane {
       this.tnom = new TextField();
       this.tdescription = new TextArea();
       this.dico = Jeu.recupListeJeux();
+      this.cbmodes = new ComboBox<String>();
+      this.cbjeux = new ComboBox<String>();
       this.haut();
       this.centre();
       this.creerGererJeu();
@@ -59,10 +65,10 @@ public class GererJeu extends BorderPane {
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Gestion des jeux");
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa));
+        bRetour.setOnAction(new ActionRetour(this.primaryStage));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
 
@@ -201,13 +207,13 @@ public class GererJeu extends BorderPane {
       this.cbjeux.getSelectionModel().selectFirst();
       this.cbjeux.setPrefWidth(297);
 
-      return cbjeux;
+      return this.cbjeux;
     }
 
     /** Création du textarea où l'on doit écrire les règles du jeu */
     public TextArea creerTextAreaRegleJeu(){
       TextArea treglejeu = new TextArea();
-      treglejeu.setPromptText("Entrez les règles du jeu");
+      treglejeu.setText((String)this.dico.get("regleJeu").get(0));
       treglejeu.setPrefWidth(80);
       treglejeu.setWrapText(true);
 
@@ -237,6 +243,48 @@ public class GererJeu extends BorderPane {
       }
     }
 
+    /** Création du Label qui affiche "Ajouter un jeu" */
+    public Label creerLabelAjouterJeu(){
+      Label laddjeu = new Label("Ajouter un jeu");
+      laddjeu.setFont(Font.font ("Arial", 18));
+
+      return laddjeu;
+    }
+
+    /** Création du textfield où l'on doit écrire le nom du jeu ou le nom du jeu s'affiche lorsqu'on
+    appuie sur le ComboBox */
+    public TextField creerTextFieldNomJeu(){
+      //this.tnom.setPromptText("Entrez le nom du jeu");
+      this.tnom.setText((String)this.dico.get("nomJeu").get(0));
+      for (int i = 0; i < this.dico.get("idJeu").size(); i++) {
+          String nom = (String) this.dico.get("nomJeu").get(i);
+          if (this.cbjeux.getSelectionModel().getSelectedIndex() == i){
+            //this.tnom.setText((String)this.dico.get("nomJeu").get(Integer.parseInt(this.cbjeux.getSelectionModel().getSelectedItem())));
+            this.tnom.setText((String)this.dico.get("nomJeu").get(i));
+          }
+      }
+      return this.tnom;
+    }
+
+    /** Retourne le nom contenu dans le textfield du dessus */
+    public String getNom(){
+      return this.tnom.getText();
+    }
+
+    /** Création du textarea où l'on doit écrire la description du jeu */
+    public TextArea creerTextAreaDescriptionJeu(){
+      this.tdescription.setPrefWidth(80);
+      this.tdescription.setWrapText(true);
+      this.tdescription.setPromptText("Entrez la description du jeu");
+
+      return this.tdescription;
+    }
+
+    /** Retourne la description du jeu contenu dans le textarea du dessus */
+    public String getRegles(){
+      return this.tdescription.getText();
+    }
+
     /** Création du VBox contenant toute la partie gauche de la vue (les infos pour modifier un jeu) */
     public VBox creerVBoxDescriptionJeu(){
       VBox vbjeu = new VBox();
@@ -260,41 +308,6 @@ public class GererJeu extends BorderPane {
       gauche.setPadding(new Insets(5,5,5,10));
 
       return gauche;
-    }
-
-    /** Création du Label qui affiche "Ajouter un jeu" */
-    public Label creerLabelAjouterJeu(){
-      Label laddjeu = new Label("Ajouter un jeu");
-      laddjeu.setFont(Font.font ("Arial", 18));
-
-      return laddjeu;
-    }
-
-    /** Création du textfield où l'on doit écrire le nom du jeu */
-    public TextField creerTextFieldNomJeu(){
-      //this.tnom.setPromptText("Entrez le nom du jeu");
-      this.tnom.setText((String)this.dico.get("nomJeu").get(0));
-
-      return this.tnom;
-    }
-
-    /** Retourne le nom contenu dans le textfield du dessus */
-    public String getNom(){
-      return this.tnom.getText();
-    }
-
-    /** Création du textarea où l'on doit écrire la description du jeu */
-    public TextArea creerTextAreaDescriptionJeu(){
-      this.tdescription.setPrefWidth(80);
-      this.tdescription.setWrapText(true);
-      this.tdescription.setPromptText("Entrez la description du jeu");
-
-      return this.tdescription;
-    }
-
-    /** Retourne la description du jeu contenu dans le textarea du dessus */
-    public String getRegles(){
-      return this.tdescription.getText();
     }
 
     /** Création du Label qui "Activer maintenant ?" */
@@ -382,13 +395,16 @@ public class GererJeu extends BorderPane {
       this.setCenter(centre);
     }
 
+    /** Création de la partie gauche de la page gérer jeu */
     public void creerGererJeu(){
       this.setLeft(gauche());
     }
 
-    /** Rafraichit la page de gérer jeu */
+    /** Rafraichit la partie gauche de la page de gérer jeu */
     public void majAffichage() {
         this.creerGererJeu();
     }
+
+    public String getTitle() { return this.title; }
 
 }
