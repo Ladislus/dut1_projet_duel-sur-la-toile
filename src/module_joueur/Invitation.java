@@ -126,7 +126,8 @@ public class Invitation extends BorderPane {
                 if (!ami.toString().equals(joueur.getPseudo())) {
 
                     Button btAmis = new Button(ami.toString());
-                    btAmis.setPrefWidth(200);
+                    btAmis.setStyle("-fx-background-color: white;");
+                    btAmis.setPrefWidth(240);
                     btAmis.setOnAction(new ActionAjoutAmis(joueur.getPseudo(), btAmis.getText(), this));
 
                     listeDamisBoutton.add(btAmis); }}

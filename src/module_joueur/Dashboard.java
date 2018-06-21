@@ -17,11 +17,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Dashboard extends BorderPane {
+public class Dashboard extends BorderPane {
 
   Boolean isAdmin;
 
@@ -93,7 +96,7 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditer mon profil");
-    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
+    btEditerProfile.setOnAction(new ActionToEditerProfile(this.primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
@@ -214,19 +217,21 @@ class Dashboard extends BorderPane {
 
     if(listeJeux.size() > 0) {
 
-        for(Object title : listeJeux.get("nomJeu")) {
-
-            String titleString = title.toString();
-            listeTitleJeux.add(titleString); }
+        for(Object title : listeJeux.get("nomJeu")) { listeTitleJeux.add(title.toString()); }
 
         for(int i = 0; i < listeTitleJeux.size(); i++) {
 
-          module_joueur.Jeu jeu = new module_joueur.Jeu(listeTitleJeux.get(i));
+          String titre = listeTitleJeux.get(i);
 
-          //TODO : Recuperer le blob de la BD
-          File fileImage = new File("./img/pub/logo.png");
+          byte[] bytes = (byte[]) GestionBD.selectPreparedStatement("SELECT image from JEU where nomJeu = '" + titre + "';").get("image").get(0);
 
-          ImageView ivJeux = new ImageView(new Image(fileImage.toURI().toString()));
+          String regles = (String) GestionBD.selectPreparedStatement("SELECT regleJeu from JEU where nomJeu = '" + titre + "';").get("regleJeu").get(0);
+
+
+          module_joueur.Jeu jeu = new module_joueur.Jeu(titre, bytes, regles);
+
+          ImageView ivJeux = new ImageView();
+          ivJeux.setImage(jeu.getImage());
           ivJeux.setPreserveRatio(true);
           ivJeux.setFitWidth(50);
 

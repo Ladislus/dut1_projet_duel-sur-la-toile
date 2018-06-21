@@ -19,8 +19,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static module_21.Jeu21Batonnets.chem;
 
 public class Partie21 {
 
@@ -201,11 +204,12 @@ public class Partie21 {
         res.setPrefHeight(100.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-//        File file = new File(chem+"connect4logo.png");
-//        Image im = new Image(file.toURI().toString());
-//        ImageView iv = new ImageView(im);
-//        iv.setPreserveRatio(true);
-//        iv.setFitHeight(60);
+        File file = new File(chem+"logo21.png");
+        Image im = new Image(file.toURI().toString());
+        ImageView iv = new ImageView(im);
+        iv.setPreserveRatio(true);
+        iv.setFitHeight(60);
+        res.getChildren().addAll(iv);
 
         res.getChildren().addAll();
 

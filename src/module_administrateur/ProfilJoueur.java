@@ -1,28 +1,28 @@
 package module_administrateur;
 
-import javafx.application.Application;
-import javafx.geometry.*;
-import javafx.scene.Scene;
+import APIMySQL.Utilisateur;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.collections.*;
-import java.io.File;
-import javafx.scene.chart.*;
-import APIMySQL.*;
 
 /** Vue de la page pour voir et modifier le profil d'un joueur */
 public class ProfilJoueur extends BorderPane {
 
     /** Attributs de ProfilJoueur */
     private GererJoueur gJoueur;
-    private PageAccueil pa;
+    private Stage primaryStage;
     private Joueur joueur;
+
+    private String title;
 
     private RadioButton rbactiver;
     private RadioButton rbpasactiver;
@@ -38,12 +38,20 @@ public class ProfilJoueur extends BorderPane {
     private TextField tnom;
     private TextField temail;
 
+    private Administration admin;
+
     /** Constructeur de cette vue */
-    public ProfilJoueur(PageAccueil pa, GererJoueur gJoueur, Joueur joueur) {
+    public ProfilJoueur(Stage primaryStage, GererJoueur gJoueur, Joueur joueur, Administration admin) {
+
         super();
+
+        this.admin = admin;
+
+        this.title = "Profil";
+
         this.gJoueur = gJoueur;
         this.joueur = joueur;
-        this.pa = pa;
+        this.primaryStage = primaryStage;
         this.groupe = new ToggleGroup();
         this.tfilechooser = new TextField();
         this.haut();
@@ -75,8 +83,8 @@ public class ProfilJoueur extends BorderPane {
         return this.sexeF;
     }
 
-    public PageAccueil getPa() {
-        return this.pa;
+    public Stage getPa() {
+        return this.primaryStage;
     }
 
     public String getTFprenom() {
@@ -95,10 +103,10 @@ public class ProfilJoueur extends BorderPane {
     public void haut() {
         BorderPane haut = new BorderPane();
         Label l = new Label("Profil de "+this.joueur.getPseudo());
-        Button bRetour = new Button("< Retour");
+        Button bRetour = new Button("Retour");
         haut.setLeft(l);
         haut.setRight(bRetour);
-        bRetour.setOnAction(new ActionRetour(this.pa, this.gJoueur));
+        bRetour.setOnAction(new ActionRetour(this.primaryStage, this.gJoueur));
         l.setFont(Font.font ("Arial", 25));
         haut.setPadding(new Insets(20,25,20,25));
         this.setTop(haut);
@@ -237,7 +245,7 @@ public class ProfilJoueur extends BorderPane {
 
     public Button creerBoutonSauvegarderModifs(){
         Button bsave = new Button("Sauvegarder");
-        bsave.setOnAction(new ActionProfilJoueurSauvegarde(this, this.joueur));
+        bsave.setOnAction(new ActionProfilJoueurSauvegarde(this.primaryStage, this, this.joueur));
         return bsave;
     }
 
@@ -339,4 +347,7 @@ public class ProfilJoueur extends BorderPane {
         this.setCenter(vbcentre);
     }
 
+    public String getTitle() { return this.title; }
+
+    public Administration getAdmin() { return this.admin; }
 }

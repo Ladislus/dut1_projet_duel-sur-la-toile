@@ -8,12 +8,17 @@ public class ActionSupprimerCouleur implements EventHandler<Event> {
 
     private PartieM mastermind;
 
+    /**
+     * Constructeur du controlleur
+     * @param mastermind une PartieM
+     */
     public ActionSupprimerCouleur(PartieM mastermind){
         this.mastermind = mastermind;
     }
 
     /**
-     * Remet la couleur cliqué à 0
+     * Méthode appelée lors de l'utilisation du controlleur, permet de supprimer une couleur dans la combinaison courante
+     * @param event un Event
      */
     @Override
     public void handle(Event event){

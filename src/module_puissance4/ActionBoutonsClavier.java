@@ -13,12 +13,17 @@ public class ActionBoutonsClavier implements EventHandler<KeyEvent> {
     /** Vue de la page du jeu du puissance 4 */
     private PartieP4 jeu;
 
+    /**
+     * Constructeur de ActionBoutonsClavier, permettant le contrôle du Puissance 4 avec le clavier
+     * @param puissance4 un PartieP4
+     */
     public ActionBoutonsClavier(PartieP4 puissance4) {
         this.jeu = puissance4;
     }
 
     /**
-     * Identifie la touche actionnée et agit en fonction
+     * Méthode qui gère les actions au clavier
+     * @param event un KeyEvent
      */
     @Override
     public void handle(KeyEvent event) {

@@ -1,5 +1,9 @@
 package module_joueur;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MessageModele {
 
     private long dateEnvoi;
@@ -26,6 +30,11 @@ public class MessageModele {
 
     public long getDateEnvoi() {
         return dateEnvoi;
+    }
+
+    public String getDateEnvoiString(){
+        Date date = new Date(this.dateEnvoi);
+        return String.valueOf(new SimpleDateFormat("HH:mm:ss '-' dd/MM/yy").format(date));
     }
 
     public String getContenu() {

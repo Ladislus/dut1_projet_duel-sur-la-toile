@@ -7,12 +7,17 @@ public class ActionSupprimerTout implements EventHandler<ActionEvent> {
 
     private PartieM mastermind;
 
+    /**
+     * Constructeur du controlleur
+     * @param mastermind un Mastermind
+     */
     public ActionSupprimerTout(PartieM mastermind){
         this.mastermind = mastermind;
     }
 
     /**
-     * Remet tout les elements la liste à 0
+     * Méthode appelée lors de l'utilisation du controlleur, permet de supprimer toutes les couleurs dans la combinaison courante
+     * @param actionEvent un ActionEvent
      */
     @Override
     public void handle(ActionEvent actionEvent){

@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class GestionBD {
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
+            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -34,14 +33,16 @@ public class GestionBD {
 
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
+            //Creation des objets necessaire a la connexion a la bd
             Statement st = co.createStatement();
             ResultSet rs = st.executeQuery(requete);
             ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
             int columns = md.getColumnCount();
             List<HashMap<String, List<Object>>> list = new ArrayList<>();
+            //On boucle sur les colonnes
             while (rs.next()) {
-                //On boucle sur les colonnes
                 HashMap<String, List<Object>> row = new HashMap<>(columns);
+                //Pour chaque colonne, ajoutée le dictionnaire {nomCol=valeur} dans la liste
                 for (int i = 1; i <= columns; ++i) {
                     ArrayList<Object> liste = new ArrayList<>();
                     liste.add(rs.getObject(i));
@@ -50,25 +51,24 @@ public class GestionBD {
                 list.add(row);
             }
             HashMap<String, List<Object>> res = new HashMap<>();
+            //Reformattage de la liste des HashMap pour avoir qu'une seule hashmap : {nomCol=[valeur1, valeur2], nomCol2=[]..etc}
             for (HashMap<String, List<Object>> e : list){
                 for(String key : e.keySet()){
-                    //Si la clé n'existe pas
                     if(!res.containsKey(key))
                         res.put(key, e.get(key));
                     else
                         res.get(key).add(e.get(key).get(0));
                 }
             }
+            //retourne le resultat
             return res;
         } catch (SQLException e){
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
         return null;
     }
 
     public static void updatePreparedStatement(String requete, List<Object> listeDonnee) throws SQLException{
-        //todo : make an exception
         int nbPointDinterrogation = 0;
         for(int i =0; i<requete.length(); i++){
             if(requete.charAt(i) == '?'){

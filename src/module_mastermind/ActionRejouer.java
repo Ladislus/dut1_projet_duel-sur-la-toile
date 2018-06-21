@@ -21,6 +21,10 @@ public class ActionRejouer implements EventHandler<ActionEvent> {
         this.mastermind = m;
         }
 
+    /**
+     * Méthode appelée lors de l'utilisation du controlleur, permet de rejouer avec pop-up de confirmation
+     * @param actionEvent un ActionEvent
+     */
     @Override
     public void handle(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

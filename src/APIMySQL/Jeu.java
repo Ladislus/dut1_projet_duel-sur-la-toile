@@ -16,7 +16,6 @@ public class Jeu {
             Collections.addAll(donnees,nomJeu,regleJeu,GestionBD.createBlob(jarJeuPath),1,idTy,GestionBD.createBlob(imagePath));
             GestionBD.updatePreparedStatement("INSERT INTO JEU (nomJeu,regleJeu,jarJeu,activeJeu,idTy,image) VALUES (?,?,?,?,?,?)",donnees);
         } catch (IOException e) {
-            System.out.println("Ce fichier n'existe pas.");
         } catch (SQLException e) {
             throw new APIMySQLException("gameNameTaken");
         }

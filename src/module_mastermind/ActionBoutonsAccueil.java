@@ -12,6 +12,10 @@ public class ActionBoutonsAccueil implements EventHandler<ActionEvent> {
         this.mastermind = mastermind;
     }
 
+    /**
+     * Méthode appelée lors de l'utilisation du controlleur, permet de changer de scène
+     * @param actionEvent un ActionEvent
+     */
     @Override
     public void handle(ActionEvent actionEvent) {
         this.mastermind.setScene("");

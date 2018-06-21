@@ -30,6 +30,10 @@ public class ChoixJoueurM {
     private GridPane contacts; // Grille des contacts à afficher
     private BorderPane scene;
 
+    /**
+     * Constructeur de la vue du le choix des joueurs
+     * @param m un Mastermind
+     */
     public ChoixJoueurM(Mastermind m){
         this.mastermind = m;
         this.listeAmis = new HashSet<>();
@@ -57,6 +61,10 @@ public class ChoixJoueurM {
         return new Scene(res, 850, 650);
     }
 
+    /**
+     * Retourne l'en-tête de la fenêtre de choix des joueurs
+     * @return une HBox
+     */
     private HBox haut() {
         HBox res = new HBox();
         res.setSpacing(50.);
@@ -86,6 +94,10 @@ public class ChoixJoueurM {
         return res;
     }
 
+    /**
+     * Vue de la partie centrale du choix des joueurs, avec les boutons pur choir son adversaire
+     * @return une VBox
+     */
     private VBox centre() {
         VBox res = new VBox();
         res.setAlignment(Pos.TOP_CENTER);
@@ -126,7 +138,9 @@ public class ChoixJoueurM {
         return res;
     }
 
-    /** Mettre à jour la liste des contacts affichées dans la vue */
+    /**
+     * Mettre à jour la liste des contacts affichées dans la vue
+     */
     public void majContacts() {
         this.contacts.getChildren().clear();
 
