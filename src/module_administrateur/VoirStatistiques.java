@@ -14,9 +14,13 @@ public class VoirStatistiques extends BorderPane {
     /** Attribut de VoirStatistiques */
     private Stage primaryStage;
 
+    private String title;
+
     /** Constructeur de la page pour voir les statistiques */
     public VoirStatistiques(Stage primaryStage) {
         super();
+
+        this.title = "Statistiques";
         this.primaryStage = primaryStage;
         this.haut();
         this.gauche();
@@ -249,4 +253,6 @@ public class VoirStatistiques extends BorderPane {
 
       this.setRight(vbdroite);
     }
+
+    public String getTitle() { return this.title; }
 }

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Dashboard extends BorderPane {
+public class Dashboard extends BorderPane {
 
   Boolean isAdmin;
 
@@ -93,7 +93,7 @@ class Dashboard extends BorderPane {
     btParti.setPrefWidth(150);
 
     Button btEditerProfile = new Button("Éditer mon profil");
-    btEditerProfile.setOnAction(new ActionToEditerProfile(primaryStage, joueur));
+    btEditerProfile.setOnAction(new ActionToEditerProfile(this.primaryStage, joueur));
     btEditerProfile.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);

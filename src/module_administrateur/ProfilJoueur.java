@@ -24,6 +24,8 @@ public class ProfilJoueur extends BorderPane {
     private Stage primaryStage;
     private Joueur joueur;
 
+    private String title;
+
     private RadioButton rbactiver;
     private RadioButton rbpasactiver;
     private RadioButton sexeH;
@@ -38,9 +40,17 @@ public class ProfilJoueur extends BorderPane {
     private TextField tnom;
     private TextField temail;
 
+    private Administration admin;
+
     /** Constructeur de cette vue */
     public ProfilJoueur(Stage primaryStage, GererJoueur gJoueur, Joueur joueur) {
+
         super();
+
+        this.admin = admin;
+
+        this.title = "Profil";
+
         this.gJoueur = gJoueur;
         this.joueur = joueur;
         this.primaryStage = primaryStage;
@@ -237,7 +247,7 @@ public class ProfilJoueur extends BorderPane {
 
     public Button creerBoutonSauvegarderModifs(){
         Button bsave = new Button("Sauvegarder");
-        bsave.setOnAction(new ActionProfilJoueurSauvegarde(this, this.joueur));
+        bsave.setOnAction(new ActionProfilJoueurSauvegarde(this.primaryStage, this, this.joueur));
         return bsave;
     }
 
@@ -339,4 +349,5 @@ public class ProfilJoueur extends BorderPane {
         this.setCenter(vbcentre);
     }
 
+    public String getTitle() { return this.title; }
 }

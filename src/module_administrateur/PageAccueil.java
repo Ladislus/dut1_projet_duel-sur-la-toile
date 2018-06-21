@@ -12,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.ContentDisplay;
-import module_joueur.ActionToAdmin;
 
 public class PageAccueil extends BorderPane {
 
@@ -37,10 +36,6 @@ public class PageAccueil extends BorderPane {
         this.setTop(haut());
         this.setCenter(centre());
         this.setBottom(bas()); }
-
-    public PageAccueil getBp() {
-      return (PageAccueil) this.primaryStage.getScene().getRoot();
-    }
 
     public Administration getAdmin() {
       return this.admin; }
@@ -83,7 +78,7 @@ public class PageAccueil extends BorderPane {
       bJoueur.setContentDisplay(ContentDisplay.TOP);
       bJoueur.setPrefWidth(350);
       bJoueur.setPrefHeight(220);
-      bJoueur.setOnAction(new ActionUtilisateurs(this.primaryStage));
+      bJoueur.setOnAction(new ActionUtilisateurs(this.primaryStage, this.admin));
 
 
       centre.getChildren().addAll(bJeu, bJoueur);
@@ -97,9 +92,7 @@ public class PageAccueil extends BorderPane {
     public BorderPane haut() {
       BorderPane haut = new BorderPane();
       Label l = new Label("Administration");
-      Button b = new Button("Accueil");
       haut.setLeft(l);
-      haut.setRight(b);
       l.setFont(Font.font ("Arial", 25));
       haut.setPadding(new Insets(20,25,20,25));
       return haut; }

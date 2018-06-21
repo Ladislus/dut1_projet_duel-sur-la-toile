@@ -2,6 +2,7 @@ package module_administrateur;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ActionJeu implements EventHandler<ActionEvent> {
@@ -14,4 +15,8 @@ public class ActionJeu implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        ((PageAccueil) this.primaryStage.getScene().getRoot()).getBp().setCenter(new GererJeu(this.primaryStage)); }}
+
+        GererJeu gJ = new GererJeu(this.primaryStage);
+
+        this.primaryStage.setTitle(gJ.getTitle());
+        this.primaryStage.setScene(new Scene(gJ, 650, 450)); }}

@@ -33,11 +33,14 @@ public class GererJeu extends BorderPane {
     private TextField tnom;
     private TextArea tdescription;
     private ComboBox<String> cbmodes;
+    private String title;
 
 
     /** Constructeur de la page pour gérer les jeux */
     public GererJeu(Stage primaryStage) {
       super();
+
+      this.title = "Gestion des jeux";
       this.primaryStage = primaryStage;
       this.groupe = new ToggleGroup();
       this.tfilechoosergauche = new TextField();
@@ -387,5 +390,7 @@ public class GererJeu extends BorderPane {
     public void majAffichage() {
         this.creerGererJeu();
     }
+
+    public String getTitle() { return this.title; }
 
 }
