@@ -57,4 +57,9 @@ public class Administration {
     public void activerJoueur(Joueur j) {
         Utilisateur.setUserInfo("activeUt", 1, "pseudoUt", j.getPseudo());
     }
+
+    public HashMap<String, List<Object>> requetteListeJeux() {
+        return GestionBD.selectPreparedStatement("select * from JEU;");
+    }
+
 }

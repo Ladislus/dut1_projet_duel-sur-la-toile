@@ -1,17 +1,23 @@
 package module_administrateur;
 
+import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.cell.*;
+import javafx.geometry.Pos;
 import javafx.beans.property.SimpleStringProperty;
 import APIMySQL.*;
 import java.util.HashMap;
@@ -76,8 +82,8 @@ public class GererJoueur extends BorderPane {
     /** Création de la liste de tous les joueurs */
     public ObservableList<Joueur> getListeJoueursTableView() {
         this.listeJoueur = FXCollections.observableArrayList();
-        HashMap<String, List<Object>> dico = GestionBD.selectPreparedStatement("select * from UTILISATEUR where activeUt IS TRUE;");
-        if (dico.size() == 0) {
+        HashMap<String, List<Object>> dico = ((PageAccueil)this.primaryStage.getScene().getRoot()).getAdmin().requetteListeJoueur();
+        if (dico.size() == 0 || dico == null) {
             return this.listeJoueur;
         }
         else {
@@ -210,7 +216,6 @@ public class GererJoueur extends BorderPane {
         this.recherche.setPromptText("Rechercher un joueur");
         this.recherche.setPrefWidth(280);
         this.recherche.setPrefHeight(35);
-        //this.recherche.setOnKeyReleased(new ActionRechercherJoueur(this));
         return this.recherche;
     }
 
