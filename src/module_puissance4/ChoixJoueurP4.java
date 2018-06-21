@@ -34,6 +34,10 @@ public class ChoixJoueurP4 {
     private GridPane contacts; // Grille des contacts à afficher
     private BorderPane scene;
 
+    /**
+     * Constructeur de ChoixJoueurP4, la fenêtre de la vue du choix des joueurs au début d'une partie ou en reprenant une partie en cours
+     * @param p un Puissance4
+     */
     public ChoixJoueurP4(Puissance4 p){
         this.puissance4 = p;
         this.listeAmis = new HashSet<>();
@@ -48,6 +52,11 @@ public class ChoixJoueurP4 {
         this.listeAdvers.add("Benjam2");
     }
 
+    /**
+     * Renvoie la Scene, utilisée dans Puissance4.java
+     * @param mode la String qui détermine si on affiche la page de nouvelle partie ou pour reprendre une partie en cours
+     * @return une Scene
+     */
     public Scene getScene(String mode){ // "New Game" ou "Resume Game"
         this.mode = mode;
 
@@ -61,6 +70,10 @@ public class ChoixJoueurP4 {
         return new Scene(res, 850, 650);
     }
 
+    /**
+     * Crée la partie haute de la vue
+     * @return une HBox
+     */
     private HBox haut() {
         HBox res = new HBox();
         res.setSpacing(50.);
@@ -85,6 +98,10 @@ public class ChoixJoueurP4 {
         return res;
     }
 
+    /**
+     * Crée la partie centralede la vue
+     * @return une VBox
+     */
     private VBox centre() {
         VBox res = new VBox();
         res.setAlignment(Pos.TOP_CENTER);
@@ -125,7 +142,9 @@ public class ChoixJoueurP4 {
         return res;
     }
 
-    /** Mettre à jour la liste des contacts affichées dans la vue */
+    /**
+     * Mettre à jour la liste des contacts affichées dans la vue
+     */
     public void majContacts() {
         this.contacts.getChildren().clear();
 
