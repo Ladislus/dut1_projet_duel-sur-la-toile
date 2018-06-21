@@ -34,7 +34,7 @@ public class MessageModele {
 
     public String getDateEnvoiString(){
         Date date = new Date(this.dateEnvoi);
-        return String.valueOf(new SimpleDateFormat("HH:mm:ss '-' dd/MM/yy").format(new Date(System.currentTimeMillis())));
+        return String.valueOf(new SimpleDateFormat("HH:mm:ss '-' dd/MM/yy").format(date));
     }
 
     public String getContenu() {

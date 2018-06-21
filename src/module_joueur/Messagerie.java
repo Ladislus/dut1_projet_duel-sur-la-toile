@@ -194,10 +194,10 @@ public class Messagerie extends SplitPane {
             for (Object idMsg : listeIdMessage1) {
                 String nomExp = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt1 from MESSAGE where idMsg = " + idMsg.toString()).get("idUt1").get(0));
                 String nomDest = Utilisateur.getPseudoById((Integer) GestionBD.selectPreparedStatement("select idUt2 from MESSAGE where idMsg = " + idMsg.toString()).get("idUt2").get(0));
-                List<Object> resReq = GestionBD.selectPreparedStatement("select contenuMsg, dateEnvoi from MESSAGE where idMsg = " + idMsg.toString()).get("contenuMsg");
-                String contenu = (String) resReq.get(0);
-                long dateEnvoi = (long) resReq.get(1);
-                MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi, contenu);
+                HashMap<String, List<Object>> resReq = GestionBD.selectPreparedStatement("select contenuMsg, dateMsg from MESSAGE where idMsg = " + idMsg.toString());
+                String contenu = (String) resReq.get("contenuMsg").get(0);
+                Date dateEnvoi = (Date) resReq.get("dateMsg").get(0);
+                MessageModele messageModele = new MessageModele(nomExp, nomDest, dateEnvoi.getTime(), contenu);
                 res.add(messageModele);
             }
         }catch (NullPointerException e){
