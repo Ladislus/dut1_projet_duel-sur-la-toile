@@ -34,12 +34,9 @@ public class GererJeu extends BorderPane {
     private TextField tnom;
     private TextArea tdescription;
     private ComboBox<String> cbmodes;
-<<<<<<< HEAD
     private String title;
-=======
     private HashMap<String, List<Object>> dico;
     private ComboBox<String> cbjeux;
->>>>>>> 686fe7bac8ab04a87e4a63d02ec45917612d6c84
 
 
     /** Constructeur de la page pour gérer les jeux */
