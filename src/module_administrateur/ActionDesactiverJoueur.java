@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 /** Contrôleur du bouton pour désactiver les joueurs cochés */
 public class ActionDesactiverJoueur implements EventHandler<ActionEvent> {
 
-    GererJoueur gJoueur;
+    private GererJoueur gJoueur;
     private Stage primaryStage;
 
     /** Constructeur de ce contrôleur */
@@ -37,13 +37,13 @@ public class ActionDesactiverJoueur implements EventHandler<ActionEvent> {
 
         if (result.get() == btoui) {
 
-            PageAccueil page = (PageAccueil) this.primaryStage.getScene().getRoot();
+            GererJoueur page = (GererJoueur) this.primaryStage.getScene().getRoot();
 
             for (Joueur j : page.getAdmin().getListeModif()) {
                 page.getAdmin().desactiverJoueur(j);
             }
             page.getAdmin().majAdmin();
-            this.gJoueur.majAffichage();
+            this.gJoueur.majTableView();
 
             alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Validation de la désactivation");

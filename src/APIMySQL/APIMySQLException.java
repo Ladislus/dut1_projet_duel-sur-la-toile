@@ -29,7 +29,4 @@ public class APIMySQLException extends SQLException {
         return message;
     }
 
-    public void printMessage() {
-        System.out.println(this.message);
-    }
-}
+    public void printMessage() {}}

@@ -38,7 +38,7 @@ public class ActionInvitationAcceptOrRefuse implements EventHandler<ActionEvent>
 
             try { GestionBD.updatePreparedStatement("insert into ETREAMI values (?,?)", peer); }
 
-            catch (SQLException e) { System.out.println("Erreur dans l'acceptation de la demande"); }
+            catch (SQLException e) { }
 
             this.invitation.majAffichageInvitation(); }
 

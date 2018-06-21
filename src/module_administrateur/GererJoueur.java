@@ -30,6 +30,10 @@ import java.util.Comparator;
 /** Vue de la page pour gérer les joueurs */
 public class GererJoueur extends BorderPane {
 
+    private Administration admin;
+
+    private String title;
+
     private Stage primaryStage;
     private TextField recherche;
     private Button activer;
@@ -37,8 +41,14 @@ public class GererJoueur extends BorderPane {
     private ObservableList<Joueur> listeJoueur;
 
     /** Constructeur de la page pour gérer les joueurs */
-    public GererJoueur(Stage primaryStage) {
+    public GererJoueur(Stage primaryStage, Administration admin) {
+
       super();
+
+      this.admin = admin;
+
+      this.title = "Gestion des joueurs";
+
       this.primaryStage = primaryStage;
       this.creerGererJoueur();
     }
@@ -66,8 +76,7 @@ public class GererJoueur extends BorderPane {
 
     /** Rafraichit la liste de tous les joueurs */
     public void majTableView() {
-      System.out.println(this.listeJoueur);
-        this.setCenter(new GererJoueur(this.primaryStage));
+        this.setCenter(new GererJoueur(this.primaryStage, this.admin).getCenter());
     }
 
     /** Création de la liste de tous les joueurs */
@@ -90,7 +99,7 @@ public class GererJoueur extends BorderPane {
                 boolean estActif = Boolean.valueOf(stringEstActif);
                 Joueur j = new Joueur(id, pseudo, prenom, nom, email, sexe, role, estActif);
                 j.getProfil().setOnAction(new ActionProfilJoueur(this.primaryStage, this, j));
-                j.getActiver().setOnAction(new ActionCheckActiver(this, ((PageAccueil)this.primaryStage.getScene().getRoot()).getAdmin(), j));
+                j.getActiver().setOnAction(new ActionCheckActiver(this, this.admin, j));
                 this.listeJoueur.add(j);
             }
         }
@@ -99,14 +108,14 @@ public class GererJoueur extends BorderPane {
 
     /** Création du tableau contenant la liste de tous les joueurs */
     public TableView<Joueur> creerTableListeJoueur() {
-        TableView<Joueur> table = new TableView<Joueur>();
+        TableView<Joueur> table = new TableView<>();
 
-        TableColumn<Joueur, String> pseudo = new TableColumn<Joueur, String>("Pseudo");
-        TableColumn<Joueur, Integer> id = new TableColumn<Joueur, Integer>("ID");
-        TableColumn<Joueur, String> role = new TableColumn<Joueur, String>("Rôle");
-        TableColumn<Joueur, Hyperlink> profil = new TableColumn<Joueur, Hyperlink>("Profil");
-        TableColumn<Joueur, Label> estActif = new TableColumn<Joueur, Label>("Statut");
-        TableColumn<Joueur, CheckBox> activer = new TableColumn<Joueur, CheckBox>("✓");
+        TableColumn<Joueur, String> pseudo = new TableColumn<>("Pseudo");
+        TableColumn<Joueur, Integer> id = new TableColumn<>("ID");
+        TableColumn<Joueur, String> role = new TableColumn<>("Rôle");
+        TableColumn<Joueur, Hyperlink> profil = new TableColumn<>("Profil");
+        TableColumn<Joueur, Label> estActif = new TableColumn<>("Statut");
+        TableColumn<Joueur, CheckBox> activer = new TableColumn<>("✓");
 
         pseudo.setCellValueFactory(new PropertyValueFactory<>("pseudo"));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -267,4 +276,7 @@ public class GererJoueur extends BorderPane {
     public void majAffichage() {
         this.creerGererJoueur();
     }
-}
+
+    public String getTitle() { return this.title; }
+
+    public Administration getAdmin() { return this.admin; }}

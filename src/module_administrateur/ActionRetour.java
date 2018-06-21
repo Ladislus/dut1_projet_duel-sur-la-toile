@@ -33,11 +33,14 @@ public class ActionRetour implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        PageAccueil page = (PageAccueil) this.primaryStage.getScene().getRoot();
-
         if (this.title.equals("GererJoueur")) {
-            page.setCenter(new GererJoueur(this.primaryStage));
-            page.getAdmin().majAdmin(); }
+
+            PageAccueil page = new PageAccueil(this.primaryStage);
+
+            this.primaryStage.setScene(new Scene(page, 650, 450));
+            this.primaryStage.setTitle(page.getTitle());
+
+            ((PageAccueil)this.primaryStage.getScene().getRoot()).getAdmin().majAdmin(); }
         else {
             this.primaryStage.setTitle(new PageAccueil(this.primaryStage).getTitle());
             this.primaryStage.setScene(new Scene(new PageAccueil(this.primaryStage), 650, 450));

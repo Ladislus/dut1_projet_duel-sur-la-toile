@@ -24,8 +24,6 @@ public class ActionValiderCoup implements EventHandler<ActionEvent> {
         int nbBat = this.nbBatonSelect(indice);
         int jCour = this.partie.getPlateau().getJCour();
 
-        System.out.println(indice);
-
         // On désactive d'abord tous les bâtons activés
         for (int i=indice;i>indice-3 && i>=0;i--){
             lesBatons.get(i).desactive();
