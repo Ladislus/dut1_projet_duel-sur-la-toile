@@ -10,6 +10,10 @@ import java.sql.SQLException;
 
 import java.util.*;
 
+/**
+ * Classe permettant de gérer tout ce qui a un lien avec les
+ * utilisateurs de la BD ( Mots de passe, profil, informations)
+ */
 public class Utilisateur {
 
     private static final SecureRandom RANDOM = new SecureRandom();
@@ -17,7 +21,7 @@ public class Utilisateur {
     private Utilisateur(){}
 
     /**
-     * Genere le salt pour stocker le mdp dans la base
+     * Genère un sel (salt), sous forme de chaîne aléatoire en Base64
      * @return String
      */
     private static String getSalt(){
@@ -27,8 +31,8 @@ public class Utilisateur {
     }
 
     /**
-     * Genere le hash du mdp pour pouvoir le stocker
-     * dans la base
+     * Genère le hash d'un tableau d'octets, ici, de la chaîne
+     * de caractères composée d'un mot de passe et d'un sel
      * @return String
      */
     private static String getHash(byte[] bytes){
@@ -41,7 +45,8 @@ public class Utilisateur {
     }
 
     /**
-     * Permet d'avoir les information un utilisateur
+     * Permet de récupérer les informations d'un utilisateur
+     * à partir d'une autre information et de la valeur de celle-ci
      * @param columnInfoName
      * @param columnName
      * @param columnValue
@@ -52,7 +57,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de mettre les information d'un utilisateur a jour
+     * Permet de mettre à jour les informations d'un utilisateur
      * @param columnInfoName
      * @param columInfoValue
      * @param columnName
@@ -63,7 +68,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de créer un utilisateur pas fini
+     * Permet de créer un utilisateur sans image
      * @param pseudo
      * @param email
      * @param sexe
@@ -86,7 +91,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de creer un utilisateur complet
+     * Permet de créer un utilisateur complet
      * @param pseudo
      * @param email
      * @param sexe
@@ -111,10 +116,10 @@ public class Utilisateur {
     }
 
     /**
-     Permet de savoir si le mdp d'un utilisateur est valide ou pas
+     Permet de savoir si le mot de passe d'un utilisateur est valide ou pas
      @param pseudoUt : Une String contenant le pseudo entré
      @param mdp : Une String contenant le mot de passe entré
-     @return : Un boolean
+     @return : Un booléen
      @throws APIMySQLException : Le compte n'est pas dans la BD
     */
     public static boolean isMdpValide(String pseudoUt, String mdp) throws APIMySQLException {
@@ -128,7 +133,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de savoir si l'utilisateur est activée
+     * Permet de savoir si l'utilisateur est activé
      * @param pseudoUt
      * @return Boolean
      */
@@ -137,7 +142,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de desactiver un utilisateur
+     * Permet de désactiver un utilisateur
      * @param pseudo
      */
     public static void deactivateUser(String pseudo){
@@ -160,7 +165,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet d'obtenir l'id d'un utilisateur en ayant juste le pseudo
+     * Permet d'obtenir l'id d'un utilisateur à l'aide de son pseudo
      * @param pseudoUt
      * @return int
      */
@@ -169,7 +174,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet d'obtenir le pseudo en ayant que l'id de l'utilisateur
+     * Permet d'obtenir le pseudo d'un utilisateur en ayant son id
      * @param id
      * @return String
      */
@@ -178,7 +183,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet d'avoir la liste d'amis associer a l'utilisateur
+     * Permet d'avoir la liste d'amis associés à un utilisateur
      * @param pseudo
      * @return ArrayList<String>
      */
@@ -209,7 +214,7 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de mettre a jour l'image d'un utilisateur
+     * Permet de mettre à jour l'image d'un utilisateur
      * @param pseudo
      * @param image
      */
@@ -224,7 +229,7 @@ public class Utilisateur {
     }
 
     /**
-     * permet de mettre a jour un utilisateur
+     * permet de mettre à jour un utilisateur
      * @param pseudo
      * @param email
      * @param motDePasse

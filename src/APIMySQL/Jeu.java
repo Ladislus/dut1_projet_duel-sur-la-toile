@@ -11,7 +11,7 @@ public class Jeu {
     private Jeu(){}
 
     /**
-     * Permet de créer un jeux dans la bd
+     * Permet de créer un jeu dans la BD
      * @param nomJeu
      * @param regleJeu
      * @param jarJeuPath
@@ -31,7 +31,7 @@ public class Jeu {
     }
 
     /**
-     * Permet de recuperée la liste des jeux
+     * Permet de recupérer la liste des jeux
      * @return HashMap<String, List<Object>>
      */
     public static HashMap<String, List<Object>> recupListeJeux(){

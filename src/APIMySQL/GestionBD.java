@@ -17,15 +17,13 @@ public class GestionBD {
     private static Connection co = null;
 
     static {
-
         try {
-
             Class.forName("com.mysql.jdbc.Driver");
             co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst"); }
         catch (ClassNotFoundException | SQLException e) { e.printStackTrace(); }}
 
     /**
-     * Class static permettant la gestion bas niveau de l'api mysql
+     * Classe statique (Bibliothèque) permettant la gestion bas niveau de l'API MySQL
      */
     private GestionBD(){}
 
@@ -38,9 +36,9 @@ public class GestionBD {
     }
 
     /**
-     * Permet de mettre une requete en entrée
-     * puis de retourner le resultat sous une forme
-     * pratique pour l'integration de l'api sur les differents module
+     * Permet de passer une requête SQL en entrée
+     * puis de retourner le résultat sous une forme
+     * pratique pour l'intégration de l'API sur les différents modules
      * @param requete
      * @return HashMap<String, List<Object>>
      */
@@ -82,8 +80,8 @@ public class GestionBD {
     }
 
     /**
-     * Permet de faire une requete de type update avec
-     * des donnée rajoutées respectivement dans la liste
+     * Permet de faire une requête SQL UPDATE avec
+     * des données rajoutées dans l'ordre dans une liste
      * @param requete
      * @param listeDonnee
      * @throws SQLException
@@ -113,7 +111,7 @@ public class GestionBD {
     }
 
     /**
-     * Permet de faire des requetes de type update en brut
+     * Permet de faire des requêtes de type update en brut
      * @param requete
      */
     public static void updateStatement(String requete){
@@ -126,7 +124,7 @@ public class GestionBD {
     }
 
     /**
-     * Permet de créer un blob a partir d'un chemin relatif
+     * Permet de créer un Blob à partir d'un chemin relatif ou absolu
      * @param url
      * @return Blob
      * @throws IOException
@@ -139,7 +137,7 @@ public class GestionBD {
     }
 
     /**
-     * Permet de créer un blob a partir d'un tableau d'octet
+     * Permet de créer un blob à partir d'un tableau d'octets
      * @param bytes
      * @return Blob
      * @throws SQLException
@@ -151,7 +149,7 @@ public class GestionBD {
     }
 
     /**
-     * Permet de convertir un blob en objet image java
+     * Permet de convertir un Blob en Image JavaFX
      * @param blob
      * @return Image
      */
@@ -166,7 +164,7 @@ public class GestionBD {
         return null; }
 
     /**
-     * Permet de convertir un tableau d'octets en image
+     * Permet de convertir un tableau d'octets en Image JavaFX
      * @param bytes
      * @return Image
      */

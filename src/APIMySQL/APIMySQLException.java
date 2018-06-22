@@ -7,7 +7,8 @@ public class APIMySQLException extends SQLException {
     private String message;
 
     /**
-     * Permet d'humanisée les exceptions
+     * Exception permettant de signaler plus clairement
+     * un problème au niveau de l'API MySQL
      * @param cause
      */
     public APIMySQLException(String cause){
@@ -18,7 +19,7 @@ public class APIMySQLException extends SQLException {
 
     /**
      * Fonction qui permet de mettre en place un message
-     * d'erreur lisable par un humain
+     * d'erreur compréhensible facilement par un utilisateur
      */
     private void setMessage(){
         if (this.cause.equals("unknownPseudo"))

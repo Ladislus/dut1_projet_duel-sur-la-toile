@@ -8,7 +8,7 @@ import java.util.Collections;
 public class Message {
 
     /**
-     * Permet de créer un message dans la bd
+     * Permet de créer un message dans la BD
      * @param contenuMsg
      * @param idUt1
      * @param idUt2

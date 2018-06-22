@@ -9,7 +9,7 @@ public class Partie {
     private Partie(){}
 
     /**
-     * Permet de créer une partie dans la bd
+     * Permet de créer une partie dans la BD
      * @param idJeu
      * @param idUt1
      * @param idUt2
