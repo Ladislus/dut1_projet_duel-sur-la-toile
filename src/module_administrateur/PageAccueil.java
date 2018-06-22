@@ -6,12 +6,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.ContentDisplay;
+
+import java.net.URISyntaxException;
 
 public class PageAccueil extends BorderPane {
 
@@ -43,10 +46,15 @@ public class PageAccueil extends BorderPane {
     /** Création du VBox qui affiche le bouton "Voir les statistiques" ainsi que l'image */
     public VBox bas() {
       VBox bas = new VBox();
-      //Image stat = new Image(getClass().getResourceAsStream("./img/module_administrateur/stat.png"));
-      //Button bStat = new Button("Voir les statistiques", new ImageView(stat));
-      Button bStat = new Button("Voir les statistiques");
+        Button bStat = null;
+        try {
+            bStat = new Button("Voir les statistiques", new ImageView(getClass().getResource("/img/module_administrateur/stat.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        //Button bStat = new Button("Voir les statistiques");
       bStat.setContentDisplay(ContentDisplay.TOP);
+
 
 
       bStat.setOnAction(new ActionStatistiques(this.primaryStage));
@@ -63,18 +71,26 @@ public class PageAccueil extends BorderPane {
     "Gérer les utilisateurs" */
     public HBox centre() {
       HBox centre = new HBox();
-      //Image jeu = new Image(getClass().getResourceAsStream("./img/module_administrateur/jeu.png"));
-      //Button bJeu = new Button("Gérer les jeux", new ImageView(jeu));
-      Button bJeu = new Button("Gérer les jeux");
+        Button bJeu = null;
+        try {
+            bJeu = new Button("Gérer les jeux", new ImageView(getClass().getResource("/img/module_administrateur/jeu.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        //Button bJeu = new Button("Gérer les jeux");
       bJeu.setContentDisplay(ContentDisplay.TOP);
       bJeu.setOnAction(new ActionJeu(this.primaryStage));
       bJeu.setPrefWidth(350);
       bJeu.setPrefHeight(220);
 
 
-      //Image utilisateurs = new Image(getClass().getResourceAsStream("./img/module_administrateur/profil.png"));
-      //Button bJoueur = new Button("Gérer les utilisateurs", new ImageView(utilisateurs));
-      Button bJoueur = new Button("Gérer les utilisateurs");
+        Button bJoueur = null;
+        try {
+            bJoueur = new Button("Gérer les utilisateurs", new ImageView(getClass().getResource("/img/module_administrateur/profil.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        //Button bJoueur = new Button("Gérer les utilisateurs");
       bJoueur.setContentDisplay(ContentDisplay.TOP);
       bJoueur.setPrefWidth(350);
       bJoueur.setPrefHeight(220);
