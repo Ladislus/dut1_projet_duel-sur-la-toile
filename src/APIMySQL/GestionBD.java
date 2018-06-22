@@ -13,24 +13,37 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GestionBD {
-
     private static Connection co = null;
 
     static{
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "");
+            co = DriverManager.getConnection("jdbc:mysql://localhost/serveurDeJeux", "root", "marlou06");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Class static permettant la gestion bas niveau de l'api mysql
+     */
     private GestionBD(){}
 
+    /**
+     * Retourne la connection courante
+     * @return connexion
+     */
     public static Connection getCo() {
         return co;
     }
 
+    /**
+     * Permet de mettre une requete en entrée
+     * puis de retourner le resultat sous une forme
+     * pratique pour l'integration de l'api sur les differents module
+     * @param requete
+     * @return HashMap<String, List<Object>>
+     */
     public static HashMap<String, List<Object>> selectPreparedStatement(String requete) {
         try {
             //Creation des objets necessaire a la connexion a la bd
@@ -68,14 +81,24 @@ public class GestionBD {
         return null;
     }
 
+    /**
+     * Permet de faire une requete de type update avec
+     * des donnée rajoutées respectivement dans la liste
+     * @param requete
+     * @param listeDonnee
+     * @throws SQLException
+     */
     public static void updatePreparedStatement(String requete, List<Object> listeDonnee) throws SQLException{
+        //On compte le nombre de point d'interogation
         int nbPointDinterrogation = 0;
         for(int i =0; i<requete.length(); i++){
             if(requete.charAt(i) == '?'){
                 nbPointDinterrogation += 1;
             }
         }
+        //On prepare les object necessaire
         PreparedStatement ps = co.prepareStatement(requete);
+        //Puis on entre les données dans la bd
         for(int i =0; i<nbPointDinterrogation; i++){
             Object o = listeDonnee.get(i);
             if (o.getClass().getName().equals("com.mysql.jdbc.Blob")){
@@ -89,6 +112,10 @@ public class GestionBD {
         ps.executeUpdate();
     }
 
+    /**
+     * Permet de faire des requetes de type update en brut
+     * @param requete
+     */
     public static void updateStatement(String requete){
         try {
             Statement s = co.createStatement();
@@ -98,18 +125,36 @@ public class GestionBD {
         }
     }
 
+    /**
+     * Permet de créer un blob a partir d'un chemin relatif
+     * @param url
+     * @return Blob
+     * @throws IOException
+     * @throws SQLException
+     */
     public static Blob createBlob(String url) throws IOException, SQLException {
         Blob res = co.createBlob();
         res.setBytes(1,Files.readAllBytes(Paths.get(url)));
         return res;
     }
 
+    /**
+     * Permet de créer un blob a partir d'un tableau d'octet
+     * @param bytes
+     * @return Blob
+     * @throws SQLException
+     */
     public static Blob createBlob(byte[] bytes) throws SQLException {
         Blob res = co.createBlob();
         res.setBytes(1,bytes);
         return res;
     }
 
+    /**
+     * Permet de convertir un blob en objet image java
+     * @param blob
+     * @return Image
+     */
     public static Image blobToImage(Blob blob) {
         try {
             Image res = new Image(new ByteArrayInputStream(blob.getBytes(1,(int)blob.length())));
@@ -120,6 +165,11 @@ public class GestionBD {
         }
         return null; }
 
+    /**
+     * Permet de convertir un tableau d'octets en image
+     * @param bytes
+     * @return Image
+     */
     public static Image bytesToImage(byte[] bytes){
         return new Image(new ByteArrayInputStream(bytes));
     }}

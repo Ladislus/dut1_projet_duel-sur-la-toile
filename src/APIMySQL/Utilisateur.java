@@ -18,12 +18,21 @@ public class Utilisateur {
 
     private Utilisateur(){}
 
+    /**
+     * Genere le salt pour stocker le mdp dans la base
+     * @return String
+     */
     private static String getSalt(){
         byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
 
+    /**
+     * Genere le hash du mdp pour pouvoir le stocker
+     * dans la base
+     * @return String
+     */
     private static String getHash(byte[] bytes){
         MessageDigest digest = null;
         try {
@@ -33,14 +42,39 @@ public class Utilisateur {
         return Base64.getEncoder().encodeToString(hash);
     }
 
+    /**
+     * Permet d'avoir les information un utilisateur
+     * @param columnInfoName
+     * @param columnName
+     * @param columnValue
+     * @return String
+     */
     public static String getUserInfo(String columnInfoName, String columnName, String columnValue){
         return GestionBD.selectPreparedStatement("SELECT " + columnInfoName + " FROM UTILISATEUR WHERE " + columnName + "='" + columnValue + "'").get(columnInfoName).get(0).toString();
     }
 
+    /**
+     * Permet de mettre les information d'un utilisateur a jour
+     * @param columnInfoName
+     * @param columInfoValue
+     * @param columnName
+     * @param columnValue
+     */
     public static void setUserInfo(String columnInfoName, Object columInfoValue, String columnName, String columnValue){
         GestionBD.updateStatement("UPDATE UTILISATEUR SET " + columnInfoName + "='" + columInfoValue + "' WHERE " + columnName + "='" + columnValue + "'");
     }
 
+    /**
+     * Permet de créer un utilisateur pas fini
+     * @param pseudo
+     * @param email
+     * @param sexe
+     * @param prenom
+     * @param nom
+     * @param mdp
+     * @param nomRole
+     * @throws APIMySQLException
+     */
     public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, String mdp, String nomRole) throws APIMySQLException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
@@ -53,6 +87,19 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * Permet de creer un utilisateur complet
+     * @param pseudo
+     * @param email
+     * @param sexe
+     * @param prenom
+     * @param nom
+     * @param active
+     * @param mdp
+     * @param nomRole
+     * @param image
+     * @throws APIMySQLException
+     */
     public static void creerUtilisateur(String pseudo, String email, String sexe, String prenom, String nom, int active, String mdp, String nomRole, Blob image) throws APIMySQLException {
         String salt = getSalt();
         ArrayList<Object> donnees = new ArrayList<>();
@@ -65,6 +112,13 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * Permet de savoir si le mdp d'un utilisateur est valide ou pas
+     * @param pseudoUt
+     * @param mdp
+     * @return
+     * @throws APIMySQLException
+     */
     public static boolean isMdpValide(String pseudoUt, String mdp) throws APIMySQLException {
         try {
             String hash = getUserInfo("hash","pseudoUt",pseudoUt);
@@ -75,15 +129,28 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * Permet de savoir si l'utilisateur est activée
+     * @param pseudoUt
+     * @return Boolean
+     */
     public static boolean isActivated(String pseudoUt){
         return getUserInfo("activeUt", "pseudoUt", pseudoUt).equals("true");
     }
 
-
+    /**
+     * Permet de desactiver un utilisateur
+     * @param pseudo
+     */
     public static void deactivateUser(String pseudo){
         setUserInfo("activeUt", 0, "pseudoUt", pseudo);
     }
 
+    /**
+     * Permet de supprimer un utilisateur
+     * @param pseudo
+     * @throws SQLException
+     */
     public static void deleteUser(String pseudo) throws SQLException {
         ArrayList<String> pseudoList = new ArrayList<>();
         pseudoList.add(pseudo);
@@ -94,14 +161,29 @@ public class Utilisateur {
         GestionBD.updatePreparedStatement("delete from UTILISATEUR where idUt=?", idListFromPseudo);
     }
 
+    /**
+     * Permet d'obtenir l'id d'un utilisateur en ayant juste le pseudo
+     * @param pseudoUt
+     * @return int
+     */
     public static int getIdByPseudo(String pseudoUt){
         return Integer.parseInt(getUserInfo("idUt", "pseudoUt", pseudoUt));
     }
 
+    /**
+     * Permet d'obtenir le pseudo en ayant que l'id de l'utilisateur
+     * @param id
+     * @return String
+     */
     public static String getPseudoById(Integer id){
         return getUserInfo("pseudoUt", "idUt", id.toString());
     }
 
+    /**
+     * Permet d'avoir la liste d'amis associer a l'utilisateur
+     * @param pseudo
+     * @return ArrayList<String>
+     */
     public static ArrayList<String> getListeDamis(String pseudo){
         ArrayList<String> listePseudo = new ArrayList<>();
         List<Object> listeId1 = GestionBD.selectPreparedStatement("SELECT idUt2 FROM ETREAMI WHERE idUt1 = "+getIdByPseudo(pseudo)).get("idUt2");
@@ -128,6 +210,11 @@ public class Utilisateur {
         return listePseudo;
     }
 
+    /**
+     * Permet de mettre a jour l'image d'un utilisateur
+     * @param pseudo
+     * @param image
+     */
     public static void updateImage(String pseudo, byte[] image){
         try {
             PreparedStatement s = GestionBD.getCo().prepareStatement("UPDATE UTILISATEUR SET image=? WHERE pseudoUt='"+pseudo+"'");
@@ -138,6 +225,14 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * permet de mettre a jour un utilisateur
+     * @param pseudo
+     * @param email
+     * @param motDePasse
+     * @param ancientMotDePasse
+     * @param image
+     */
     public static void updateUtilisateur(String pseudo, String email, String motDePasse, String ancientMotDePasse, byte[] image){
         int id = getIdByPseudo(ancientMotDePasse);
         String salt = getSalt();
@@ -153,6 +248,11 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * Permet d'obtenir l'adresse mail d'un utilisateur via son pseudo
+     * @param pseudoUt
+     * @return String
+     */
     public static String getEmailByPseudo(String pseudoUt){
         return getUserInfo("emailUt", "pseudoUt", pseudoUt);
     }
