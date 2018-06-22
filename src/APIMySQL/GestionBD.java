@@ -13,16 +13,16 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GestionBD {
+
     private static Connection co = null;
 
-    static{
+    static {
+
         try {
+
             Class.forName("com.mysql.jdbc.Driver");
-            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst");
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
+            co = DriverManager.getConnection("jdbc:mysql://192.168.1.100/serveurDeJeux", "dst", "dst"); }
+        catch (ClassNotFoundException | SQLException e) { e.printStackTrace(); }}
 
     /**
      * Class static permettant la gestion bas niveau de l'api mysql

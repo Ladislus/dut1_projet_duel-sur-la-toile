@@ -27,7 +27,11 @@ class InscriptionJoueur extends BorderPane {
 
   private Stage primaryStage;
 
-  public InscriptionJoueur(Stage primaryStage) {
+  /**
+   Création de la page d'inscription
+   @param primaryStage : La page principale à propager
+  */
+  InscriptionJoueur(Stage primaryStage) {
 
     super();
 
@@ -40,7 +44,12 @@ class InscriptionJoueur extends BorderPane {
     this.setRight(creeDroite());
     this.setBottom(creerBas()); }
 
-  public VBox creeDroite() {
+  /**
+   Création de la partie gauche contenant le formulaire
+   ainsi que le bouton d'inscription
+   @return : Une VBox
+  */
+  private VBox creeDroite() {
 
     VBox candidate = new VBox();
 
@@ -122,7 +131,12 @@ class InscriptionJoueur extends BorderPane {
 
     return candidate; }
 
-  public VBox creerGauche() {
+  /**
+   Création de la partie gauche, contenant le logo ainsi que le
+   bouton de retour et le Label d'affichage en cas d'erreur
+   @return : Une VBox
+  */
+  private VBox creerGauche() {
 
     VBox candidate = new VBox();
 
@@ -147,7 +161,11 @@ class InscriptionJoueur extends BorderPane {
 
     return candidate; }
 
-  public HBox creerHaut() {
+  /**
+   Crration de la partie haute contenant le titre
+   @return : Une HBox
+  */
+  private HBox creerHaut() {
 
     HBox candidate = new HBox();
 
@@ -160,7 +178,11 @@ class InscriptionJoueur extends BorderPane {
 
     return candidate; }
 
-  public HBox creerBas() {
+  /**
+   Création de la partie basse contenant le copyroght
+   @return : Un HBox
+  */
+  private HBox creerBas() {
 
     HBox candidate = new HBox();
 
@@ -172,20 +194,20 @@ class InscriptionJoueur extends BorderPane {
 
     return candidate; }
 
-  public String getPrenom() { return this.tfPrenom.getText(); }
+  String getPrenom() { return this.tfPrenom.getText(); }
 
-  public String getName() { return this.tfName.getText(); }
+  String getName() { return this.tfName.getText(); }
 
-  public String getMail() { return this.tfMail.getText(); }
+  String getMail() { return this.tfMail.getText(); }
 
   public String getPseudo() { return this.tfPseudo.getText(); }
 
-  public String getSex() { return (String) this.tgSex.getSelectedToggle().getUserData(); }
+  String getSex() { return (String) this.tgSex.getSelectedToggle().getUserData(); }
 
-  public String getPassword() { return this.tfPassword.getText(); }
+  String getPassword() { return this.tfPassword.getText(); }
 
-  public String getPasswordConfirm() {return this.tfPasswordConfirm.getText(); }
+  String getPasswordConfirm() {return this.tfPasswordConfirm.getText(); }
 
   public String getTitle() { return this.title; }
 
-  public void setInfo(String message) { this.lInfo.setText(message); }}
+  void setInfo(String message) { this.lInfo.setText(message); }}

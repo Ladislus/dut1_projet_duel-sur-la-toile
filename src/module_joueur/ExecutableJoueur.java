@@ -8,6 +8,10 @@ public class ExecutableJoueur extends Application {
 
   public static void main(String [] args) { launch(args); }
 
+  /**
+   Lanceur de l'application
+   @param primaryStage : La page principale à propager
+  */
   @Override
   public void start(Stage primaryStage) {
 

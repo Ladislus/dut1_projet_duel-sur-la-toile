@@ -2,6 +2,7 @@ package module_joueur;
 
 import APIMySQL.GestionBD;
 import APIMySQL.Utilisateur;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -36,11 +37,18 @@ class EditionProfil extends BorderPane {
   private PasswordField pfMotDePasse;
   private PasswordField pfConfirmMotDePasse;
 
-  public EditionProfil(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
+  /**
+   Création de la page d'edition de profil
+   @param primaryStage : La page principale à propager
+   @param secondaryStage : La page secondaire à propager
+   @param joueur : Le joueur courant
+  */
+  EditionProfil(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     super();
 
     this.title = "Editez mon profil";
+
     this.joueur = joueur;
 
     this.joueur.setPseudo(Utilisateur.getPseudoById(joueur.getId()));
@@ -53,7 +61,12 @@ class EditionProfil extends BorderPane {
     this.setRight(creerDroite());
     this.setBottom(creerBas()); }
 
-  public VBox creerGauche() {
+  /**
+   Création de la partie gauche contenant
+   l'imageview, le fileChooser ainsi que les modifications du pseudo
+   @return : Une Vbox
+  */
+  private VBox creerGauche() {
 
     Label lImage = new Label("Mon image");
     lImage.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -117,7 +130,12 @@ class EditionProfil extends BorderPane {
 
     return candidate; }
 
-  public VBox creerDroite() {
+  /**
+   Création de la partie droite,
+   contenant la modification de l'email et du mot de passe
+   @return : Une VBox
+  */
+  private VBox creerDroite() {
 
     ImageView ivImageEdit = new ImageView();
     ivImageEdit.setImage(VariablesJoueur.EDIT);
@@ -194,10 +212,15 @@ class EditionProfil extends BorderPane {
 
     return candidate; }
 
-  public BorderPane creerBas() {
+  /**
+   Création de la partie basse, contenant
+   les trois boutons (Annuler, Supprimer, Enregistrer)
+   @return : Un borderPane
+  */
+  private BorderPane creerBas() {
 
     Button btRetour = new Button("Retour");
-    btRetour.setOnAction(new ActionRetourToDashboard());
+    btRetour.setOnAction(new ActionRetourToDashboard(this.secondaryStage));
 
     Button btSuppressionCompte = new Button("Supprimer mon compte");
     btSuppressionCompte.setBackground(new Background(new BackgroundFill(Color.DARKRED, null, null)));
@@ -207,7 +230,7 @@ class EditionProfil extends BorderPane {
     Button btEnregistrer = new Button("Enregistrer");
     btEnregistrer.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
     btEnregistrer.setTextFill(Color.WHITE);
-    btEnregistrer.setOnAction(new ActionEnregistrer(this.primaryStage, this.secondaryStage, joueur));
+    btEnregistrer.setOnAction(new ActionEnregistrer(this.secondaryStage, joueur));
 
     BorderPane candidate = new BorderPane();
     candidate.setLeft(btRetour);
@@ -219,12 +242,12 @@ class EditionProfil extends BorderPane {
 
   public String getTitle() { return this.title; }
 
-  public TextField getTfEmail() { return this.tfEmail; }
+  TextField getTfEmail() { return this.tfEmail; }
 
-  public TextField getTfPseudo() { return this.tfPseudo; }
+  TextField getTfPseudo() { return this.tfPseudo; }
 
-  public PasswordField getPfMotDePasse() { return this.pfMotDePasse; }
+  PasswordField getPfMotDePasse() { return this.pfMotDePasse; }
 
-  public PasswordField getPfConfirmMotDePasse() { return this.pfConfirmMotDePasse; }
+  PasswordField getPfConfirmMotDePasse() { return this.pfConfirmMotDePasse; }
 
-  public Path getImagePath() { return this.imagePath; }}
+  Path getImagePath() { return this.imagePath; }}

@@ -22,7 +22,12 @@ class ConnexionJoueur extends BorderPane {
 
   private Label lInfo;
 
-  public ConnexionJoueur(Stage primaryStage) {
+  /**
+   Page afficher au lancement de l'application,
+   permettant la connexion à la platforme
+   @param primaryStage : La page principale à propager
+  */
+  ConnexionJoueur(Stage primaryStage) {
 
     super();
 
@@ -34,7 +39,12 @@ class ConnexionJoueur extends BorderPane {
     this.setRight(creerDroite());
     this.setBottom(creerBas()); }
 
-  public VBox creerGauche() {
+  /**
+   Création de la partie gauche,
+   contenant le logo et slogan
+   @return : Une VBox
+  */
+  private VBox creerGauche() {
 
     VBox candidate = new VBox();
 
@@ -60,7 +70,12 @@ class ConnexionJoueur extends BorderPane {
 
     return candidate; }
 
-  public VBox creerDroite() {
+  /**
+   Création de la partie droite de la page,
+   contenant les champs de connexion et le bouton
+   @return : Une VBox
+  */
+  private VBox creerDroite() {
 
     VBox candidate = new VBox();
 
@@ -94,7 +109,11 @@ class ConnexionJoueur extends BorderPane {
 
     return candidate; }
 
-  public HBox creerBas() {
+  /**
+   Création de la partie inférieur contenant le copyright
+   @return : Une HBox
+  */
+  private HBox creerBas() {
 
     HBox candidate = new HBox();
 
@@ -106,12 +125,12 @@ class ConnexionJoueur extends BorderPane {
 
     return candidate; }
 
-  public String getTfLogin() { return this.tfLogin.getText(); }
+  String getTfLogin() { return this.tfLogin.getText(); }
 
-  public String getTfPassword() { return this.tfPassword.getText(); }
+  String getTfPassword() { return this.tfPassword.getText(); }
 
   public String getTitle() { return this.title; }
 
-  public void setTfPassword(String s) { this.tfPassword.setText(s); }
+  void setTfPassword(String s) { this.tfPassword.setText(s); }
 
-  public void setInfo(String message) { this.lInfo.setText(message); }}
+  void setInfo(String message) { this.lInfo.setText(message); }}

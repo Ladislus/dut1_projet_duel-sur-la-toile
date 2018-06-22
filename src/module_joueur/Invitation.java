@@ -30,7 +30,12 @@ public class Invitation extends BorderPane {
 
     private ArrayList<Button> listeDamisBoutton;
 
-    public Invitation(Joueur joueur, Dashboard dashboard) {
+    /**
+     Création de la page d'invitation en ami
+     @param joueur : Le joueur courant
+     @param dashboard : La page du dashboard à propager
+    */
+    Invitation(Joueur joueur, Dashboard dashboard) {
 
         this.joueur = joueur;
 
@@ -48,7 +53,12 @@ public class Invitation extends BorderPane {
 
         majAffichageInvitation(); }
 
-    public VBox creerGauche() {
+    /**
+     Création de la partie gauche contenant la barre de
+     recherche ainsi que la boite de résultats
+     @return : Une VBox
+    */
+    private VBox creerGauche() {
 
         VBox candidate = new VBox();
         candidate.getChildren().addAll(creerHeader(), creerRechercheAmis());
@@ -56,7 +66,12 @@ public class Invitation extends BorderPane {
 
         return candidate; }
 
-    public VBox creerHeader() {
+    /**
+     Création de lar partie haute contenant le titre
+     ainsi que la barre de recherche
+     @return : Une VBox
+    */
+    private VBox creerHeader() {
 
         Label lbTitle = new Label("Rechercher un joueur :");
         lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -75,7 +90,12 @@ public class Invitation extends BorderPane {
 
         return candidate; }
 
-    public ScrollPane creerRechercheAmis() {
+    /**
+     Création de la partie de droite contenant la
+     boite de résultat
+     @return : Un Scrollpane
+    */
+    private ScrollPane creerRechercheAmis() {
 
         vRechercherAmis.setPadding(new Insets(9,15,0,15));
         vRechercherAmis.setSpacing(9);
@@ -83,11 +103,15 @@ public class Invitation extends BorderPane {
         ScrollPane scrollPaneRechercherAmis = new ScrollPane();
         scrollPaneRechercherAmis.setPrefHeight(250);
         scrollPaneRechercherAmis.setPadding(new Insets(0,0,0,0));
-        scrollPaneRechercherAmis.setContent(vRechercherAmis);
+        scrollPaneRechercherAmis.setContent(this.vRechercherAmis);
 
         return scrollPaneRechercherAmis; }
 
-    public VBox creerDroite() {
+    /**
+     Création de la partie droite contenant les demandes d'ami
+     @return : Une VBox
+    */
+    private VBox creerDroite() {
 
         Label lbTitre = new Label("Invitations reçues :");
         lbTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -113,7 +137,11 @@ public class Invitation extends BorderPane {
 
         return candidate; }
 
-    public void majAffichageListeJoueur(List<Object> listeJoueur) {
+    /**
+     Mise à jour de l'affichage des amis trouvé par la recherche
+     @param listeJoueur : La liste des joueurs déjà trouvé
+    */
+    void majAffichageListeJoueur(List<Object> listeJoueur) {
 
         vRechercherAmis.getChildren().removeAll(listeDamisBoutton);
 
@@ -136,7 +164,10 @@ public class Invitation extends BorderPane {
 
         catch (NullPointerException e) { vRechercherAmis.getChildren().clear(); }}
 
-    public void majAffichageInvitation() {
+    /**
+     Mise à jouer de l'affiche des invitation reçues
+      */
+    void majAffichageInvitation() {
 
         invitation.getChildren().clear();
 
@@ -165,6 +196,4 @@ public class Invitation extends BorderPane {
 
         catch (NullPointerException e) { this.dashboard.majAffichage(); }}
 
-    public TextField getTfSearch() {
-        return tfSearch;
-    }}
+    public TextField getTfSearch() { return tfSearch; }}

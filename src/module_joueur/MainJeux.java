@@ -1,17 +1,12 @@
 package module_joueur;
 
-import APIMySQL.GestionBD;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class MainJeux extends VBox {
 
@@ -21,7 +16,12 @@ public class MainJeux extends VBox {
 
     private Jeu jeu;
 
-    public MainJeux(Stage secondaryStage, Jeu jeu) {
+    /**
+     Fenêtre de lancement d'un jeu, contenant diverse informations
+     @param secondaryStage : La page secondaire à propager
+     @param jeu : Le jeu à lancé
+    */
+    MainJeux(Stage secondaryStage, Jeu jeu) {
 
         super();
 
@@ -35,7 +35,11 @@ public class MainJeux extends VBox {
         this.getChildren().add(creerHeader());
         this.getChildren().add(creerDescription()); }
 
-    public HBox creerHeader() {
+    /**
+     Création du header contenant l'image, le bouton de lancement et le titre
+      @return : Une HBox
+    */
+    private HBox creerHeader() {
 
         ImageView ivImageJeux = new ImageView();
         ivImageJeux.setImage(jeu.getImage());
@@ -63,7 +67,11 @@ public class MainJeux extends VBox {
 
         return candidate; }
 
-    public VBox creerDescription() {
+    /**
+     Création de la boite de description
+     @return : Une VBox
+    */
+    private VBox creerDescription() {
 
         Label lbTitle = new Label("Description : ");
         lbTitle.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -79,10 +87,11 @@ public class MainJeux extends VBox {
 
         return candidate; }
 
+    /**
+     Création d'un page contenant des screenshots du jeu (Pas implémenté)
+     @return : Une HBox
+    */
     public HBox creerCoverFlow() {
 
         //TODO : Faire le coverFlow
-
-        HBox hPrincipal = new HBox();
-
-        return hPrincipal; }}
+        return new HBox(); }}
