@@ -1,6 +1,7 @@
 package module_joueur;
 
 import APIMySQL.*;
+
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -11,10 +12,20 @@ public class ActionEntrerToDashboard implements EventHandler<KeyEvent> {
 
   private Stage primaryStage;
 
-  public ActionEntrerToDashboard(Stage primaryStage) { this.primaryStage = primaryStage; }
+  /**
+   Controlleur permettant la connexion grâce à la touche ENTRER
+   @param primaryStage : La page principale à propager
+  */
+  ActionEntrerToDashboard(Stage primaryStage) { this.primaryStage = primaryStage; }
 
+  /**
+   Action permettant la connexion grâce à la touche ENTRER
+   @param keyEvent : Le KeyEvent contenant l'action et la touche
+  */
+  @Override
   public void handle(KeyEvent keyEvent) {
 
+      //Si la touche appuyé est ENTRER
       if (keyEvent.getCode().equals(KeyCode.ENTER)) {
 
         ConnexionJoueur page = (ConnexionJoueur) this.primaryStage.getScene().getRoot();
@@ -22,6 +33,7 @@ public class ActionEntrerToDashboard implements EventHandler<KeyEvent> {
         String login = page.getTfLogin();
         String password = page.getTfPassword();
 
+        //Identique à ActionConnection
         try {
 
           if (!Utilisateur.isMdpValide(login, password)) {

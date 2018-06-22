@@ -9,8 +9,17 @@ class ActionRetourToConnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  public ActionRetourToConnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
+  /**
+   Controlleur permettant de passé de InscriptionJoueur à ConnexionJoueur
+   * @param primaryStage : La page principale propager
+   */
+  ActionRetourToConnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
 
+  /**
+   Action créant le contenu de la page de connexion et l'affichant
+   @param actionEvent : L'ActionEvent contenant l'action
+  */
+  @Override
   public void handle(ActionEvent actionEvent) {
 
     ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);

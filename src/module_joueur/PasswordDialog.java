@@ -9,11 +9,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class PasswordDialog extends Dialog<String> {
+class PasswordDialog extends Dialog<String> {
 
   private PasswordField passwordField;
 
-  public PasswordDialog() {
+  /**
+   Création d'un boite de dialogue spéciale, contenant un PasswordField
+   */
+  PasswordDialog() {
 
     setTitle("CONFIRMATION");
     setHeaderText("Nous voulons vérifier que c'est bien vous \nVeuillez entrer votre mot de passe");
@@ -38,4 +41,5 @@ public class PasswordDialog extends Dialog<String> {
 
       if (dialogButton == passwordButtonType)
         return passwordField.getText();
+
       return null; }); }}

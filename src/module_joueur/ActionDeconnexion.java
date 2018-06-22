@@ -12,13 +12,22 @@ public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
   private Stage primaryStage;
 
-  public ActionDeconnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
+  /**
+   Action de déconnexion de l'utilisateur
+   @param primaryStage : La page principale à propager
+  */
+  ActionDeconnexion(Stage primaryStage) { this.primaryStage = primaryStage; }
 
+  /**
+   Demande confirmation de déconnection, puis renvoie à ConnexionJoueur
+   @param actionEvent : L'actionEvent contenant l'action
+  */
   @Override
   public void handle(ActionEvent actionEvent) {
 
     ConnexionJoueur connexion = new ConnexionJoueur(this.primaryStage);
 
+    //Demande de confirmation
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("INFORMATION");
     alert.setHeaderText("Voulez-vous vraiment vous déconnecter ?");
@@ -28,6 +37,7 @@ public class ActionDeconnexion implements EventHandler<ActionEvent> {
 
     alert.getButtonTypes().setAll(okButton, noButton);
 
+    //Si oui -> Déconnexion
     alert.showAndWait().ifPresent(type -> {
 
       if (type.getButtonData().toString().equals("YES")) {
