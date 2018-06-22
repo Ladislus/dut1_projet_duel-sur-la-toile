@@ -12,14 +12,22 @@ public class ActionLaunch implements EventHandler<ActionEvent> {
 
     private Stage secondaryStage;
 
-    public ActionLaunch(Stage secondaryStage, String jeu) {
+    /**
+     Controlleur permettant de lancer les fichiers
+     .jar contenu dans le dossier JAR
+     @param secondaryStage : La page secondaire à propager
+     @param jeu : Le nom du jeu à lancer
+    */
+    ActionLaunch(Stage secondaryStage, String jeu) {
 
         this.secondaryStage = secondaryStage;
         this.jeu = jeu; }
 
+    @Override
     public void handle(ActionEvent event) {
 
         try { Runtime.getRuntime().exec("java -jar jar/" + jeu + ".jar"); }
         catch (IOException e) { e.printStackTrace(); }
 
+        //Ferme la fenêtre de lancement de jeu
         this.secondaryStage.close();}}

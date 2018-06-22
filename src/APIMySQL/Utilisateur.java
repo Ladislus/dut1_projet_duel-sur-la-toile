@@ -1,6 +1,5 @@
 package APIMySQL;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -9,7 +8,6 @@ import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import java.sql.Statement;
 import java.util.*;
 
 public class Utilisateur {
@@ -113,12 +111,12 @@ public class Utilisateur {
     }
 
     /**
-     * Permet de savoir si le mdp d'un utilisateur est valide ou pas
-     * @param pseudoUt
-     * @param mdp
-     * @return
-     * @throws APIMySQLException
-     */
+     Permet de savoir si le mdp d'un utilisateur est valide ou pas
+     @param pseudoUt : Une String contenant le pseudo entré
+     @param mdp : Une String contenant le mot de passe entré
+     @return : Un boolean
+     @throws APIMySQLException : Le compte n'est pas dans la BD
+    */
     public static boolean isMdpValide(String pseudoUt, String mdp) throws APIMySQLException {
         try {
             String hash = getUserInfo("hash","pseudoUt",pseudoUt);

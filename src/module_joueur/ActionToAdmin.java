@@ -1,17 +1,24 @@
 package module_joueur;
 
+import module_administrateur.PageAccueil;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import module_administrateur.PageAccueil;
 
 public class ActionToAdmin implements EventHandler<ActionEvent> {
 
-    private Stage primaryStage;
+    /**
+     Controlleur permettant l'acces au module administrateur
+     */
+    ActionToAdmin() {}
 
-    public ActionToAdmin(Stage primaryStage) { this.primaryStage = primaryStage; }
-
+    /**
+     Création d'une nouvelle fenêtre contenant le
+     module administrateur
+     @param actionEvent : L'actionEvent contenant l'action
+    */
     @Override
     public void handle(ActionEvent actionEvent) {
 
@@ -21,6 +28,5 @@ public class ActionToAdmin implements EventHandler<ActionEvent> {
 
         secondaryStage.setTitle(pageAccueil.getTitle());
         secondaryStage.setScene(new Scene(pageAccueil, 650, 450));
-        secondaryStage.show();
-    }}
+        secondaryStage.show(); }}
 

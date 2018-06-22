@@ -8,7 +8,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -16,17 +15,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Dashboard extends BorderPane {
 
-  Boolean isAdmin;
+  private Boolean isAdmin;
 
   private String title;
 
@@ -41,6 +36,12 @@ public class Dashboard extends BorderPane {
 
   private ArrayList<Button> listeBoutton;
 
+  /**
+   Création du dashboard du joueur
+   @param primaryStage : La page principale à propager
+   @param joueur : Le joueur courant
+   @param isAdmin : Boolean indiquant si l'utilisateur est admin ou non
+  */
   public Dashboard(Stage primaryStage, Joueur joueur, Boolean isAdmin) {
 
     super();
@@ -67,7 +68,11 @@ public class Dashboard extends BorderPane {
     this.setCenter(creerCentre());
     this.setRight(creerDroite()); }
 
-  public HBox creerHaut() {
+  /**
+   Création de la partie haute contenant le titre
+   @return : Une Hbox
+  */
+  private HBox creerHaut() {
 
     Label lTitre = new Label("Bienvenue " + joueur.getPseudo());
     lTitre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
@@ -79,7 +84,11 @@ public class Dashboard extends BorderPane {
 
     return candidate; }
 
-  public VBox creerGauche() {
+  /**
+   Création de la partie gauche, contenant les boutons de menu
+   @return : Une VBox
+  */
+  private VBox creerGauche() {
 
     VBox candidate = new VBox();
     VBox param = new VBox();
@@ -100,12 +109,13 @@ public class Dashboard extends BorderPane {
     btEditerProfile.setPrefWidth(150);
 
     Button btExit = new Button("", imageViewLogo);
-    btExit.setOnAction(new ActionDeconnexion(primaryStage));
+    btExit.setOnAction(new ActionDeconnexion(this.primaryStage));
 
+    //Ajout dud bouton d'acces à l'administration si l'utilisateur est admin
     if (isAdmin) {
 
       Button btAdmin = new Button("Admin");
-      btAdmin.setOnAction(new ActionToAdmin(this.primaryStage));
+      btAdmin.setOnAction(new ActionToAdmin());
 
       param.getChildren().addAll(btAdmin, btExit); }
 
@@ -121,7 +131,12 @@ public class Dashboard extends BorderPane {
 
     return candidate; }
 
-  public VBox creerDroite() {
+  /**
+   Création de la partie droite, contenant la liste d'amis
+   ainsi que l'acces à la messagerie
+   @return : Une VBox
+  */
+  private VBox creerDroite() {
 
     Label lbTotalContact = new Label("Total : " + listeBoutton.size() + " contact(s)");
     Label lListeDamis = new Label("Ma liste d'ami");
@@ -150,7 +165,11 @@ public class Dashboard extends BorderPane {
 
     return candidate; }
 
-  public VBox creerCentre() {
+  /**
+   Création du centre du dashboard, contenant les deux bibliothèques de jeux
+   @return : Une VBox
+  */
+  private VBox creerCentre() {
 
     Label lbJeux = new Label("Jeux : ");
 
@@ -181,6 +200,9 @@ public class Dashboard extends BorderPane {
 
     return candidate; }
 
+  /**
+   Mise à jour de l'affichage de du dashboard
+  */
   public void majAffichage() {
 
     listeBoutton.clear();
@@ -215,11 +237,11 @@ public class Dashboard extends BorderPane {
 
     ArrayList<String> listeTitleJeux = new ArrayList<>();
 
-    if(listeJeux.size() > 0) {
+    if (listeJeux.size() > 0) {
 
-        for(Object title : listeJeux.get("nomJeu")) { listeTitleJeux.add(title.toString()); }
+        for (Object title : listeJeux.get("nomJeu")) { listeTitleJeux.add(title.toString()); }
 
-        for(int i = 0; i < listeTitleJeux.size(); i++) {
+        for (int i = 0; i < listeTitleJeux.size(); i++) {
 
           String titre = listeTitleJeux.get(i);
 

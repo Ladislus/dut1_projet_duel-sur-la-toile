@@ -1,6 +1,7 @@
 package module_joueur;
 
 import APIMySQL.Utilisateur;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -18,16 +19,27 @@ public class ActionSuppressionCompte implements EventHandler<ActionEvent> {
 
   private Joueur joueur;
 
-  public ActionSuppressionCompte(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
+  /**
+   Controlleur permettant la suppression du compte
+   @param primaryStage ; La page principale à propager
+   @param secondaryStage : La page secondaire à propager
+   @param joueur : Le joueur courant
+  */
+  ActionSuppressionCompte(Stage primaryStage, Stage secondaryStage, Joueur joueur) {
 
     this.primaryStage = primaryStage;
     this.secondaryStage = secondaryStage;
 
     this.joueur = joueur; }
 
+  /**
+   Action utilisant l'API supprimant le compte après confirmation
+   @param actionEvent : L'actionEvent contenant l'action
+  */
   @Override
   public void handle(ActionEvent actionEvent) {
 
+    //Récupération de la page
     Stage page = (Stage) secondaryStage.getScene().getWindow();
 
     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -40,6 +52,7 @@ public class ActionSuppressionCompte implements EventHandler<ActionEvent> {
     alert.getButtonTypes().setAll(okButton, noButton);
     alert.showAndWait().ifPresent(type -> {
 
+      //Si oui -> Suppression
       if (type.getButtonData().toString().equals("YES")) {
 
         try {
