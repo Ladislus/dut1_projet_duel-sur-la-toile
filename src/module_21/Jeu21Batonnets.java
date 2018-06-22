@@ -79,9 +79,12 @@ public class Jeu21Batonnets extends Application {
         b1.setOnAction(event -> this.setScene("New Game"));
         res.getChildren().add(b1);
 
-        File continu = new File(chem+"continuerPartie.png");
         ImageView continuPartie = new ImageView();
-        continuPartie.setImage(new Image(continu.toURI().toString()));
+        try {
+            continuPartie.setImage(new Image(getClass().getResource(chem+"continuerPartie.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         Button b2 = new Button("Reprendre une partie", continuPartie);
         b2.setFont(bouton);
@@ -99,7 +102,11 @@ public class Jeu21Batonnets extends Application {
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
 
-        res.setCenter(new ImageView(new Image(new File(chem+"logo21.png").toURI().toString())));
+        try {
+            res.setCenter(new ImageView(new Image(getClass().getResource(chem+"logo21.png").toURI().toString())));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }

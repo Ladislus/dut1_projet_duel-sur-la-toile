@@ -150,7 +150,7 @@ public class ChoixJoueur21 {
 
         ImageView img = null;
         try {
-            img = new ImageView(new Image(getClass().getResource("/pub/info.png").toURI().toString(),30,30,true,true));
+            img = new ImageView(new Image(getClass().getResource("/img/pub/info.png").toURI().toString(),30,30,true,true));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
