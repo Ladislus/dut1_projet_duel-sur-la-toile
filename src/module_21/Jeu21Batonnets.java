@@ -15,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 /**
@@ -30,7 +31,7 @@ public class Jeu21Batonnets extends Application {
     private HashMap<String,Scene> attribution;
 
     /** chemin relatif pour retrouver les images du puissance 4 */
-    public static String chem = "./img/module_21/";
+    public static String chem = "/img/module_21/";
 
 
 
@@ -64,9 +65,12 @@ public class Jeu21Batonnets extends Application {
         HBox res = new HBox();
         Font bouton = Font.font("Verdana",FontWeight.BOLD,25);
 
-        File imageami = new File(chem+"jouerAmi.png");
         ImageView ami = new ImageView();
-        ami.setImage(new Image(imageami.toURI().toString()));
+        try {
+            ami.setImage(new Image(getClass().getResource(chem+"jouerAmi.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         Button b1 = new Button("Nouvelle partie",ami);
         b1.setFont(bouton);

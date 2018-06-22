@@ -1,6 +1,7 @@
 package module_joueur;
 
 import APIMySQL.GestionBD;
+import APIMySQL.Utilisateur;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -41,6 +42,9 @@ class EditionProfil extends BorderPane {
 
     this.title = "Editez mon profil";
     this.joueur = joueur;
+
+    this.joueur.setPseudo(Utilisateur.getPseudoById(joueur.getId()));
+    this.joueur.setEmail(Utilisateur.getEmailByPseudo(joueur.getPseudo()));
 
     this.primaryStage = primaryStage;
     this.secondaryStage = secondaryStage;

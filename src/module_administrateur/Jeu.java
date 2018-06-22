@@ -7,17 +7,17 @@ public class Jeu {
 
   private int idJeu;
   private String nomJeu;
-  private String regles;
+  private String regleJeu;
   private String jarJeuPath;
   private char active;
   private int idType;
   private String imagePath;
 
   /** Constructeur du joueur */
-  public Jeu(int idJeu, String nomJeu, String regles, String jarJeuPath, char active, int idType, String imagePath) {
+  public Jeu(int idJeu, String nomJeu, String regleJeu, String jarJeuPath, char active, int idType, String imagePath) {
     this.idJeu = idJeu;
     this.nomJeu = nomJeu;
-    this.regles = regles;
+    this.regleJeu = regleJeu;
     this.jarJeuPath = jarJeuPath;
     this.active = active;
     this.imagePath = imagePath;
@@ -34,7 +34,7 @@ public class Jeu {
   }
 
   public String getRegles() {
-    return this.regles;
+    return this.regleJeu;
   }
 
   public String getJarJeuPath(){

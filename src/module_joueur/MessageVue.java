@@ -22,11 +22,8 @@ public class MessageVue extends VBox {
         if (msg.getDateEnvoi()==0)
             this.titre = new Label("Temps non défini");
         else {
-            try {
-                this.titre = new Label(msg.getDateEnvoiString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+
+            this.titre = new Label(msg.getDateEnvoiString());
         }
         this.titre.setFont(Font.font("Verdana",FontWeight.NORMAL,FontPosture.ITALIC,10));
         this.titre.setStyle("-fx-background-color: transparent;");
