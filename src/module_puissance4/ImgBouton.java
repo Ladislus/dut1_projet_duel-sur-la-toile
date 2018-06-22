@@ -15,6 +15,10 @@ public class ImgBouton extends ImageView {
     /** dictionnaire reliant un titre String à son image File */
     private static HashMap<String,Image> dicoImage;
 
+    /**
+     * Constructeur de la vue des boutons au dessus colonnes (images)
+     * @param type une String
+     */
     public ImgBouton(String type) {
         super();
 

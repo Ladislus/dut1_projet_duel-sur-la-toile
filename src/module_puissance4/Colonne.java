@@ -11,7 +11,9 @@ import java.util.ArrayList;
  */
 public class Colonne extends ArrayList<Integer> {
 
-    /** Créer une colonne : Liste d'entiers à 0 au départ */
+    /**
+     * Constructeur de la classe Colonne
+     */
     public Colonne(){
         super();
         for (int l=0;l<6;l++){
@@ -19,7 +21,11 @@ public class Colonne extends ArrayList<Integer> {
         }
     }
 
-    /** Ajouter un pion : renvoie le numéro de la ligne où le pion a atterrit */
+    /**
+     * Méthode permettant d'ajouter un pion à une colonne
+     * @param numJ un int correspondant au numéro du Joueur, suivant e numéro le pion aura une valeur différente, changeant sa couleur dans la vue
+     * @return un int le numéro de la ligne dans laquelle le pion a été mis
+     */
     public int addPion(int numJ){
         int l = 0;
         while (this.get(l)!=0){l++;}
@@ -28,19 +34,19 @@ public class Colonne extends ArrayList<Integer> {
     }
 
     /**
-     * Renvoie True si la colonne n'est pas pleine
-     * si la case la plus haute est occupée, la colonne est pleine
+     * Renvoie True si la colonne n'est pas pleine, c'est à dire si la dernière case n'est pas occupée
+     * @return un boolean
      */
     public boolean isNotFull(){
         return this.get(5)==0;
     }
 
     /**
-     * Renvoie True si la colonne est pleine
-     * si la case la plus haute est occupée, la colonne est pleine
+     * Renvoie True si la colonne est pleine, c'est à dire si la dernière case est occupée
+     * @return un boolean
      */
     public boolean isFull(){
         return this.get(5)!=0;
     }
-    //
+
 }
