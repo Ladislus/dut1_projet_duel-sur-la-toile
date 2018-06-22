@@ -1,6 +1,5 @@
 package APIMySQL;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -9,7 +8,6 @@ import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import java.sql.Statement;
 import java.util.*;
 
 public class Utilisateur {
