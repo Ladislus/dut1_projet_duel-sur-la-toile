@@ -20,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,8 +205,12 @@ public class Partie21 {
         res.setPrefHeight(100.);
         res.setAlignment(Pos.CENTER_LEFT);
 
-        File file = new File(chem+"logo21.png");
-        Image im = new Image(file.toURI().toString());
+        Image im = null;
+        try {
+            im = new Image(getClass().getResource(chem+"logo21.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         ImageView iv = new ImageView(im);
         iv.setPreserveRatio(true);
         iv.setFitHeight(60);
