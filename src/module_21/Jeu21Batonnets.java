@@ -102,7 +102,11 @@ public class Jeu21Batonnets extends Application {
     public Scene pageAccueil(){
         BorderPane res = new BorderPane();
 
-        res.setCenter(new ImageView(new Image(new File(chem+"logo21.png").toURI().toString())));
+        try {
+            res.setCenter(new ImageView(new Image(getClass().getResource(chem+"logo21.png").toURI().toString())));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         res.setBottom(boutonsAccueil());
         return new Scene(res,850,650);
     }
