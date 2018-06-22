@@ -6,6 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Message {
+
+    /**
+     * Permet de créer un message dans la bd
+     * @param contenuMsg
+     * @param idUt1
+     * @param idUt2
+     * @throws APIMySQLException
+     */
     public static void creerMessage(String contenuMsg,int idUt1, int idUt2) throws APIMySQLException {
         ArrayList<Object> donnees = new ArrayList<>();
         Collections.addAll(donnees,new Timestamp(System.currentTimeMillis()),contenuMsg,"N",idUt1,idUt2);

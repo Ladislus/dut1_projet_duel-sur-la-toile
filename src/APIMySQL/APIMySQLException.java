@@ -6,12 +6,20 @@ public class APIMySQLException extends SQLException {
     private String cause;
     private String message;
 
+    /**
+     * Permet d'humanisée les exceptions
+     * @param cause
+     */
     public APIMySQLException(String cause){
         super();
         this.cause = cause;
         setMessage();
     }
 
+    /**
+     * Fonction qui permet de mettre en place un message
+     * d'erreur lisable par un humain
+     */
     private void setMessage(){
         if (this.cause.equals("unknownPseudo"))
             this.message = "Ce pseudo n'existe pas.";
@@ -25,6 +33,10 @@ public class APIMySQLException extends SQLException {
             this.message = "Erreur inconnue.";
     }
 
+    /**
+     * Retourne le message d'erreur courant
+     * @return message
+     */
     public String getMessage() {
         return message;
     }

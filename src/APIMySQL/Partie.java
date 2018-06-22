@@ -8,6 +8,12 @@ import java.util.Collections;
 public class Partie {
     private Partie(){}
 
+    /**
+     * Permet de créer une partie dans la bd
+     * @param idJeu
+     * @param idUt1
+     * @param idUt2
+     */
     public static void creerPartie(int idJeu, int idUt1, int idUt2){
         ArrayList<Object> donnees = new ArrayList<>();
         Collections.addAll(donnees,new Timestamp(System.currentTimeMillis()),0,"",idJeu,idUt1,0,idUt2,0);

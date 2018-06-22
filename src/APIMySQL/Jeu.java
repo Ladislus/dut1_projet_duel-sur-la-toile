@@ -10,6 +10,15 @@ import java.util.List;
 public class Jeu {
     private Jeu(){}
 
+    /**
+     * Permet de créer un jeux dans la bd
+     * @param nomJeu
+     * @param regleJeu
+     * @param jarJeuPath
+     * @param idTy
+     * @param imagePath
+     * @throws APIMySQLException
+     */
     public static void creerJeu(String nomJeu, String regleJeu, String jarJeuPath, int idTy, String imagePath) throws APIMySQLException {
         ArrayList<Object> donnees = new ArrayList<>();
         try {
@@ -21,6 +30,10 @@ public class Jeu {
         }
     }
 
+    /**
+     * Permet de recuperée la liste des jeux
+     * @return HashMap<String, List<Object>>
+     */
     public static HashMap<String, List<Object>> recupListeJeux(){
         return GestionBD.selectPreparedStatement("select * from JEU");
     }
