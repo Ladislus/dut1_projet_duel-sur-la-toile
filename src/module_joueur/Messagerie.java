@@ -16,6 +16,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -24,7 +25,7 @@ import java.util.*;
 public class Messagerie extends SplitPane {
 
     private List<String> lesContacts;
-    private static String chem = "./img/pub/";
+    private static String chem = "/img/pub/";
 
     private Joueur user;
     private String contactCour;
@@ -53,18 +54,33 @@ public class Messagerie extends SplitPane {
 
 
         VBox contacts = new VBox();
-        Button out = new Button("Sortir",new ImageView(new Image(new File(chem+"log_out.png").toURI().toString(),50.,50.,true,true)));
+        Button out = null;
+        try {
+            out = new Button("Sortir",new ImageView(new Image(getClass().getResource(chem+"log_out.png").toURI().toString(),50.,50.,true,true)));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         out.setPadding(new Insets(2));
         out.setPrefWidth(300.);
         out.setAlignment(Pos.CENTER_LEFT);
 
-        Label titre = new Label("Mes contacts",new ImageView(new Image(new File(chem+"messaging.png").toURI().toString(),50.,50.,true,true)));
+        Label titre = null;
+        try {
+            titre = new Label("Mes contacts",new ImageView(new Image(getClass().getResource(chem+"messaging.png").toURI().toString(),50.,50.,true,true)));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         titre.setFont(Font.font("FreeSerif",FontWeight.BOLD,FontPosture.ITALIC,35));
         titre.setPadding(new Insets(5,0,6,4));
         titre.setFont(VariablesJoueur.DEFAULT_TITLE_FONT);
         titre.setPadding(new Insets(4));
 
-        Button accueil = new Button("ACCUEIL",new ImageView(new Image(new File(chem+"logoWithoutText.png").toURI().toString(),50.,50.,true,true)));
+        Button accueil = null;
+        try {
+            accueil = new Button("ACCUEIL",new ImageView(new Image(getClass().getResource(chem+"logoWithoutText.png").toURI().toString(),50.,50.,true,true)));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         accueil.setPadding(new Insets(3));
         accueil.setPrefWidth(300.);
         accueil.setAlignment(Pos.CENTER_LEFT);
@@ -79,7 +95,12 @@ public class Messagerie extends SplitPane {
         Collections.sort(liste);
 
         for (String nom : liste){
-            ImageView img = new ImageView(new Image(new File(chem+"contact.png").toURI().toString()));
+            ImageView img = null;
+            try {
+                img = new ImageView(new Image(getClass().getResource(chem+"contact.png").toURI().toString()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             img.setPreserveRatio(true);
             img.setFitHeight(55.);
 
@@ -111,11 +132,21 @@ public class Messagerie extends SplitPane {
         VBox res = new VBox();
         res.setPrefWidth(700.);
 
-        ImageView jeu = new ImageView(new Image(new File(chem+"logoWithoutText.png").toURI().toString()));
+        ImageView jeu = null;
+        try {
+            jeu = new ImageView(new Image(getClass().getResource(chem+"logoWithoutText.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         jeu.setPreserveRatio(true);
         jeu.setFitHeight(35);
 
-        ImageView img = new ImageView(new Image(new File(chem+"contact.png").toURI().toString()));
+        ImageView img = null;
+        try {
+            img = new ImageView(new Image(getClass().getResource(chem+"contact.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         img.setPreserveRatio(true);
         img.setFitHeight(35);
 
